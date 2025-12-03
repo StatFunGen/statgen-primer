@@ -220,6 +220,24 @@
 
 
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Correlation Between Variables</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="factor_analysis.html">Factor Analysis</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="principal_component_analysis.html">Principal Component Analysis (PCA)</a></li>
+
+
+
+
+
+
+
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fixed Effects Models</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="ordinary_least_squares.html">Ordinary Least Squares</a></li>
@@ -288,6 +306,7 @@
 
 
 
+
 <li class="toctree-l1"><a class="reference internal" href="mediator.html">Mediator</a></li>
 
 
@@ -333,6 +352,7 @@
 
 
 
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayesian Versus Frequentist</span></p>
 <ul class="nav bd-sidenav">
@@ -350,7 +370,8 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="p_value.html">p-value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p_value.html">p-value and Bayesian Hypothesis Testing</a></li>
+
 
 
 
@@ -551,6 +572,11 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-causal-variant-identification-with-ld">Example 1 – Causal Variant Identification with LD</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-analysis-for-example-1">Conditional Analysis for Example 1</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-start-with-the-most-significant-variant">Step 1: Start with the most significant variant</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-conditional-analysis-for-remaining-variants">Step 2: Conditional analysis for remaining variants</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-simpson-s-paradox">Example 2 – Simpson’s Paradox</a></li>
 </ul>
 </li>
@@ -572,7 +598,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="marginal-and-joint-effects">
 <h1>Marginal and Joint Effects<a class="headerlink" href="#marginal-and-joint-effects" title="Link to this heading">#</a></h1>
-<p>Marginal effects measure a genetic variant’s influence on a trait when considered <strong>alone, ignoring other variants</strong>, while joint effects measure each variant’s independent contribution when all variants are <strong>simultaneously included</strong> in the model, revealing their true effects after <strong>accounting for correlations (LD) between them</strong>.</p>
+<p><strong>Marginal effects</strong> measure a genetic variant’s influence on a trait when considered <strong>alone, ignoring other variants</strong>; while <strong>joint effects</strong> measure each variant’s independent contribution when all variants are <strong>simultaneously included</strong> in the model, revealing their true effects after <strong>accounting for correlations (LD) between them</strong>.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="graphical-summary">
 <h1>Graphical Summary<a class="headerlink" href="#graphical-summary" title="Link to this heading">#</a></h1>
@@ -661,8 +687,7 @@ document.write(`
 <h1>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
 <section id="example-1-causal-variant-identification-with-ld">
 <h2>Example 1 – Causal Variant Identification with LD<a class="headerlink" href="#example-1-causal-variant-identification-with-ld" title="Link to this heading">#</a></h2>
-<p>When testing genetic variants individually, we might find that multiple variants appear to be associated with a trait. But what happens when we test them together? This example shows how linkage disequilibrium (correlation between nearby variants) can make non-causal variants appear significant in marginal analysis, while joint analysis reveals which variant is truly driving the association.</p>
-<p>The key question: Which genetic variants are truly causal versus just correlated with the causal variant?</p>
+<p>When testing genetic variants individually, we might find that multiple variants appear to be associated with a trait. But are they all true causal variants? Is it possible that only one or a few of the associations are true, and the others are due to the linkage disequilibrium (correlation between nearby variants) with the true causal variants? In this example we first reveal this with a toy example, then use joint analysis to reveal which variant is truly driving the association.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clear the environment</span>
@@ -725,10 +750,27 @@ document.write(`
 <span class="w">  </span><span class="n">P_Value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">p_values</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span>
 <span class="w">  </span><span class="n">Significant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_values</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0.05</span>
 <span class="p">)</span>
+
+<span class="n">marginal_OLS_results</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A data.frame: 3 × 4</caption>
+<thead>
+	<tr><th scope=col>Variant</th><th scope=col>Beta</th><th scope=col>P_Value</th><th scope=col>Significant</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;lgl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>Variant 1</td><td>0.9416</td><td>0.0000</td><td>TRUE</td></tr>
+	<tr><td>Variant 2</td><td>0.4997</td><td>0.0249</td><td>TRUE</td></tr>
+	<tr><td>Variant 3</td><td>0.8226</td><td>0.0000</td><td>TRUE</td></tr>
+</tbody>
+</table>
+</div></div>
 </div>
+<p>Based on this result, it seems like all of them are associated with the trait.</p>
 <p>Now let’s calculate the joint effects by including all variants in one model:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -737,7 +779,7 @@ document.write(`
 <span class="n">joint_summary</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">joint_model</span><span class="p">)</span>
 
 <span class="c1"># Extract the joint effect coefficients and p-values</span>
-<span class="c1"># Skip the intercept (first row)</span>
+<span class="c1"># Skip the intercept (first row)                             </span>
 <span class="n">joint_betas</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">joint_summary</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="o">:</span><span class="p">(</span><span class="n">M</span><span class="m">+1</span><span class="p">),</span><span class="w"> </span><span class="m">1</span><span class="p">]</span>
 <span class="n">joint_p_values</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">joint_summary</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="o">:</span><span class="p">(</span><span class="n">M</span><span class="m">+1</span><span class="p">),</span><span class="w"> </span><span class="m">4</span><span class="p">]</span>
 
@@ -749,40 +791,13 @@ document.write(`
 <span class="w">  </span><span class="n">Significant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">joint_p_values</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0.05</span>
 <span class="p">)</span>
 <span class="nf">rownames</span><span class="p">(</span><span class="n">joint_OLS_results</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kc">NULL</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">print</span><span class="p">(</span><span class="s">&quot;Marginal Effect:&quot;</span><span class="p">)</span>
-<span class="n">marginal_OLS_results</span>
-<span class="nf">print</span><span class="p">(</span><span class="s">&quot;Joint Effect:&quot;</span><span class="p">)</span>
 <span class="n">joint_OLS_results</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;Marginal Effect:&quot;
-</pre></div>
-</div>
 <div class="output text_html"><table class="dataframe">
-<caption>A data.frame: 3 x 4</caption>
-<thead>
-	<tr><th scope=col>Variant</th><th scope=col>Beta</th><th scope=col>P_Value</th><th scope=col>Significant</th></tr>
-	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;lgl&gt;</th></tr>
-</thead>
-<tbody>
-	<tr><td>Variant 1</td><td>0.9416</td><td>0.0000</td><td>TRUE</td></tr>
-	<tr><td>Variant 2</td><td>0.4997</td><td>0.0249</td><td>TRUE</td></tr>
-	<tr><td>Variant 3</td><td>0.8226</td><td>0.0000</td><td>TRUE</td></tr>
-</tbody>
-</table>
-</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;Joint Effect:&quot;
-</pre></div>
-</div>
-<div class="output text_html"><table class="dataframe">
-<caption>A data.frame: 3 x 4</caption>
+<caption>A data.frame: 3 × 4</caption>
 <thead>
 	<tr><th scope=col>Variant</th><th scope=col>Beta</th><th scope=col>P_Value</th><th scope=col>Significant</th></tr>
 	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;lgl&gt;</th></tr>
@@ -795,10 +810,108 @@ document.write(`
 </table>
 </div></div>
 </div>
+<p>Now if there are millions of variants (<span class="math notranslate nohighlight">\(M&gt;&gt;N\)</span>) or the LD between variants are very strong, then we might not be able to fit the model and the joint model might give unstable results. Typically we can start with the strongest signal from marginal analysis, and then test remaining variants conditioning on the lead SNP, and iteratively identify additional independent signals until no variants exceed the significance threshold.</p>
+</section>
+<section id="conditional-analysis-for-example-1">
+<h2>Conditional Analysis for Example 1<a class="headerlink" href="#conditional-analysis-for-example-1" title="Link to this heading">#</a></h2>
+<p>Let’s now perform a <strong>conditional analysis</strong> on our toy data to identify which variant(s) truly drive the association. We’ll use the forward selection procedure:</p>
+<section id="step-1-start-with-the-most-significant-variant">
+<h3>Step 1: Start with the most significant variant<a class="headerlink" href="#step-1-start-with-the-most-significant-variant" title="Link to this heading">#</a></h3>
+<p>Based on the marginal analysis, Variant 1 had the smallest p-value. We select it as our lead variant:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Identify the lead variant (most significant from marginal analysis)</span>
+<span class="n">lead_variant_idx</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">which.min</span><span class="p">(</span><span class="n">p_values</span><span class="p">)</span>
+<span class="n">lead_variant_name</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">X</span><span class="p">)[</span><span class="n">lead_variant_idx</span><span class="p">]</span>
+<span class="n">lead_p_value</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">p_values</span><span class="p">[</span><span class="n">lead_variant_idx</span><span class="p">]</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;=== STEP 1: Lead Variant Selection ===\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Selected:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lead_variant_name</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Marginal p-value:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">format</span><span class="p">(</span><span class="n">lead_p_value</span><span class="p">,</span><span class="w"> </span><span class="n">scientific</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Marginal effect size:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">betas</span><span class="p">[</span><span class="n">lead_variant_idx</span><span class="p">],</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n\n&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== STEP 1: Lead Variant Selection ===
+Selected: Variant 1 
+Marginal p-value: 6.077549e-10 
+Marginal effect size: 0.9416 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-conditional-analysis-for-remaining-variants">
+<h3>Step 2: Conditional analysis for remaining variants<a class="headerlink" href="#step-2-conditional-analysis-for-remaining-variants" title="Link to this heading">#</a></h3>
+<p>Now we test each remaining variant <strong>while holding the lead variant constant</strong>. This shows us which additional variants have independent effects:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">cat</span><span class="p">(</span><span class="s">&quot;=== STEP 2: Conditional Analysis ===\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Testing remaining variants conditional on&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lead_variant_name</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\n\n&quot;</span><span class="p">)</span>
+
+<span class="c1"># Test each remaining variant conditioned on the lead variant</span>
+<span class="n">remaining_variants_idx</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">setdiff</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">lead_variant_idx</span><span class="p">)</span>
+<span class="n">conditional_results</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span>
+<span class="w">  </span><span class="n">Variant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">X</span><span class="p">)[</span><span class="n">remaining_variants_idx</span><span class="p">],</span>
+<span class="w">  </span><span class="n">Marginal_Beta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">betas</span><span class="p">[</span><span class="n">remaining_variants_idx</span><span class="p">],</span>
+<span class="w">  </span><span class="n">Marginal_P</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_values</span><span class="p">[</span><span class="n">remaining_variants_idx</span><span class="p">],</span>
+<span class="w">  </span><span class="n">Conditional_Beta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">remaining_variants_idx</span><span class="p">)),</span>
+<span class="w">  </span><span class="n">Conditional_P</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">remaining_variants_idx</span><span class="p">)),</span>
+<span class="w">  </span><span class="n">Conditional_SE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">remaining_variants_idx</span><span class="p">))</span>
+<span class="p">)</span>
+
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">remaining_variants_idx</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">variant_idx</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">remaining_variants_idx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+<span class="w">  </span><span class="c1"># Fit model with lead variant and test variant</span>
+<span class="w">  </span><span class="n">X_conditional</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cbind</span><span class="p">(</span><span class="n">X</span><span class="p">[,</span><span class="w"> </span><span class="n">lead_variant_idx</span><span class="p">],</span><span class="w"> </span><span class="n">X</span><span class="p">[,</span><span class="w"> </span><span class="n">variant_idx</span><span class="p">])</span>
+<span class="w">  </span><span class="n">model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">X_conditional</span><span class="p">)</span>
+<span class="w">  </span><span class="n">summary_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+<span class="w">  </span><span class="c1"># Extract coefficients for the test variant (second column, third row = second coefficient)</span>
+<span class="w">  </span><span class="n">conditional_results</span><span class="o">$</span><span class="n">Conditional_Beta</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">summary_model</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span>
+<span class="w">  </span><span class="n">conditional_results</span><span class="o">$</span><span class="n">Conditional_SE</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">summary_model</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">]</span>
+<span class="w">  </span><span class="n">conditional_results</span><span class="o">$</span><span class="n">Conditional_P</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">summary_model</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="c1"># Round for display</span>
+<span class="n">conditional_results_display</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">conditional_results</span>
+<span class="n">conditional_results_display</span><span class="o">$</span><span class="n">Marginal_Beta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">conditional_results_display</span><span class="o">$</span><span class="n">Marginal_Beta</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">)</span>
+<span class="n">conditional_results_display</span><span class="o">$</span><span class="n">Marginal_P</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">conditional_results_display</span><span class="o">$</span><span class="n">Marginal_P</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">)</span>
+<span class="n">conditional_results_display</span><span class="o">$</span><span class="n">Conditional_Beta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">conditional_results_display</span><span class="o">$</span><span class="n">Conditional_Beta</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">)</span>
+<span class="n">conditional_results_display</span><span class="o">$</span><span class="n">Conditional_P</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">conditional_results_display</span><span class="o">$</span><span class="n">Conditional_P</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">)</span>
+<span class="n">conditional_results_display</span><span class="o">$</span><span class="n">Conditional_SE</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">conditional_results_display</span><span class="o">$</span><span class="n">Conditional_SE</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">)</span>
+
+<span class="n">conditional_results_display</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== STEP 2: Conditional Analysis ===
+Testing remaining variants conditional on Variant 1 
+</pre></div>
+</div>
+<div class="output text_html"><table class="dataframe">
+<caption>A data.frame: 2 × 6</caption>
+<thead>
+	<tr><th scope=col>Variant</th><th scope=col>Marginal_Beta</th><th scope=col>Marginal_P</th><th scope=col>Conditional_Beta</th><th scope=col>Conditional_P</th><th scope=col>Conditional_SE</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>Variant 2</td><td>0.4997</td><td>0.0249</td><td> 0.0757</td><td>0.4151</td><td>0.0906</td></tr>
+	<tr><td>Variant 3</td><td>0.8226</td><td>0.0000</td><td>-0.1323</td><td>0.4839</td><td>0.1848</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>Neither variant 2 or variant 3 are significant anymore (<span class="math notranslate nohighlight">\(p&gt;0.05\)</span>)! Variants 2 and 3 were only associated with the trait because they are correlated with the true causal variant (Variant 1). Once we condition on Variant 1, they provide no additional explanatory power.</p>
+<p>This demonstrates the power of conditional analysis in <strong>causal variant identification</strong>: it helps distinguish between true causal effects and spurious associations due to linkage disequilibrium (LD).</p>
+</section>
 </section>
 <section id="example-2-simpson-s-paradox">
 <h2>Example 2 – Simpson’s Paradox<a class="headerlink" href="#example-2-simpson-s-paradox" title="Link to this heading">#</a></h2>
-<p>Sometimes a genetic variant can appear <strong>protective</strong> when analyzed alone, but turn out to be <strong>detrimental</strong> when we account for other factors. This counterintuitive phenomenon is Simpson’s paradox - where the direction of association completely reverses between marginal and joint analysis.</p>
+<p>Sometimes a genetic variant can appear <strong>protective</strong> when analyzed alone, but turn out to be <strong>detrimental</strong> when we account for other factors. This counterintuitive phenomenon is called <strong>Simpson’s paradox</strong> - where the direction of association completely reverses between marginal and joint analysis.</p>
 <p>The key question: <em>How can a genetic variant seem protective overall but actually increase risk when we control for confounding factors?</em></p>
 <p>We’ll simulate a scenario where genetic ancestry acts as a confounder:</p>
 <div class="cell docutils container">
@@ -830,7 +943,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Population A (ancestry=0) mean genotype: 0.41 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Population A (ancestry=0) mean genotype: 0.35 
 Population B (ancestry=1) mean genotype: 1.59 
 </pre></div>
 </div>
@@ -861,8 +974,8 @@ Population B (ancestry=1) mean genotype: 1.59
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Population A disease rate: 0.81 
-Population B disease rate: 0.26 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Population A disease rate: 0.83 
+Population B disease rate: 0.28 
 </pre></div>
 </div>
 </div>
@@ -889,9 +1002,13 @@ Population B disease rate: 0.26
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message:
+“glm.fit: fitted probabilities numerically 0 or 1 occurred”
+</pre></div>
+</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== WITHIN-POPULATION EFFECTS ===
-Population A: OR = 2.317 
-Population B: OR = 0.709 
+Population A: OR = 71662028 
+Population B: OR = 5.014 
 </pre></div>
 </div>
 </div>
@@ -912,7 +1029,9 @@ Population B: OR = 0.709
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== MARGINAL EFFECT (combining populations, ignoring ancestry) ===
-OR = 0.394 , p = 4e-04 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OR = 0.522 , p = 0.012 
 Interpretation: Protective 
 </pre></div>
 </div>
@@ -1013,13 +1132,27 @@ Interpretation: Protective
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>`geom_smooth()` using formula = &#39;y ~ x&#39;
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attaching package: ‘dplyr’
+
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+
+Warning message:
+“The `size` argument of `element_line()` is deprecated as of ggplot2 3.4.0.
+<span class=" -Color -Color-Cyan">ℹ</span> Please use the `linewidth` argument instead.”
+`geom_smooth()` using formula = &#39;y ~ x&#39;
+`geom_smooth()` using formula = &#39;y ~ x&#39;
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>`geom_smooth()` using formula = &#39;y ~ x&#39;
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/c8614ede0614404370e3772f82a1d69584ab9e2708e546018b57e993b1718724.png"><img alt="_images/c8614ede0614404370e3772f82a1d69584ab9e2708e546018b57e993b1718724.png" src="_images/c8614ede0614404370e3772f82a1d69584ab9e2708e546018b57e993b1718724.png" style="width: 420px; height: 420px;" />
+<a class="reference internal image-reference" href="_images/94e8c1e5cca8fc3962d804d87d9d7a539e33332df3c80f4f16b2dddf63b78d05.png"><img alt="_images/94e8c1e5cca8fc3962d804d87d9d7a539e33332df3c80f4f16b2dddf63b78d05.png" src="_images/94e8c1e5cca8fc3962d804d87d9d7a539e33332df3c80f4f16b2dddf63b78d05.png" style="width: 420px; height: 420px;" />
 </a>
 </div>
 </div>
@@ -1102,6 +1235,11 @@ Interpretation: Protective
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-causal-variant-identification-with-ld">Example 1 – Causal Variant Identification with LD</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-analysis-for-example-1">Conditional Analysis for Example 1</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-start-with-the-most-significant-variant">Step 1: Start with the most significant variant</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-conditional-analysis-for-remaining-variants">Step 2: Conditional analysis for remaining variants</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-simpson-s-paradox">Example 2 – Simpson’s Paradox</a></li>
 </ul>
 </li>

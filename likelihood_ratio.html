@@ -220,6 +220,24 @@
 
 
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Correlation Between Variables</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="factor_analysis.html">Factor Analysis</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="principal_component_analysis.html">Principal Component Analysis (PCA)</a></li>
+
+
+
+
+
+
+
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fixed Effects Models</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="ordinary_least_squares.html">Ordinary Least Squares</a></li>
@@ -288,6 +306,7 @@
 
 
 
+
 <li class="toctree-l1"><a class="reference internal" href="mediator.html">Mediator</a></li>
 
 
@@ -333,6 +352,7 @@
 
 
 
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayesian Versus Frequentist</span></p>
 <ul class="nav bd-sidenav">
@@ -350,7 +370,8 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="p_value.html">p-value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p_value.html">p-value and Bayesian Hypothesis Testing</a></li>
+
 
 
 
@@ -545,6 +566,7 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-interpretation">Basic Interpretation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties">Properties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wilks-theorem">Wilks’ Theorem</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#likelihood-ratio-test">Likelihood Ratio Test</a></li>
 </ul>
 </li>
@@ -555,6 +577,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Likelihood Ratio Test</a></li>
 </ul>
 </li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#extended-reading">Extended Reading</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#supplementary">Supplementary</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Graphical Summary</a></li>
 </ul>
@@ -614,6 +637,22 @@ document.write(`
 <li><p>Forms the basis for many statistical tests and model selection criteria</p></li>
 <li><p>In genetics, commonly used for testing association between variants and traits</p></li>
 </ul>
+</section>
+<section id="wilks-theorem">
+<h2>Wilks’ Theorem<a class="headerlink" href="#wilks-theorem" title="Link to this heading">#</a></h2>
+<p>Let’s assume we are dealing with distributions parameterized by <span class="math notranslate nohighlight">\(\theta\)</span>. To generalize the case of simple hypotheses, let’s assume that <span class="math notranslate nohighlight">\(H_0\)</span> specifies that <span class="math notranslate nohighlight">\(\theta\)</span> lives in some set <span class="math notranslate nohighlight">\(\Theta_0\)</span> and <span class="math notranslate nohighlight">\(H_1\)</span> specifies that <span class="math notranslate nohighlight">\(\theta \in \Theta_1\)</span>. Let <span class="math notranslate nohighlight">\(\Omega = \Theta_0 \cup \Theta_1\)</span>. A somewhat natural extension to the likelihood ratio test statistic we discussed above is the generalized log-likelihood ratio:</p>
+<div class="math notranslate nohighlight">
+\[
+\Lambda^* = \log \frac{\max_{\theta \in \Theta_1} f(X_1,...,X_n|\theta)}{\max_{\theta \in \Theta_0} f(X_1,...,X_n|\theta)}
+\]</div>
+<p>For technical reasons, it is preferable to use the following related quantity:</p>
+<div class="math notranslate nohighlight">
+\[
+\Lambda_n = 2 \log \frac{\max_{\theta \in \Omega} f(X_1,...,X_n|\theta)}{\max_{\theta \in \Theta_0} f(X_1,...,X_n|\theta)}
+\]</div>
+<p>Just like before, larger values of <span class="math notranslate nohighlight">\(\Lambda_n\)</span> provide stronger evidence against <span class="math notranslate nohighlight">\(H_0\)</span>.</p>
+<p><strong>Wilks’s Theorem</strong>: Suppose that the dimension of <span class="math notranslate nohighlight">\(\Omega\)</span> is <span class="math notranslate nohighlight">\(v\)</span> and the dimension of <span class="math notranslate nohighlight">\(\Theta_0\)</span> is <span class="math notranslate nohighlight">\(r\)</span>. Under regularity conditions and assuming <span class="math notranslate nohighlight">\(H_0\)</span><span class="math notranslate nohighlight">\( is true, the distribution of \)</span>\Lambda_n<span class="math notranslate nohighlight">\( tends to a chi-squared distribution with degrees of freedom equal to \)</span>v−r$ as the sample size tends to infinity.</p>
+<p>With this theorem in hand (and for <span class="math notranslate nohighlight">\(n\)</span> large), we can compare the value of our log-likehood ratio to the expected values from a <span class="math notranslate nohighlight">\(\chi^2_{v−r}\)</span> distribution.</p>
 </section>
 <section id="likelihood-ratio-test">
 <h2>Likelihood Ratio Test<a class="headerlink" href="#likelihood-ratio-test" title="Link to this heading">#</a></h2>
@@ -981,6 +1020,10 @@ Result: FAIL TO REJECT null - insufficient evidence for genetic effect
 <p>This is actually very realistic for genetics research - most real genetic effects require hundreds or thousands of individuals to detect with statistical confidence. A non-significant LRT result doesn’t mean no effect exists; it means we don’t have enough data to prove an effect exists beyond reasonable doubt.</p>
 </section>
 </section>
+<section class="tex2jax_ignore mathjax_ignore" id="extended-reading">
+<h1>Extended Reading<a class="headerlink" href="#extended-reading" title="Link to this heading">#</a></h1>
+<p><a class="reference external" href="https://stephens999.github.io/fiveMinuteStats/wilks.html">Matthew Stephen’s fiveMinuteStats: Likelihood Ratio: Wilks’s Theorem</a></p>
+</section>
 <section class="tex2jax_ignore mathjax_ignore" id="supplementary">
 <h1>Supplementary<a class="headerlink" href="#supplementary" title="Link to this heading">#</a></h1>
 <section id="id2">
@@ -1192,6 +1235,7 @@ Result: FAIL TO REJECT null - insufficient evidence for genetic effect
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-interpretation">Basic Interpretation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties">Properties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wilks-theorem">Wilks’ Theorem</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#likelihood-ratio-test">Likelihood Ratio Test</a></li>
 </ul>
 </li>
@@ -1202,6 +1246,7 @@ Result: FAIL TO REJECT null - insufficient evidence for genetic effect
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Likelihood Ratio Test</a></li>
 </ul>
 </li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#extended-reading">Extended Reading</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#supplementary">Supplementary</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Graphical Summary</a></li>
 </ul>

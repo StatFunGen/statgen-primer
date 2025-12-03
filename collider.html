@@ -220,6 +220,24 @@
 
 
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Correlation Between Variables</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="factor_analysis.html">Factor Analysis</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="principal_component_analysis.html">Principal Component Analysis (PCA)</a></li>
+
+
+
+
+
+
+
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fixed Effects Models</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="ordinary_least_squares.html">Ordinary Least Squares</a></li>
@@ -288,6 +306,7 @@
 
 
 
+
 <li class="toctree-l1"><a class="reference internal" href="mediator.html">Mediator</a></li>
 
 
@@ -333,6 +352,7 @@
 
 
 
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayesian Versus Frequentist</span></p>
 <ul class="nav bd-sidenav">
@@ -350,7 +370,8 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="p_value.html">p-value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p_value.html">p-value and Bayesian Hypothesis Testing</a></li>
+
 
 
 
@@ -559,11 +580,9 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-2-incorrect-approach-adjusting-for-the-collider">Analysis 2: Incorrect Approach (Adjusting for the Collider)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-3-stratification-by-height-another-way-to-condition-on-the-collider">Analysis 3: Stratification by Height (Another Way to Condition on the Collider)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compile-results">Compile Results</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation">Interpretation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-does-this-matter">Why Does This Matter?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-key-lesson">The Key Lesson</a></li>
 </ul>
 </li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#extended-reading">Extended Reading</a></li>
 </ul>
 
             </nav>
@@ -661,7 +680,7 @@ Y = \beta_0 + \beta_1 X + \beta_2 \text{Collider} + \epsilon \quad \text{(WRONG!
 <h1>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
 <p>Here’s a biologically implausible scenario that perfectly demonstrates collider bias: What if we told you that certain genetic variants (autosomal SNPs) are associated with biological sex? That sounds absurd, right? Sex is determined by sex chromosomes (XX or XY), so autosomal SNPs (variants on non-sex chromosomes) should have <strong>zero</strong> association with whether someone is male or female.</p>
 <p>Yet, if we make one seemingly innocent analytical choice—adjusting for height in our model—we can create hundreds of “genome-wide significant” associations between autosomal SNPs and sex. These associations are completely spurious, arising purely from collider bias.</p>
-<p>This example is based on a landmark study published in the <em>American Journal of Human Genetics</em> that used UK Biobank data to definitively demonstrate collider bias. The researchers deliberately induced this bias to show how adjusting for heritable covariates can create biologically impossible associations.</p>
+<p>This example is based on a landmark study <a class="reference external" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4746366/">published in the <em>American Journal of Human Genetics</em></a> that used UK Biobank data to definitively demonstrate collider bias. The researchers deliberately induced this bias to show how adjusting for heritable covariates can create biologically impossible associations.</p>
 <section id="the-setup-height-as-a-collider">
 <h2>The Setup: Height as a Collider<a class="headerlink" href="#the-setup-height-as-a-collider" title="Link to this heading">#</a></h2>
 <p>The causal structure is:</p>
@@ -943,45 +962,11 @@ F-statistic: 13.08 on 1 and 2498 DF,  p-value: 0.0003037
 </div></div>
 </div>
 </section>
-<section id="interpretation">
-<h2>Interpretation<a class="headerlink" href="#interpretation" title="Link to this heading">#</a></h2>
-<p>The results are striking:</p>
-<ol class="arabic simple">
-<li><p><strong>Correct analysis (no height adjustment)</strong>: β ≈ 0, p &gt; 0.05</p>
-<ul class="simple">
-<li><p>As expected! Autosomal SNPs don’t cause sex, so there’s no association.</p></li>
-</ul>
-</li>
-<li><p><strong>Incorrect analysis (adjusted for height)</strong>: β ≈ -0.08, p &lt; 0.0001</p>
-<ul class="simple">
-<li><p>A highly “significant” association appears! But it’s completely spurious.</p></li>
-<li><p>The negative beta means: height-increasing alleles are associated with being female (when controlling for height).</p></li>
-<li><p>This is biologically impossible—it’s pure collider bias.</p></li>
-</ul>
-</li>
-<li><p><strong>Stratified analyses (tall or short people only)</strong>: Both show spurious associations</p>
-<ul class="simple">
-<li><p>Selecting only tall or short people also conditions on the collider.</p></li>
-<li><p>Even without explicitly including height as a covariate, we create bias through selection.</p></li>
-</ul>
-</li>
-</ol>
 </section>
-<section id="why-does-this-matter">
-<h2>Why Does This Matter?<a class="headerlink" href="#why-does-this-matter" title="Link to this heading">#</a></h2>
-<p>This example demonstrates a critical principle: <strong>conditioning on a collider creates spurious associations between its causes</strong>, even when those causes are completely independent. In the real UK Biobank study, adjusting for height created over 200 genome-wide significant “associations” between autosomal SNPs and sex—all of them false.</p>
-<p>The implications are profound:</p>
-<ul class="simple">
-<li><p>Adjusting for heritable traits can create false-positive findings</p></li>
-<li><p>Selection bias (e.g., studying only hospitalized patients, survivors, or people who meet certain criteria) can induce collider bias</p></li>
-<li><p>The mantra “control for everything” is dangerous—sometimes controlling creates bias rather than removes it</p></li>
-</ul>
-</section>
-<section id="the-key-lesson">
-<h2>The Key Lesson<a class="headerlink" href="#the-key-lesson" title="Link to this heading">#</a></h2>
-<p>Before including a variable in your model, ask: <strong>Could this variable be caused by both my exposure and my outcome?</strong> If yes, you’re looking at a potential collider, and adjusting for it may create spurious associations rather than reveal true ones.</p>
-<p>In genetics and epidemiology, careful consideration of causal structure—often represented through directed acyclic graphs (DAGs)—is essential for avoiding collider bias and other forms of selection bias.</p>
-</section>
+<section class="tex2jax_ignore mathjax_ignore" id="extended-reading">
+<h1>Extended Reading<a class="headerlink" href="#extended-reading" title="Link to this heading">#</a></h1>
+<p><strong>Aschard et al. (2015).</strong> “Adjusting for Heritable Covariates Can Bias Effect Estimates in Genome-Wide Association Studies.” <em>American Journal of Human Genetics</em>, 96(3), 329-339. <a class="reference external" href="https://www.cell.com/ajhg/fulltext/S0002-9297(14)00527-8">https://www.cell.com/ajhg/fulltext/S0002-9297(14)00527-8</a></p>
+<p>This landmark paper demonstrates that adjusting for heritable covariates—traits with a genetic basis—can introduce significant bias into genome-wide association studies. The authors show that when genetic variants influence both an outcome of interest and the covariate being adjusted for, the effect estimates can be severely distorted, even creating false-positive associations. Using real data from large GWAS meta-analyses of anthropometric traits (waist-to-hip ratio and waist circumference adjusted for BMI), they found that approximately half of the reported associations could be explained by genetic effects on BMI rather than the primary outcome. The paper provides both theoretical framework and practical examples demonstrating that collider bias arises from shared causal factors between the outcome and covariate, and that standard adjustment methods cannot eliminate this bias when the underlying causal structure is unknown. This is essential reading for anyone conducting GWAS of correlated traits, as it highlights the importance of understanding causal relationships before deciding which variables to adjust for in your analysis.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1068,11 +1053,9 @@ F-statistic: 13.08 on 1 and 2498 DF,  p-value: 0.0003037
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-2-incorrect-approach-adjusting-for-the-collider">Analysis 2: Incorrect Approach (Adjusting for the Collider)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-3-stratification-by-height-another-way-to-condition-on-the-collider">Analysis 3: Stratification by Height (Another Way to Condition on the Collider)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compile-results">Compile Results</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation">Interpretation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-does-this-matter">Why Does This Matter?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-key-lesson">The Key Lesson</a></li>
 </ul>
 </li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#extended-reading">Extended Reading</a></li>
 </ul>
 
   </nav></div>

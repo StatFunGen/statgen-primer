@@ -1,0 +1,1301 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Principal Component Analysis (PCA) &#8212; Statistical backgrounds for gene mapping</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'principal_component_analysis';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Ordinary Least Squares" href="ordinary_least_squares.html" />
+    <link rel="prev" title="Factor Analysis" href="factor_analysis.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="README.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Statistical backgrounds for gene mapping</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Popular Topics and Related Notebooks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="notations.html">Notations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="popular_topics.html">Popular Topics in Statistical Genetics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="genotype_coding.html">Genotype Coding</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="minor_allele_frequency.html">Minor Allele Frequency</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Hardy_Weinberg_equilibrium.html">Hardy-Weinberg Equilibrium</a></li>
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Correlation Between Variants</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="linkage_disequilibrium.html">Linkage Disequilibrium</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="linkage_disequilibrium_score.html">Linkage Disequilibrium Score</a></li>
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Correlation Between Individuals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="genetic_relationship_matrix.html">Genetic Relationship Matrix</a></li>
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Correlation Between Variables</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="factor_analysis.html">Factor Analysis</a></li>
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Principal Component Analysis (PCA)</a></li>
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fixed Effects Models</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ordinary_least_squares.html">Ordinary Least Squares</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="odds_ratio.html">Odds Ratio</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="marginal_joint_effects.html">Marginal and Joint Effects</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="summary_statistics.html">Summary Statistics</a></li>
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Random Effects Models</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="random_effect.html">Random Effect</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="proportion_of_variance_explained.html">Proportion of Variance Explained and Heritability</a></li>
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Linear Mixed Model</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="linear_mixed_model.html">Linear Mixed Model</a></li>
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Covariates</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="confounder.html">Confounder</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="collider.html">Collider</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="mediator.html">Mediator</a></li>
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Meta-analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="meta_analysis_fixed_effect.html">Meta-Analysis Fixed Effect</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="meta_analysis_random_effect.html">Meta-Analysis Random Effect</a></li>
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Likelihood</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="likelihood.html">Likelihood</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="maximum_likelihood_estimation.html">Maximum Likelihood Estimation</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="likelihood_ratio.html">Likelihood Ratio</a></li>
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayesian Versus Frequentist</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Bayesian_frequentist.html">Bayesian and Frequentist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bayes_rule.html">Bayes Rule</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Bayes_factor.html">Bayes Factor</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="p_value.html">p-value and Bayesian Hypothesis Testing</a></li>
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayesian Model</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Bayesian_normal_mean_model.html">Bayesian Normal Mean Model</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Bayesian_multivariate_normal_mean_model.html">Bayesian Multivariate Normal Mean Model</a></li>
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Multiple Bayesian models</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Bayesian_model_comparison.html">Bayesian Model Comparison</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Bayesian_mixture_model.html">Bayesian Mixture Model</a></li>
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/principal_component_analysis.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Principal Component Analysis (PCA)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Principal Component Analysis (PCA)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-summary">Graphical Summary</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pca-and-factor-analysis">PCA and Factor Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-mathbf-x-t-mathbf-x">Connection to <span class="math notranslate nohighlight">\(\mathbf{X}^T\mathbf{X}\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eigendecomposition-of-mathbf-x-t-mathbf-x">Eigendecomposition of <span class="math notranslate nohighlight">\(\mathbf{X}^T\mathbf{X}\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-covariance-matrix">Connection to Covariance Matrix</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scaling">Scaling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-explained">Variance Explained</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detect-multiple-ancestral-populations-via-pca">Detect Multiple Ancestral Populations via PCA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-data">Generate Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-pca-on-the-genotype-matrix">Perform PCA on the Genotype Matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proportion-of-variance-explained-by-the-top-pcs">Proportion of Variance Explained by the top PCs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pc1-vs-pc2-colored-by-population">PC1 vs PC2 Colored by Population</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-mixture-to-admixture">From mixture to admixture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-loadings-for-the-top-pc">Interpretation of Loadings for the top PC</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#supplementary">Supplementary</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Graphical Summary</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#extended-reading">Extended Reading</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="principal-component-analysis-pca">
+<h1>Principal Component Analysis (PCA)<a class="headerlink" href="#principal-component-analysis-pca" title="Link to this heading">#</a></h1>
+<p>PCA finds the directions in your data where the points are most spread out (maximum variance), allowing you to summarize high-dimensional data using just a few key axes of variation.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="graphical-summary">
+<h1>Graphical Summary<a class="headerlink" href="#graphical-summary" title="Link to this heading">#</a></h1>
+<p><img alt="Fig" src="_images/Slide31.png" /></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="key-formula">
+<h1>Key Formula<a class="headerlink" href="#key-formula" title="Link to this heading">#</a></h1>
+<p>Let <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> be an <span class="math notranslate nohighlight">\(N \times p\)</span> data matrix (<span class="math notranslate nohighlight">\(N\)</span> observations, <span class="math notranslate nohighlight">\(p\)</span> variables). The singular value decomposition (SVD) of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> can be written as</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{X} = \mathbf{FL} + \mathbf{E} = \mathbf{U}_k\mathbf{\Sigma_k}\mathbf{W}_k^T + \mathbf{E}
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf{F}=\mathbf{U}\mathbf{\Sigma_k}\)</span> can be considered as the factor matrix</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{U}_k\)</span>: <span class="math notranslate nohighlight">\(N \times N\)</span>, each column is the left singular vector of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> (first <span class="math notranslate nohighlight">\(k\)</span> vectors)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{\Sigma}_k\)</span>: <span class="math notranslate nohighlight">\(N \times k\)</span>, the top <span class="math notranslate nohighlight">\(k\)</span> rows forms a diagonal matrix where each element is the singular value of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>, ordered from largest to smallest. The bottom <span class="math notranslate nohighlight">\((N-k) \times k\)</span> are all 0.</p></li>
+</ul>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{L}=\mathbf{W}_k^T\)</span> as the loading matrix, as in the context of factor analysis.</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{W}_k^T\)</span>: <span class="math notranslate nohighlight">\(k \times p\)</span>, <span class="math notranslate nohighlight">\(\mathbf{W}_k\)</span> consists of the first <span class="math notranslate nohighlight">\(k\)</span> columns of <span class="math notranslate nohighlight">\(\mathbf{W}\)</span>, each column of which is the right singular vector of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>.</p></li>
+</ul>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{E}\)</span>: <span class="math notranslate nohighlight">\(N \times p\)</span> <strong>reconstruction error</strong> (truncation error).</p>
+<ul>
+<li><p>If all singular values are used (i.e., <span class="math notranslate nohighlight">\(k=p\)</span>), then <span class="math notranslate nohighlight">\(\mathbf{E}=0\)</span>.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="technical-details">
+<h1>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading">#</a></h1>
+<section id="pca-and-factor-analysis">
+<h2>PCA and Factor Analysis<a class="headerlink" href="#pca-and-factor-analysis" title="Link to this heading">#</a></h2>
+<p>PCA can be considered as a special case of factor analysis with the following constraints:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf{U}_k\)</span> and <span class="math notranslate nohighlight">\(\mathbf{W}_k\)</span> are both orthogonal matrix</p></li>
+<li><p>Each column of <span class="math notranslate nohighlight">\(\mathbf{U}_k\)</span> is a unit vector of length <span class="math notranslate nohighlight">\(N\)</span>, the left singular vector of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span></p></li>
+<li><p>The diagonal elements (<span class="math notranslate nohighlight">\(\sigma_1, \dots, \sigma_k\)</span>) of the top part of <span class="math notranslate nohighlight">\(\mathbf{\Sigma}_k\)</span> is the singular values of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>, and <span class="math notranslate nohighlight">\(\sigma_1 \geq \sigma_2 \geq \dots \geq \sigma_k &gt; 0\)</span></p></li>
+<li><p>Each column of <span class="math notranslate nohighlight">\(\mathbf{W}_k\)</span> is a unit vector of length <span class="math notranslate nohighlight">\(p\)</span>, the right singular vector of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span></p></li>
+</ol>
+<p>When conducting PCA, we order the singular values by the variance <span class="math notranslate nohighlight">\(\sigma_1 \geq \sigma_2 \geq \dots \geq \sigma_k &gt; 0\)</span> to reach the <strong>variance maximization</strong> by selecting the <strong>first</strong> <span class="math notranslate nohighlight">\(k\)</span> singular vectors.</p>
+</section>
+<section id="connection-to-mathbf-x-t-mathbf-x">
+<h2>Connection to <span class="math notranslate nohighlight">\(\mathbf{X}^T\mathbf{X}\)</span><a class="headerlink" href="#connection-to-mathbf-x-t-mathbf-x" title="Link to this heading">#</a></h2>
+<section id="eigendecomposition-of-mathbf-x-t-mathbf-x">
+<h3>Eigendecomposition of <span class="math notranslate nohighlight">\(\mathbf{X}^T\mathbf{X}\)</span><a class="headerlink" href="#eigendecomposition-of-mathbf-x-t-mathbf-x" title="Link to this heading">#</a></h3>
+<p>When we take <span class="math notranslate nohighlight">\(k=p\)</span> we have <span class="math notranslate nohighlight">\(\mathbf{X} = \mathbf{U}\mathbf{\Sigma}\mathbf{W}^T \)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{X}^T\mathbf{X} = (\mathbf{W}\mathbf{\Sigma}\mathbf{U}^T)(\mathbf{U}\mathbf{\Sigma}\mathbf{W}^T) = \mathbf{W}\mathbf{\Sigma}^T\mathbf{\Sigma}\mathbf{W}^T = \mathbf{W}\mathbf{\Lambda}\mathbf{W}^T
+\]</div>
+<p>(here we denote <span class="math notranslate nohighlight">\(\mathbf{\Lambda} = \mathbf{\Sigma}^T\mathbf{\Sigma}\)</span>).</p>
+<p>This is the eigendecomposition of matrix <span class="math notranslate nohighlight">\(\mathbf{X}^T\mathbf{X}\)</span>. <span class="math notranslate nohighlight">\(\mathbf{\Lambda}\)</span> is a <span class="math notranslate nohighlight">\(p\times p\)</span> diagonal matrix of eigenvalues <span class="math notranslate nohighlight">\(\lambda_k\)</span> of <span class="math notranslate nohighlight">\(\mathbf{X}^T\mathbf{X}\)</span>. <span class="math notranslate nohighlight">\(\lambda_k\)</span> is equal to the sum of the squares over the dataset associated with each component <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<p>The eigenvalues <span class="math notranslate nohighlight">\(\lambda_k\)</span> relate to the singular values by <span class="math notranslate nohighlight">\(\lambda_k = \sigma_k^2\)</span>, where <span class="math notranslate nohighlight">\(\sigma_k\)</span> are the diagonal elements of <span class="math notranslate nohighlight">\(\mathbf{\Sigma}\)</span>, i.e., the singular value of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>.</p>
+</section>
+<section id="connection-to-covariance-matrix">
+<h3>Connection to Covariance Matrix<a class="headerlink" href="#connection-to-covariance-matrix" title="Link to this heading">#</a></h3>
+<p>When <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is centered (columns have zero mean), <span class="math notranslate nohighlight">\(\mathbf{X}^T\mathbf{X}/(N-1)\)</span> is the sample covariance matrix <span class="math notranslate nohighlight">\(\text{Cov}(\mathbf{X})\)</span>. Thus, PCA via eigendecomposition is often described as finding the eigenvectors of the covariance matrix. The eigenvectors <span class="math notranslate nohighlight">\(\mathbf{W}\)</span> are the principal directions, and the eigenvalues represent the variance explained along each direction.</p>
+<p>In practice the SVD of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is preferred for numerical stability (especially when <span class="math notranslate nohighlight">\(p\)</span> is large or when <span class="math notranslate nohighlight">\(\mathbf{X}^T\mathbf{X}\)</span> is nearly singular), but the eigendecomposition of <span class="math notranslate nohighlight">\(\mathbf{X}^T\mathbf{X}\)</span> is the traditional textbook approach.</p>
+</section>
+</section>
+<section id="scaling">
+<h2>Scaling<a class="headerlink" href="#scaling" title="Link to this heading">#</a></h2>
+<p>PCA is sensitive to the scaling of the variables. Mathematically this sensitivity comes from the way a rescaling changes the sample‑covariance matrix that PCA diagonalises. So in practice one needs to scale (both centered and unit variance) the matrix before performing PCA.</p>
+</section>
+<section id="variance-explained">
+<h2>Variance Explained<a class="headerlink" href="#variance-explained" title="Link to this heading">#</a></h2>
+<p>The variance explained by the first <span class="math notranslate nohighlight">\(k\)</span> PCs is:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\sum_{j=1}^k \sigma_j^2}{\sum_{j=1}^p \sigma_j^2}
+\]</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="related-topics">
+<h1>Related Topics<a class="headerlink" href="#related-topics" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p><a class="reference external" href="https://statfungen.github.io/statgen-prerequisites/confounder.html">Confounders</a></p></li>
+<li><p><a class="reference external" href="https://statfungen.github.io/statgen-prerequisites/genetic_relationship_matrix.html">Genetic Relationship Matrix</a></p></li>
+<li><p><a class="reference external" href="https://statfungen.github.io/statgen-prerequisites/proportion_of_variance_explained.html">Proportion of Variance Explained</a></p></li>
+<li><p><a class="reference external" href="https://statfungen.github.io/statgen-prerequisites/factor_analysis.html">Factor Analysis</a></p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="example">
+<h1>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
+<section id="detect-multiple-ancestral-populations-via-pca">
+<h2>Detect Multiple Ancestral Populations via PCA<a class="headerlink" href="#detect-multiple-ancestral-populations-via-pca" title="Link to this heading">#</a></h2>
+<p>You are given a sample of genotyped individuals and want to know: <strong>Are all individuals in this sample from the same genetic ancestry, or do they come from different populations?</strong> This is a fundamental question in population genetics and forensics, as population structure can be a major confounder in association studies.</p>
+<p>In this example, we’ll demonstrate how PCA can automatically reveal population structure without any prior knowledge of population labels.</p>
+<p>This is the <strong>mixture problem</strong>: we have a mixture of individuals from distinct populations, and PCA reveals their structure through the principal components. Here we use the same setting as in the topic of <a class="reference external" href="https://statfungen.github.io/statgen-prerequisites/factor_analysis.html">Factor Analysis</a>, and we will see the PCA will detect the four groups of individuals easily.</p>
+</section>
+<section id="generate-data">
+<h2>Generate Data<a class="headerlink" href="#generate-data" title="Link to this heading">#</a></h2>
+<p>This is the same generation as we did in the <a class="reference external" href="https://statfungen.github.io/statgen-prerequisites/factor_analysis.html">Factor Analysis</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="o">=</span><span class="nf">ls</span><span class="p">())</span>
+<span class="nf">set.seed</span><span class="p">(</span><span class="m">74</span><span class="p">)</span>
+
+<span class="n">N</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">50</span><span class="w">  </span><span class="c1"># Number of individuals</span>
+<span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">100</span><span class="w">  </span><span class="c1"># Number of markers (SNPs)</span>
+<span class="n">k</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">2</span><span class="w">   </span><span class="c1"># Number of ancestral populations</span>
+
+<span class="c1"># Create L matrix with very distinct population frequencies</span>
+<span class="n">L_true</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">)</span>
+<span class="c1"># Population 1</span>
+<span class="n">L_true</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">50</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">runif</span><span class="p">(</span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="m">0.9</span><span class="p">,</span><span class="w"> </span><span class="m">0.95</span><span class="p">)</span>
+<span class="n">L_true</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">51</span><span class="o">:</span><span class="m">100</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">runif</span><span class="p">(</span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="m">0.05</span><span class="p">,</span><span class="w"> </span><span class="m">0.1</span><span class="p">)</span>
+<span class="c1"># Population 2</span>
+<span class="n">L_true</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">50</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">runif</span><span class="p">(</span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="m">0.05</span><span class="p">,</span><span class="w"> </span><span class="m">0.3</span><span class="p">)</span>
+<span class="n">L_true</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">51</span><span class="o">:</span><span class="m">100</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">runif</span><span class="p">(</span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w"> </span><span class="m">0.95</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">L_true</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;SNP&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">p</span><span class="p">)</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">L_true</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;POP&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">k</span><span class="p">)</span>
+
+<span class="c1"># Create F matrix with specified ancestry proportions</span>
+<span class="n">F_true</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">k</span><span class="p">)</span>
+<span class="c1"># Individuals 1-15: Pure Pop1</span>
+<span class="n">F_true</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">15</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1.0</span>
+<span class="n">F_true</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">15</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.0</span>
+<span class="c1"># Individuals 16-30: Pure Pop2</span>
+<span class="n">F_true</span><span class="p">[</span><span class="m">16</span><span class="o">:</span><span class="m">30</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.0</span>
+<span class="n">F_true</span><span class="p">[</span><span class="m">16</span><span class="o">:</span><span class="m">30</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1.0</span>
+<span class="c1"># Individuals 31-40: Pop1-Pop2 admixture (80-20)</span>
+<span class="n">F_true</span><span class="p">[</span><span class="m">31</span><span class="o">:</span><span class="m">40</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.8</span>
+<span class="n">F_true</span><span class="p">[</span><span class="m">31</span><span class="o">:</span><span class="m">40</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.2</span>
+<span class="c1"># Individuals 41-50: Pop1-Pop2 admixture (30-70)</span>
+<span class="n">F_true</span><span class="p">[</span><span class="m">41</span><span class="o">:</span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.3</span>
+<span class="n">F_true</span><span class="p">[</span><span class="m">41</span><span class="o">:</span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.7</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">F_true</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;IND&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">F_true</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;POP&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">k</span><span class="p">)</span>
+
+<span class="c1"># Generate genotype matrix X_raw</span>
+<span class="n">X_raw</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">)</span>
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1"># Expected frequency = weighted average of population frequencies</span>
+<span class="w">    </span><span class="n">p_ij</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">F_true</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">L_true</span><span class="p">[</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">])</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c1"># Sample genotype (0, 1, or 2 copies)</span>
+<span class="w">    </span><span class="n">X_raw</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rbinom</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">prob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_ij</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">X_raw</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;IND&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">X_raw</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;SNP&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As described above, we need to scale the <code class="docutils literal notranslate"><span class="pre">X_raw</span></code> first before performing PCA:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">scale</span><span class="p">(</span><span class="n">X_raw</span><span class="p">,</span><span class="w"> </span><span class="n">center</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="perform-pca-on-the-genotype-matrix">
+<h2>Perform PCA on the Genotype Matrix<a class="headerlink" href="#perform-pca-on-the-genotype-matrix" title="Link to this heading">#</a></h2>
+<p>Now we apply PCA to the genotype matrix <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> to discover the population structure.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">pca_result</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">prcomp</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">center</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">scale.</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="proportion-of-variance-explained-by-the-top-pcs">
+<h2>Proportion of Variance Explained by the top PCs<a class="headerlink" href="#proportion-of-variance-explained-by-the-top-pcs" title="Link to this heading">#</a></h2>
+<p>The scree plot shows that the first principal component captures the majority of variance, indicating strong population differentiation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extract principal component scores</span>
+<span class="n">pc_scores</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pca_result</span><span class="o">$</span><span class="n">x</span>
+
+<span class="c1"># Calculate variance explained by each PC</span>
+<span class="n">variance_explained</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="n">pca_result</span><span class="o">$</span><span class="n">sdev</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">pca_result</span><span class="o">$</span><span class="n">sdev</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">100</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Variance explained by top 5 PCs:\n&quot;</span><span class="p">)</span>
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;PC%d: %.2f%%\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">variance_explained</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+<span class="p">}</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variance explained by top 5 PCs:
+PC1: 60.92%
+PC2: 2.60%
+PC3: 2.33%
+PC4: 2.20%
+PC5: 1.99%
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create scree plot</span>
+<span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">))</span>
+
+<span class="c1"># Barplot of variance explained</span>
+<span class="nf">barplot</span><span class="p">(</span><span class="n">variance_explained</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">],</span>
+<span class="w">        </span><span class="n">names.arg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span>
+<span class="w">        </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Principal Component&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Variance Explained (%)&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Scree Plot&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;steelblue&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;white&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">variance_explained</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">])</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.1</span><span class="p">))</span>
+
+<span class="c1"># Cumulative variance explained</span>
+<span class="n">cumvar</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cumsum</span><span class="p">(</span><span class="n">variance_explained</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">])</span>
+<span class="nf">plot</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">cumvar</span><span class="p">,</span>
+<span class="w">     </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span>
+<span class="w">     </span><span class="n">pch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">19</span><span class="p">,</span>
+<span class="w">     </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;darkred&quot;</span><span class="p">,</span>
+<span class="w">     </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span>
+<span class="w">     </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Number of PCs&quot;</span><span class="p">,</span>
+<span class="w">     </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Cumulative Variance Explained (%)&quot;</span><span class="p">,</span>
+<span class="w">     </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Cumulative Variance Explained&quot;</span><span class="p">,</span>
+<span class="w">     </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">100</span><span class="p">))</span>
+<span class="nf">grid</span><span class="p">(</span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;gray80&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/93bfe7af11f53ebfd42f514301d753e9b143817d75179c0ad6ff547986b0c480.png"><img alt="_images/93bfe7af11f53ebfd42f514301d753e9b143817d75179c0ad6ff547986b0c480.png" src="_images/93bfe7af11f53ebfd42f514301d753e9b143817d75179c0ad6ff547986b0c480.png" style="width: 420px; height: 420px;" />
+</a>
+</div>
+</div>
+</section>
+<section id="pc1-vs-pc2-colored-by-population">
+<h2>PC1 vs PC2 Colored by Population<a class="headerlink" href="#pc1-vs-pc2-colored-by-population" title="Link to this heading">#</a></h2>
+<p>We plot the first two principal components, coloring individuals by their true population origin (which PCA discovers automatically!).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define colors for populations</span>
+<span class="n">pop_labels</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="s">&quot;Population 1&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">15</span><span class="p">),</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="s">&quot;Population 2&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">15</span><span class="p">),</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="s">&quot;Mix 80-20&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">),</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="s">&quot;Mix 30-70&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">))</span>
+<span class="n">pop_colors</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Population 1&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;#E41A1C&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Population 2&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;#377EB8&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Mix 80-20&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;#4DAF4A&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Mix 30-70&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;#984EA3&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create scatter plot: PC1 vs PC2</span>
+<span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">))</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="n">pc_scores</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">pc_scores</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="p">],</span>
+<span class="w">     </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pop_colors</span><span class="p">[</span><span class="n">pop_labels</span><span class="p">],</span>
+<span class="w">     </span><span class="n">pch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">19</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span>
+<span class="w">     </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;PC1 (%.1f%% variance)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">variance_explained</span><span class="p">[</span><span class="m">1</span><span class="p">]),</span>
+<span class="w">     </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;PC2 (%.1f%% variance)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">variance_explained</span><span class="p">[</span><span class="m">2</span><span class="p">]),</span>
+<span class="w">     </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;PCA Reveals Population Structure&quot;</span><span class="p">,</span>
+<span class="w">     </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">range</span><span class="p">(</span><span class="n">pc_scores</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">])</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.15</span><span class="p">,</span>
+<span class="w">     </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">range</span><span class="p">(</span><span class="n">pc_scores</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="p">])</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.15</span><span class="p">)</span>
+
+<span class="nf">legend</span><span class="p">(</span><span class="s">&quot;topright&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">       </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">pop_colors</span><span class="p">),</span>
+<span class="w">       </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pop_colors</span><span class="p">,</span><span class="w"> </span>
+<span class="w">       </span><span class="n">pch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">19</span><span class="p">,</span><span class="w"> </span>
+<span class="w">       </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.2</span><span class="p">,</span>
+<span class="w">       </span><span class="n">bty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;o&quot;</span><span class="p">)</span>
+
+<span class="nf">grid</span><span class="p">(</span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;gray80&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;gray50&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">)</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;gray50&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/21ac45be0dd863e7fb64011d1e16bf47d429ee4b2c9b16d0dfc63b1b2ee4f1e2.png"><img alt="_images/21ac45be0dd863e7fb64011d1e16bf47d429ee4b2c9b16d0dfc63b1b2ee4f1e2.png" src="_images/21ac45be0dd863e7fb64011d1e16bf47d429ee4b2c9b16d0dfc63b1b2ee4f1e2.png" style="width: 420px; height: 420px;" />
+</a>
+</div>
+</div>
+</section>
+<section id="from-mixture-to-admixture">
+<h2>From mixture to admixture<a class="headerlink" href="#from-mixture-to-admixture" title="Link to this heading">#</a></h2>
+<p>Note that here PCA actually captures four clusters of individuals, treating them as separate groups in the PC plot.</p>
+<p>But our data generation is actually an <strong>admixture problem</strong>, i.e., the individuals actually comes from only two ancestries, with mixed between the ancestries. Since PCA is actually a specific type of factor analysis, we can also infer the proportion of ancestries in each individuals from the PCA results.</p>
+<p>Now we can attempt to infer the genetic ancestry using the PCA results. It’s a heuristic that works well when:</p>
+<ul class="simple">
+<li><p>Population structure is the dominant source of variation (PC1 explains most variance)</p></li>
+<li><p>Populations are reasonably well-separated</p></li>
+</ul>
+<p>The <span class="math notranslate nohighlight">\(k\)</span>-th PC score for the <span class="math notranslate nohighlight">\(i\)</span>-th individual is actually calculated by mapping the <span class="math notranslate nohighlight">\(i\)</span>-th individual in <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> through the coeffecients <span class="math notranslate nohighlight">\(\mathbf{W}_k\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{PC score}_{i,k} = \sum_{j=1}^p \mathbf{X}_{i,j} \cdot \mathbf{W}_{j,k}
+\]</div>
+<p>To illustrate this as the proportion of ancestry, the PC scores will be scaled to [0,1].</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find the range of PC1 scores</span>
+<span class="n">pc1_min</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">pc_scores</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">])</span>
+<span class="n">pc1_max</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">pc_scores</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">])</span>
+
+<span class="c1"># Estimate ancestry proportions by rescaling PC1 to [0, 1]</span>
+<span class="c1"># This assumes: Pop1 is at pc1_min, Pop2 is at pc1_max</span>
+<span class="c1"># Ancestry proportion for Pop2 = (PC1_score - pc1_min) / (pc1_max - pc1_min)</span>
+<span class="n">ancestry_pop1_pca</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="n">pc_scores</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">pc1_min</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">pc1_max</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">pc1_min</span><span class="p">)</span>
+<span class="n">ancestry_pop2_pca</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ancestry_pop1_pca</span>
+
+<span class="c1"># Create a matrix similar to the ADMIXTURE F matrix</span>
+<span class="n">F_pca</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">t</span><span class="p">(</span><span class="nf">rbind</span><span class="p">(</span><span class="n">ancestry_pop1_pca</span><span class="p">,</span><span class="w"> </span><span class="n">ancestry_pop2_pca</span><span class="p">))</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">F_pca</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;POP1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;POP2&quot;</span><span class="p">)</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">F_pca</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rownames</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1"># Calculate correlation between true and PCA-inferred ancestry</span>
+<span class="n">cor_pop1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cor</span><span class="p">(</span><span class="n">F_true</span><span class="p">[</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">F_pca</span><span class="p">[</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;POP1&quot;</span><span class="p">])</span>
+<span class="n">cor_pop2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cor</span><span class="p">(</span><span class="n">F_true</span><span class="p">[</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">F_pca</span><span class="p">[</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;POP2&quot;</span><span class="p">])</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Correlation between true and PCA-inferred ancestry proportions:\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;Population 1: %.4f\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cor_pop1</span><span class="p">))</span>
+<span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;Population 2: %.4f\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cor_pop2</span><span class="p">))</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Correlation between true and PCA-inferred ancestry proportions:
+Population 1: -0.9976
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Population 2: -0.9976
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since the correlations are all close to -1, we need to flip the populations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">F_pca_flipped</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">F_pca</span><span class="p">[,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;POP2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;POP1&quot;</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualize the comparison using same style as ADMIXTURE</span>
+<span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">))</span>
+
+<span class="c1"># True ancestry</span>
+<span class="nf">barplot</span><span class="p">(</span><span class="nf">t</span><span class="p">(</span><span class="n">F_true</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;steelblue&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;coral&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span>
+<span class="w">        </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;True Ancestry Proportions&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Individual&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Ancestry Proportion&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">names.arg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">)</span>
+<span class="nf">legend</span><span class="p">(</span><span class="s">&quot;topright&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Population 1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Population 2&quot;</span><span class="p">),</span>
+<span class="w">       </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;steelblue&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;coral&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span>
+
+<span class="c1"># PCA-inferred ancestry</span>
+<span class="nf">barplot</span><span class="p">(</span><span class="nf">t</span><span class="p">(</span><span class="n">F_pca_flipped</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;steelblue&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;coral&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span>
+<span class="w">        </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;PCA-inferred Ancestry Proportions&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Individual&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Ancestry Proportion&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">names.arg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">)</span>
+<span class="nf">legend</span><span class="p">(</span><span class="s">&quot;topright&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Population 1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Population 2&quot;</span><span class="p">),</span>
+<span class="w">       </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;steelblue&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;coral&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/68ebc1865cc58c5414cb6addc27429751ec23092bd8f2c29d50143796375e45b.png"><img alt="_images/68ebc1865cc58c5414cb6addc27429751ec23092bd8f2c29d50143796375e45b.png" src="_images/68ebc1865cc58c5414cb6addc27429751ec23092bd8f2c29d50143796375e45b.png" style="width: 420px; height: 420px;" />
+</a>
+</div>
+</div>
+<p>While PCA can visualize population structure, <strong>for admixture analysis it is better to use the ADMIXTURE model</strong> introduced in <a class="reference external" href="https://statfungen.github.io/statgen-prerequisites/factor_analysis.html">Factor Analysis</a>. Here’s why:</p>
+<ul class="simple">
+<li><p><strong>PCA is a descriptive method</strong>: PCA finds the directions of maximum variance in the data but does not provide a statistical model of how the data was generated.</p></li>
+<li><p><strong>ADMIXTURE is a generative model</strong>: ADMIXTURE explicitly models the genetic mixture as a weighted combination of ancestry components: <span class="math notranslate nohighlight">\(\mathbf{X} = \mathbf{FL} + \mathbf{E}\)</span> (check <a class="reference external" href="https://statfungen.github.io/statgen-prerequisites/factor_analysis.html">Factor Analysis</a> for more details).</p></li>
+</ul>
+</section>
+<section id="interpretation-of-loadings-for-the-top-pc">
+<h2>Interpretation of Loadings for the top PC<a class="headerlink" href="#interpretation-of-loadings-for-the-top-pc" title="Link to this heading">#</a></h2>
+<p>Here we show that actually the loading for PC1 actually captures the difference of the allele frequencies between the two ancestries:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extract PC loadings (weights for each SNP)</span>
+<span class="n">pc1_loadings</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pca_result</span><span class="o">$</span><span class="n">rotation</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span>
+<span class="n">pc2_loadings</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pca_result</span><span class="o">$</span><span class="n">rotation</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="p">]</span>
+
+<span class="c1"># Calculate allele frequency for each population at each SNP</span>
+<span class="n">pop1_freq</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">colMeans</span><span class="p">(</span><span class="n">X_raw</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">15</span><span class="p">,</span><span class="w"> </span><span class="p">])</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">2</span><span class="w">   </span><span class="c1"># Pure Population 1</span>
+<span class="n">pop2_freq</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">colMeans</span><span class="p">(</span><span class="n">X_raw</span><span class="p">[</span><span class="m">16</span><span class="o">:</span><span class="m">30</span><span class="p">,</span><span class="w"> </span><span class="p">])</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">2</span><span class="w">  </span><span class="c1"># Pure Population 2</span>
+
+<span class="c1"># Calculate allele frequency difference between populations</span>
+<span class="n">freq_diff</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pop2_freq</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">pop1_freq</span>
+
+<span class="c1"># Show correlations</span>
+<span class="n">cor_pc1_freqdiff</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cor</span><span class="p">(</span><span class="n">pc1_loadings</span><span class="p">,</span><span class="w"> </span><span class="n">freq_diff</span><span class="p">)</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\n=== PC Loadings and Allele Frequency Differences in the Raw Data ===\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;Correlation between PC1 loadings and freq differences (raw data): %.4f\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cor_pc1_freqdiff</span><span class="p">))</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== PC Loadings and Allele Frequency Differences in the Raw Data ===
+Correlation between PC1 loadings and freq differences (raw data): 0.9975
+</pre></div>
+</div>
+</div>
+</div>
+<p>And this correlation persists before and after the scale of input data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate allele frequency for each population at each SNP</span>
+<span class="n">pop1_freq_scaled</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">colMeans</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">15</span><span class="p">,</span><span class="w"> </span><span class="p">])</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">2</span><span class="w">   </span><span class="c1"># Pure Population 1</span>
+<span class="n">pop2_freq_scaled</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">colMeans</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="m">16</span><span class="o">:</span><span class="m">30</span><span class="p">,</span><span class="w"> </span><span class="p">])</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">2</span><span class="w">  </span><span class="c1"># Pure Population 2</span>
+
+<span class="c1"># Calculate allele frequency difference between populations</span>
+<span class="n">freq_diff_scaled</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pop2_freq_scaled</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">pop1_freq_scaled</span>
+
+<span class="c1"># Show correlations</span>
+<span class="n">cor_pc1_freqdiff_scaled</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cor</span><span class="p">(</span><span class="n">pc1_loadings</span><span class="p">,</span><span class="w"> </span><span class="n">freq_diff_scaled</span><span class="p">)</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\n=== PC Loadings and Allele Frequency Differences After Scaling the Data ===\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;Correlation between PC1 loadings and freq differences (scaled data): %.4f\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cor_pc1_freqdiff_scaled</span><span class="p">))</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== PC Loadings and Allele Frequency Differences After Scaling the Data ===
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Correlation between PC1 loadings and freq differences (scaled data): 0.9985
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="supplementary">
+<h1>Supplementary<a class="headerlink" href="#supplementary" title="Link to this heading">#</a></h1>
+<section id="id1">
+<h2>Graphical Summary<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+
+<span class="c1"># Set seed for reproducibility</span>
+<span class="nf">set.seed</span><span class="p">(</span><span class="m">42</span><span class="p">)</span>
+
+<span class="c1"># Generate correlated 2D data with PC1 &gt;&gt; PC2</span>
+<span class="n">n</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1000</span>
+<span class="n">theta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kc">pi</span><span class="o">/</span><span class="m">6</span><span class="w">  </span><span class="c1"># 30 degree tilt</span>
+
+<span class="c1"># Create elongated cloud - PC1 much longer than PC2</span>
+<span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w">    </span><span class="c1"># Large variance for PC1 direction</span>
+<span class="n">y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0.8</span><span class="p">)</span><span class="w">  </span><span class="c1"># Small variance for PC2 direction</span>
+
+<span class="c1"># Rotate to create diagonal spread</span>
+<span class="n">X_original</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+<span class="n">Y_original</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+
+<span class="n">data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X_original</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Y_original</span><span class="p">)</span>
+
+<span class="c1"># Perform PCA</span>
+<span class="n">pca</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">prcomp</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">center</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">scale.</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
+
+<span class="c1"># Get PC directions - flip if needed</span>
+<span class="n">pc1_direction</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="o">-</span><span class="n">pca</span><span class="o">$</span><span class="n">rotation</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w">  </span>
+<span class="n">pc2_direction</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="o">-</span><span class="n">pca</span><span class="o">$</span><span class="n">rotation</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="p">]</span><span class="w">  </span>
+
+<span class="c1"># Scale for visualization</span>
+<span class="n">scale_factor1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">8</span>
+<span class="n">scale_factor2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">5</span>
+<span class="n">pc1_end</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">scale_factor1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pc1_direction</span>
+<span class="n">pc2_end</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">scale_factor2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pc2_direction</span>
+
+<span class="c1"># Get the center (mean)</span>
+<span class="n">center_x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">X_original</span><span class="p">)</span>
+<span class="n">center_y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">Y_original</span><span class="p">)</span>
+
+<span class="c1"># Create the plot</span>
+<span class="n">p_PCA</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;#66C2A5&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1"># PC1 arrow (blue) - use annotate instead of geom_segment</span>
+<span class="w">  </span><span class="nf">annotate</span><span class="p">(</span><span class="s">&quot;segment&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">           </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">center_x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">center_y</span><span class="p">,</span><span class="w"> </span>
+<span class="w">           </span><span class="n">xend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">center_x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pc1_end</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span>
+<span class="w">           </span><span class="n">yend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">center_y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pc1_end</span><span class="p">[</span><span class="m">2</span><span class="p">],</span>
+<span class="w">           </span><span class="n">arrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">arrow</span><span class="p">(</span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">unit</span><span class="p">(</span><span class="m">0.3</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cm&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;closed&quot;</span><span class="p">),</span>
+<span class="w">           </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;#3B4CC0&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">annotate</span><span class="p">(</span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">center_x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pc1_end</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">0.6</span><span class="p">,</span><span class="w"> </span>
+<span class="w">           </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">center_y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pc1_end</span><span class="p">[</span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span>
+<span class="w">           </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;PC1&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;#3B4CC0&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="p">,</span><span class="w"> </span><span class="n">fontface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1"># PC2 arrow (purple) - use annotate instead of geom_segment</span>
+<span class="w">  </span><span class="nf">annotate</span><span class="p">(</span><span class="s">&quot;segment&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">           </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">center_x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">center_y</span><span class="p">,</span><span class="w"> </span>
+<span class="w">           </span><span class="n">xend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">center_x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pc2_end</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span>
+<span class="w">           </span><span class="n">yend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">center_y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pc2_end</span><span class="p">[</span><span class="m">2</span><span class="p">],</span>
+<span class="w">           </span><span class="n">arrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">arrow</span><span class="p">(</span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">unit</span><span class="p">(</span><span class="m">0.3</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cm&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;closed&quot;</span><span class="p">),</span>
+<span class="w">           </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;#B40426&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">annotate</span><span class="p">(</span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">center_x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pc2_end</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span>
+<span class="w">           </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">center_y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pc2_end</span><span class="p">[</span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">0.6</span><span class="p">,</span><span class="w"> </span>
+<span class="w">           </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;PC2&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;#B40426&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="p">,</span><span class="w"> </span><span class="n">fontface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1"># Styling</span>
+<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Principal Component Analysis (PCA)&quot;</span><span class="p">,</span>
+<span class="w">       </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;X&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Y&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme_minimal</span><span class="p">(</span><span class="n">base_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">14</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme</span><span class="p">(</span>
+<span class="w">    </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">hjust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">axis.title.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">axis.title.y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">axis.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">(),</span>
+<span class="w">    </span><span class="n">panel.grid.major</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_line</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;gray80&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">panel.grid.minor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_line</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;gray90&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">axis.line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_line</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;black&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">),</span>
+<span class="w">    </span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">),</span>
+<span class="w">    </span><span class="n">panel.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span>
+<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">coord_fixed</span><span class="p">(</span><span class="n">ratio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+<span class="w">  </span>
+<span class="c1"># Save with transparent background</span>
+<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;./cartoons/PCA.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_PCA</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="p">,</span><span class="w"> </span>
+<span class="w">       </span><span class="n">units</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;in&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">p_PCA</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/2bf60687f6397a3a07485df3fc3eba576bbf5080cd47533b45cecf81bab95186.png"><img alt="_images/2bf60687f6397a3a07485df3fc3eba576bbf5080cd47533b45cecf81bab95186.png" src="_images/2bf60687f6397a3a07485df3fc3eba576bbf5080cd47533b45cecf81bab95186.png" style="width: 420px; height: 420px;" />
+</a>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="extended-reading">
+<h1>Extended Reading<a class="headerlink" href="#extended-reading" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p><a class="reference external" href="https://web.stanford.edu/group/pritchardlab/HGbook.html">An Owner’s Guide to the Human Genome: an introduction to human population genetics, variation and disease</a>, by Jonathan Pritchard, Stanford University (Chapter 3.1 and 3.2)</p></li>
+<li><p>Novembre, J., Johnson, T., Bryc, K. et al. Genes mirror geography within Europe. Nature 456, 98–101 (2008). <a class="reference external" href="https://doi.org/10.1038/nature07331">https://doi.org/10.1038/nature07331</a></p></li>
+<li><p>Novembre, J., Stephens, M. Interpreting principal component analyses of spatial population genetic variation. Nat Genet 40, 646–649 (2008). <a class="reference external" href="https://doi.org/10.1038/ng.139">https://doi.org/10.1038/ng.139</a></p></li>
+<li><p>Patterson, Nick, Alkes L. Price, and David Reich. “Population structure and eigenanalysis.” PLoS genetics 2.12 (2006): e190. <a class="reference external" href="https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.0020190">https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.0020190</a></p></li>
+</ul>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            name: "ir",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="factor_analysis.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Factor Analysis</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ordinary_least_squares.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Ordinary Least Squares</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Principal Component Analysis (PCA)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-summary">Graphical Summary</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pca-and-factor-analysis">PCA and Factor Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-mathbf-x-t-mathbf-x">Connection to <span class="math notranslate nohighlight">\(\mathbf{X}^T\mathbf{X}\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eigendecomposition-of-mathbf-x-t-mathbf-x">Eigendecomposition of <span class="math notranslate nohighlight">\(\mathbf{X}^T\mathbf{X}\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-covariance-matrix">Connection to Covariance Matrix</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scaling">Scaling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-explained">Variance Explained</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detect-multiple-ancestral-populations-via-pca">Detect Multiple Ancestral Populations via PCA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-data">Generate Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-pca-on-the-genotype-matrix">Perform PCA on the Genotype Matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proportion-of-variance-explained-by-the-top-pcs">Proportion of Variance Explained by the top PCs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pc1-vs-pc2-colored-by-population">PC1 vs PC2 Colored by Population</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-mixture-to-admixture">From mixture to admixture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-loadings-for-the-top-pc">Interpretation of Loadings for the top PC</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#supplementary">Supplementary</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Graphical Summary</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#extended-reading">Extended Reading</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Gao Wang, Rui Dong
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

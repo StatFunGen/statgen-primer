@@ -21,7 +21,7 @@ The created template will have:
 
 
 ```bash
-jupyter-book build . --config website/_config.yml --toc website/_toc.yml
+jupyter-book build
 ```
 
 This will generate the HTML files in the `_build/html` directory.

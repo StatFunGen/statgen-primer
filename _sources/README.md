@@ -11,6 +11,8 @@ Notes on statistical background for statistical genetics practitioners
 | **Correlation** | Between variants | [Linkage Disequilibrium](https://statfungen.github.io/statgen-prerequisites/linkage_disequilibrium.html) |
 | | | [Linkage Disequilibrium Score](https://statfungen.github.io/statgen-prerequisites/linkage_disequilibrium_score.html) |
 | | Between individuals | [Genetic Relationship Matrix](https://statfungen.github.io/statgen-prerequisites/genetic_relationship_matrix.html) |
+| | Between variables | [Factor Analysis](https://statfungen.github.io/statgen-prerequisites/factor_analysis.html) |
+| | | [Principal Component Analysis](https://statfungen.github.io/statgen-prerequisites/principal_component_analysis.html) |
 | **Genetic Associations** | Basic model | [Ordinary Least Squares](https://statfungen.github.io/statgen-prerequisites/ordinary_least_squares.html) |
 | | Extend to binary outcome | [Odds Ratio](https://statfungen.github.io/statgen-prerequisites/odds_ratio.html) |
 | | Extend to multiple variables| [Marginal vs. Joint Effects](https://statfungen.github.io/statgen-prerequisites/marginal_joint_effects.html) |

@@ -578,8 +578,8 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-admixture-analysis-using-admixture">Example 1: Admixture Analysis using ADMIXTURE</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-data">Generate Data</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-define-variant-frequencies-in-ancestral-populations-mathbf-l">Step 1: Define variant frequencies in ancestral populations (<span class="math notranslate nohighlight">\(\mathbf{L}\)</span>)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-create-individuals-with-different-ancestry-proportions-mathbf-f-matrix">Step 2: Create individuals with different ancestry proportions (<span class="math notranslate nohighlight">\(\mathbf{F}\)</span> matrix)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-define-variant-frequencies-in-ancestral-populations-mathbf-f">Step 1: Define variant frequencies in ancestral populations (<span class="math notranslate nohighlight">\(\mathbf{F}\)</span>)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-create-individuals-with-different-ancestry-proportions-mathbf-l">Step 2: Create individuals with different ancestry proportions (<span class="math notranslate nohighlight">\(\mathbf{L}\)</span>)</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-generate-genotypes-based-on-ancestry-mathbf-x-matrix">Step 3: Generate genotypes based on ancestry (<span class="math notranslate nohighlight">\(\mathbf{X}\)</span> matrix)</a></li>
 </ul>
 </li>
@@ -619,13 +619,13 @@ document.write(`
 <p>The fundamental factor analysis model:</p>
 <div class="math notranslate nohighlight">
 \[
-\mathbf{X} = \mathbf{FL} + \mathbf{E}
+\mathbf{X} = \mathbf{L}^T \mathbf{F} + \mathbf{E}
 \]</div>
 <p>where:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is a <span class="math notranslate nohighlight">\(N \times p\)</span> matrix of observed variables (<span class="math notranslate nohighlight">\(N\)</span> is the number of samples, <span class="math notranslate nohighlight">\(p\)</span> is the number of variables)</p></li>
-<li><p><span class="math notranslate nohighlight">\(\mathbf{F}\)</span> is a <span class="math notranslate nohighlight">\(N \times k\)</span> matrix of <strong>factor scores</strong> (factor values for each observation)</p></li>
-<li><p><span class="math notranslate nohighlight">\(\mathbf{L}\)</span> is a <span class="math notranslate nohighlight">\(k \times p\)</span> matrix of <strong>loading matrix</strong> (how strongly each variable relates to each factor)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{L}\)</span> is a <span class="math notranslate nohighlight">\(k \times N\)</span> matrix of <strong>loading matrix</strong> (loadings of each observation)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{F}\)</span> is a <span class="math notranslate nohighlight">\(k \times p\)</span> matrix of <strong>factor scores</strong> (how strongly each variable relates to each factor)</p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathbf{E}\)</span> is a <span class="math notranslate nohighlight">\(N \times p\)</span> matrix of <strong>unique errors</strong> (noise)</p></li>
 <li><p><span class="math notranslate nohighlight">\(k \leq p\)</span>, <span class="math notranslate nohighlight">\(k\)</span> is the number of latent factors</p></li>
 </ul>
@@ -636,9 +636,9 @@ document.write(`
 <h2>Indeterminacy of Matrix Decomposition<a class="headerlink" href="#indeterminacy-of-matrix-decomposition" title="Link to this heading">#</a></h2>
 <p>For any invertible matrix <span class="math notranslate nohighlight">\(\mathbf{T}\)</span> (sometimes called <strong>rotation matrix</strong>):
 $<span class="math notranslate nohighlight">\(
-\mathbf{X} = \mathbf{FL} + \mathbf{E} = (\mathbf{FT})(\mathbf{T}^{-1}\mathbf{L}) + \mathbf{E}
+\mathbf{X} = \mathbf{L}^T \mathbf{F} + \mathbf{E} = (\mathbf{L}^T\mathbf{T})(\mathbf{T}^{-1}\mathbf{F}) + \mathbf{E}
 \)</span>$</p>
-<p><strong>Result:</strong> Infinitely many <span class="math notranslate nohighlight">\((\mathbf{F}, \mathbf{L})\)</span> pairs fit the data equally well (i.e., same <span class="math notranslate nohighlight">\(\mathbf{E}\)</span>)! Therefore the key to the factor analysis is the constraints on <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> and/or <span class="math notranslate nohighlight">\(\mathbf{F}\)</span>!</p>
+<p><strong>Result:</strong> Infinitely many <span class="math notranslate nohighlight">\((\mathbf{L}, \mathbf{F})\)</span> pairs fit the data equally well (i.e., same <span class="math notranslate nohighlight">\(\mathbf{E}\)</span>)! Therefore the key to the factor analysis is the constraints on <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> and/or <span class="math notranslate nohighlight">\(\mathbf{F}\)</span>!</p>
 </section>
 <section id="common-constraints">
 <h2>Common Constraints<a class="headerlink" href="#common-constraints" title="Link to this heading">#</a></h2>
@@ -646,13 +646,13 @@ $<span class="math notranslate nohighlight">\(
 <section id="constraints-in-admixture-analysis-example-1-in-the-next-section">
 <h3>Constraints in Admixture Analysis (Example 1 in the next section)<a class="headerlink" href="#constraints-in-admixture-analysis-example-1-in-the-next-section" title="Link to this heading">#</a></h3>
 <p>In the admixture analysis, we consider the problem of <span class="math notranslate nohighlight">\(N\)</span> individuals that comes from <span class="math notranslate nohighlight">\(k\)</span> ancestries, and <span class="math notranslate nohighlight">\(p\)</span> is the number of genetic variants.</p>
-<p><span class="math notranslate nohighlight">\(\mathbf{F}\)</span>(<span class="math notranslate nohighlight">\(N \times k\)</span>) is the proportion of each ancestry for each individual; <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> (<span class="math notranslate nohighlight">\(k \times p\)</span>) is allele frequency of each variant in each ancestry.</p>
+<p><span class="math notranslate nohighlight">\(\mathbf{L}\)</span>(<span class="math notranslate nohighlight">\(k \times N\)</span>) is the proportion of each ancestry for each individual; <span class="math notranslate nohighlight">\(\mathbf{F}\)</span> (<span class="math notranslate nohighlight">\(k \times p\)</span>) is allele frequency of each variant in each ancestry.</p>
 <ul class="simple">
 <li><p><strong>Constraints</strong>:</p>
 <ul>
-<li><p><span class="math notranslate nohighlight">\(\forall i \in \{1,..., N\},   \sum_j\mathbf{F}_{ij}=1\)</span>: only the <span class="math notranslate nohighlight">\(k\)</span> ancestries are considered</p></li>
-<li><p><span class="math notranslate nohighlight">\(\forall i \in \{1,..., N\}, j \in \{1,..., p\}, 0 \leq\mathbf{F}_{ij} \leq 1\)</span>: the proportions of ancestry for each individual are between 0 and 1</p></li>
-<li><p><span class="math notranslate nohighlight">\(\forall i \in \{1,..., N\}, j \in \{1,..., p\}, 0 \leq\mathbf{L}_{ij} \leq 1\)</span>: genetic variant frequencies are between 0 and 1</p></li>
+<li><p><span class="math notranslate nohighlight">\(\forall i \in \{1,..., N\}, \sum_j\mathbf{L}_{ij}=1\)</span>: only the <span class="math notranslate nohighlight">\(k\)</span> ancestries are considered</p></li>
+<li><p><span class="math notranslate nohighlight">\(\forall i \in \{1,..., N\}, j \in \{1,..., p\}, 0 \leq\mathbf{L}_{ij} \leq 1\)</span>: the proportions of ancestry for each individual are between 0 and 1</p></li>
+<li><p><span class="math notranslate nohighlight">\(\forall i \in \{1,..., N\}, j \in \{1,..., p\}, 0 \leq\mathbf{F}_{ij} \leq 1\)</span>: genetic variant frequencies are between 0 and 1</p></li>
 </ul>
 </li>
 </ul>
@@ -676,11 +676,11 @@ $<span class="math notranslate nohighlight">\(
 <p>The total variance in <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> can be decomposed into explained and unexplained components:</p>
 <div class="math notranslate nohighlight">
 \[
-\text{Var}(\mathbf{X}) = \text{Var}(\mathbf{FL}) + \text{Var}(\mathbf{E})
+\text{Var}(\mathbf{X}) = \text{Var}(\mathbf{L}^T\mathbf{F}) + \text{Var}(\mathbf{E})
 \]</div>
 <p><strong>A good factor analysis should:</strong></p>
 <ol class="arabic simple">
-<li><p><strong>Explain most of the variance</strong>: This means the error matrix <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> is small relative to the signal <span class="math notranslate nohighlight">\(\mathbf{LF}\)</span></p></li>
+<li><p><strong>Explain most of the variance</strong>: This means the error matrix <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> is small relative to the signal <span class="math notranslate nohighlight">\(\mathbf{L}^T\mathbf{F}\)</span></p></li>
 <li><p><strong>Easy to interpret the factors</strong>: Reveal underlying biological pathways or mechanisms.</p></li>
 <li><p><strong>Use fewer factors than variables</strong>: <span class="math notranslate nohighlight">\(k \ll p\)</span></p>
 <ul class="simple">
@@ -708,12 +708,12 @@ $<span class="math notranslate nohighlight">\(
 <section id="generate-data">
 <h3>Generate Data<a class="headerlink" href="#generate-data" title="Link to this heading">#</a></h3>
 <p>Like we did in other notebooks, let’s first simulate the data given the generative model of truth, i.e., to mimic the way that <strong>nature creates admixed individuals</strong>.</p>
-<p>Imagine we have two ancestral populations. In reality, different populations have evolved in different geographic regions, and thus they carry different genetic variants at different frequencies. Let’s start with assuming that in our two ancestral populations, the frequencies of genetic markers are very different from each other. We will represent these population-specific marker frequencies in a matrix called <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> (the allele frequency matrix).</p>
-<p>Next, we create individuals with mixed ancestry. Some individuals might come purely from one ancestral population, while others might be mixtures of the two populations. We represent each individual’s ancestry proportions in a matrix called <span class="math notranslate nohighlight">\(\mathbf{F}\)</span> (the ancestry proportion matrix). For example, an individual might be 60% from Population 1 and 40% from Population 2.</p>
-<p>Finally, given an individual’s ancestry composition (<span class="math notranslate nohighlight">\(\mathbf{F}\)</span>) and the population marker frequencies (<span class="math notranslate nohighlight">\(\mathbf{L}\)</span>), we can generate that individual’s genotypes. By combining the ancestry proportions with the population frequencies, we can simulate realistic genetic data.</p>
-<section id="step-1-define-variant-frequencies-in-ancestral-populations-mathbf-l">
-<h4>Step 1: Define variant frequencies in ancestral populations (<span class="math notranslate nohighlight">\(\mathbf{L}\)</span>)<a class="headerlink" href="#step-1-define-variant-frequencies-in-ancestral-populations-mathbf-l" title="Link to this heading">#</a></h4>
-<p>We start by assuming that two ancestral populations have very distinct marker frequencies. We represent these population-specific allele frequencies in matrix <span class="math notranslate nohighlight">\(\mathbf{L}\)</span>, where <span class="math notranslate nohighlight">\(\mathbf{L}[j, k]\)</span> = frequency of marker <span class="math notranslate nohighlight">\(j\)</span> in population <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<p>Imagine we have two ancestral populations. In reality, different populations have evolved in different geographic regions, and thus they carry different genetic variants at different frequencies. Let’s start with assuming that in our two ancestral populations, the frequencies of genetic markers are very different from each other. We will represent these population-specific marker frequencies in a matrix called <span class="math notranslate nohighlight">\(\mathbf{F}\)</span> (the allele frequency matrix).</p>
+<p>Next, we create individuals with mixed ancestry. Some individuals might come purely from one ancestral population, while others might be mixtures of the two populations. We represent each individual’s ancestry proportions in a matrix called <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> (the ancestry proportion matrix). For example, an individual might be 60% from Population 1 and 40% from Population 2.</p>
+<p>Finally, given an individual’s ancestry composition (<span class="math notranslate nohighlight">\(\mathbf{L}\)</span>) and the population marker frequencies (<span class="math notranslate nohighlight">\(\mathbf{F}\)</span>), we can generate that individual’s genotypes. By combining the ancestry proportions with the population frequencies, we can simulate realistic genetic data.</p>
+<section id="step-1-define-variant-frequencies-in-ancestral-populations-mathbf-f">
+<h4>Step 1: Define variant frequencies in ancestral populations (<span class="math notranslate nohighlight">\(\mathbf{F}\)</span>)<a class="headerlink" href="#step-1-define-variant-frequencies-in-ancestral-populations-mathbf-f" title="Link to this heading">#</a></h4>
+<p>We start by assuming that two ancestral populations have very distinct marker frequencies. We represent these population-specific allele frequencies in matrix <span class="math notranslate nohighlight">\(\mathbf{F}\)</span>, where <span class="math notranslate nohighlight">\(\mathbf{F}[k, j]\)</span> = frequency of marker <span class="math notranslate nohighlight">\(j\)</span> in population <span class="math notranslate nohighlight">\(k\)</span>.</p>
 <p>The key insight is that the two populations differ substantially at these markers, making them genetically distinguishable.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -725,26 +725,26 @@ $<span class="math notranslate nohighlight">\(
 <span class="n">k</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">2</span><span class="w">   </span><span class="c1"># Number of ancestral populations</span>
 
 <span class="c1"># Create L matrix with very distinct population frequencies</span>
-<span class="n">L_true</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">)</span>
+<span class="n">F_true</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">)</span>
 <span class="c1"># Population 1: generally higher frequencies in the first 50 SNPS, lower frequencies in the last 50</span>
-<span class="n">L_true</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">50</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">runif</span><span class="p">(</span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="m">0.9</span><span class="p">,</span><span class="w"> </span><span class="m">0.95</span><span class="p">)</span>
-<span class="n">L_true</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">51</span><span class="o">:</span><span class="m">100</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">runif</span><span class="p">(</span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="m">0.05</span><span class="p">,</span><span class="w"> </span><span class="m">0.1</span><span class="p">)</span>
+<span class="n">F_true</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">50</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">runif</span><span class="p">(</span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="m">0.9</span><span class="p">,</span><span class="w"> </span><span class="m">0.95</span><span class="p">)</span>
+<span class="n">F_true</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">51</span><span class="o">:</span><span class="m">100</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">runif</span><span class="p">(</span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="m">0.05</span><span class="p">,</span><span class="w"> </span><span class="m">0.1</span><span class="p">)</span>
 
 <span class="c1"># Population 2: inverse pattern</span>
-<span class="n">L_true</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">50</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">runif</span><span class="p">(</span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="m">0.05</span><span class="p">,</span><span class="w"> </span><span class="m">0.3</span><span class="p">)</span>
-<span class="n">L_true</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">51</span><span class="o">:</span><span class="m">100</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">runif</span><span class="p">(</span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w"> </span><span class="m">0.95</span><span class="p">)</span>
+<span class="n">F_true</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">50</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">runif</span><span class="p">(</span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="m">0.05</span><span class="p">,</span><span class="w"> </span><span class="m">0.3</span><span class="p">)</span>
+<span class="n">F_true</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">51</span><span class="o">:</span><span class="m">100</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">runif</span><span class="p">(</span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w"> </span><span class="m">0.95</span><span class="p">)</span>
 
 <span class="c1"># Add row and column names</span>
-<span class="nf">colnames</span><span class="p">(</span><span class="n">L_true</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;SNP&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">p</span><span class="p">)</span>
-<span class="nf">rownames</span><span class="p">(</span><span class="n">L_true</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;POP&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">k</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">F_true</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;SNP&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">p</span><span class="p">)</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">F_true</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;POP&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">k</span><span class="p">)</span>
 
-<span class="nf">print</span><span class="p">(</span><span class="s">&quot;L matrix (first 10 SNPs):&quot;</span><span class="p">)</span>
-<span class="n">L_true</span><span class="p">[,</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">]</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">&quot;F matrix (first 10 SNPs):&quot;</span><span class="p">)</span>
+<span class="n">F_true</span><span class="p">[,</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;L matrix (first 10 SNPs):&quot;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;F matrix (first 10 SNPs):&quot;
 </pre></div>
 </div>
 <div class="output text_html"><table class="dataframe">
@@ -760,8 +760,8 @@ $<span class="math notranslate nohighlight">\(
 </div></div>
 </div>
 </section>
-<section id="step-2-create-individuals-with-different-ancestry-proportions-mathbf-f-matrix">
-<h4>Step 2: Create individuals with different ancestry proportions (<span class="math notranslate nohighlight">\(\mathbf{F}\)</span> matrix)<a class="headerlink" href="#step-2-create-individuals-with-different-ancestry-proportions-mathbf-f-matrix" title="Link to this heading">#</a></h4>
+<section id="step-2-create-individuals-with-different-ancestry-proportions-mathbf-l">
+<h4>Step 2: Create individuals with different ancestry proportions (<span class="math notranslate nohighlight">\(\mathbf{L}\)</span>)<a class="headerlink" href="#step-2-create-individuals-with-different-ancestry-proportions-mathbf-l" title="Link to this heading">#</a></h4>
 <p>Now we create fifty individuals with different ancestry mixtures:</p>
 <ul class="simple">
 <li><p><strong>Individuals 1-15</strong>: Pure ancestry from Population 1</p></li>
@@ -769,29 +769,29 @@ $<span class="math notranslate nohighlight">\(
 <li><p><strong>Individuals 31-40</strong>: Mixed ancestry (80% Population 1, 20% Population 2)</p></li>
 <li><p><strong>Individuals 41-50</strong>: Mixed ancestry (30% Population 1, 70% Population 2)</p></li>
 </ul>
-<p>We represent each individual’s ancestry proportions in matrix <span class="math notranslate nohighlight">\(\mathbf{F}\)</span>, where <span class="math notranslate nohighlight">\(\mathbf{F}[k, i]\)</span> = proportion of individual <span class="math notranslate nohighlight">\(i\)</span>’s genome from population <span class="math notranslate nohighlight">\(k\)</span>. Each column of <span class="math notranslate nohighlight">\(\mathbf{F}\)</span> must sum to 1, representing 100% ancestry.</p>
+<p>We represent each individual’s ancestry proportions in matrix <span class="math notranslate nohighlight">\(\mathbf{L}\)</span>, where <span class="math notranslate nohighlight">\(\mathbf{L}[k, i]\)</span> = proportion of individual <span class="math notranslate nohighlight">\(i\)</span>’s genome from population <span class="math notranslate nohighlight">\(k\)</span>. Each column of <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> must sum to 1, representing 100% ancestry.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">F_true</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">k</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">transpose_L_true</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">k</span><span class="p">)</span>
 
 <span class="c1"># Individuals 1-15: Pure Pop1</span>
-<span class="n">F_true</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">15</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1.0</span>
-<span class="n">F_true</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">15</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.0</span>
+<span class="n">transpose_L_true</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">15</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1.0</span>
+<span class="n">transpose_L_true</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">15</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.0</span>
 
 <span class="c1"># Individuals 16-30: Pure Pop2</span>
-<span class="n">F_true</span><span class="p">[</span><span class="m">16</span><span class="o">:</span><span class="m">30</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.0</span>
-<span class="n">F_true</span><span class="p">[</span><span class="m">16</span><span class="o">:</span><span class="m">30</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1.0</span>
+<span class="n">transpose_L_true</span><span class="p">[</span><span class="m">16</span><span class="o">:</span><span class="m">30</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.0</span>
+<span class="n">transpose_L_true</span><span class="p">[</span><span class="m">16</span><span class="o">:</span><span class="m">30</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1.0</span>
 
 <span class="c1"># Individuals 31-40: Pop1-Pop2 admixture (80-20)</span>
-<span class="n">F_true</span><span class="p">[</span><span class="m">31</span><span class="o">:</span><span class="m">40</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.8</span>
-<span class="n">F_true</span><span class="p">[</span><span class="m">31</span><span class="o">:</span><span class="m">40</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.2</span>
+<span class="n">transpose_L_true</span><span class="p">[</span><span class="m">31</span><span class="o">:</span><span class="m">40</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.8</span>
+<span class="n">transpose_L_true</span><span class="p">[</span><span class="m">31</span><span class="o">:</span><span class="m">40</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.2</span>
 <span class="c1"># Individuals 41-50: Pop1-Pop2 admixture (30-70)</span>
-<span class="n">F_true</span><span class="p">[</span><span class="m">41</span><span class="o">:</span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.3</span>
-<span class="n">F_true</span><span class="p">[</span><span class="m">41</span><span class="o">:</span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.7</span>
+<span class="n">transpose_L_true</span><span class="p">[</span><span class="m">41</span><span class="o">:</span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.3</span>
+<span class="n">transpose_L_true</span><span class="p">[</span><span class="m">41</span><span class="o">:</span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.7</span>
 
 <span class="c1"># Add row and column names</span>
-<span class="nf">rownames</span><span class="p">(</span><span class="n">F_true</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;IND&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">)</span>
-<span class="nf">colnames</span><span class="p">(</span><span class="n">F_true</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;POP&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">k</span><span class="p">)</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">transpose_L_true</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;IND&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">transpose_L_true</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;POP&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">k</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -801,12 +801,14 @@ $<span class="math notranslate nohighlight">\(
 <h4>Step 3: Generate genotypes based on ancestry (<span class="math notranslate nohighlight">\(\mathbf{X}\)</span> matrix)<a class="headerlink" href="#step-3-generate-genotypes-based-on-ancestry-mathbf-x-matrix" title="Link to this heading">#</a></h4>
 <p>The crucial insight is that <strong>an individual’s genotype depends on their ancestry</strong>. Given:</p>
 <ul class="simple">
-<li><p>An individual’s ancestry proportions (row of <span class="math notranslate nohighlight">\(\mathbf{F}\)</span>)</p></li>
-<li><p>The allele frequencies in each population (columns of <span class="math notranslate nohighlight">\(\mathbf{L}\)</span>)</p></li>
+<li><p>An individual’s ancestry proportions (row of <span class="math notranslate nohighlight">\(\mathbf{L}\)</span>)</p></li>
+<li><p>The allele frequencies in each population (columns of <span class="math notranslate nohighlight">\(\mathbf{F}\)</span>)</p></li>
 </ul>
 <p>We can calculate the expected allele frequency for that individual at each marker as a weighted average:</p>
 <div class="math notranslate nohighlight">
-\[p_{ij} = \sum_{k=1}^{K} q_{ik} \times f_{kj}\]</div>
+\[
+p_{ij} = \sum_{k=1}^{K} l_{ki} \times f_{kj}
+\]</div>
 <p>Then we sample the individual’s genotype from a binomial distribution with this expected frequency. The result is matrix <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> (the genotype matrix), where <span class="math notranslate nohighlight">\(\mathbf{X}[i, j]\)</span> = genotype (0, 1, or 2 copies) of individual <span class="math notranslate nohighlight">\(i\)</span> at marker <span class="math notranslate nohighlight">\(j\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -815,7 +817,7 @@ $<span class="math notranslate nohighlight">\(
 <span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1"># Expected frequency = weighted average of population frequencies</span>
-<span class="w">    </span><span class="n">p_ij</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">F_true</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">L_true</span><span class="p">[</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">])</span>
+<span class="w">    </span><span class="n">p_ij</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">transpose_L_true</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">F_true</span><span class="p">[</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">])</span>
 <span class="w">    </span>
 <span class="w">    </span><span class="c1"># Sample genotype (0, 1, or 2 copies)</span>
 <span class="w">    </span><span class="n">X_raw</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rbinom</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">prob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_ij</span><span class="p">)</span>
@@ -841,9 +843,9 @@ $<span class="math notranslate nohighlight">\(
 	<tr><th></th><th scope=col>SNP1</th><th scope=col>SNP2</th><th scope=col>SNP3</th><th scope=col>SNP4</th><th scope=col>SNP5</th><th scope=col>SNP6</th><th scope=col>SNP7</th><th scope=col>SNP8</th><th scope=col>SNP9</th><th scope=col>SNP10</th><th scope=col>⋯</th><th scope=col>SNP91</th><th scope=col>SNP92</th><th scope=col>SNP93</th><th scope=col>SNP94</th><th scope=col>SNP95</th><th scope=col>SNP96</th><th scope=col>SNP97</th><th scope=col>SNP98</th><th scope=col>SNP99</th><th scope=col>SNP100</th></tr>
 </thead>
 <tbody>
-	<tr><th scope=row>IND1</th><td>1</td><td>1</td><td>2</td><td>1</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>1</td><td>⋯</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>IND1</th><td>1</td><td>2</td><td>1</td><td>2</td><td>1</td><td>1</td><td>2</td><td>1</td><td>2</td><td>2</td><td>⋯</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
 	<tr><th scope=row>IND2</th><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>⋯</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-	<tr><th scope=row>IND3</th><td>2</td><td>0</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>1</td><td>1</td><td>2</td><td>⋯</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+	<tr><th scope=row>IND3</th><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>0</td><td>2</td><td>2</td><td>2</td><td>2</td><td>⋯</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
 </tbody>
 </table>
 </div></div>
@@ -856,8 +858,8 @@ $<span class="math notranslate nohighlight">\(
 <p>The ADMIXTURE algorithm is based on maximum likelihood estimation. It finds the <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{F}\)</span> matrices that maximize the probability of observing the genotype data <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>.</p>
 <p><strong>Constraints:</strong></p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(0 \leq L_{ij} \leq 1\)</span> (allele frequencies must be valid probabilities)</p></li>
-<li><p><span class="math notranslate nohighlight">\(F_{ij} \geq 0\)</span> and <span class="math notranslate nohighlight">\(\sum_j F_{ij} = 1\)</span> (ancestry proportions must sum to 1)</p></li>
+<li><p><span class="math notranslate nohighlight">\(0 \leq \mathbf{F}_{ij} \leq 1\)</span> (allele frequencies must be valid probabilities)</p></li>
+<li><p><span class="math notranslate nohighlight">\(L_{ij} \geq 0\)</span> and <span class="math notranslate nohighlight">\(\sum_j L_{ij} = 1\)</span> (ancestry proportions must sum to 1)</p></li>
 </ul>
 <p><strong>Block Relaxation Strategy:</strong></p>
 <ol class="arabic simple">
@@ -868,14 +870,14 @@ $<span class="math notranslate nohighlight">\(
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Log-likelihood function</span>
-<span class="n">compute_loglik</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">L</span><span class="p">,</span><span class="w"> </span><span class="bp">F</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="n">compute_loglik</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">transpose_L</span><span class="p">,</span><span class="w"> </span><span class="bp">F</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ncol</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 <span class="w">  </span><span class="n">N</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">nrow</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 <span class="w">  </span>
 <span class="w">  </span><span class="n">loglik</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span>
 <span class="w">  </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="n">p_ij</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="bp">F</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">L</span><span class="p">[</span><span class="w"> </span><span class="p">,</span><span class="n">j</span><span class="p">])</span>
+<span class="w">      </span><span class="n">p_ij</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">transpose_L</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="bp">F</span><span class="p">[</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">])</span>
 <span class="w">      </span><span class="n">p_ij</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">pmax</span><span class="p">(</span><span class="m">0.001</span><span class="p">,</span><span class="w"> </span><span class="nf">pmin</span><span class="p">(</span><span class="m">0.999</span><span class="p">,</span><span class="w"> </span><span class="n">p_ij</span><span class="p">))</span>
 <span class="w">      </span><span class="n">loglik</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">loglik</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">p_ij</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="m">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">])</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">p_ij</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
@@ -889,12 +891,12 @@ $<span class="math notranslate nohighlight">\(
 <span class="w">  </span><span class="n">N</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">nrow</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 <span class="w">  </span><span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ncol</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 <span class="w">  </span>
-<span class="w">  </span><span class="c1"># Initialize L and F</span>
-<span class="w">  </span><span class="n">L</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="nf">runif</span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="m">0.3</span><span class="p">,</span><span class="w"> </span><span class="m">0.7</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">)</span>
-<span class="w">  </span><span class="bp">F</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="nf">runif</span><span class="p">(</span><span class="n">N</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">k</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">k</span><span class="p">)</span>
-<span class="w">  </span><span class="c1"># this is the constraint on F: each row sums to 1 (ancestry proportions for each individual)</span>
+<span class="w">  </span><span class="c1"># Initialize transpose_L (L) and F</span>
+<span class="w">  </span><span class="bp">F</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="nf">runif</span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="m">0.3</span><span class="p">,</span><span class="w"> </span><span class="m">0.7</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">)</span>
+<span class="w">  </span><span class="n">transpose_L</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="nf">runif</span><span class="p">(</span><span class="n">N</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">k</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">k</span><span class="p">)</span>
+<span class="w">  </span><span class="c1"># this is the constraint on transpose_L: each row sums to 1 (ancestry proportions for each individual)</span>
 <span class="w">  </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="bp">F</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="bp">F</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="bp">F</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="p">])</span>
+<span class="w">    </span><span class="n">transpose_L</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">transpose_L</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">transpose_L</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="p">])</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="w">  </span>
 <span class="w">  </span><span class="n">loglik_history</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="n">max_iter</span><span class="p">)</span>
@@ -912,10 +914,10 @@ $<span class="math notranslate nohighlight">\(
 <span class="w">        </span>
 <span class="w">        </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">          </span><span class="c1"># Current predicted allele frequency for this individual</span>
-<span class="w">          </span><span class="n">p_ij</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="bp">F</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">L</span><span class="p">[,</span><span class="w"> </span><span class="n">j</span><span class="p">])</span>
+<span class="w">          </span><span class="n">p_ij</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">transpose_L</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="bp">F</span><span class="p">[,</span><span class="w"> </span><span class="n">j</span><span class="p">])</span>
 <span class="w">          </span><span class="n">p_ij</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">pmax</span><span class="p">(</span><span class="m">0.001</span><span class="p">,</span><span class="w"> </span><span class="nf">pmin</span><span class="p">(</span><span class="m">0.999</span><span class="p">,</span><span class="w"> </span><span class="n">p_ij</span><span class="p">))</span>
 
-<span class="w">          </span><span class="n">weight</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="bp">F</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">k_idx</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">L</span><span class="p">[</span><span class="n">k_idx</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">p_ij</span>
+<span class="w">          </span><span class="n">weight</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">transpose_L</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">k_idx</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="bp">F</span><span class="p">[</span><span class="n">k_idx</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">p_ij</span>
 <span class="w">          </span>
 <span class="w">          </span><span class="c1"># Expected number of alleles from pop k (out of X[j,i] observed)</span>
 <span class="w">          </span><span class="n">numerator</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">numerator</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">weight</span>
@@ -923,46 +925,46 @@ $<span class="math notranslate nohighlight">\(
 <span class="w">        </span><span class="p">}</span>
 <span class="w">        </span>
 <span class="w">        </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">denominator</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">          </span><span class="n">L</span><span class="p">[</span><span class="n">k_idx</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">numerator</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">denominator</span>
+<span class="w">          </span><span class="bp">F</span><span class="p">[</span><span class="n">k_idx</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">numerator</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">denominator</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="n">L</span><span class="p">[</span><span class="n">k_idx</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">pmax</span><span class="p">(</span><span class="m">0.01</span><span class="p">,</span><span class="w"> </span><span class="nf">pmin</span><span class="p">(</span><span class="m">0.99</span><span class="p">,</span><span class="w"> </span><span class="n">L</span><span class="p">[</span><span class="n">k_idx</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]))</span>
+<span class="w">        </span><span class="bp">F</span><span class="p">[</span><span class="n">k_idx</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">pmax</span><span class="p">(</span><span class="m">0.01</span><span class="p">,</span><span class="w"> </span><span class="nf">pmin</span><span class="p">(</span><span class="m">0.99</span><span class="p">,</span><span class="w"> </span><span class="bp">F</span><span class="p">[</span><span class="n">k_idx</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]))</span>
 <span class="w">      </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span>
 <span class="w">    </span><span class="c1"># M-step: Update F (ancestry proportions)</span>
 <span class="w">    </span><span class="c1"># CRITICAL: For each individual and population, sum ACROSS ALL SNPS</span>
 <span class="w">    </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="n">F_new</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<span class="w">      </span><span class="n">transpose_L_new</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
 <span class="w">      </span>
 <span class="w">      </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">k_idx</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">total_k</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span><span class="w">  </span><span class="c1"># Expected alleles from pop k across all SNPs</span>
 <span class="w">        </span>
 <span class="w">        </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">          </span><span class="n">p_ij</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="bp">F</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">L</span><span class="p">[,</span><span class="w"> </span><span class="n">j</span><span class="p">])</span>
+<span class="w">          </span><span class="n">p_ij</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">transpose_L</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="bp">F</span><span class="p">[</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">])</span>
 <span class="w">          </span><span class="n">p_ij</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">pmax</span><span class="p">(</span><span class="m">0.001</span><span class="p">,</span><span class="w"> </span><span class="nf">pmin</span><span class="p">(</span><span class="m">0.999</span><span class="p">,</span><span class="w"> </span><span class="n">p_ij</span><span class="p">))</span>
 <span class="w">          </span>
 <span class="w">          </span><span class="c1"># Posterior prob that an observed allele at SNP j came from pop k</span>
-<span class="w">          </span><span class="n">weight_allele</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="bp">F</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">k_idx</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">L</span><span class="p">[</span><span class="n">k_idx</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">p_ij</span>
+<span class="w">          </span><span class="n">weight_allele</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">transpose_L</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">k_idx</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="bp">F</span><span class="p">[</span><span class="n">k_idx</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">p_ij</span>
 <span class="w">          </span>
 <span class="w">          </span><span class="c1"># Expected count of alleles from pop k at this SNP</span>
 <span class="w">          </span><span class="c1"># (out of X[j,i] observed alleles)</span>
 <span class="w">          </span><span class="n">total_k</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">total_k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">weight_allele</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">        </span>
-<span class="w">        </span><span class="n">F_new</span><span class="p">[</span><span class="n">k_idx</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">total_k</span>
+<span class="w">        </span><span class="n">transpose_L_new</span><span class="p">[</span><span class="n">k_idx</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">total_k</span>
 <span class="w">      </span><span class="p">}</span>
 <span class="w">      </span>
 <span class="w">      </span><span class="c1"># Normalize: total expected alleles across all populations should equal 2*J</span>
-<span class="w">      </span><span class="n">total</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">F_new</span><span class="p">)</span>
+<span class="w">      </span><span class="n">total</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">transpose_L_new</span><span class="p">)</span>
 <span class="w">      </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">total</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="bp">F</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">F_new</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">total</span>
+<span class="w">        </span><span class="n">transpose_L</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">transpose_L_new</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">total</span>
 <span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="bp">F</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span>
+<span class="w">        </span><span class="n">transpose_L</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span>
 <span class="w">      </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span>
 <span class="w">    </span><span class="c1"># Compute log-likelihood</span>
-<span class="w">    </span><span class="n">loglik</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">compute_loglik</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">L</span><span class="p">,</span><span class="w"> </span><span class="bp">F</span><span class="p">)</span>
+<span class="w">    </span><span class="n">loglik</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">compute_loglik</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">transpose_L</span><span class="p">,</span><span class="w"> </span><span class="bp">F</span><span class="p">)</span>
 <span class="w">    </span><span class="n">loglik_history</span><span class="p">[</span><span class="n">iter</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">loglik</span>
 <span class="w">    </span>
 <span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">iter</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -979,14 +981,14 @@ $<span class="math notranslate nohighlight">\(
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="w">  </span>
-<span class="w">  </span><span class="kr">return</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">L</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">L</span><span class="p">,</span><span class="w"> </span><span class="bp">F</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">F</span><span class="p">,</span><span class="w"> </span><span class="n">loglik_history</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">loglik_history</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="n">iter</span><span class="p">]))</span>
+<span class="w">  </span><span class="kr">return</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="bp">F</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">F</span><span class="p">,</span><span class="w"> </span><span class="n">transpose_L</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transpose_L</span><span class="p">,</span><span class="w"> </span><span class="n">loglik_history</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">loglik_history</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="n">iter</span><span class="p">]))</span>
 <span class="p">}</span>
 
 <span class="c1"># Run ADMIXTURE</span>
 <span class="n">result</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">admixture_em</span><span class="p">(</span><span class="n">X_raw</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">max_iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="n">tol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1e-4</span><span class="p">)</span>
 
-<span class="n">L_estimated</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">result</span><span class="o">$</span><span class="n">L</span>
 <span class="n">F_estimated</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">result</span><span class="o">$</span><span class="bp">F</span>
+<span class="n">transpose_L_estimated</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">result</span><span class="o">$</span><span class="n">transpose_L</span>
 </pre></div>
 </div>
 </div>
@@ -994,11 +996,11 @@ $<span class="math notranslate nohighlight">\(
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running ADMIXTURE (EM algorithm) (only first five iterations)...
 Iteration | Log-likelihood | Change
 -----------------------------------------
-        1 |       -6796.52 | -
-        2 |       -6772.95 | +23.566719
-        3 |       -6728.39 | +44.556606
-        4 |       -6648.62 | +79.767643
-        5 |       -6511.89 | +136.730035
+        1 |       -6717.24 | -
+        2 |       -6640.32 | +76.911938
+        3 |       -6505.67 | +134.657908
+        4 |       -6286.42 | +219.247961
+        5 |       -5970.80 | +315.618363
 </pre></div>
 </div>
 </div>
@@ -1009,22 +1011,11 @@ Iteration | Log-likelihood | Change
 <p>An important issue in mixture model inference is label switching: the optimization algorithm doesn’t inherently assign “Population 1” to a particular cluster—it just identifies the clusters. The populations could be ordered in any way: (1,2) or (2,1) in a two-population case.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">cor1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cor</span><span class="p">(</span><span class="n">L_estimated</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="p">],</span><span class="w"> </span><span class="n">L_true</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="p">])</span>
-<span class="n">cor2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cor</span><span class="p">(</span><span class="n">L_estimated</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="p">],</span><span class="w"> </span><span class="n">L_true</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="p">])</span>
-
-<span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">cor2</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">cor1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="c1"># Labels are switched</span>
-<span class="w">  </span><span class="n">L_estimated</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">L_estimated</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="p">]</span>
-<span class="w">  </span><span class="n">F_estimated</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">F_estimated</span><span class="p">[,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)]</span>
-<span class="w">  </span><span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Note: Population labels were switched during estimation (expected behavior)\n\n&quot;</span><span class="p">)</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">dim</span><span class="p">(</span><span class="n">F_true</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">F_estimated</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">result</span><span class="o">$</span><span class="bp">F</span>
+<span class="n">transpose_L_estimated</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">result</span><span class="o">$</span><span class="n">transpose_L</span>
+<span class="nf">dim</span><span class="p">(</span><span class="n">result</span><span class="o">$</span><span class="n">transpose_L</span><span class="p">)</span>
+<span class="nf">dim</span><span class="p">(</span><span class="n">F_estimated</span><span class="p">)</span>
+<span class="nf">dim</span><span class="p">(</span><span class="n">transpose_L_estimated</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1035,14 +1026,68 @@ Iteration | Log-likelihood | Change
 .list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
 </style>
 <ol class=list-inline><li>50</li><li>2</li></ol>
+</div><div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>2</li><li>100</li></ol>
+</div><div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>50</li><li>2</li></ol>
 </div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">transpose_L_estimated</span><span class="p">[</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span>
+<span class="n">transpose_L_true</span><span class="p">[</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>2.62080598520095e-24</li><li>3.95541901208146e-24</li><li>2.95047232788251e-24</li><li>7.32414354633694e-21</li><li>1.58589029490033e-17</li><li>1.97592631695544e-30</li><li>2.05808853403856e-29</li><li>2.17237309860346e-19</li><li>1.30098513556255e-22</li><li>2.45788193917315e-19</li><li>6.4334697632682e-21</li><li>7.16543412446244e-17</li><li>1.45339548384989e-17</li><li>1.17861320311903e-26</li><li>5.34239060795248e-17</li><li>1</li><li>1</li><li>1</li><li>1</li><li>0.99999989157417</li><li>1</li><li>0.999983870676304</li><li>1</li><li>1</li><li>1</li><li>1</li><li>1</li><li>1</li><li>0.999999999999916</li><li>1</li><li>0.167514039491284</li><li>0.189098264103575</li><li>0.219023334209866</li><li>0.215486134861454</li><li>0.163478713716077</li><li>0.169474329541493</li><li>0.0652281508117544</li><li>0.136120529503373</li><li>0.119511645524924</li><li>0.201446899408033</li><li>0.715708172983795</li><li>0.846254500857358</li><li>0.72179348711325</li><li>0.772015920494043</li><li>0.746668236765778</li><li>0.687637214921867</li><li>0.737099155546777</li><li>0.744151436563115</li><li>0.773855133544133</li><li>0.766643695051723</li></ol>
+</div><div class="output text_html"><style>
+.dl-inline {width: auto; margin:0; padding: 0}
+.dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
+.dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
+.dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
+</style><dl class=dl-inline><dt>IND1</dt><dd>1</dd><dt>IND2</dt><dd>1</dd><dt>IND3</dt><dd>1</dd><dt>IND4</dt><dd>1</dd><dt>IND5</dt><dd>1</dd><dt>IND6</dt><dd>1</dd><dt>IND7</dt><dd>1</dd><dt>IND8</dt><dd>1</dd><dt>IND9</dt><dd>1</dd><dt>IND10</dt><dd>1</dd><dt>IND11</dt><dd>1</dd><dt>IND12</dt><dd>1</dd><dt>IND13</dt><dd>1</dd><dt>IND14</dt><dd>1</dd><dt>IND15</dt><dd>1</dd><dt>IND16</dt><dd>0</dd><dt>IND17</dt><dd>0</dd><dt>IND18</dt><dd>0</dd><dt>IND19</dt><dd>0</dd><dt>IND20</dt><dd>0</dd><dt>IND21</dt><dd>0</dd><dt>IND22</dt><dd>0</dd><dt>IND23</dt><dd>0</dd><dt>IND24</dt><dd>0</dd><dt>IND25</dt><dd>0</dd><dt>IND26</dt><dd>0</dd><dt>IND27</dt><dd>0</dd><dt>IND28</dt><dd>0</dd><dt>IND29</dt><dd>0</dd><dt>IND30</dt><dd>0</dd><dt>IND31</dt><dd>0.8</dd><dt>IND32</dt><dd>0.8</dd><dt>IND33</dt><dd>0.8</dd><dt>IND34</dt><dd>0.8</dd><dt>IND35</dt><dd>0.8</dd><dt>IND36</dt><dd>0.8</dd><dt>IND37</dt><dd>0.8</dd><dt>IND38</dt><dd>0.8</dd><dt>IND39</dt><dd>0.8</dd><dt>IND40</dt><dd>0.8</dd><dt>IND41</dt><dd>0.3</dd><dt>IND42</dt><dd>0.3</dd><dt>IND43</dt><dd>0.3</dd><dt>IND44</dt><dd>0.3</dd><dt>IND45</dt><dd>0.3</dd><dt>IND46</dt><dd>0.3</dd><dt>IND47</dt><dd>0.3</dd><dt>IND48</dt><dd>0.3</dd><dt>IND49</dt><dd>0.3</dd><dt>IND50</dt><dd>0.3</dd></dl>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">cor1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cor</span><span class="p">(</span><span class="n">transpose_L_estimated</span><span class="p">[</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">transpose_L_true</span><span class="p">[</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">])</span>
+<span class="n">cor2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cor</span><span class="p">(</span><span class="n">transpose_L_estimated</span><span class="p">[</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">transpose_L_true</span><span class="p">[</span><span class="w"> </span><span class="p">,</span><span class="m">1</span><span class="p">])</span>
+
+<span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">cor2</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">cor1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1"># Labels are switched</span>
+<span class="w">  </span><span class="n">transpose_L_estimated</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">transpose_L_estimated</span><span class="p">[</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)]</span>
+<span class="w">  </span><span class="n">F_estimated</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">F_estimated</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="p">]</span>
+<span class="w">  </span><span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Note: Population labels were switched during estimation (expected behavior)\n\n&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: Population labels were switched during estimation (expected behavior)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">))</span>
 
 <span class="c1"># True ancestry</span>
-<span class="nf">barplot</span><span class="p">(</span><span class="nf">t</span><span class="p">(</span><span class="n">F_true</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;steelblue&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;coral&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span>
+<span class="nf">barplot</span><span class="p">(</span><span class="nf">t</span><span class="p">(</span><span class="n">transpose_L_true</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;steelblue&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;coral&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span>
 <span class="w">        </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;True Ancestry Proportions&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Individual&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Ancestry Proportion&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="n">names.arg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">)</span>
@@ -1050,7 +1095,7 @@ Iteration | Log-likelihood | Change
 <span class="w">       </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;steelblue&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;coral&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span>
 
 <span class="c1"># Estimated ancestry</span>
-<span class="nf">barplot</span><span class="p">(</span><span class="nf">t</span><span class="p">(</span><span class="n">F_estimated</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;steelblue&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;coral&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span>
+<span class="nf">barplot</span><span class="p">(</span><span class="nf">t</span><span class="p">(</span><span class="n">transpose_L_estimated</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;steelblue&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;coral&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span>
 <span class="w">        </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Estimated Ancestry Proportions (ADMIXTURE)&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Individual&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Ancestry Proportion&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="n">names.arg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">)</span>
@@ -1060,7 +1105,7 @@ Iteration | Log-likelihood | Change
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/7d50bb27cb482891e106ab18ce0d97e9e4abfebbb120868d8059965ceace7931.png"><img alt="_images/7d50bb27cb482891e106ab18ce0d97e9e4abfebbb120868d8059965ceace7931.png" src="_images/7d50bb27cb482891e106ab18ce0d97e9e4abfebbb120868d8059965ceace7931.png" style="width: 420px; height: 420px;" />
+<a class="reference internal image-reference" href="_images/2779243d8f127f7a91b4319773121925711cdb4d05ff619a8711403161e7dcc6.png"><img alt="_images/2779243d8f127f7a91b4319773121925711cdb4d05ff619a8711403161e7dcc6.png" src="_images/2779243d8f127f7a91b4319773121925711cdb4d05ff619a8711403161e7dcc6.png" style="width: 420px; height: 420px;" />
 </a>
 </div>
 </div>
@@ -1150,16 +1195,16 @@ First few rows of expression data:
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">nmf</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;brunet&quot;</span><span class="p">)</span>
 
 <span class="c1"># Extract factors</span>
-<span class="n">F_estimated</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">basis</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="w"> </span>
-<span class="n">L_estimated</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">coef</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="w">  </span>
+<span class="n">L_estimated</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">basis</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="w"> </span>
+<span class="n">F_estimated</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">coef</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="w">  </span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Let’s first look at the estimated <span class="math notranslate nohighlight">\(\mathbf{L}\)</span>:</p>
+<p>Let’s first look at the estimated <span class="math notranslate nohighlight">\(\mathbf{F}\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">L_estimated</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">F_estimated</span>
 </pre></div>
 </div>
 </div>
@@ -1176,12 +1221,12 @@ First few rows of expression data:
 </table>
 </div></div>
 </div>
-<p>Three genes (METAB1, METAB2, METAB3) contribute to the majority of the first factor (first row in <code class="docutils literal notranslate"><span class="pre">L_estimated</span></code>); while the other two genes contribute to the second factor.</p>
+<p>Three genes (METAB1, METAB2, METAB3) contribute to the majority of the first factor (first row in <code class="docutils literal notranslate"><span class="pre">F_estimated</span></code>); while the other two genes contribute to the second factor.</p>
 <p>We can also check the correlation between the estimated factor scores and the true factor scores, both are high:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">cor</span><span class="p">(</span><span class="n">F_estimated</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">factor2</span><span class="p">)</span>
-<span class="nf">cor</span><span class="p">(</span><span class="n">F_estimated</span><span class="p">[,</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">factor1</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">cor</span><span class="p">(</span><span class="n">L_estimated</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">factor2</span><span class="p">)</span>
+<span class="nf">cor</span><span class="p">(</span><span class="n">L_estimated</span><span class="p">[,</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">factor1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1297,8 +1342,8 @@ First few rows of expression data:
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-admixture-analysis-using-admixture">Example 1: Admixture Analysis using ADMIXTURE</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-data">Generate Data</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-define-variant-frequencies-in-ancestral-populations-mathbf-l">Step 1: Define variant frequencies in ancestral populations (<span class="math notranslate nohighlight">\(\mathbf{L}\)</span>)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-create-individuals-with-different-ancestry-proportions-mathbf-f-matrix">Step 2: Create individuals with different ancestry proportions (<span class="math notranslate nohighlight">\(\mathbf{F}\)</span> matrix)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-define-variant-frequencies-in-ancestral-populations-mathbf-f">Step 1: Define variant frequencies in ancestral populations (<span class="math notranslate nohighlight">\(\mathbf{F}\)</span>)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-create-individuals-with-different-ancestry-proportions-mathbf-l">Step 2: Create individuals with different ancestry proportions (<span class="math notranslate nohighlight">\(\mathbf{L}\)</span>)</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-generate-genotypes-based-on-ancestry-mathbf-x-matrix">Step 3: Generate genotypes based on ancestry (<span class="math notranslate nohighlight">\(\mathbf{X}\)</span> matrix)</a></li>
 </ul>
 </li>

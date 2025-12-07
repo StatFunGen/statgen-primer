@@ -1,6 +1,6 @@
 # statgen-primer
 
-These notes are written to help ([our own](https://wanggroup.org/)) trainees who already have some grounds in basic (human) genetics concepts and undergraduate-level statistics, 
+These notes are written to help ([some of our own](https://wanggroup.org/)) trainees who already have some grounds in basic (human) genetics concepts and undergraduate-level statistics, 
 and interested in learning in somewhat detail the statistical methods commonly used in statistical genetics research nowadays. 
 The goal is to bridge the knowledge gap between this existing background and the learning goal of interest.
 

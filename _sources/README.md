@@ -1,7 +1,7 @@
 # statgen-primer
 
 These notes are written to help ([some of our own](https://wanggroup.org/)) trainees who already have some grounds in basic (human) genetics concepts and undergraduate-level statistics, 
-and interested in learning in somewhat detail the statistical methods commonly used in statistical genetics research nowadays. 
+yet find it difficult to learn in somewhat detail various statistical methods commonly used in statistical genetics research nowadays. 
 The goal is to bridge the knowledge gap between these existing backgrounds and the more advanced learning goal of interest.
 
 ## Overview of Contents

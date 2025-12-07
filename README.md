@@ -41,9 +41,3 @@ The goal is to bridge the knowledge gap between this existing background and the
 | | | [Bayesian Mixture Model](https://statfungen.github.io/statgen-primer/Bayesian_mixture_model.html) |
 
 These notes draw inspiration from [fiveMinutesStats](https://stephens999.github.io/fiveMinuteStats/index.html) by Matthew Stephens and [statistical genetics equations](https://rawgit.com/uqrmaie1/statgen_equations/master/statgen_equations.html) by Robert Maier. Compared to Matthew's materials, these notes are more narrowly focused on human and statistical genetics with only as much statistical details to understand the applications. Compared to Robert's materials, these notes include a slightly stronger statistical component to serve as "primer" for readers to advance into learing full details of these relevant methods.
-
-# References
-
-- [statgen_equation](https://github.com/cumc/handson-tutorials/blob/main/contents/statgen_basic/statgen_equations.ipynb)
-- [original version from Robert Maier]
-- [five minutes Bayesian from Matthew Stephens]

@@ -1,5 +1,8 @@
 # statgen-prerequisites
-Notes on statistical background for statistical genetics practitioners
+
+These notes are written to help ([our own](https://wanggroup.org/)) trainees who already have some grounds in basic (human) genetics concepts and undergraduate-level statistics, 
+and interested in learning in somewhat detail the statistical methods commonly used in statistical genetics research nowadays. 
+The goal is to bridge the knowledge gap between this existing background and the learning goal of interest.
 
 # Table of Content
 
@@ -37,10 +40,10 @@ Notes on statistical background for statistical genetics practitioners
 | | Multiple Bayesian Models | [Bayesian Model Comparison](https://statfungen.github.io/statgen-prerequisites/Bayesian_model_comparison.html) |
 | | | [Bayesian Mixture Model](https://statfungen.github.io/statgen-prerequisites/Bayesian_mixture_model.html) |
 
-
+These notes draw inspiration from [fiveMinutesStats](https://stephens999.github.io/fiveMinuteStats/index.html) by Matthew Stephens and [statistical genetics equations](https://rawgit.com/uqrmaie1/statgen_equations/master/statgen_equations.html) by Robert Maier. Compared to Matthew's materials, these notes are more narrowly focused on human and statistical genetics with only as much statistical details to understand the applications. Compared to Robert's materials, these notes include a slightly stronger statistical component to serve as "primer" for readers to advance into learing full details of these relevant methods.
 
 # References
 
 - [statgen_equation](https://github.com/cumc/handson-tutorials/blob/main/contents/statgen_basic/statgen_equations.ipynb)
-- [original version from Robert Maier](https://rawgit.com/uqrmaie1/statgen_equations/master/statgen_equations.html)
-- [five minutes Bayesian from Matthew Stephens](https://stephens999.github.io/fiveMinuteStats/index.html)
+- [original version from Robert Maier]
+- [five minutes Bayesian from Matthew Stephens]

@@ -702,15 +702,15 @@ E[\hat{\beta}_{\text{OLS}}] = \beta
 <section class="tex2jax_ignore mathjax_ignore" id="related-topics">
 <h1>Related Topics<a class="headerlink" href="#related-topics" title="Link to this heading">#</a></h1>
 <ul class="simple">
-<li><p><a class="reference external" href="https://statfungen.github.io/statgen-prerequisites/genotype_coding.html">genotype coding</a></p></li>
-<li><p><a class="reference external" href="https://statfungen.github.io/statgen-prerequisites/odds_ratio.html">odds ratio</a></p></li>
-<li><p><a class="reference external" href="https://statfungen.github.io/statgen-prerequisites/Bayesian_normal_mean_model.html">Bayesian normal mean model</a></p></li>
+<li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/genotype_coding.html">genotype coding</a></p></li>
+<li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/odds_ratio.html">odds ratio</a></p></li>
+<li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/Bayesian_normal_mean_model.html">Bayesian normal mean model</a></p></li>
 </ul>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="example">
 <h1>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
 <p>How do we actually apply that OLS formula to real genetic data? Let’s work through a concrete example with 5 individuals and 3 genetic variants to see the math in action.</p>
-<p>Imagine we have genotype data (like “CC”, “TT”, “CT”) and height measurements for 5 people. We have converted those nucleotides into numbers that we can analyze in <a class="reference external" href="https://statfungen.github.io/statgen-prerequisites/genotype_coding.html">Lecture: genotype coding</a>, now the key question is <em>do any of these variants actually influence height?</em></p>
+<p>Imagine we have genotype data (like “CC”, “TT”, “CT”) and height measurements for 5 people. We have converted those nucleotides into numbers that we can analyze in <a class="reference external" href="https://statfungen.github.io/statgen-primer/genotype_coding.html">Lecture: genotype coding</a>, now the key question is <em>do any of these variants actually influence height?</em></p>
 <p>We’ll transform the genotypes using an additive model (counting alternative alleles), then apply our OLS formula both manually and using R’s built-in function. This will show you exactly how that geometric intuition - the projection and alignment between genotype and phenotype vectors - translates into real code and results.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

@@ -692,10 +692,10 @@ document.write(`
 <section class="tex2jax_ignore mathjax_ignore" id="related-topics">
 <h1>Related Topics<a class="headerlink" href="#related-topics" title="Link to this heading">#</a></h1>
 <ul class="simple">
-<li><p><a class="reference external" href="https://statfungen.github.io/statgen-prerequisites/confounder.html">Confounders</a></p></li>
-<li><p><a class="reference external" href="https://statfungen.github.io/statgen-prerequisites/genetic_relationship_matrix.html">Genetic Relationship Matrix</a></p></li>
-<li><p><a class="reference external" href="https://statfungen.github.io/statgen-prerequisites/proportion_of_variance_explained.html">Proportion of Variance Explained</a></p></li>
-<li><p><a class="reference external" href="https://statfungen.github.io/statgen-prerequisites/factor_analysis.html">Factor Analysis</a></p></li>
+<li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/confounder.html">Confounders</a></p></li>
+<li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/genetic_relationship_matrix.html">Genetic Relationship Matrix</a></p></li>
+<li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/proportion_of_variance_explained.html">Proportion of Variance Explained</a></p></li>
+<li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/factor_analysis.html">Factor Analysis</a></p></li>
 </ul>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="example">
@@ -704,11 +704,11 @@ document.write(`
 <h2>Detect Multiple Ancestral Populations via PCA<a class="headerlink" href="#detect-multiple-ancestral-populations-via-pca" title="Link to this heading">#</a></h2>
 <p>You are given a sample of genotyped individuals and want to know: <strong>Are all individuals in this sample from the same genetic ancestry, or do they come from different populations?</strong> This is a fundamental question in population genetics and forensics, as population structure can be a major confounder in association studies.</p>
 <p>In this example, we’ll demonstrate how PCA can automatically reveal population structure without any prior knowledge of population labels.</p>
-<p>This is the <strong>mixture problem</strong>: we have a mixture of individuals from distinct populations, and PCA reveals their structure through the principal components. Here we use the same setting as in the topic of <a class="reference external" href="https://statfungen.github.io/statgen-prerequisites/factor_analysis.html">Factor Analysis</a>, and we will see the PCA will detect the four groups of individuals easily.</p>
+<p>This is the <strong>mixture problem</strong>: we have a mixture of individuals from distinct populations, and PCA reveals their structure through the principal components. Here we use the same setting as in the topic of <a class="reference external" href="https://statfungen.github.io/statgen-primer/factor_analysis.html">Factor Analysis</a>, and we will see the PCA will detect the four groups of individuals easily.</p>
 </section>
 <section id="generate-data">
 <h2>Generate Data<a class="headerlink" href="#generate-data" title="Link to this heading">#</a></h2>
-<p>This is the same generation as we did in the <a class="reference external" href="https://statfungen.github.io/statgen-prerequisites/factor_analysis.html">Factor Analysis</a>.</p>
+<p>This is the same generation as we did in the <a class="reference external" href="https://statfungen.github.io/statgen-primer/factor_analysis.html">Factor Analysis</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="o">=</span><span class="nf">ls</span><span class="p">())</span>
@@ -918,7 +918,7 @@ PC5: 1.99%
 <li><p>In Admixture (and Structure method), for each individual at a specific SNP, a “personal” expected allele frequency actually is reflected by their ancestry vector and the population allele frequencies</p></li>
 <li><p>In PCA, it lacks an interpretation of what the linear combination of <span class="math notranslate nohighlight">\(p\)</span> variants represent, but it is similar to have an imaginary “ancestry” represented by the <span class="math notranslate nohighlight">\(w_k\)</span>.</p></li>
 </ul>
-<p>For a detailed relationship between between PCA and Structure, please refer to <a class="reference external" href="https://web.stanford.edu/group/pritchardlab/HGbook/ReleaseV1.1/HGBook-V1.1-ch3.1.pdf">HGBook</a> (box on page 190-192). Structure and Admixture are two methods but from different perspective (Bayesian versus frequentist, which we will discuss later <a class="reference external" href="https://statfungen.github.io/statgen-prerequisites/Bayesian_frequentist.html">here</a>).</p>
+<p>For a detailed relationship between between PCA and Structure, please refer to <a class="reference external" href="https://web.stanford.edu/group/pritchardlab/HGbook/ReleaseV1.1/HGBook-V1.1-ch3.1.pdf">HGBook</a> (box on page 190-192). Structure and Admixture are two methods but from different perspective (Bayesian versus frequentist, which we will discuss later <a class="reference external" href="https://statfungen.github.io/statgen-primer/Bayesian_frequentist.html">here</a>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find the range of PC1 scores</span>
@@ -991,10 +991,10 @@ Population 2: -0.9976
 </a>
 </div>
 </div>
-<p>While PCA can visualize population structure, <strong>for admixture analysis it is better to use the ADMIXTURE model</strong> introduced in <a class="reference external" href="https://statfungen.github.io/statgen-prerequisites/factor_analysis.html">Factor Analysis</a>. Here’s why:</p>
+<p>While PCA can visualize population structure, <strong>for admixture analysis it is better to use the ADMIXTURE model</strong> introduced in <a class="reference external" href="https://statfungen.github.io/statgen-primer/factor_analysis.html">Factor Analysis</a>. Here’s why:</p>
 <ul class="simple">
 <li><p><strong>PCA is a descriptive method</strong>: PCA finds the directions of maximum variance in the data but does not provide a statistical model of how the data was generated.</p></li>
-<li><p><strong>ADMIXTURE is a generative model</strong>: ADMIXTURE explicitly models the genetic mixture as a weighted combination of ancestry components: <span class="math notranslate nohighlight">\(\mathbf{X} = \mathbf{L^T\mathbf{F}} + \mathbf{E}\)</span> (check <a class="reference external" href="https://statfungen.github.io/statgen-prerequisites/factor_analysis.html">Factor Analysis</a> for more details).</p></li>
+<li><p><strong>ADMIXTURE is a generative model</strong>: ADMIXTURE explicitly models the genetic mixture as a weighted combination of ancestry components: <span class="math notranslate nohighlight">\(\mathbf{X} = \mathbf{L^T\mathbf{F}} + \mathbf{E}\)</span> (check <a class="reference external" href="https://statfungen.github.io/statgen-primer/factor_analysis.html">Factor Analysis</a> for more details).</p></li>
 </ul>
 </section>
 <section id="interpretation-of-loadings-for-the-top-pc">

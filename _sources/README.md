@@ -4,7 +4,7 @@ These notes are written to help ([our own](https://wanggroup.org/)) trainees who
 and interested in learning in somewhat detail the statistical methods commonly used in statistical genetics research nowadays. 
 The goal is to bridge the knowledge gap between this existing background and the learning goal of interest.
 
-# Table of Content
+## Overview of Contents
 
 | Section | Subsection | Topic |
 |---------|------------|-------|

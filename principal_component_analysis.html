@@ -571,7 +571,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pca-and-factor-analysis">PCA and Factor Analysis</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pca-and-regression">PCA and Regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scaling">Scaling</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-explained-by-principal-components">Variance Explained by Principal Components</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eigen-decomposition-and-variance-explained">Eigen Decomposition and Variance Explained</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#terminology">Terminology</a></li>
 </ul>
 </li>
@@ -660,8 +660,8 @@ document.write(`
 <h2>Scaling<a class="headerlink" href="#scaling" title="Link to this heading">#</a></h2>
 <p>PCA is sensitive to the scaling of the variables. Mathematically this sensitivity comes from the way a rescaling changes the sample‑covariance matrix that PCA diagonalises. So in practice one needs to scale (both centered and unit variance) the matrix before performing PCA.</p>
 </section>
-<section id="variance-explained-by-principal-components">
-<h2>Variance Explained by Principal Components<a class="headerlink" href="#variance-explained-by-principal-components" title="Link to this heading">#</a></h2>
+<section id="eigen-decomposition-and-variance-explained">
+<h2>Eigen Decomposition and Variance Explained<a class="headerlink" href="#eigen-decomposition-and-variance-explained" title="Link to this heading">#</a></h2>
 <p>When <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is scaled (columns have zero mean and unit variance), <span class="math notranslate nohighlight">\(\mathbf{X}^T\mathbf{X}/(N-1)\)</span> is the sample covariance matrix <span class="math notranslate nohighlight">\(\text{Cov}(\mathbf{X})\)</span>. Thus, PCA via eigendecomposition is often described as finding the eigenvectors of the covariance matrix. The eigenvectors <span class="math notranslate nohighlight">\(\mathbf{W}\)</span> are the principal directions, and the eigenvalues represent the variance explained along each direction:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1234,7 +1234,7 @@ Correlation between PC1 loadings and freq differences (scaled data): 0.9985
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pca-and-factor-analysis">PCA and Factor Analysis</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pca-and-regression">PCA and Regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scaling">Scaling</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-explained-by-principal-components">Variance Explained by Principal Components</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eigen-decomposition-and-variance-explained">Eigen Decomposition and Variance Explained</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#terminology">Terminology</a></li>
 </ul>
 </li>

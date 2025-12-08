@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>statgen-primer &#8212; Statistical backgrounds for gene mapping</title>
+    <title>Hidden Markov Model (HMM) &#8212; Statistical backgrounds for gene mapping</title>
   
   
   
@@ -57,12 +57,11 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'README';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'hidden_Markov_model';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Notations" href="notations.html" />
+    <link rel="next" title="Ordinary Least Squares" href="ordinary_least_squares.html" />
+    <link rel="prev" title="Principal Component Analysis (PCA)" href="principal_component_analysis.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -125,8 +124,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -145,7 +142,7 @@
     
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="README.html">
   
   
   
@@ -239,8 +236,8 @@
 
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Latent Structure in Genome</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="hidden_Markov_model.html">Hidden Markov Model (HMM)</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Hidden Markov Model (HMM)</a></li>
 
 
 
@@ -474,7 +471,7 @@
       
       
       
-      <li><a href="_sources/README.md" target="_blank"
+      <li><a href="_sources/hidden_Markov_model.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -484,7 +481,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -558,7 +555,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>statgen-primer</h1>
+    <h1>Hidden Markov Model (HMM)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -568,8 +565,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-contents">Overview of Contents</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Hidden Markov Model (HMM)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-summary">Graphical Summary</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
 </ul>
+
             </nav>
         </div>
     </div>
@@ -580,179 +582,30 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="statgen-primer">
-<h1>statgen-primer<a class="headerlink" href="#statgen-primer" title="Link to this heading">#</a></h1>
-<p>These notes are written to help (<a class="reference external" href="https://wanggroup.org/">some of our own</a>) trainees who already have some grounds in basic (human) genetics concepts and undergraduate-level statistics,
-yet find it difficult to learn in somewhat detail various statistical methods commonly used in statistical genetics research nowadays.
-The goal is to bridge the knowledge gap between these existing backgrounds and the more advanced learning goal of interest.</p>
-<section id="overview-of-contents">
-<h2>Overview of Contents<a class="headerlink" href="#overview-of-contents" title="Link to this heading">#</a></h2>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Section</p></th>
-<th class="head"><p>Subsection</p></th>
-<th class="head"><p>Topic</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>Basic Concepts</strong></p></td>
-<td><p></p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/genotype_coding.html">Genotype Coding</a></p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p></p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/minor_allele_frequency.html">Minor Allele Frequency</a></p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p></p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/Hardy_Weinberg_equilibrium.html">Hardy-Weinberg Equilibrium</a></p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Correlation</strong></p></td>
-<td><p>Between variants</p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/linkage_disequilibrium.html">Linkage Disequilibrium</a></p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p></p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/linkage_disequilibrium_score.html">Linkage Disequilibrium Score</a></p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p>Between individuals</p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/genetic_relationship_matrix.html">Genetic Relationship Matrix</a></p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p>Between variables</p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/factor_analysis.html">Factor Analysis</a></p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p></p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/principal_component_analysis.html">Principal Component Analysis</a></p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Genetic Associations</strong></p></td>
-<td><p>Basic model</p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/ordinary_least_squares.html">Ordinary Least Squares</a></p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p>Extend to binary outcome</p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/odds_ratio.html">Odds Ratio</a></p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p>Extend to multiple variables</p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/marginal_joint_effects.html">Marginal vs. Joint Effects</a></p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p></p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/summary_statistics.html">Summary Statistics</a></p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Genetic effects</strong></p></td>
-<td><p></p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/random_effect.html">Random Effect</a></p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p></p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/proportion_of_variance_explained.html">Proportion of Variance Explained</a></p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p></p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/linear_mixed_model.html">Linear Mixed Model</a></p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p>Covariates</p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/confounder.html">Confounder</a></p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p></p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/collider.html">Collider</a></p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p></p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/mediator.html">Mediator</a></p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p>Multiple studies</p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/meta_analysis_fixed_effect.html">Meta Analysis Fixed Effect</a></p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p></p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/meta_analysis_random_effect.html">Meta Analysis Random Effect</a></p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Statistical Inference</strong></p></td>
-<td><p>Likelihood and MLE</p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/likelihood.html">Likelihood</a></p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p></p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/maximum_likelihood_estimation.html">Maximum Likelihood Estimation</a></p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p>LR and LRT</p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/likelihood_ratio.html">Likelihood Ratio</a></p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p>Bayesian versus Frequentist</p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/Bayesian_frequentist.html">Bayesian and Frequentist</a></p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p></p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/Bayes_rule.html">Bayes Rule</a></p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p></p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/Bayes_factor.html">Bayes Factor</a></p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p></p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/p_value.html">P-value</a></p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p>Bayesian Model</p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/Bayesian_normal_mean_model.html">Bayesian Normal Mean Model</a></p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p></p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/Bayesian_multivariate_normal_mean_model.html">Bayesian Multivariate Normal Mean Model</a></p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p>Multiple Bayesian Models</p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/Bayesian_model_comparison.html">Bayesian Model Comparison</a></p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p></p></td>
-<td><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/Bayesian_mixture_model.html">Bayesian Mixture Model</a></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>These notes draw inspiration from <a class="reference external" href="https://stephens999.github.io/fiveMinuteStats/index.html">fiveMinutesStats</a> by Matthew Stephens and <a class="reference external" href="https://rawgit.com/uqrmaie1/statgen_equations/master/statgen_equations.html">statistical genetics equations</a> by Robert Maier. Compared to Matthew’s materials, these notes are more narrowly focused on human and statistical genetics with only as much statistical details to understand the applications. Compared to Robert’s materials, these notes include a slightly stronger statistical component to serve as “primer” for readers to advance into learing full details of these relevant methods.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="hidden-markov-model-hmm">
+<h1>Hidden Markov Model (HMM)<a class="headerlink" href="#hidden-markov-model-hmm" title="Link to this heading">#</a></h1>
 </section>
-<div class="toctree-wrapper compound">
+<section class="tex2jax_ignore mathjax_ignore" id="graphical-summary">
+<h1>Graphical Summary<a class="headerlink" href="#graphical-summary" title="Link to this heading">#</a></h1>
+<p><img alt="fig" src="cartoons/fig.svg" /></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="key-formula">
+<h1>Key Formula<a class="headerlink" href="#key-formula" title="Link to this heading">#</a></h1>
+<p>key formula sentence</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="technical-details">
+<h1>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading">#</a></h1>
+<p>techinical details here</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="example">
+<h1>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clear the environment</span>
+<span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ls</span><span class="p">())</span>
+</pre></div>
 </div>
-<div class="toctree-wrapper compound">
 </div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
 </div>
 </section>
 
@@ -765,16 +618,16 @@ The goal is to bridge the knowledge gap between these existing backgrounds and t
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "r"
         },
         kernelOptions: {
-            name: "python3",
+            name: "ir",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'ir'</script>
 
                 </article>
               
@@ -786,12 +639,21 @@ The goal is to bridge the knowledge gap between these existing backgrounds and t
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="principal_component_analysis.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Principal Component Analysis (PCA)</p>
+      </div>
+    </a>
     <a class="right-next"
-       href="notations.html"
+       href="ordinary_least_squares.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Notations</p>
+        <p class="prev-next-title">Ordinary Least Squares</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -811,8 +673,13 @@ The goal is to bridge the knowledge gap between these existing backgrounds and t
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-contents">Overview of Contents</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Hidden Markov Model (HMM)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-summary">Graphical Summary</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
 </ul>
+
   </nav></div>
 
 </div></div>

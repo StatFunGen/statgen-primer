@@ -228,11 +228,18 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="principal_component_analysis.html">Principal Component Analysis (PCA)</a></li>
 
 
 
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Latent Structure in Genome</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="hidden_Markov_model.html">Hidden Markov Model (HMM)</a></li>
 
 
 
@@ -589,11 +596,13 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-exploratory-factor-analysis-in-gene-expression">Example 2: Exploratory Factor Analysis in Gene Expression</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Generate Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-factor-matrix-factorization">Perform Factor Matrix Factorization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nfm-results">NFM Results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reconstruct-based-on-estimated-mathbf-l-and-mathbf-f-and-visualization">Reconstruct based on Estimated <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{F}\)</span> and Visualization</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#extended-reading">Extended Reading</a></li>
 </ul>
 
             </nav>
@@ -634,11 +643,12 @@ document.write(`
 <h1>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading">#</a></h1>
 <section id="indeterminacy-of-matrix-decomposition">
 <h2>Indeterminacy of Matrix Decomposition<a class="headerlink" href="#indeterminacy-of-matrix-decomposition" title="Link to this heading">#</a></h2>
-<p>For any invertible matrix <span class="math notranslate nohighlight">\(\mathbf{T}\)</span> (sometimes called <strong>rotation matrix</strong>):
-$<span class="math notranslate nohighlight">\(
+<p>For any invertible matrix <span class="math notranslate nohighlight">\(\mathbf{T}\)</span> (sometimes called <strong>rotation matrix</strong>):</p>
+<div class="math notranslate nohighlight">
+\[
 \mathbf{X} = \mathbf{L}^T \mathbf{F} + \mathbf{E} = (\mathbf{L}^T\mathbf{T})(\mathbf{T}^{-1}\mathbf{F}) + \mathbf{E}
-\)</span>$</p>
-<p><strong>Result:</strong> Infinitely many <span class="math notranslate nohighlight">\((\mathbf{L}, \mathbf{F})\)</span> pairs fit the data equally well (i.e., same <span class="math notranslate nohighlight">\(\mathbf{E}\)</span>)! Therefore the key to the factor analysis is the constraints on <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> and/or <span class="math notranslate nohighlight">\(\mathbf{F}\)</span>!</p>
+\]</div>
+<p><strong>Result:</strong> Infinitely many <span class="math notranslate nohighlight">\((\mathbf{L}, \mathbf{F})\)</span> pairs fit the data equally well (i.e., same <span class="math notranslate nohighlight">\(\mathbf{E}\)</span>). Therefore the key to the factor analysis is the <strong>constraints</strong> on <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> and/or <span class="math notranslate nohighlight">\(\mathbf{F}\)</span>.</p>
 </section>
 <section id="common-constraints">
 <h2>Common Constraints<a class="headerlink" href="#common-constraints" title="Link to this heading">#</a></h2>
@@ -664,7 +674,7 @@ $<span class="math notranslate nohighlight">\(
 \[
 \mathbf{X}_{i,j} \geq 0, \mathbf{F}_{i,j} \geq 0, \mathbf{L}_{i,j} \geq 0, \forall i, j
 \]</div>
-<p>This non-negativity <strong>makes the resulting matrices easier to inspect</strong>.</p>
+<p>This non-negativity <strong>makes the resulting matrices easier to inspect</strong>, as the factors can often be interpreted as additive parts.</p>
 </section>
 <section id="constraints-in-principal-component-analysis">
 <h3>Constraints in Principal Component Analysis<a class="headerlink" href="#constraints-in-principal-component-analysis" title="Link to this heading">#</a></h3>
@@ -1011,59 +1021,6 @@ Iteration | Log-likelihood | Change
 <p>An important issue in mixture model inference is label switching: the optimization algorithm doesn’t inherently assign “Population 1” to a particular cluster—it just identifies the clusters. The populations could be ordered in any way: (1,2) or (2,1) in a two-population case.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">F_estimated</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">result</span><span class="o">$</span><span class="bp">F</span>
-<span class="n">transpose_L_estimated</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">result</span><span class="o">$</span><span class="n">transpose_L</span>
-<span class="nf">dim</span><span class="p">(</span><span class="n">result</span><span class="o">$</span><span class="n">transpose_L</span><span class="p">)</span>
-<span class="nf">dim</span><span class="p">(</span><span class="n">F_estimated</span><span class="p">)</span>
-<span class="nf">dim</span><span class="p">(</span><span class="n">transpose_L_estimated</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><style>
-.list-inline {list-style: none; margin:0; padding: 0}
-.list-inline>li {display: inline-block}
-.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
-</style>
-<ol class=list-inline><li>50</li><li>2</li></ol>
-</div><div class="output text_html"><style>
-.list-inline {list-style: none; margin:0; padding: 0}
-.list-inline>li {display: inline-block}
-.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
-</style>
-<ol class=list-inline><li>2</li><li>100</li></ol>
-</div><div class="output text_html"><style>
-.list-inline {list-style: none; margin:0; padding: 0}
-.list-inline>li {display: inline-block}
-.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
-</style>
-<ol class=list-inline><li>50</li><li>2</li></ol>
-</div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">transpose_L_estimated</span><span class="p">[</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span>
-<span class="n">transpose_L_true</span><span class="p">[</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><style>
-.list-inline {list-style: none; margin:0; padding: 0}
-.list-inline>li {display: inline-block}
-.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
-</style>
-<ol class=list-inline><li>2.62080598520095e-24</li><li>3.95541901208146e-24</li><li>2.95047232788251e-24</li><li>7.32414354633694e-21</li><li>1.58589029490033e-17</li><li>1.97592631695544e-30</li><li>2.05808853403856e-29</li><li>2.17237309860346e-19</li><li>1.30098513556255e-22</li><li>2.45788193917315e-19</li><li>6.4334697632682e-21</li><li>7.16543412446244e-17</li><li>1.45339548384989e-17</li><li>1.17861320311903e-26</li><li>5.34239060795248e-17</li><li>1</li><li>1</li><li>1</li><li>1</li><li>0.99999989157417</li><li>1</li><li>0.999983870676304</li><li>1</li><li>1</li><li>1</li><li>1</li><li>1</li><li>1</li><li>0.999999999999916</li><li>1</li><li>0.167514039491284</li><li>0.189098264103575</li><li>0.219023334209866</li><li>0.215486134861454</li><li>0.163478713716077</li><li>0.169474329541493</li><li>0.0652281508117544</li><li>0.136120529503373</li><li>0.119511645524924</li><li>0.201446899408033</li><li>0.715708172983795</li><li>0.846254500857358</li><li>0.72179348711325</li><li>0.772015920494043</li><li>0.746668236765778</li><li>0.687637214921867</li><li>0.737099155546777</li><li>0.744151436563115</li><li>0.773855133544133</li><li>0.766643695051723</li></ol>
-</div><div class="output text_html"><style>
-.dl-inline {width: auto; margin:0; padding: 0}
-.dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
-.dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
-.dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
-</style><dl class=dl-inline><dt>IND1</dt><dd>1</dd><dt>IND2</dt><dd>1</dd><dt>IND3</dt><dd>1</dd><dt>IND4</dt><dd>1</dd><dt>IND5</dt><dd>1</dd><dt>IND6</dt><dd>1</dd><dt>IND7</dt><dd>1</dd><dt>IND8</dt><dd>1</dd><dt>IND9</dt><dd>1</dd><dt>IND10</dt><dd>1</dd><dt>IND11</dt><dd>1</dd><dt>IND12</dt><dd>1</dd><dt>IND13</dt><dd>1</dd><dt>IND14</dt><dd>1</dd><dt>IND15</dt><dd>1</dd><dt>IND16</dt><dd>0</dd><dt>IND17</dt><dd>0</dd><dt>IND18</dt><dd>0</dd><dt>IND19</dt><dd>0</dd><dt>IND20</dt><dd>0</dd><dt>IND21</dt><dd>0</dd><dt>IND22</dt><dd>0</dd><dt>IND23</dt><dd>0</dd><dt>IND24</dt><dd>0</dd><dt>IND25</dt><dd>0</dd><dt>IND26</dt><dd>0</dd><dt>IND27</dt><dd>0</dd><dt>IND28</dt><dd>0</dd><dt>IND29</dt><dd>0</dd><dt>IND30</dt><dd>0</dd><dt>IND31</dt><dd>0.8</dd><dt>IND32</dt><dd>0.8</dd><dt>IND33</dt><dd>0.8</dd><dt>IND34</dt><dd>0.8</dd><dt>IND35</dt><dd>0.8</dd><dt>IND36</dt><dd>0.8</dd><dt>IND37</dt><dd>0.8</dd><dt>IND38</dt><dd>0.8</dd><dt>IND39</dt><dd>0.8</dd><dt>IND40</dt><dd>0.8</dd><dt>IND41</dt><dd>0.3</dd><dt>IND42</dt><dd>0.3</dd><dt>IND43</dt><dd>0.3</dd><dt>IND44</dt><dd>0.3</dd><dt>IND45</dt><dd>0.3</dd><dt>IND46</dt><dd>0.3</dd><dt>IND47</dt><dd>0.3</dd><dt>IND48</dt><dd>0.3</dd><dt>IND49</dt><dd>0.3</dd><dt>IND50</dt><dd>0.3</dd></dl>
-</div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">cor1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cor</span><span class="p">(</span><span class="n">transpose_L_estimated</span><span class="p">[</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">transpose_L_true</span><span class="p">[</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">])</span>
 <span class="n">cor2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cor</span><span class="p">(</span><span class="n">transpose_L_estimated</span><span class="p">[</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">transpose_L_true</span><span class="p">[</span><span class="w"> </span><span class="p">,</span><span class="m">1</span><span class="p">])</span>
 
@@ -1121,6 +1078,7 @@ Iteration | Log-likelihood | Change
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="o">=</span><span class="nf">ls</span><span class="p">())</span>
 <span class="nf">library</span><span class="p">(</span><span class="n">NMF</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
 <span class="nf">set.seed</span><span class="p">(</span><span class="m">29</span><span class="p">)</span>
 
 <span class="n">n_samples</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">100</span><span class="w">   </span><span class="c1"># 100 tissue samples</span>
@@ -1153,21 +1111,6 @@ Iteration | Log-likelihood | Change
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading required package: pkgmaker
-
-Loading required package: registry
-
-Loading required package: rngtools
-
-Loading required package: cluster
-
-NMF - BioConductor layer [OK] | Shared memory capabilities [NO: bigmemory] | Cores 7/8
-
-  To enable shared memory capabilities, try: install.extras(&#39;
-NMF
-&#39;)
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data dimensions: 100 samples x 5 genes
 
 First few rows of expression data:
@@ -1189,6 +1132,9 @@ First few rows of expression data:
 </table>
 </div></div>
 </div>
+</section>
+<section id="perform-factor-matrix-factorization">
+<h3>Perform Factor Matrix Factorization<a class="headerlink" href="#perform-factor-matrix-factorization" title="Link to this heading">#</a></h3>
 <p>Then we perform the non-negative matrix factorization on the observed expression data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1201,6 +1147,9 @@ First few rows of expression data:
 </div>
 </div>
 </div>
+</section>
+<section id="nfm-results">
+<h3>NFM Results<a class="headerlink" href="#nfm-results" title="Link to this heading">#</a></h3>
 <p>Let’s first look at the estimated <span class="math notranslate nohighlight">\(\mathbf{F}\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1233,6 +1182,9 @@ First few rows of expression data:
 <div class="cell_output docutils container">
 <div class="output text_html">0.861558112926469</div><div class="output text_html">0.868112544437267</div></div>
 </div>
+</section>
+<section id="reconstruct-based-on-estimated-mathbf-l-and-mathbf-f-and-visualization">
+<h3>Reconstruct based on Estimated <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{F}\)</span> and Visualization<a class="headerlink" href="#reconstruct-based-on-estimated-mathbf-l-and-mathbf-f-and-visualization" title="Link to this heading">#</a></h3>
 <p>We can also reconstruct the expression matrix based on the estimated <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{F}\)</span> and compute the variance explained by the model:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1243,21 +1195,85 @@ First few rows of expression data:
 <span class="n">ss_total</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">((</span><span class="n">expression</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">expression</span><span class="p">))</span><span class="o">^</span><span class="m">2</span><span class="p">)</span>
 <span class="n">ss_resid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">((</span><span class="n">expression</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">expression_hat</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">)</span>
 <span class="n">R2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ss_resid</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">ss_total</span>
-<span class="n">R2</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Proportion of variance explained (R-squared):&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">R2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">0.889394111735464</div></div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Proportion of variance explained (R-squared): 0.8894 
+</pre></div>
+</div>
+</div>
+</div>
+<p>The reconstructed expression data (based on the estimated <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{F}\)</span>) aligns well with the measured expression data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create data frame with gene labels</span>
+<span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span>
+<span class="w">  </span><span class="n">true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">as.vector</span><span class="p">(</span><span class="n">expression</span><span class="p">),</span>
+<span class="w">  </span><span class="n">reconstructed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">as.vector</span><span class="p">(</span><span class="n">expression_hat</span><span class="p">),</span>
+<span class="w">  </span><span class="n">gene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="nf">colnames</span><span class="p">(</span><span class="n">expression</span><span class="p">),</span><span class="w"> </span><span class="n">each</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_samples</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Calculate correlation</span>
+<span class="n">cor_val</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cor</span><span class="p">(</span><span class="n">df</span><span class="o">$</span><span class="n">true</span><span class="p">,</span><span class="w"> </span><span class="n">df</span><span class="o">$</span><span class="n">reconstructed</span><span class="p">)</span>
+
+<span class="c1"># Create plot with colors by gene</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">true</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reconstructed</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gene</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.6</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_abline</span><span class="p">(</span><span class="n">intercept</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">slope</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;black&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">              </span><span class="n">linetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dashed&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">annotate</span><span class="p">(</span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3.5</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6.3</span><span class="p">,</span><span class="w"> </span>
+<span class="w">           </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Correlation =&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">cor_val</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">)),</span><span class="w"> </span>
+<span class="w">           </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;black&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">scale_x_continuous</span><span class="p">(</span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="o">:</span><span class="m">7</span><span class="p">,</span><span class="w"> </span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">7</span><span class="p">),</span><span class="w"> </span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">scale_y_continuous</span><span class="p">(</span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="o">:</span><span class="m">7</span><span class="p">,</span><span class="w"> </span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">7</span><span class="p">),</span><span class="w"> </span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">coord_fixed</span><span class="p">(</span><span class="n">ratio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">  </span><span class="c1"># Makes it square</span>
+<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;True Expression&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">       </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Reconstructed Expression&quot;</span><span class="p">,</span>
+<span class="w">       </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;True vs Reconstructed Expression&quot;</span><span class="p">,</span>
+<span class="w">       </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Gene&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme_bw</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme</span><span class="p">(</span><span class="n">panel.grid.minor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/d4aafb73aa286563ff39275485f0d058312ffa205d1d921c7407f883fa6185a5.png"><img alt="_images/d4aafb73aa286563ff39275485f0d058312ffa205d1d921c7407f883fa6185a5.png" src="_images/d4aafb73aa286563ff39275485f0d058312ffa205d1d921c7407f883fa6185a5.png" style="width: 420px; height: 420px;" />
+</a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">))</span>
+
+<span class="c1"># True expression heatmap</span>
+<span class="nf">image</span><span class="p">(</span><span class="nf">t</span><span class="p">(</span><span class="n">expression</span><span class="p">),</span><span class="w"> </span>
+<span class="w">      </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;True Expression&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Sample&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">hcl.colors</span><span class="p">(</span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;YlOrRd&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">rev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span>
+<span class="w">      </span><span class="n">axes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
+<span class="nf">axis</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">length.out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_genes</span><span class="p">),</span><span class="w"> </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">expression</span><span class="p">),</span><span class="w"> </span><span class="n">las</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+<span class="nf">axis</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">length.out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">),</span><span class="w"> </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">))</span>
+
+<span class="c1"># Reconstructed expression heatmap</span>
+<span class="nf">image</span><span class="p">(</span><span class="nf">t</span><span class="p">(</span><span class="n">expression_hat</span><span class="p">),</span><span class="w"> </span>
+<span class="w">      </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Reconstructed Expression&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Sample&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">hcl.colors</span><span class="p">(</span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;YlOrRd&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">rev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span>
+<span class="w">      </span><span class="n">axes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
+<span class="nf">axis</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">length.out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_genes</span><span class="p">),</span><span class="w"> </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">expression</span><span class="p">),</span><span class="w"> </span><span class="n">las</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+<span class="nf">axis</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">length.out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">),</span><span class="w"> </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/4497c3b9bd2ee7bf0cab601ce7f9f2cf6ccc7b400b358e0f4f42b5885f03b821.png"><img alt="_images/4497c3b9bd2ee7bf0cab601ce7f9f2cf6ccc7b400b358e0f4f42b5885f03b821.png" src="_images/4497c3b9bd2ee7bf0cab601ce7f9f2cf6ccc7b400b358e0f4f42b5885f03b821.png" style="width: 420px; height: 420px;" />
+</a>
+</div>
 </div>
 </section>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="extended-reading">
-<h1>Extended Reading<a class="headerlink" href="#extended-reading" title="Link to this heading">#</a></h1>
-<ul class="simple">
-<li><p><a class="reference external" href="https://www.cs.columbia.edu/~blei/papers/Blei2012.pdf">Introduction to Probabilistic Topic Models</a>. DB Blei (2012). Communications of the ACM. 55 (4): 77-84.</p></li>
-</ul>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1353,11 +1369,13 @@ First few rows of expression data:
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-exploratory-factor-analysis-in-gene-expression">Example 2: Exploratory Factor Analysis in Gene Expression</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Generate Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-factor-matrix-factorization">Perform Factor Matrix Factorization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nfm-results">NFM Results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reconstruct-based-on-estimated-mathbf-l-and-mathbf-f-and-visualization">Reconstruct based on Estimated <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{F}\)</span> and Visualization</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#extended-reading">Extended Reading</a></li>
 </ul>
 
   </nav></div>

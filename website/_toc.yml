@@ -29,6 +29,10 @@ parts:
       - file: factor_analysis
       - file: principal_component_analysis
   
+  - caption: Latent Structure in Genome
+    chapters:
+      - file: hidden_Markov_model
+      
   - caption: Fixed Effects Models
     chapters:
       - file: ordinary_least_squares

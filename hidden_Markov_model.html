@@ -645,6 +645,12 @@ document.write(`
 <li><p><span class="math notranslate nohighlight">\(x_{1:T}\)</span> = sequence of observations from time 1 to <span class="math notranslate nohighlight">\(T\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(T\)</span> = total number of time steps</p></li>
 </ul>
+<p>This formula tells us how to <strong>generate</strong> sequences, but in practice we observe <span class="math notranslate nohighlight">\(x_{1:T}\)</span> and want to <strong>infer</strong> the hidden states: <span class="math notranslate nohighlight">\(\mathbb{P}(z_t | x_{1:T})\)</span>. Computing this directly from the formula above is intractable—summing over all possible state sequences grows exponentially with <span class="math notranslate nohighlight">\(T\)</span>. However, the Markov property gives us a crucial insight: conditioning on the current state <span class="math notranslate nohighlight">\(z_t\)</span> makes the past and future <strong>conditionally independent</strong>. This allows us to decompose the problem:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{P}(z_t, x_{1:T}) = \underbrace{\mathbb{P}(z_t, x_{1:t})}_{\text{past}} \times \underbrace{\mathbb{P}(x_{t+1:T} | z_t)}_{\text{future}}
+\]</div>
+<p>The forward-backward algorithm (introduced in the next section) exploits this factorization: instead of considering all <span class="math notranslate nohighlight">\(K^T\)</span> possible state sequences at once, we solve two simpler subproblems (forward and backward passes) and combine their results.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="technical-details">
 <h1>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading">#</a></h1>
@@ -660,7 +666,7 @@ document.write(`
 </section>
 <section id="inference-problem">
 <h2>Inference Problem<a class="headerlink" href="#inference-problem" title="Link to this heading">#</a></h2>
-<p>Given a sequence of observations <span class="math notranslate nohighlight">\(x_{1:T}\)</span>, we want to infer the hidden states. Specifically, we want to compute the posterior distribution <span class="math notranslate nohighlight">\(\mathbb{P}(z_t | x_{1:T})\)</span> for each time <span class="math notranslate nohighlight">\(t\)</span>. The forward-backward algorithm solves this efficiently using dynamic programming.</p>
+<p>Given a sequence of observations <span class="math notranslate nohighlight">\(x_{1:T}\)</span>, we want to infer the hidden states. Specifically, we want to compute the posterior distribution <span class="math notranslate nohighlight">\(\mathbb{P}(z_t | x_{1:T})\)</span> for each time <span class="math notranslate nohighlight">\(t\)</span>. The forward-backward algorithm solves this efficiently using dynamic programming.  This reduces complexity from exponential to linear in <span class="math notranslate nohighlight">\(T\)</span>.</p>
 </section>
 <section id="forward-probability">
 <h2>Forward Probability<a class="headerlink" href="#forward-probability" title="Link to this heading">#</a></h2>
@@ -705,12 +711,14 @@ document.write(`
 \mathbb{P}(z_t = k | x_{1:T}) = \frac{\alpha_t(k) \cdot \beta_t(k)}{\sum_{k'} \alpha_t(k') \cdot \beta_t(k')}
 \]</div>
 <p>This answers: “Given all observations, what is the probability we were in state <span class="math notranslate nohighlight">\(k\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>?”</p>
+<p>For future technical details, please refer to Matthew Stepen’s <a class="reference external" href="http://stephens999.github.io/fiveMinuteStats/hmm.html">discussion on HMM</a>.</p>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="related-topics">
 <h1>Related Topics<a class="headerlink" href="#related-topics" title="Link to this heading">#</a></h1>
 <ul class="simple">
 <li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/minor_allele_frequency.html">minor allele frequency</a></p></li>
+<li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/likelihood.html">likelihood</a></p></li>
 </ul>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="example">
@@ -1650,7 +1658,6 @@ Global Admixture Proportions:
 <li><p>Maples, Brian K., et al. <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0002929713002899?via%3Dihub">“RFMix: a discriminative modeling approach for rapid and robust local-ancestry inference.”</a> The American Journal of Human Genetics 93.2 (2013): 278-288.</p></li>
 </ul>
 </li>
-<li><p><a class="reference external" href="http://stephens999.github.io/fiveMinuteStats/hmm.html">A technical minimum example of HMM</a> from Matthew Stephens</p></li>
 <li><p>More about genotype imputation: Section 3.2: Genotype imputation from <a class="reference external" href="https://www.wiley.com/en-us/Handbook+of+Statistical+Genomics%2C+4th+Edition-p-9781119429142">Handbook of Statistical Genomics, 4th edition, by David J. Balding</a>, especially Figure 3.4.</p></li>
 </ul>
 </section>

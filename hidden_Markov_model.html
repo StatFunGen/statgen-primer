@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Hidden Markov Model (HMM) &#8212; Statistical backgrounds for gene mapping</title>
+    <title>Hidden Markov Model &#8212; Statistical backgrounds for gene mapping</title>
   
   
   
@@ -57,6 +57,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'hidden_Markov_model';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -234,7 +236,9 @@
 
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Hidden Markov Model (HMM)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Hidden Markov Model</a></li>
+
+
 
 
 
@@ -546,7 +550,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Hidden Markov Model (HMM)</h1>
+    <h1>Hidden Markov Model</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -556,11 +560,57 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Hidden Markov Model (HMM)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Hidden Markov Model</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-summary">Graphical Summary</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markov-chain">Markov Chain</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inference-problem">Inference Problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-probability">Forward Probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-probability">Backward Probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-distribution">Posterior Distribution</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-genotype-imputation">Example 1: Genotype Imputation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-generate-data">Step 1: Generate Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-define-hmm-parameters">Step 2: Define HMM Parameters</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transition-probability-p-z-m-k-z-m-1-j">2.1 Transition Probability <span class="math notranslate nohighlight">\(P(Z_m = k | Z_{m-1} = j)\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#emission-probability-p-x-m-x-z-m-k">2.2 Emission Probability <span class="math notranslate nohighlight">\(P(X_m = x | Z_m = k)\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-run-forward-backward-algorithm">Step 3: Run Forward-Backward Algorithm</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-probability-alpha-m-k">3.1 Forward Probability <span class="math notranslate nohighlight">\(\alpha_m(k)\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-probability-beta-m-k">3.2 Backward Probability <span class="math notranslate nohighlight">\(\beta_m(k)\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-posterior-and-impute-genotypes">3.3 Compute Posterior and Impute Genotypes</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-results">Step 4: Results</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-local-ancestry-inference-with-elai">Example 2: Local Ancestry Inference with ELAI</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Step 1: Generate Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-define-model-parameters-and-probability-functions">Step 2: Define Model Parameters and Probability Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#allele-frequencies-theta-mk">2.1 Allele Frequencies <span class="math notranslate nohighlight">\(\theta_{mk}\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#beta-beta-sk-layer-connection-matrix">2.2 Beta <span class="math notranslate nohighlight">\(\beta_{sk}\)</span>: Layer Connection Matrix</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transition-parameters-j-and-rho">2.3 Transition Parameters <span class="math notranslate nohighlight">\(j\)</span> and <span class="math notranslate nohighlight">\(\rho\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#emission-probability-p-h-m-y-m-k">2.4 Emission Probability <span class="math notranslate nohighlight">\(P(h_m | Y_m = k)\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transition-probability-p-x-m-s-y-m-k-x-m-1-s-y-m-1-k">2.5 Transition Probability <span class="math notranslate nohighlight">\(P(X_m=s, Y_m=k | X_{m-1}=s', Y_{m-1}=k')\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Step 3: Run Forward-Backward Algorithm</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-probability-alpha-m-s-k">3.1 Forward Probability <span class="math notranslate nohighlight">\(\alpha_m(s,k)\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-probability-beta-m-s-k">3.2 Backward Probability <span class="math notranslate nohighlight">\(\beta_m(s,k)\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-probability-p-x-m-s-h-1-m">3.3 Posterior Probability <span class="math notranslate nohighlight">\(P(X_m=s | h_{1:M})\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Step 4: Results</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#extended-reading">Extended Reading</a></li>
 </ul>
 
             </nav>
@@ -573,31 +623,1036 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="hidden-markov-model-hmm">
-<h1>Hidden Markov Model (HMM)<a class="headerlink" href="#hidden-markov-model-hmm" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="hidden-markov-model">
+<h1>Hidden Markov Model<a class="headerlink" href="#hidden-markov-model" title="Link to this heading">#</a></h1>
+<p>A Hidden Markov Model (HMM) is a statistical model for sequential data where unobservable states (e.g., underlying ancestry) evolve over time according to a Markov chain, and at each time point we observe noisy or indirect measurements that depend on the current hidden state.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="graphical-summary">
 <h1>Graphical Summary<a class="headerlink" href="#graphical-summary" title="Link to this heading">#</a></h1>
-<p><img alt="fig" src="cartoons/fig.svg" /></p>
+<p><img alt="Fig" src="_images/Slide32.png" /></p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="key-formula">
 <h1>Key Formula<a class="headerlink" href="#key-formula" title="Link to this heading">#</a></h1>
-<p>key formula sentence</p>
+<p>The complete probability of any sequence of hidden states and observations in an HMM is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{P}(z_{1:T}, x_{1:T}) = \mathbb{P}(z_1) \prod_{t=2}^{T} \mathbb{P}(z_t | z_{t-1}) \prod_{t=1}^{T} \mathbb{P}(x_t | z_t)
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(z_t\)</span> = hidden state at time <span class="math notranslate nohighlight">\(t\)</span> (what’s happening behind the scenes)</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_t\)</span> = observation at time <span class="math notranslate nohighlight">\(t\)</span> (what you can actually see)</p></li>
+<li><p><span class="math notranslate nohighlight">\(z_{1:T}\)</span> = sequence of hidden states from time 1 to <span class="math notranslate nohighlight">\(T\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(x_{1:T}\)</span> = sequence of observations from time 1 to <span class="math notranslate nohighlight">\(T\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(T\)</span> = total number of time steps</p></li>
+</ul>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="technical-details">
 <h1>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading">#</a></h1>
-<p>techinical details here</p>
+<section id="markov-chain">
+<h2>Markov Chain<a class="headerlink" href="#markov-chain" title="Link to this heading">#</a></h2>
+<p>A Markov chain is a sequence of random variables <span class="math notranslate nohighlight">\(z_1, z_2, \ldots, z_T\)</span> where the future state depends only on the current state, not on the history:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{P}(z_{t+1} | z_1, z_2, \ldots, z_t) = \mathbb{P}(z_{t+1} | z_t)
+\]</div>
+<p>This is the <strong>Markov property</strong>. The chain is fully specified by initial distribution <span class="math notranslate nohighlight">\(\mathbb{P}(z_1)\)</span> and transition probabilities <span class="math notranslate nohighlight">\(\mathbb{P}(z_{t+1} | z_t)\)</span>.</p>
+<p>An HMM extends this by adding observations: the states <span class="math notranslate nohighlight">\(z_t\)</span> are hidden (unobservable), but at each time <span class="math notranslate nohighlight">\(t\)</span> we observe <span class="math notranslate nohighlight">\(x_t\)</span> that depends only on the current hidden state <span class="math notranslate nohighlight">\(z_t\)</span>. This is called <strong>output independence</strong>.</p>
+</section>
+<section id="inference-problem">
+<h2>Inference Problem<a class="headerlink" href="#inference-problem" title="Link to this heading">#</a></h2>
+<p>Given a sequence of observations <span class="math notranslate nohighlight">\(x_{1:T}\)</span>, we want to infer the hidden states. Specifically, we want to compute the posterior distribution <span class="math notranslate nohighlight">\(\mathbb{P}(z_t | x_{1:T})\)</span> for each time <span class="math notranslate nohighlight">\(t\)</span>. The forward-backward algorithm solves this efficiently using dynamic programming.</p>
+</section>
+<section id="forward-probability">
+<h2>Forward Probability<a class="headerlink" href="#forward-probability" title="Link to this heading">#</a></h2>
+<p>The forward probability accumulates information from past observations.</p>
+<p><strong>Definition:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\alpha_t(k) := \mathbb{P}(z_t = k, x_{1:t})
+\]</div>
+<p>Joint probability of state <span class="math notranslate nohighlight">\(k\)</span> at time <span class="math notranslate nohighlight">\(t\)</span> and all past observations.</p>
+<p><strong>Forward Recursion:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\alpha_{t+1}(k) = \mathbb{P}(x_{t+1} | z_{t+1} = k) \sum_{j} \alpha_t(j) \cdot \mathbb{P}(z_{t+1} = k | z_t = j)
+\]</div>
+</section>
+<section id="backward-probability">
+<h2>Backward Probability<a class="headerlink" href="#backward-probability" title="Link to this heading">#</a></h2>
+<p>The backward probability accumulates information from future observations.</p>
+<p><strong>Definition:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\beta_t(k) := \mathbb{P}(x_{t+1:T} | z_t = k)
+\]</div>
+<p>Probability of all future observations given state <span class="math notranslate nohighlight">\(k\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p><strong>Backward Recursion:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\beta_t(k) = \sum_{j} \mathbb{P}(z_{t+1} = j | z_t = k) \cdot \mathbb{P}(x_{t+1} | z_{t+1} = j) \cdot \beta_{t+1}(j)
+\]</div>
+</section>
+<section id="posterior-distribution">
+<h2>Posterior Distribution<a class="headerlink" href="#posterior-distribution" title="Link to this heading">#</a></h2>
+<p>By the Markov property, conditioning on <span class="math notranslate nohighlight">\(z_t\)</span> makes past and future observations independent:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{P}(z_t = k, x_{1:T}) = \mathbb{P}(z_t = k, x_{1:t}) \cdot \mathbb{P}(x_{t+1:T} | z_t = k) = \alpha_t(k) \cdot \beta_t(k)
+\]</div>
+<p>Thus, the posterior distribution is:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{P}(z_t = k | x_{1:T}) = \frac{\alpha_t(k) \cdot \beta_t(k)}{\sum_{k'} \alpha_t(k') \cdot \beta_t(k')}
+\]</div>
+<p>This answers: “Given all observations, what is the probability we were in state <span class="math notranslate nohighlight">\(k\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>?”</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="related-topics">
+<h1>Related Topics<a class="headerlink" href="#related-topics" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/minor_allele_frequency.html">minor allele frequency</a></p></li>
+</ul>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="example">
 <h1>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
+<section id="example-1-genotype-imputation">
+<h2>Example 1: Genotype Imputation<a class="headerlink" href="#example-1-genotype-imputation" title="Link to this heading">#</a></h2>
+<p><strong>Problem</strong>: Genotyping arrays are cost-effective but only measure a subset of genetic variants. Given an individual genotyped at sparse markers and a reference panel with dense genotypes, can we infer (impute) the missing genotypes at untyped markers?</p>
+<p><strong>HMM Solution</strong>: Model each individual’s haplotype as a mosaic copied from reference haplotypes, with occasional switches due to recombination. The HMM has:</p>
+<ol class="arabic simple">
+<li><p><strong>Hidden states</strong>: Which reference haplotype is being copied at each position</p></li>
+<li><p><strong>Observations</strong>: Observed genotypes at typed markers (emissions)</p></li>
+<li><p><strong>Transitions</strong>: Recombination events causing switches between reference haplotypes</p></li>
+</ol>
+<p>This Li and Stephens (2003) model captures linkage disequilibrium through the haplotype copying process.</p>
+<section id="step-1-generate-data">
+<h3>Step 1: Generate Data<a class="headerlink" href="#step-1-generate-data" title="Link to this heading">#</a></h3>
+<p>We create a reference panel with complete haplotypes, then simulate a target individual genotyped only at a subset of markers.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clear the environment</span>
-<span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ls</span><span class="p">())</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ls</span><span class="p">())</span>
+<span class="nf">set.seed</span><span class="p">(</span><span class="m">534</span><span class="p">)</span>
+
+<span class="nf">library</span><span class="p">(</span><span class="n">gridExtra</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+
+<span class="c1"># Parameters</span>
+<span class="n">n_markers</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">100</span><span class="w">        </span><span class="c1"># Total number of SNP markers</span>
+<span class="n">n_ref_haps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">20</span><span class="w">        </span><span class="c1"># Number of reference haplotypes</span>
+<span class="n">typed_prop</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.3</span><span class="w">       </span><span class="c1"># Proportion of markers that are typed</span>
+
+<span class="c1"># Generate reference panel with realistic LD structure</span>
+<span class="c1"># Use a simple model where allele frequencies vary</span>
+<span class="n">allele_freq</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">runif</span><span class="p">(</span><span class="n">n_markers</span><span class="p">,</span><span class="w"> </span><span class="m">0.2</span><span class="p">,</span><span class="w"> </span><span class="m">0.8</span><span class="p">)</span>
+
+<span class="c1"># Create reference haplotypes with some LD structure</span>
+<span class="n">ref_panel</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_markers</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_ref_haps</span><span class="p">)</span>
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">h</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">n_ref_haps</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1"># First marker</span>
+<span class="w">  </span><span class="n">ref_panel</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rbinom</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">allele_freq</span><span class="p">[</span><span class="m">1</span><span class="p">])</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1"># Subsequent markers have correlation with previous marker</span>
+<span class="w">  </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="n">n_markers</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1"># Copy previous allele with some probability (creates LD)</span>
+<span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nf">runif</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0.7</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">ref_panel</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ref_panel</span><span class="p">[</span><span class="n">m</span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">ref_panel</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rbinom</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">allele_freq</span><span class="p">[</span><span class="n">m</span><span class="p">])</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># Generate true target haplotype by copying from reference with switches</span>
+<span class="n">true_target</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="n">n_markers</span><span class="p">)</span>
+<span class="n">current_ref</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n_ref_haps</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">  </span><span class="c1"># Start by copying from a random reference</span>
+<span class="n">true_copying_path</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="n">n_markers</span><span class="p">)</span>
+<span class="n">true_copying_path</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">current_ref</span>
+
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">n_markers</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1"># Recombination: switch reference haplotype with small probability</span>
+<span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nf">runif</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0.05</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">current_ref</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n_ref_haps</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="n">true_copying_path</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">current_ref</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1"># Copy allele from current reference (with small error rate)</span>
+<span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nf">runif</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0.98</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">true_target</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ref_panel</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">current_ref</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">true_target</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ref_panel</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">current_ref</span><span class="p">]</span><span class="w">  </span><span class="c1"># Mutation/error</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># Determine which markers are typed vs. untyped</span>
+<span class="n">typed_indices</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sort</span><span class="p">(</span><span class="nf">sample</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n_markers</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">typed_prop</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n_markers</span><span class="p">)))</span>
+<span class="n">untyped_indices</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">setdiff</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n_markers</span><span class="p">,</span><span class="w"> </span><span class="n">typed_indices</span><span class="p">)</span>
+
+<span class="c1"># Observed data: only typed markers are known</span>
+<span class="n">observed_target</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">n_markers</span><span class="p">)</span>
+<span class="n">observed_target</span><span class="p">[</span><span class="n">typed_indices</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">true_target</span><span class="p">[</span><span class="n">typed_indices</span><span class="p">]</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;Reference panel: %d haplotypes × %d markers\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n_ref_haps</span><span class="p">,</span><span class="w"> </span><span class="n">n_markers</span><span class="p">))</span>
+<span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;Target individual: %d typed markers, %d to impute\n&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">            </span><span class="nf">length</span><span class="p">(</span><span class="n">typed_indices</span><span class="p">),</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">untyped_indices</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reference panel: 20 haplotypes × 100 markers
+Target individual: 30 typed markers, 70 to impute
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="step-2-define-hmm-parameters">
+<h3>Step 2: Define HMM Parameters<a class="headerlink" href="#step-2-define-hmm-parameters" title="Link to this heading">#</a></h3>
+<section id="transition-probability-p-z-m-k-z-m-1-j">
+<h4>2.1 Transition Probability <span class="math notranslate nohighlight">\(P(Z_m = k | Z_{m-1} = j)\)</span><a class="headerlink" href="#transition-probability-p-z-m-k-z-m-1-j" title="Link to this heading">#</a></h4>
+<p>The probability of switching from copying reference haplotype <span class="math notranslate nohighlight">\(j\)</span> to haplotype <span class="math notranslate nohighlight">\(k\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+P(Z_m = k | Z_{m-1} = j) = \begin{cases}
+1 - \rho &amp; \text{if } k = j \text{ (no switch)}\\
+\frac{\rho}{n_{\text{ref hap}}} &amp; \text{if } k \neq j \text{ (switch)}
+\end{cases}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\rho\)</span> is the recombination/switch rate.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># HMM parameters</span>
+<span class="n">rho</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.01</span><span class="w">        </span><span class="c1"># Recombination/switch probability per marker</span>
+<span class="n">epsilon</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.01</span><span class="w">    </span><span class="c1"># Mutation/error rate</span>
+
+<span class="c1"># Transition probability function</span>
+<span class="n">transition_prob_impute</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1"># Probability of transitioning from state j to state k</span>
+<span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">return</span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">rho</span><span class="p">)</span><span class="w">  </span><span class="c1"># Stay in same state</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">return</span><span class="p">(</span><span class="n">rho</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">n_ref_haps</span><span class="p">)</span><span class="w">  </span><span class="c1"># Switch to different state (uniform)</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="emission-probability-p-x-m-x-z-m-k">
+<h4>2.2 Emission Probability <span class="math notranslate nohighlight">\(P(X_m = x | Z_m = k)\)</span><a class="headerlink" href="#emission-probability-p-x-m-x-z-m-k" title="Link to this heading">#</a></h4>
+<p>The probability of observing allele <span class="math notranslate nohighlight">\(x\)</span> given we’re copying from reference haplotype <span class="math notranslate nohighlight">\(k\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+P(X_m = x | Z_m = k) = \begin{cases}
+1 - \epsilon &amp; \text{if } x = \text{ref}_k[m] \text{ (match)}\\
+\epsilon &amp; \text{if } x \neq \text{ref}_k[m] \text{ (mismatch)}
+\end{cases}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\epsilon\)</span> is the mutation/error rate. For untyped markers, the emission is uniform (uninformative).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Emission probability function</span>
+<span class="n">emission_prob_impute</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span><span class="w"> </span><span class="n">ref_allele</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1"># observed: observed allele at marker m (NA if untyped)</span>
+<span class="w">  </span><span class="c1"># ref_allele: allele in reference haplotype at marker m</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">observed</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1"># Untyped marker: emission probability is 1 (uninformative)</span>
+<span class="w">    </span><span class="kr">return</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">observed</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ref_allele</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1"># Match: high probability</span>
+<span class="w">    </span><span class="kr">return</span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">epsilon</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1"># Mismatch: low probability (mutation/error)</span>
+<span class="w">    </span><span class="kr">return</span><span class="p">(</span><span class="n">epsilon</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="step-3-run-forward-backward-algorithm">
+<h3>Step 3: Run Forward-Backward Algorithm<a class="headerlink" href="#step-3-run-forward-backward-algorithm" title="Link to this heading">#</a></h3>
+<p>We use forward-backward to compute posterior probabilities of copying from each reference haplotype at each position.</p>
+<section id="forward-probability-alpha-m-k">
+<h4>3.1 Forward Probability <span class="math notranslate nohighlight">\(\alpha_m(k)\)</span><a class="headerlink" href="#forward-probability-alpha-m-k" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[
+\alpha_m(k) = P(X_{1:m}, Z_m = k)
+\]</div>
+<p>This is the joint probability of typed observations up to marker <span class="math notranslate nohighlight">\(m\)</span> AND copying from reference haplotype <span class="math notranslate nohighlight">\(k\)</span> at marker <span class="math notranslate nohighlight">\(m\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize forward probabilities</span>
+<span class="n">forward_impute</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_markers</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_ref_haps</span><span class="p">)</span>
+
+<span class="c1"># Base case: marker 1 (uniform prior over reference haplotypes)</span>
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">n_ref_haps</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">forward_impute</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">n_ref_haps</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>
+<span class="w">                          </span><span class="nf">emission_prob_impute</span><span class="p">(</span><span class="n">observed_target</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">ref_panel</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1"># Normalize</span>
+<span class="n">forward_impute</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">forward_impute</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">forward_impute</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="p">])</span>
+
+<span class="c1"># Forward recursion</span>
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="n">n_markers</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">n_ref_haps</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1"># Sum over all previous states</span>
+<span class="w">    </span><span class="n">sum_val</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span>
+<span class="w">    </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">n_ref_haps</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">sum_val</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sum_val</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">forward_impute</span><span class="p">[</span><span class="n">m</span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">transition_prob_impute</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">forward_impute</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">emission_prob_impute</span><span class="p">(</span><span class="n">observed_target</span><span class="p">[</span><span class="n">m</span><span class="p">],</span><span class="w"> </span><span class="n">ref_panel</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sum_val</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="c1"># Normalize to prevent underflow</span>
+<span class="w">  </span><span class="n">forward_impute</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">forward_impute</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">forward_impute</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="p">])</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="backward-probability-beta-m-k">
+<h4>3.2 Backward Probability <span class="math notranslate nohighlight">\(\beta_m(k)\)</span><a class="headerlink" href="#backward-probability-beta-m-k" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[
+\beta_m(k) = P(X_{m+1:M} | Z_m = k)
+\]</div>
+<p>This is the probability of future typed observations given we’re copying from reference haplotype <span class="math notranslate nohighlight">\(k\)</span> at marker <span class="math notranslate nohighlight">\(m\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize backward probabilities</span>
+<span class="n">backward_impute</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_markers</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_ref_haps</span><span class="p">)</span>
+
+<span class="c1"># Backward recursion</span>
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="p">(</span><span class="n">n_markers</span><span class="m">-1</span><span class="p">)</span><span class="o">:</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">n_ref_haps</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">sum_val</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span>
+<span class="w">    </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">n_ref_haps</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">sum_val</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sum_val</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">        </span><span class="nf">transition_prob_impute</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">*</span>
+<span class="w">        </span><span class="nf">emission_prob_impute</span><span class="p">(</span><span class="n">observed_target</span><span class="p">[</span><span class="n">m</span><span class="m">+1</span><span class="p">],</span><span class="w"> </span><span class="n">ref_panel</span><span class="p">[</span><span class="n">m</span><span class="m">+1</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">],</span><span class="w"> </span><span class="n">m</span><span class="m">+1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span>
+<span class="w">        </span><span class="n">backward_impute</span><span class="p">[</span><span class="n">m</span><span class="m">+1</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">backward_impute</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sum_val</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="c1"># Normalize to prevent underflow</span>
+<span class="w">  </span><span class="n">backward_impute</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">backward_impute</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">backward_impute</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="p">])</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="compute-posterior-and-impute-genotypes">
+<h4>3.3 Compute Posterior and Impute Genotypes<a class="headerlink" href="#compute-posterior-and-impute-genotypes" title="Link to this heading">#</a></h4>
+<p>For each untyped marker, compute <span class="math notranslate nohighlight">\(P(Z_m = k | X_{\text{typed}}) \propto \alpha_m(k) \cdot \beta_m(k)\)</span>, then impute the genotype as the expected value over reference haplotypes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute posterior probabilities</span>
+<span class="n">posterior_copying</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_markers</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_ref_haps</span><span class="p">)</span>
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">n_markers</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">posterior_copying</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">forward_impute</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">backward_impute</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="p">]</span>
+<span class="w">  </span><span class="n">posterior_copying</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">posterior_copying</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">posterior_copying</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="p">])</span>
+<span class="p">}</span>
+
+<span class="c1"># Impute genotypes at untyped markers</span>
+<span class="n">imputed_genotypes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="n">n_markers</span><span class="p">)</span>
+<span class="n">imputed_genotypes</span><span class="p">[</span><span class="n">typed_indices</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">observed_target</span><span class="p">[</span><span class="n">typed_indices</span><span class="p">]</span>
+
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="n">untyped_indices</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1"># Expected genotype = sum over reference haplotypes weighted by posterior</span>
+<span class="w">  </span><span class="n">imputed_genotypes</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">posterior_copying</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ref_panel</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="p">])</span>
+<span class="w">  </span><span class="c1"># Round to nearest integer (0 or 1)</span>
+<span class="w">  </span><span class="n">imputed_genotypes</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">imputed_genotypes</span><span class="p">[</span><span class="n">m</span><span class="p">])</span>
+<span class="p">}</span>
+
+<span class="c1"># Calculate imputation accuracy</span>
+<span class="n">imputation_accuracy</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">imputed_genotypes</span><span class="p">[</span><span class="n">untyped_indices</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">true_target</span><span class="p">[</span><span class="n">untyped_indices</span><span class="p">])</span><span class="w"> </span><span class="o">/</span><span class="w"> </span>
+<span class="w">                       </span><span class="nf">length</span><span class="p">(</span><span class="n">untyped_indices</span><span class="p">)</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\n=================================================================\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;GENOTYPE IMPUTATION RESULTS\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;=================================================================\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;Imputation accuracy: %.1f%% (%d/%d markers correct)\n&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">            </span><span class="n">imputation_accuracy</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">100</span><span class="p">,</span>
+<span class="w">            </span><span class="nf">sum</span><span class="p">(</span><span class="n">imputed_genotypes</span><span class="p">[</span><span class="n">untyped_indices</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">true_target</span><span class="p">[</span><span class="n">untyped_indices</span><span class="p">]),</span>
+<span class="w">            </span><span class="nf">length</span><span class="p">(</span><span class="n">untyped_indices</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=================================================================
+GENOTYPE IMPUTATION RESULTS
+=================================================================
+Imputation accuracy: 90.0% (63/70 markers correct)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="step-4-results">
+<h3>Step 4: Results<a class="headerlink" href="#step-4-results" title="Link to this heading">#</a></h3>
+<p>We visualize the imputation process and accuracy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Separate correct and incorrect imputations</span>
+<span class="n">correct_idx</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">untyped_indices</span><span class="p">[</span><span class="n">imputed_genotypes</span><span class="p">[</span><span class="n">untyped_indices</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">true_target</span><span class="p">[</span><span class="n">untyped_indices</span><span class="p">]]</span>
+<span class="n">incorrect_idx</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">untyped_indices</span><span class="p">[</span><span class="n">imputed_genotypes</span><span class="p">[</span><span class="n">untyped_indices</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">true_target</span><span class="p">[</span><span class="n">untyped_indices</span><span class="p">]]</span>
+
+<span class="c1"># Panel 1: Genotypes</span>
+<span class="n">df1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span>
+<span class="w">  </span><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n_markers</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span>
+<span class="w">  </span><span class="n">genotype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">true_target</span><span class="p">,</span><span class="w"> </span>
+<span class="w">               </span><span class="nf">ifelse</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n_markers</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">typed_indices</span><span class="p">,</span><span class="w"> </span><span class="n">observed_target</span><span class="p">,</span><span class="w"> </span><span class="kc">NA</span><span class="p">),</span>
+<span class="w">               </span><span class="nf">ifelse</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n_markers</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">correct_idx</span><span class="p">,</span><span class="w"> </span><span class="n">imputed_genotypes</span><span class="p">,</span><span class="w"> </span><span class="kc">NA</span><span class="p">),</span>
+<span class="w">               </span><span class="nf">ifelse</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n_markers</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">incorrect_idx</span><span class="p">,</span><span class="w"> </span><span class="n">imputed_genotypes</span><span class="p">,</span><span class="w"> </span><span class="kc">NA</span><span class="p">)),</span>
+<span class="w">  </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;True genotype&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Typed (observed)&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Imputed (correct)&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Imputed (incorrect)&quot;</span><span class="p">),</span><span class="w"> </span>
+<span class="w">             </span><span class="n">each</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_markers</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Remove rows with NA genotypes</span>
+<span class="n">df1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">df1</span><span class="p">[</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">df1</span><span class="o">$</span><span class="n">genotype</span><span class="p">),</span><span class="w"> </span><span class="p">]</span>
+
+<span class="n">p1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">position</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">genotype</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">type</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_point</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">scale_color_manual</span><span class="p">(</span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;True genotype&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;black&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Typed (observed)&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                                  </span><span class="s">&quot;Imputed (correct)&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;green&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Imputed (incorrect)&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">scale_shape_manual</span><span class="p">(</span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;True genotype&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">19</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Typed (observed)&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">19</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                                 </span><span class="s">&quot;Imputed (correct)&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Imputed (incorrect)&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">scale_size_manual</span><span class="p">(</span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;True genotype&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Typed (observed)&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                                </span><span class="s">&quot;Imputed (correct)&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Imputed (incorrect)&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Marker position&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Genotype&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Panel A: Genotypes (True, Typed, and Imputed)&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme_bw</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme</span><span class="p">(</span><span class="n">legend.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">())</span>
+
+<span class="c1"># Panel 2: Heatmap</span>
+<span class="n">df2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span>
+<span class="w">  </span><span class="n">marker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n_markers</span><span class="p">,</span><span class="w"> </span><span class="n">each</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_ref_haps</span><span class="p">),</span>
+<span class="w">  </span><span class="n">haplotype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n_ref_haps</span><span class="p">,</span><span class="w"> </span><span class="n">n_markers</span><span class="p">),</span>
+<span class="w">  </span><span class="n">probability</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">posterior_copying</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">p2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">marker</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">haplotype</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">probability</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_tile</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">scale_fill_gradientn</span><span class="p">(</span><span class="n">colors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;white&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lightblue&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;darkblue&quot;</span><span class="p">),</span>
+<span class="w">                       </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Probability&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_vline</span><span class="p">(</span><span class="n">xintercept</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">typed_indices</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dashed&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Marker position&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Reference haplotype&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">       </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Panel B: Posterior Copying Probabilities&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme_bw</span><span class="p">()</span>
+
+<span class="c1"># Panel 3: Confidence</span>
+<span class="n">max_posterior</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="n">posterior_copying</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">max</span><span class="p">)</span>
+<span class="n">df3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span>
+<span class="w">  </span><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">n_markers</span><span class="p">,</span>
+<span class="w">  </span><span class="n">confidence</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max_posterior</span><span class="p">,</span>
+<span class="w">  </span><span class="n">is_untyped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">n_markers</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">untyped_indices</span>
+<span class="p">)</span>
+
+<span class="n">p3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">df3</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">position</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_rect</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df3</span><span class="p">[</span><span class="n">df3</span><span class="o">$</span><span class="n">is_untyped</span><span class="p">,</span><span class="w"> </span><span class="p">],</span><span class="w"> </span>
+<span class="w">            </span><span class="nf">aes</span><span class="p">(</span><span class="n">xmin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">position</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">position</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">ymin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">ymax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">),</span>
+<span class="w">            </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_line</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">confidence</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;darkgreen&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_hline</span><span class="p">(</span><span class="n">yintercept</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dashed&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;gray&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Marker position&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Max P(copying ref k)&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">       </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Panel C: Imputation Confidence (Max Posterior Probability)&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">ylim</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme_bw</span><span class="p">()</span>
+
+<span class="c1"># Combine panels</span>
+<span class="nf">grid.arrange</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span><span class="w"> </span><span class="n">p2</span><span class="p">,</span><span class="w"> </span><span class="n">p3</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/124b95a93dcf8d33f932c7da150317b7d7e69f684440c17414197d13612541d2.png"><img alt="_images/124b95a93dcf8d33f932c7da150317b7d7e69f684440c17414197d13612541d2.png" src="_images/124b95a93dcf8d33f932c7da150317b7d7e69f684440c17414197d13612541d2.png" style="width: 420px; height: 420px;" />
+</a>
+</div>
+</div>
+<p>The results show successful genotype imputation using the HMM:</p>
+<ul class="simple">
+<li><p>Panel A displays the comparison between true genotypes (black), typed markers (blue), and imputed genotypes (green crosses for correct, red circles for incorrect).</p></li>
+<li><p>Panel B is a heatmap showing <span class="math notranslate nohighlight">\(P(Z_m = k | X_{\text{typed}})\)</span> - the posterior probability of copying from each reference haplotype <span class="math notranslate nohighlight">\(k\)</span> (y-axis, 1-20) at each marker position <span class="math notranslate nohighlight">\(m\)</span> (x-axis, 1-100). Darker blue indicates higher probability. The horizontal bands reveal that the target primarily copies from a few reference haplotypes, switching between them due to recombination (as expected from the mosaic structure). The vertical red lines mark typed markers that anchor the inference.</p></li>
+<li><p>Panel C shows imputation confidence (maximum posterior probability across all reference haplotypes), with higher confidence at typed markers and nearby positions due to linkage disequilibrium. The shaded regions highlight untyped markers where imputation was performed. The HMM leverages LD structure in the reference panel to accurately impute most untyped genotypes, with confidence decreasing in regions distant from typed markers.</p></li>
+</ul>
+</section>
+</section>
+<section id="example-2-local-ancestry-inference-with-elai">
+<h2>Example 2: Local Ancestry Inference with ELAI<a class="headerlink" href="#example-2-local-ancestry-inference-with-elai" title="Link to this heading">#</a></h2>
+<p><strong>Problem</strong>: When populations mix through migration and intermarriage, their descendants carry chromosomal segments from different ancestral populations. Given an admixed individual’s genome and reference panels from ancestral populations, can we infer which population each genomic segment originated from?</p>
+<p><strong>ELAI’s Solution</strong>: A two-layer Hidden Markov Model that captures genetic variation at two scales:</p>
+<ol class="arabic simple">
+<li><p><strong>Upper Layer</strong>: Which ancestral <strong>population</strong> (e.g., European vs. African)</p>
+<ul class="simple">
+<li><p>Captures long-range admixture LD (1-10 cM)</p></li>
+</ul>
+</li>
+<li><p><strong>Lower Layer</strong>: Which specific ancestral <strong>haplotype</strong> within that population</p>
+<ul class="simple">
+<li><p>Captures fine-scale within-population LD (0.1-1 cM)</p></li>
+</ul>
+</li>
+</ol>
+<p>This hierarchical structure models both the ancestry switches created by admixture and the haplotype copying process within populations.</p>
+<section id="id1">
+<h3>Step 1: Generate Data<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>We first create reference populations with distinct allele frequencies, then simulate an admixed individual as a mosaic of segments from these populations (mimicking recombination history during admixture).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ls</span><span class="p">())</span>
+<span class="nf">set.seed</span><span class="p">(</span><span class="m">720</span><span class="p">)</span>
+<span class="c1"># Parameters</span>
+<span class="n">n_markers</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">50</span><span class="w">          </span><span class="c1"># Number of SNP markers</span>
+<span class="n">n_ref_haps_per_pop</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="c1"># Reference haplotypes per population</span>
+
+<span class="c1"># Population 1 (e.g., European): lower allele frequencies</span>
+<span class="c1"># Make populations VERY distinct for clear inference</span>
+<span class="n">pop1_freq</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">runif</span><span class="p">(</span><span class="n">n_markers</span><span class="p">,</span><span class="w"> </span><span class="m">0.05</span><span class="p">,</span><span class="w"> </span><span class="m">0.25</span><span class="p">)</span>
+
+<span class="c1"># Population 2 (e.g., African): higher allele frequencies</span>
+<span class="n">pop2_freq</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">runif</span><span class="p">(</span><span class="n">n_markers</span><span class="p">,</span><span class="w"> </span><span class="m">0.75</span><span class="p">,</span><span class="w"> </span><span class="m">0.95</span><span class="p">)</span>
+
+<span class="c1"># Generate reference haplotypes</span>
+<span class="n">ref_pop1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span>
+<span class="w">  </span><span class="nf">rbinom</span><span class="p">(</span><span class="n">n_markers</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n_ref_haps_per_pop</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">prob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="n">pop1_freq</span><span class="p">,</span><span class="w"> </span><span class="n">n_ref_haps_per_pop</span><span class="p">)),</span>
+<span class="w">  </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_markers</span><span class="p">,</span>
+<span class="w">  </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_ref_haps_per_pop</span>
+<span class="p">)</span>
+
+<span class="n">ref_pop2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span>
+<span class="w">  </span><span class="nf">rbinom</span><span class="p">(</span><span class="n">n_markers</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n_ref_haps_per_pop</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">prob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="n">pop2_freq</span><span class="p">,</span><span class="w"> </span><span class="n">n_ref_haps_per_pop</span><span class="p">)),</span>
+<span class="w">  </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_markers</span><span class="p">,</span>
+<span class="w">  </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_ref_haps_per_pop</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simulate true ancestry with random ancestry blocks</span>
+<span class="c1"># Start with all markers from population 1</span>
+<span class="n">true_ancestry</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">n_markers</span><span class="p">)</span>
+
+<span class="c1"># Define ancestry switch points (simulating recombination events)</span>
+<span class="n">switch_rate</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.05</span><span class="w">  </span><span class="c1"># Probability of ancestry switch at each marker</span>
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="n">n_markers</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nf">runif</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">switch_rate</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1"># Switch ancestry</span>
+<span class="w">    </span><span class="n">true_ancestry</span><span class="p">[</span><span class="n">m</span><span class="o">:</span><span class="n">n_markers</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">true_ancestry</span><span class="p">[</span><span class="n">m</span><span class="m">-1</span><span class="p">]</span><span class="w">  </span><span class="c1"># Switch between 1 and 2</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1"># Keep same ancestry as previous marker</span>
+<span class="w">    </span><span class="n">true_ancestry</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">true_ancestry</span><span class="p">[</span><span class="n">m</span><span class="m">-1</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># Generate observed haplotype by copying from appropriate population</span>
+<span class="n">observed_haplotype</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="n">n_markers</span><span class="p">)</span>
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">n_markers</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1"># Select reference panel based on true ancestry</span>
+<span class="w">  </span><span class="n">ref_panel</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">true_ancestry</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="n">ref_pop1</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="n">ref_pop2</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1"># Copy allele from a random haplotype in the reference panel</span>
+<span class="w">  </span><span class="n">donor_hap</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n_ref_haps_per_pop</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+<span class="w">  </span><span class="n">observed_haplotype</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ref_panel</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">donor_hap</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-define-model-parameters-and-probability-functions">
+<h3>Step 2: Define Model Parameters and Probability Functions<a class="headerlink" href="#step-2-define-model-parameters-and-probability-functions" title="Link to this heading">#</a></h3>
+<p>We now set up ELAI’s two-layer HMM by defining the model parameters and the emission/transition probabilities.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># UPPER LAYER: Ancestral populations</span>
+<span class="n">S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">2</span><span class="w">  </span><span class="c1"># Number of populations</span>
+<span class="n">upper_clusters</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">S</span>
+
+<span class="c1"># LOWER LAYER: Ancestral haplotypes within each population</span>
+<span class="n">K</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">4</span><span class="w">  </span><span class="c1"># Total number of lower-layer clusters (2 per population for simplicity)</span>
+
+<span class="c1"># Admixture proportion - based on true ancestry created earlier</span>
+<span class="n">true_admix</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="nf">mean</span><span class="p">(</span><span class="n">true_ancestry</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">true_ancestry</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">2</span><span class="p">))</span>
+<span class="n">admix_proportion</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">true_admix</span><span class="w">  </span><span class="c1"># Use true proportions for better inference</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="allele-frequencies-theta-mk">
+<h4>2.1 Allele Frequencies <span class="math notranslate nohighlight">\(\theta_{mk}\)</span><a class="headerlink" href="#allele-frequencies-theta-mk" title="Link to this heading">#</a></h4>
+<p>Each lower-layer cluster represents an ancestral haplotype with its own allele frequency at each marker. These frequencies determine the emission probabilities.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cluster allele frequencies (theta in ELAI notation)</span>
+<span class="c1"># Clusters 1-2: similar to population 1</span>
+<span class="c1"># Clusters 3-4: similar to population 2</span>
+<span class="c1"># Use very small noise to keep clusters very close to population frequencies</span>
+<span class="n">theta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_markers</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">K</span><span class="p">)</span>
+<span class="n">theta</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pop1_freq</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="n">n_markers</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0.01</span><span class="p">)</span>
+<span class="n">theta</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pop1_freq</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="n">n_markers</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0.01</span><span class="p">)</span>
+<span class="n">theta</span><span class="p">[,</span><span class="w"> </span><span class="m">3</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pop2_freq</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="n">n_markers</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0.01</span><span class="p">)</span>
+<span class="n">theta</span><span class="p">[,</span><span class="w"> </span><span class="m">4</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pop2_freq</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="n">n_markers</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0.01</span><span class="p">)</span>
+<span class="n">theta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">pmax</span><span class="p">(</span><span class="nf">pmin</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="w"> </span><span class="m">0.95</span><span class="p">),</span><span class="w"> </span><span class="m">0.05</span><span class="p">)</span><span class="w">  </span><span class="c1"># Keep in valid range [0.05, 0.95]</span>
+
+<span class="c1"># Add column and row names</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;Cluster&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">K</span><span class="p">)</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;Marker&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">n_markers</span><span class="p">)</span>
+
+<span class="c1"># Show first 5 markers</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Allele frequencies (first 5 markers):\n&quot;</span><span class="p">)</span>
+
+<span class="nf">round</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="p">],</span><span class="w"> </span><span class="m">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Allele frequencies (first 5 markers):
+</pre></div>
+</div>
+<div class="output text_html"><table class="dataframe">
+<caption>A matrix: 5 × 4 of type dbl</caption>
+<thead>
+	<tr><th></th><th scope=col>Cluster1</th><th scope=col>Cluster2</th><th scope=col>Cluster3</th><th scope=col>Cluster4</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>Marker1</th><td>0.096</td><td>0.088</td><td>0.912</td><td>0.941</td></tr>
+	<tr><th scope=row>Marker2</th><td>0.223</td><td>0.229</td><td>0.856</td><td>0.859</td></tr>
+	<tr><th scope=row>Marker3</th><td>0.064</td><td>0.069</td><td>0.797</td><td>0.783</td></tr>
+	<tr><th scope=row>Marker4</th><td>0.104</td><td>0.112</td><td>0.927</td><td>0.943</td></tr>
+	<tr><th scope=row>Marker5</th><td>0.168</td><td>0.182</td><td>0.821</td><td>0.811</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p><strong>Interpretation</strong>: <span class="math notranslate nohighlight">\(\theta_{mk}\)</span> = probability that ancestral haplotype <span class="math notranslate nohighlight">\(k\)</span> carries allele “1” at marker <span class="math notranslate nohighlight">\(m\)</span>.</p>
+</section>
+<section id="beta-beta-sk-layer-connection-matrix">
+<h4>2.2 Beta <span class="math notranslate nohighlight">\(\beta_{sk}\)</span>: Layer Connection Matrix<a class="headerlink" href="#beta-beta-sk-layer-connection-matrix" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\(\beta_{sk}\)</span> connects the two layers - the probability that lower-layer cluster <span class="math notranslate nohighlight">\(k\)</span> belongs to upper-layer population <span class="math notranslate nohighlight">\(s\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Beta: probability that lower cluster k belongs to upper cluster s</span>
+<span class="n">beta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">K</span><span class="p">)</span>
+<span class="n">beta</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.6</span><span class="p">,</span><span class="w"> </span><span class="m">0.4</span><span class="p">)</span><span class="w">  </span><span class="c1"># Pop 1 uses clusters 1 and 2</span>
+<span class="n">beta</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="o">:</span><span class="m">4</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w">  </span><span class="c1"># Pop 2 uses clusters 3 and 4</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">beta</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;Pop&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">S</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">beta</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;Cluster&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">K</span><span class="p">)</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Beta matrix (connection between layers):\n&quot;</span><span class="p">)</span>
+<span class="n">beta</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Beta matrix (connection between layers):
+</pre></div>
+</div>
+<div class="output text_html"><table class="dataframe">
+<caption>A matrix: 2 × 4 of type dbl</caption>
+<thead>
+	<tr><th></th><th scope=col>Cluster1</th><th scope=col>Cluster2</th><th scope=col>Cluster3</th><th scope=col>Cluster4</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>Pop1</th><td>0.6</td><td>0.4</td><td>0.0</td><td>0.0</td></tr>
+	<tr><th scope=row>Pop2</th><td>0.0</td><td>0.0</td><td>0.5</td><td>0.5</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p><strong>Interpretation</strong>: For example, <span class="math notranslate nohighlight">\(\beta_{1,1} = 0.6\)</span> means “if in population 1, 60% chance of copying from lower cluster 1.”</p>
+</section>
+<section id="transition-parameters-j-and-rho">
+<h4>2.3 Transition Parameters <span class="math notranslate nohighlight">\(j\)</span> and <span class="math notranslate nohighlight">\(\rho\)</span><a class="headerlink" href="#transition-parameters-j-and-rho" title="Link to this heading">#</a></h4>
+<p>These parameters control state changes along the chromosome.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.03</span><span class="w">     </span><span class="c1"># Lower-layer switch probability (within-population recombination)</span>
+<span class="w">                </span><span class="c1"># Small value allows stable ancestry blocks</span>
+<span class="n">j_prob</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.01</span><span class="w">  </span><span class="c1"># Upper-layer switch probability (ancestry switch)</span>
+<span class="w">                </span><span class="c1"># Very small to match the rare ancestry switches in the data</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;Transition probabilities:\n&quot;</span><span class="p">))</span>
+<span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot; rho = %.2f  [Lower layer switch - recombination within population]\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">rho</span><span class="p">))</span>
+<span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot; j   = %.2f  [Upper layer switch - ancestry change]\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">j_prob</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Transition probabilities:
+ rho = 0.03  [Lower layer switch - recombination within population]
+ j   = 0.01  [Upper layer switch - ancestry change]
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Interpretation</strong>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(j\)</span> (upper layer): Ancestry switch rate between populations</p></li>
+<li><p><span class="math notranslate nohighlight">\(\rho\)</span> (lower layer): Haplotype switch rate within a population</p></li>
+</ul>
+</section>
+<section id="emission-probability-p-h-m-y-m-k">
+<h4>2.4 Emission Probability <span class="math notranslate nohighlight">\(P(h_m | Y_m = k)\)</span><a class="headerlink" href="#emission-probability-p-h-m-y-m-k" title="Link to this heading">#</a></h4>
+<p>Given ancestral haplotype <span class="math notranslate nohighlight">\(k\)</span>, the observed allele follows a Bernoulli distribution:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+p(h_m | Y_m = k, \theta) = \begin{cases} 
+\theta_{mk} &amp; \text{if } h_m = 1 \\
+1 - \theta_{mk} &amp; \text{if } h_m = 0
+\end{cases}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Emission probability function</span>
+<span class="n">emission_prob</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">h_m</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1"># h_m: observed allele (0 or 1)</span>
+<span class="w">  </span><span class="c1"># k: lower-layer cluster</span>
+<span class="w">  </span><span class="c1"># m: marker position</span>
+<span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">h_m</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">return</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">])</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">return</span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">theta</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">])</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># Example: probability of observing allele 1 at marker 1 from cluster 1</span>
+<span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;Example: P(observe &#39;1&#39; at marker 1 | cluster 1) = %.3f\n&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="nf">emission_prob</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)))</span>
+<span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;Example: P(observe &#39;0&#39; at marker 1 | cluster 1) = %.3f\n&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="nf">emission_prob</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Example: P(observe &#39;1&#39; at marker 1 | cluster 1) = 0.096
+Example: P(observe &#39;0&#39; at marker 1 | cluster 1) = 0.904
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Interpretation</strong>: Once you know which ancestral haplotype you’re copying from, the allele probability is straightforward.</p>
+</section>
+<section id="transition-probability-p-x-m-s-y-m-k-x-m-1-s-y-m-1-k">
+<h4>2.5 Transition Probability <span class="math notranslate nohighlight">\(P(X_m=s, Y_m=k | X_{m-1}=s', Y_{m-1}=k')\)</span><a class="headerlink" href="#transition-probability-p-x-m-s-y-m-k-x-m-1-s-y-m-1-k" title="Link to this heading">#</a></h4>
+<p>ELAI’s key innovation - the transition has <strong>three terms</strong> for different biological scenarios:</p>
+<div class="math notranslate nohighlight">
+\[
+P(X_m=s, Y_m=k | X_{m-1}=s', Y_{m-1}=k') = 
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\underbrace{j \cdot a_s \cdot \beta_{sk}}_{\text{Ancestry switch}} + 
+\underbrace{(1-j) \cdot \rho \cdot \beta_{sk} \cdot I(s=s')}_{\text{Haplotype switch}} + 
+\underbrace{(1-j) \cdot (1-\rho) \cdot I(s=s') \cdot I(k=k')}_{\text{No switch}}
+\]</div>
+<ul class="simple">
+<li><p><strong>Term 1</strong>: Change populations (both layers change)</p></li>
+<li><p><strong>Term 2</strong>: Stay in population, switch haplotypes (only lower layer changes)</p></li>
+<li><p><strong>Term 3</strong>: Continue copying same haplotype (no change)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Transition probability function</span>
+<span class="n">transition_prob</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">s_prev</span><span class="p">,</span><span class="w"> </span><span class="n">k_prev</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1"># s, k: current state (upper cluster, lower cluster)</span>
+<span class="w">  </span><span class="c1"># s_prev, k_prev: previous state</span>
+<span class="w">  </span><span class="c1"># m: marker position</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1"># Term 1: Upper layer switches (both layers must change)</span>
+<span class="w">  </span><span class="n">term1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">j_prob</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">admix_proportion</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta</span><span class="p">[</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">]</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1"># Term 2: Only lower layer switches (upper stays same)</span>
+<span class="w">  </span><span class="n">term2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">j_prob</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rho</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta</span><span class="p">[</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">s_prev</span><span class="p">)</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1"># Term 3: No switches (stay in same state)</span>
+<span class="w">  </span><span class="n">term3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">j_prob</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">rho</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">s_prev</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">k_prev</span><span class="p">)</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="kr">return</span><span class="p">(</span><span class="n">term1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">term2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">term3</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1"># Example: staying in state (1,1)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;Example: P(stay in state (s=1, k=1)) = %.4f\n&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="nf">transition_prob</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">)))</span>
+
+<span class="c1"># Example: switching populations</span>
+<span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;Example: P(switch from (s=1, k=1) to (s=2, k=3)) = %.4f\n&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="nf">transition_prob</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Example: P(stay in state (s=1, k=1)) = 0.9816
+Example: P(switch from (s=1, k=1) to (s=2, k=3)) = 0.0021
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="id2">
+<h3>Step 3: Run Forward-Backward Algorithm<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>We apply the forward-backward algorithm to compute posterior probabilities.</p>
+<section id="forward-probability-alpha-m-s-k">
+<h4>3.1 Forward Probability <span class="math notranslate nohighlight">\(\alpha_m(s,k)\)</span><a class="headerlink" href="#forward-probability-alpha-m-s-k" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[
+\alpha_m(s,k) = P(h_{1:m}, X_m=s, Y_m=k)
+\]</div>
+<p>This is the joint probability of observing markers 1 to <span class="math notranslate nohighlight">\(m\)</span> AND being in state <span class="math notranslate nohighlight">\((s,k)\)</span> at marker <span class="math notranslate nohighlight">\(m\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize forward probabilities</span>
+<span class="n">forward</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">array</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">n_markers</span><span class="p">,</span><span class="w"> </span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="n">K</span><span class="p">))</span>
+
+<span class="c1"># Base case: marker 1</span>
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">S</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">K</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">forward</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">admix_proportion</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta</span><span class="p">[</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>
+<span class="w">                        </span><span class="nf">emission_prob</span><span class="p">(</span><span class="n">observed_haplotype</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Forward algorithm - initialization at marker 1:\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;State (s=1, k=1):&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">forward</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;State (s=2, k=3):&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">forward</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">],</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+
+<span class="c1"># Forward recursion</span>
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="n">n_markers</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">S</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">K</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1"># Sum over all previous states</span>
+<span class="w">      </span><span class="n">sum_val</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span>
+<span class="w">      </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">s_prev</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">S</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">k_prev</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">K</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="n">sum_val</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sum_val</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">            </span><span class="n">forward</span><span class="p">[</span><span class="n">m</span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="n">s_prev</span><span class="p">,</span><span class="w"> </span><span class="n">k_prev</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>
+<span class="w">            </span><span class="nf">transition_prob</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">s_prev</span><span class="p">,</span><span class="w"> </span><span class="n">k_prev</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="n">forward</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">emission_prob</span><span class="p">(</span><span class="n">observed_haplotype</span><span class="p">[</span><span class="n">m</span><span class="p">],</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sum_val</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="c1"># Normalize to prevent underflow</span>
+<span class="w">  </span><span class="n">forward</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">forward</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">forward</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="p">])</span>
+<span class="p">}</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\nForward algorithm completed for all&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n_markers</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;markers\n&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Forward algorithm - initialization at marker 1:
+State (s=1, k=1): 0.3147502 
+State (s=2, k=3): 0.01840828 
+
+Forward algorithm completed for all 50 markers
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Key insight</strong>: Forward probabilities accumulate information from the past.</p>
+</section>
+<section id="backward-probability-beta-m-s-k">
+<h4>3.2 Backward Probability <span class="math notranslate nohighlight">\(\beta_m(s,k)\)</span><a class="headerlink" href="#backward-probability-beta-m-s-k" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[
+\beta_m(s,k) = P(h_{m+1:M} | X_m=s, Y_m=k)
+\]</div>
+<p>This is the probability of observing future markers <span class="math notranslate nohighlight">\((m+1)\)</span> to <span class="math notranslate nohighlight">\(M\)</span> GIVEN state <span class="math notranslate nohighlight">\((s,k)\)</span> at marker <span class="math notranslate nohighlight">\(m\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize backward probabilities</span>
+<span class="n">backward</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">array</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">n_markers</span><span class="p">,</span><span class="w"> </span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="n">K</span><span class="p">))</span>
+
+<span class="c1"># Backward recursion</span>
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="p">(</span><span class="n">n_markers</span><span class="m">-1</span><span class="p">)</span><span class="o">:</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">S</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">K</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">sum_val</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span>
+<span class="w">      </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">s_next</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">S</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">k_next</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">K</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="n">sum_val</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sum_val</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">            </span><span class="nf">transition_prob</span><span class="p">(</span><span class="n">s_next</span><span class="p">,</span><span class="w"> </span><span class="n">k_next</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="m">+1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span>
+<span class="w">            </span><span class="nf">emission_prob</span><span class="p">(</span><span class="n">observed_haplotype</span><span class="p">[</span><span class="n">m</span><span class="m">+1</span><span class="p">],</span><span class="w"> </span><span class="n">k_next</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="m">+1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span>
+<span class="w">            </span><span class="n">backward</span><span class="p">[</span><span class="n">m</span><span class="m">+1</span><span class="p">,</span><span class="w"> </span><span class="n">s_next</span><span class="p">,</span><span class="w"> </span><span class="n">k_next</span><span class="p">]</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="n">backward</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sum_val</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="c1"># Normalize to prevent underflow</span>
+<span class="w">  </span><span class="n">backward</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">backward</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">backward</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="p">])</span>
+<span class="p">}</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Backward algorithm completed for all&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n_markers</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;markers\n&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Backward algorithm completed for all 50 markers
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Key insight</strong>: Backward probabilities accumulate information from the future.</p>
+</section>
+<section id="posterior-probability-p-x-m-s-h-1-m">
+<h4>3.3 Posterior Probability <span class="math notranslate nohighlight">\(P(X_m=s | h_{1:M})\)</span><a class="headerlink" href="#posterior-probability-p-x-m-s-h-1-m" title="Link to this heading">#</a></h4>
+<p>Combining forward and backward:</p>
+<div class="math notranslate nohighlight">
+\[
+P(X_m=s | h_{1:M}) \propto \sum_k \alpha_m(s,k) \cdot \beta_m(s,k)
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute posterior probability: P(X_m = s | observed data)</span>
+<span class="n">posterior_ancestry</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_markers</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">S</span><span class="p">)</span>
+
+<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">n_markers</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">S</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1"># Sum over all lower clusters k</span>
+<span class="w">    </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">K</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">posterior_ancestry</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">posterior_ancestry</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">                                  </span><span class="n">forward</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">backward</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="c1"># Normalize</span>
+<span class="w">  </span><span class="n">posterior_ancestry</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">posterior_ancestry</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">posterior_ancestry</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="p">])</span>
+<span class="p">}</span>
+
+<span class="c1"># Most likely ancestry at each marker</span>
+<span class="n">inferred_ancestry</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="n">posterior_ancestry</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">which.max</span><span class="p">)</span>
+
+<span class="c1"># Calculate accuracy</span>
+<span class="n">accuracy</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">inferred_ancestry</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">true_ancestry</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">n_markers</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\n=================================================================\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;LOCAL ANCESTRY INFERENCE RESULTS\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;=================================================================\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;\nAccuracy: %.1f%% of markers correctly assigned\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">accuracy</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">100</span><span class="p">))</span>
+
+<span class="c1"># Estimated vs true admixture proportions</span>
+<span class="n">estimated_admix</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">colMeans</span><span class="p">(</span><span class="n">posterior_ancestry</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\nGlobal Admixture Proportions:\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;  Population 1: True = %.2f, Estimated = %.2f\n&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">            </span><span class="nf">mean</span><span class="p">(</span><span class="n">true_ancestry</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">estimated_admix</span><span class="p">[</span><span class="m">1</span><span class="p">]))</span>
+<span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;  Population 2: True = %.2f, Estimated = %.2f\n&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">            </span><span class="nf">mean</span><span class="p">(</span><span class="n">true_ancestry</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">estimated_admix</span><span class="p">[</span><span class="m">2</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=================================================================
+LOCAL ANCESTRY INFERENCE RESULTS
+=================================================================
+
+Accuracy: 96.0% of markers correctly assigned
+
+Global Admixture Proportions:
+  Population 1: True = 0.58, Estimated = 0.62
+  Population 2: True = 0.42, Estimated = 0.38
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="id3">
+<h3>Step 4: Results<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>The posterior probability <span class="math notranslate nohighlight">\(P(X_m=s | \text{all data})\)</span> quantifies confidence in each ancestry assignment.</p>
+<p>The four panels show the complete inference pipeline:</p>
+<ul class="simple">
+<li><p><strong>Panel A</strong>: Observed haplotype (raw data)</p></li>
+<li><p><strong>Panel B</strong>: Population allele frequencies (model input)</p></li>
+<li><p><strong>Panel C</strong>: True local ancestry (ground truth)</p></li>
+<li><p><strong>Panel D</strong>: Inferred ancestry with uncertainty (HMM output)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">))</span>
+
+<span class="c1"># Panel 1: Observed haplotype</span>
+<span class="nf">plot</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n_markers</span><span class="p">,</span><span class="w"> </span><span class="n">observed_haplotype</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;h&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;darkgray&quot;</span><span class="p">,</span>
+<span class="w">     </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Marker position&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Allele&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">     </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Panel A: Observed Admixed Haplotype&quot;</span><span class="p">,</span>
+<span class="w">     </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-0.1</span><span class="p">,</span><span class="w"> </span><span class="m">1.1</span><span class="p">))</span>
+<span class="nf">text</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">0.9</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Allele values\n(0 or 1)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">)</span>
+
+<span class="c1"># Panel 2: Allele frequency comparison</span>
+<span class="nf">plot</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n_markers</span><span class="p">,</span><span class="w"> </span><span class="n">pop1_freq</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;l&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">     </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Marker position&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">     </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Allele frequency&quot;</span><span class="p">,</span>
+<span class="w">     </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Panel B: Population Allele Frequencies&quot;</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n_markers</span><span class="p">,</span><span class="w"> </span><span class="n">pop2_freq</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">)</span>
+<span class="nf">legend</span><span class="p">(</span><span class="s">&quot;topright&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Population 1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Population 2&quot;</span><span class="p">),</span><span class="w"> </span>
+<span class="w">       </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+<span class="nf">text</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;Mean difference: %.2f\n(Larger = easier inference)&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                     </span><span class="nf">mean</span><span class="p">(</span><span class="n">pop2_freq</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">pop1_freq</span><span class="p">)),</span><span class="w"> </span><span class="n">adj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">)</span>
+
+<span class="c1"># Panel 3: True ancestry</span>
+<span class="nf">plot</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n_markers</span><span class="p">,</span><span class="w"> </span><span class="n">true_ancestry</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;darkgreen&quot;</span><span class="p">,</span>
+<span class="w">     </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Marker position&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Ancestry&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">     </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Panel C: True Local Ancestry (What We Want to Infer)&quot;</span><span class="p">,</span>
+<span class="w">     </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="m">2.5</span><span class="p">),</span><span class="w"> </span><span class="n">yaxt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;n&quot;</span><span class="p">)</span>
+<span class="nf">axis</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Pop 1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Pop 2&quot;</span><span class="p">))</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;gray&quot;</span><span class="p">)</span>
+<span class="nf">grid</span><span class="p">()</span>
+<span class="c1"># Add ancestry block labels</span>
+<span class="nf">text</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1.2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Pop 1&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.9</span><span class="p">)</span>
+<span class="nf">text</span><span class="p">(</span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">2.2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Pop 2&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.9</span><span class="p">)</span>
+<span class="nf">text</span><span class="p">(</span><span class="m">40</span><span class="p">,</span><span class="w"> </span><span class="m">1.2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Pop 1&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.9</span><span class="p">)</span>
+
+<span class="c1"># Panel 4: Inferred ancestry with uncertainty</span>
+<span class="nf">plot</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n_markers</span><span class="p">,</span><span class="w"> </span><span class="n">posterior_ancestry</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;l&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;blue&quot;</span><span class="p">,</span>
+<span class="w">     </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Marker position&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;P(Population)&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">     </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Panel D: Inferred Local Ancestry (HMM Posterior Probability)&quot;</span><span class="p">,</span>
+<span class="w">     </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">))</span>
+<span class="nf">lines</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n_markers</span><span class="p">,</span><span class="w"> </span><span class="n">posterior_ancestry</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">)</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;black&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+<span class="nf">legend</span><span class="p">(</span><span class="s">&quot;topright&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">       </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;P(Pop 1)&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;P(Pop 2)&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Decision boundary&quot;</span><span class="p">),</span><span class="w"> </span>
+<span class="w">       </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;black&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">))</span>
+<span class="c1"># Shade regions by most likely ancestry</span>
+<span class="nf">polygon</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n_markers</span><span class="p">,</span><span class="w"> </span><span class="n">n_markers</span><span class="o">:</span><span class="m">1</span><span class="p">),</span><span class="w"> </span>
+<span class="w">        </span><span class="nf">c</span><span class="p">(</span><span class="n">posterior_ancestry</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">n_markers</span><span class="p">)),</span>
+<span class="w">        </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rgb</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0.2</span><span class="p">),</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span>
+<span class="nf">polygon</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n_markers</span><span class="p">,</span><span class="w"> </span><span class="n">n_markers</span><span class="o">:</span><span class="m">1</span><span class="p">),</span><span class="w"> </span>
+<span class="w">        </span><span class="nf">c</span><span class="p">(</span><span class="n">posterior_ancestry</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">n_markers</span><span class="p">)),</span>
+<span class="w">        </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rgb</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0.2</span><span class="p">),</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span>
+<span class="nf">text</span><span class="p">(</span><span class="m">30</span><span class="p">,</span><span class="w"> </span><span class="m">0.9</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;High confidence in Pop 1&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
+<span class="nf">text</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">0.9</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;High confidence in Pop 2&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/f1568ebb6f1b2be335b587235d491ebccc6ee81413454ad52774e8d277408a3d.png"><img alt="_images/f1568ebb6f1b2be335b587235d491ebccc6ee81413454ad52774e8d277408a3d.png" src="_images/f1568ebb6f1b2be335b587235d491ebccc6ee81413454ad52774e8d277408a3d.png" style="width: 420px; height: 420px;" />
+</a>
+</div>
+</div>
+<p>The results show successful local ancestry inference. Panel D’s posterior probabilities closely track the true ancestry (Panel C), with high confidence in most regions and uncertainty only near ancestry switches. The model accurately estimates global admixture proportions and achieves high per-marker accuracy by leveraging population allele frequency differences (Panel B) and LD structure.</p>
+<p><strong>Note on implementation</strong>: This example uses known parameters for clarity. The actual ELAI method uses an Expectation-Maximization (EM) algorithm to iteratively estimate parameters from data, alternating between computing posteriors (E-step) and updating parameters (M-step).</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="extended-reading">
+<h1>Extended Reading<a class="headerlink" href="#extended-reading" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Both ELAI and RFMix are local ancestry inference tools used in population genetics to identify ancestry along chromosomes in admixed individuals. In contrast to ELAI’s two-layer hidden Markov model, RFMix employs a discriminative approach using random forests combined with a conditional random field framework for ancestry inference.</p>
+<ul>
+<li><p>Guan, Yongtao. <a class="reference external" href="https://academic.oup.com/genetics/article/196/3/625/5935669?login=true">“Detecting structure of haplotypes and local ancestry.”</a> Genetics 196.3 (2014): 625-642.</p></li>
+<li><p>Maples, Brian K., et al. <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0002929713002899?via%3Dihub">“RFMix: a discriminative modeling approach for rapid and robust local-ancestry inference.”</a> The American Journal of Human Genetics 93.2 (2013): 278-288.</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="http://stephens999.github.io/fiveMinuteStats/hmm.html">A technical minimum example of HMM</a> from Matthew Stephens</p></li>
+<li><p>More about genotype imputation: Section 3.2: Genotype imputation from <a class="reference external" href="https://www.wiley.com/en-us/Handbook+of+Statistical+Genomics%2C+4th+Edition-p-9781119429142">Handbook of Statistical Genomics, 4th edition, by David J. Balding</a>, especially Figure 3.4.</p></li>
+</ul>
 </section>
 
     <script type="text/x-thebe-config">
@@ -664,11 +1719,57 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Hidden Markov Model (HMM)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Hidden Markov Model</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-summary">Graphical Summary</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markov-chain">Markov Chain</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inference-problem">Inference Problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-probability">Forward Probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-probability">Backward Probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-distribution">Posterior Distribution</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-genotype-imputation">Example 1: Genotype Imputation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-generate-data">Step 1: Generate Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-define-hmm-parameters">Step 2: Define HMM Parameters</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transition-probability-p-z-m-k-z-m-1-j">2.1 Transition Probability <span class="math notranslate nohighlight">\(P(Z_m = k | Z_{m-1} = j)\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#emission-probability-p-x-m-x-z-m-k">2.2 Emission Probability <span class="math notranslate nohighlight">\(P(X_m = x | Z_m = k)\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-run-forward-backward-algorithm">Step 3: Run Forward-Backward Algorithm</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-probability-alpha-m-k">3.1 Forward Probability <span class="math notranslate nohighlight">\(\alpha_m(k)\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-probability-beta-m-k">3.2 Backward Probability <span class="math notranslate nohighlight">\(\beta_m(k)\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-posterior-and-impute-genotypes">3.3 Compute Posterior and Impute Genotypes</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-results">Step 4: Results</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-local-ancestry-inference-with-elai">Example 2: Local Ancestry Inference with ELAI</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Step 1: Generate Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-define-model-parameters-and-probability-functions">Step 2: Define Model Parameters and Probability Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#allele-frequencies-theta-mk">2.1 Allele Frequencies <span class="math notranslate nohighlight">\(\theta_{mk}\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#beta-beta-sk-layer-connection-matrix">2.2 Beta <span class="math notranslate nohighlight">\(\beta_{sk}\)</span>: Layer Connection Matrix</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transition-parameters-j-and-rho">2.3 Transition Parameters <span class="math notranslate nohighlight">\(j\)</span> and <span class="math notranslate nohighlight">\(\rho\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#emission-probability-p-h-m-y-m-k">2.4 Emission Probability <span class="math notranslate nohighlight">\(P(h_m | Y_m = k)\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transition-probability-p-x-m-s-y-m-k-x-m-1-s-y-m-1-k">2.5 Transition Probability <span class="math notranslate nohighlight">\(P(X_m=s, Y_m=k | X_{m-1}=s', Y_{m-1}=k')\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Step 3: Run Forward-Backward Algorithm</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-probability-alpha-m-s-k">3.1 Forward Probability <span class="math notranslate nohighlight">\(\alpha_m(s,k)\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-probability-beta-m-s-k">3.2 Backward Probability <span class="math notranslate nohighlight">\(\beta_m(s,k)\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-probability-p-x-m-s-h-1-m">3.3 Posterior Probability <span class="math notranslate nohighlight">\(P(X_m=s | h_{1:M})\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Step 4: Results</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#extended-reading">Extended Reading</a></li>
 </ul>
 
   </nav></div>

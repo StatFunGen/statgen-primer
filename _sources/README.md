@@ -16,6 +16,7 @@ The goal is to bridge the knowledge gap between these existing backgrounds and t
 | | Between individuals | [Genetic Relationship Matrix](https://statfungen.github.io/statgen-primer/genetic_relationship_matrix.html) |
 | | Between variables | [Factor Analysis](https://statfungen.github.io/statgen-primer/factor_analysis.html) |
 | | | [Principal Component Analysis](https://statfungen.github.io/statgen-primer/principal_component_analysis.html) |
+| | | [Hidden Markov Model](https://statfungen.github.io/statgen-primer/hidden_Markov_model.html) |
 | **Genetic Associations** | Basic model | [Ordinary Least Squares](https://statfungen.github.io/statgen-primer/ordinary_least_squares.html) |
 | | Extend to binary outcome | [Odds Ratio](https://statfungen.github.io/statgen-primer/odds_ratio.html) |
 | | Extend to multiple variables| [Marginal vs. Joint Effects](https://statfungen.github.io/statgen-primer/marginal_joint_effects.html) |

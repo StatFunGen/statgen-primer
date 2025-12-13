@@ -80,5 +80,3 @@ parts:
       - file: principal_component_analysis
       - file: hidden_Markov_model
       
-  - caption: Population Genetics Theories
-

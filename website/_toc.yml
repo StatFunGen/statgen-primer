@@ -9,7 +9,7 @@ parts:
       - file: notations
       - file: popular_topics
   
-  - caption: Human Genetics Concepts
+  - caption: Basic Genetics Concepts
     chapters:
       - file: genotype_coding
       - file: minor_allele_frequency

@@ -24,12 +24,6 @@ parts:
     chapters:
       - file: genetic_relationship_matrix
   
-  - caption: Latent Structures in Data
-    chapters:
-      - file: factor_analysis
-      - file: principal_component_analysis
-      - file: hidden_Markov_model
-      
   - caption: Fixed Effects Models
     chapters:
       - file: ordinary_least_squares
@@ -62,7 +56,14 @@ parts:
       - file: likelihood
       - file: maximum_likelihood_estimation
       - file: likelihood_ratio
+      - file: expectation_maximum
   
+  - caption: Latent Structures in Data
+    chapters:
+      - file: factor_analysis
+      - file: principal_component_analysis
+      - file: hidden_Markov_model
+
   - caption: Bayesian Versus Frequentist
     chapters: 
       - file: Bayesian_frequentist

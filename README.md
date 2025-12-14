@@ -14,9 +14,6 @@ The goal is to bridge the knowledge gap between these existing backgrounds and t
 | **Correlation** | Between variants | [Linkage Disequilibrium](https://statfungen.github.io/statgen-primer/linkage_disequilibrium.html) |
 | | | [Linkage Disequilibrium Score](https://statfungen.github.io/statgen-primer/linkage_disequilibrium_score.html) |
 | | Between individuals | [Genetic Relationship Matrix](https://statfungen.github.io/statgen-primer/genetic_relationship_matrix.html) |
-| | Between variables | [Factor Analysis](https://statfungen.github.io/statgen-primer/factor_analysis.html) |
-| | | [Principal Component Analysis](https://statfungen.github.io/statgen-primer/principal_component_analysis.html) |
-| | | [Hidden Markov Model](https://statfungen.github.io/statgen-primer/hidden_Markov_model.html) |
 | **Genetic Associations** | Basic model | [Ordinary Least Squares](https://statfungen.github.io/statgen-primer/ordinary_least_squares.html) |
 | | Extend to binary outcome | [Odds Ratio](https://statfungen.github.io/statgen-primer/odds_ratio.html) |
 | | Extend to multiple variables| [Marginal vs. Joint Effects](https://statfungen.github.io/statgen-primer/marginal_joint_effects.html) |
@@ -29,9 +26,13 @@ The goal is to bridge the knowledge gap between these existing backgrounds and t
 | | | [Mediator](https://statfungen.github.io/statgen-primer/mediator.html) |
 | | Multiple studies | [Meta Analysis Fixed Effect](https://statfungen.github.io/statgen-primer/meta_analysis_fixed_effect.html) |
 | | | [Meta Analysis Random Effect](https://statfungen.github.io/statgen-primer/meta_analysis_random_effect.html) |
-| **Statistical Inference** | Likelihood and MLE | [Likelihood](https://statfungen.github.io/statgen-primer/likelihood.html) |
+| **Statistical Inference** | Likelihood| [Likelihood](https://statfungen.github.io/statgen-primer/likelihood.html) |
 | | | [Maximum Likelihood Estimation](https://statfungen.github.io/statgen-primer/maximum_likelihood_estimation.html) |
-| | LR and LRT | [Likelihood Ratio](https://statfungen.github.io/statgen-primer/likelihood_ratio.html) |
+| | | [Likelihood Ratio](https://statfungen.github.io/statgen-primer/likelihood_ratio.html) |
+| | | [Expectation-Maximum Algorithm](https://statfungen.github.io/statgen-primer/expectation_maximum.html) |
+| | Latent Structures in Data | [Factor Analysis](https://statfungen.github.io/statgen-primer/factor_analysis.html) |
+| | | [Principal Component Analysis](https://statfungen.github.io/statgen-primer/principal_component_analysis.html) |
+| | | [Hidden Markov Model](https://statfungen.github.io/statgen-primer/hidden_Markov_model.html) |
 | | Bayesian versus Frequentist | [Bayesian and Frequentist](https://statfungen.github.io/statgen-primer/Bayesian_frequentist.html) |
 | | | [Bayes Rule](https://statfungen.github.io/statgen-primer/Bayes_rule.html) |
 | | | [Bayes Factor](https://statfungen.github.io/statgen-primer/Bayes_factor.html) |

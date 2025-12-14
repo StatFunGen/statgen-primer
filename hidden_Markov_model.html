@@ -328,6 +328,12 @@
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="expectation_maximum.html">Expectation-Maximum Algorithm</a></li>
+
+
+
+
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayesian Versus Frequentist</span></p>
 <ul class="nav bd-sidenav">
@@ -650,6 +656,7 @@ document.write(`
 \mathbb{P}(z_t, x_{1:T}) = \underbrace{\mathbb{P}(z_t, x_{1:t})}_{\text{past}} \times \underbrace{\mathbb{P}(x_{t+1:T} | z_t)}_{\text{future}}
 \]</div>
 <p>The forward-backward algorithm (introduced in the next section) exploits this factorization: instead of considering all <span class="math notranslate nohighlight">\(K^T\)</span> possible state sequences at once, we solve two simpler subproblems (forward and backward passes) and combine their results.</p>
+<p><strong>Our inference goal</strong> is to compute <span class="math notranslate nohighlight">\(\mathbb{P}(z_t | x_{1:T})\)</span> for each time point <span class="math notranslate nohighlight">\(t\)</span> using Bayes rule: <span class="math notranslate nohighlight">\(\mathbb{P}(z_t | x_{1:T}) \propto \mathbb{P}(z_t, x_{1:T})\)</span>, which gives us the posterior probability distribution over hidden states given all available observations.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="technical-details">
 <h1>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading">#</a></h1>
@@ -718,6 +725,7 @@ document.write(`
 <ul class="simple">
 <li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/minor_allele_frequency.html">minor allele frequency</a></p></li>
 <li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/likelihood.html">likelihood</a></p></li>
+<li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/expectation_maximum.html">expectation-maximum algorithm</a></p></li>
 </ul>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="example">

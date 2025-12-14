@@ -760,6 +760,7 @@ Number of errors introduced: 494
 </section>
 <section id="error-model">
 <h3>Error Model<a class="headerlink" href="#error-model" title="Link to this heading">#</a></h3>
+<p>The error model assumes that with probability <span class="math notranslate nohighlight">\(\epsilon\)</span>, a genotyping error occurs and the observed genotype is randomly assigned to {0, 1, 2} with equal probability <span class="math notranslate nohighlight">\(\frac{1}{3}\)</span> each. When the true genotype is <span class="math notranslate nohighlight">\(j\)</span>, observing the correct genotype <span class="math notranslate nohighlight">\(j\)</span> can happen two ways: no error (probability <span class="math notranslate nohighlight">\(1-\epsilon\)</span>) or an error that randomly lands on <span class="math notranslate nohighlight">\(j\)</span> (probability <span class="math notranslate nohighlight">\(\epsilon \times \frac{1}{3}\)</span>), giving total probability <span class="math notranslate nohighlight">\(1 - \frac{2\epsilon}{3}\)</span>. Observing an incorrect genotype <span class="math notranslate nohighlight">\(k \neq j\)</span> only happens through errors, with probability <span class="math notranslate nohighlight">\(\frac{\epsilon}{3}\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 p(d_i = k \mid g_i = j, \epsilon) = \begin{cases}

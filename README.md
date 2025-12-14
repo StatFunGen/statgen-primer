@@ -26,7 +26,7 @@ The goal is to bridge the knowledge gap between these existing backgrounds and t
 | | | [Mediator](https://statfungen.github.io/statgen-primer/mediator.html) |
 | | Multiple studies | [Meta Analysis Fixed Effect](https://statfungen.github.io/statgen-primer/meta_analysis_fixed_effect.html) |
 | | | [Meta Analysis Random Effect](https://statfungen.github.io/statgen-primer/meta_analysis_random_effect.html) |
-| **Statistical Inference** | Likelihood| [Likelihood](https://statfungen.github.io/statgen-primer/likelihood.html) |
+| **Statistical Inference** | Likelihood | [Likelihood](https://statfungen.github.io/statgen-primer/likelihood.html) |
 | | | [Maximum Likelihood Estimation](https://statfungen.github.io/statgen-primer/maximum_likelihood_estimation.html) |
 | | | [Likelihood Ratio](https://statfungen.github.io/statgen-primer/likelihood_ratio.html) |
 | | | [Expectation-Maximum Algorithm](https://statfungen.github.io/statgen-primer/expectation_maximum.html) |

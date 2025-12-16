@@ -181,6 +181,7 @@
 
 
 
+
 <li class="toctree-l1"><a class="reference internal" href="minor_allele_frequency.html">Minor Allele Frequency</a></li>
 
 
@@ -188,6 +189,7 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="Hardy_Weinberg_equilibrium.html">Hardy-Weinberg Equilibrium</a></li>
+
 
 
 
@@ -298,7 +300,7 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="meta_analysis_random_effects.html">Meta-Analysis Random Effects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="meta_analysis_random_effect.html">Meta-Analysis Random Effect</a></li>
 
 
 
@@ -338,7 +340,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayesian Versus Frequentist</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Bayesian_frequentist.html">Bayesian and Frequentist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bayesian_versus_frequentist.html">Bayesian versus Frequentist</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bayes_rule.html">Bayes Rule</a></li>
 
 
@@ -352,7 +354,7 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="p_value.html">p-value and Bayesian Hypothesis Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p_value_and_Bayesian_hypothesis_testing.html">p-value and Bayesian Hypothesis Testing</a></li>
 
 
 
@@ -611,8 +613,8 @@ document.write(`
 \]</div>
 <p>Where:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(w_k\)</span> is the weight associated with model <span class="math notranslate nohighlight">\(M_k\)</span>, which reflects how likely or good the model is at describing the data.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\hat{y}^*_k\)</span> is the prediction made by model <span class="math notranslate nohighlight">\(M_k\)</span> for the new data point.</p></li>
+<li><p><span class="math notranslate nohighlight">\(w_k\)</span> is the weight associated with model <span class="math notranslate nohighlight">\(M_k\)</span>, which reflects how likely or good the model is at describing the data</p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{y}^*_k\)</span> is the prediction made by model <span class="math notranslate nohighlight">\(M_k\)</span> for the new data point</p></li>
 </ul>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="technical-details">
@@ -623,8 +625,8 @@ document.write(`
 <ol class="arabic">
 <li><p><strong>Bayesian Model Averaging (BMA)</strong>: In the Bayesian framework, the weights correspond to the posterior model probabilities, i.e., the probability of each model given the data:</p>
 <div class="math notranslate nohighlight">
-\[ 
-   w_k = P(M_k | D) 
+\[
+   w_k = P(M_k | D)
    \]</div>
 <p>Where <span class="math notranslate nohighlight">\(P(M_k | D)\)</span> is the posterior probability of model <span class="math notranslate nohighlight">\(M_k\)</span> given the observed data <span class="math notranslate nohighlight">\(D\)</span>.</p>
 </li>
@@ -632,8 +634,8 @@ document.write(`
 </ol>
 <p><strong>Akaike Information Criterion (AIC) or Bayesian Information Criterion (BIC)</strong>: In a frequentist context, the weights are often computed based on the relative likelihood of each model, using information criteria like AIC or BIC. The models with lower AIC/BIC values are considered to be more likely and receive higher weights.</p>
 <div class="math notranslate nohighlight">
-\[ 
-   w_k = \frac{e^{-\frac{1}{2} \Delta \text{AIC}_k}}{\sum_{j=1}^K e^{-\frac{1}{2} \Delta \text{AIC}_j}} 
+\[
+   w_k = \frac{e^{-\frac{1}{2} \Delta \text{AIC}_k}}{\sum_{j=1}^K e^{-\frac{1}{2} \Delta \text{AIC}_j}}
    \]</div>
 <p>Where <span class="math notranslate nohighlight">\(\Delta \text{AIC}_k = \text{AIC}_k - \min(\text{AIC})\)</span>, and <span class="math notranslate nohighlight">\(\text{AIC}_k\)</span> is the AIC of model <span class="math notranslate nohighlight">\(k\)</span>.</p>
 </section>
@@ -641,16 +643,16 @@ document.write(`
 <h2>Why Model Averaging Works<a class="headerlink" href="#why-model-averaging-works" title="Link to this heading">#</a></h2>
 <p>BMA accounts for the uncertainty involved in selecting the model, <strong>preserving the uncertainty about models</strong>.</p>
 <ol class="arabic simple">
-<li><p><strong>Reduced Risk of Overfitting</strong>: By averaging over multiple models, we avoid overfitting to any one model. Even if one model fits the training data well but fails to generalize, other models can provide complementary information, reducing the overall risk of overfitting.</p></li>
-<li><p><strong>Improved Accuracy</strong>: If models make different types of errors, combining their predictions can reduce the variance and bias, leading to more accurate predictions.</p></li>
-<li><p><strong>Incorporating Model Uncertainty</strong>: In cases where model uncertainty is high, model averaging incorporates this uncertainty by using multiple models and averaging their predictions, rather than relying on a single model.</p></li>
+<li><p><strong>Reduced Risk of Overfitting</strong>: By averaging over multiple models, we avoid overfitting to any one model. Even if one model fits the training data well but fails to generalize, other models can provide complementary information, reducing the overall risk of overfitting</p></li>
+<li><p><strong>Improved Accuracy</strong>: If models make different types of errors, combining their predictions can reduce the variance and bias, leading to more accurate predictions</p></li>
+<li><p><strong>Incorporating Model Uncertainty</strong>: In cases where model uncertainty is high, model averaging incorporates this uncertainty by using multiple models and averaging their predictions, rather than relying on a single model</p></li>
 </ol>
 <ul class="simple">
 <li><p><strong>Advantages of BMA</strong></p>
 <ul>
-<li><p>Accounts for model uncertainty, leading to more robust inference.</p></li>
-<li><p>Prevents overconfidence in a single model when multiple models have similar posterior probabilities.</p></li>
-<li><p>Helps mitigate overfitting, especially with limited data.</p></li>
+<li><p>Accounts for model uncertainty, leading to more robust inference</p></li>
+<li><p>Prevents overconfidence in a single model when multiple models have similar posterior probabilities</p></li>
+<li><p>Helps mitigate overfitting, especially with limited data</p></li>
 </ul>
 </li>
 </ul>
@@ -661,10 +663,10 @@ document.write(`
 <p>We will introduce the concept of Bayesian Model Averaging (BMA) by considering a situation with a single SNP and two traits: height and weight. We define four models, where the SNP may or may not affect height and/or weight:</p>
 <p>Here we are trying to average the estimated effect sizes of the SNP on both height and weight across multiple possible models where the SNP may:</p>
 <ul class="simple">
-<li><p>Have no effect on either trait (<code class="docutils literal notranslate"><span class="pre">Model</span> <span class="pre">1</span></code>).</p></li>
-<li><p>Affect height only (<code class="docutils literal notranslate"><span class="pre">Model</span> <span class="pre">2</span></code>).</p></li>
-<li><p>Affect weight only (<code class="docutils literal notranslate"><span class="pre">Model</span> <span class="pre">3</span></code>).</p></li>
-<li><p>Affect both height and weight (<code class="docutils literal notranslate"><span class="pre">Model</span> <span class="pre">4</span></code>), capturing pleiotropy.</p></li>
+<li><p>Have no effect on either trait (<code class="docutils literal notranslate"><span class="pre">Model</span> <span class="pre">1</span></code>)</p></li>
+<li><p>Affect height only (<code class="docutils literal notranslate"><span class="pre">Model</span> <span class="pre">2</span></code>)</p></li>
+<li><p>Affect weight only (<code class="docutils literal notranslate"><span class="pre">Model</span> <span class="pre">3</span></code>)</p></li>
+<li><p>Affect both height and weight (<code class="docutils literal notranslate"><span class="pre">Model</span> <span class="pre">4</span></code>), capturing pleiotropy</p></li>
 </ul>
 <p>Specifically, it’s calculating:</p>
 <ul class="simple">

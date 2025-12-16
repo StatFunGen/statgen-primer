@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>template &#8212; Statistical backgrounds for genetics trainees</title>
+    <title>Bayesian versus Frequentist &#8212; Statistical backgrounds for genetics trainees</title>
   
   
   
@@ -57,9 +57,11 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'template';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Bayesian_versus_frequentist';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Bayes Rule" href="Bayes_rule.html" />
+    <link rel="prev" title="Expectation-Maximum Algorithm" href="expectation_maximum.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -122,8 +124,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -179,6 +179,7 @@
 
 
 
+
 <li class="toctree-l1"><a class="reference internal" href="minor_allele_frequency.html">Minor Allele Frequency</a></li>
 
 
@@ -186,6 +187,7 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="Hardy_Weinberg_equilibrium.html">Hardy-Weinberg Equilibrium</a></li>
+
 
 
 
@@ -296,7 +298,7 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="meta_analysis_random_effects.html">Meta-Analysis Random Effects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="meta_analysis_random_effect.html">Meta-Analysis Random Effect</a></li>
 
 
 
@@ -335,8 +337,8 @@
 
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayesian Versus Frequentist</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Bayesian_frequentist.html">Bayesian and Frequentist</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Bayesian versus Frequentist</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bayes_rule.html">Bayes Rule</a></li>
 
 
@@ -350,7 +352,7 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="p_value.html">p-value and Bayesian Hypothesis Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p_value_and_Bayesian_hypothesis_testing.html">p-value and Bayesian Hypothesis Testing</a></li>
 
 
 
@@ -470,7 +472,7 @@
       
       
       
-      <li><a href="_sources/template.ipynb" target="_blank"
+      <li><a href="_sources/Bayesian_versus_frequentist.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -541,9 +543,7 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+
 </div></div>
       
     </div>
@@ -554,27 +554,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>template</h1>
+    <h1>Bayesian versus Frequentist</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">template</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuitional-description">Intuitional Description</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-summary">Graphical Summary</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -584,36 +568,12 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="template">
-<h1>template<a class="headerlink" href="#template" title="Link to this heading">#</a></h1>
-<section id="intuitional-description">
-<h2>Intuitional Description<a class="headerlink" href="#intuitional-description" title="Link to this heading">#</a></h2>
-<p>Genotype coding converts DNA nucleotide pairs into numerical values for statistical analysis, with the additive model being particularly valuable because genetic effects often accumulate proportionally with each additional copy of a variant.</p>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="graphical-summary">
-<h1>Graphical Summary<a class="headerlink" href="#graphical-summary" title="Link to this heading">#</a></h1>
-<p><img alt="fig" src="cartoons/fig.svg" /></p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="key-formula">
-<h1>Key Formula<a class="headerlink" href="#key-formula" title="Link to this heading">#</a></h1>
-<p>key formula sentence</p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="technical-details">
-<h1>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading">#</a></h1>
-<p>techinical details here</p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="example">
-<h1>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
-<p>Let’s illustrate how we encode genotypes using different models and standardize them. We’ll start with the raw allele counts and demonstrate the process step by step.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clear the environment</span>
-<span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ls</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="bayesian-versus-frequentist">
+<h1>Bayesian versus Frequentist<a class="headerlink" href="#bayesian-versus-frequentist" title="Link to this heading">#</a></h1>
+<blockquote>
+<div><p>Being a Frequentist is all about evaluating what happens if I do this procedure in long-run practice across a population of situations, and choosing procedures that work well across this population; then, when faced with one real situation, assume that this one situation is randomly drawn from all possible situations; subtleties involve conditioning on observed aspects of the real situation to choose more apposite procedures. Bayesians attempt to condition on everything that is known, implying that everything that is unknown has a distribution.</p>
+<p>Quote from Donald Rubin, personal communication, March 21 2025</p>
+</div></blockquote>
 </section>
 
     <script type="text/x-thebe-config">
@@ -646,35 +606,30 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="expectation_maximum.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Expectation-Maximum Algorithm</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Bayes_rule.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Bayes Rule</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">template</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuitional-description">Intuitional Description</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-summary">Graphical Summary</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
-</ul>
-
-  </nav></div>
-
-</div></div>
               
             
           </div>

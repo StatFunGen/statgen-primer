@@ -181,6 +181,7 @@
 
 
 
+
 <li class="toctree-l1"><a class="reference internal" href="minor_allele_frequency.html">Minor Allele Frequency</a></li>
 
 
@@ -188,6 +189,7 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="Hardy_Weinberg_equilibrium.html">Hardy-Weinberg Equilibrium</a></li>
+
 
 
 
@@ -298,7 +300,7 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="meta_analysis_random_effects.html">Meta-Analysis Random Effects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="meta_analysis_random_effect.html">Meta-Analysis Random Effect</a></li>
 
 
 
@@ -338,7 +340,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayesian Versus Frequentist</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Bayesian_frequentist.html">Bayesian and Frequentist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bayesian_versus_frequentist.html">Bayesian versus Frequentist</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bayes_rule.html">Bayes Rule</a></li>
 
 
@@ -352,7 +354,7 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="p_value.html">p-value and Bayesian Hypothesis Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p_value_and_Bayesian_hypothesis_testing.html">p-value and Bayesian Hypothesis Testing</a></li>
 
 
 
@@ -609,18 +611,18 @@ document.write(`
 \]</div>
 <p>where:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is the centered genotype matrix.</p></li>
-<li><p><span class="math notranslate nohighlight">\(N\)</span> is the number of individuals.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is the centered genotype matrix</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span> is the number of individuals</p></li>
 </ul>
 <p>When <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is scaled, the covariance matrix is the same as correlation matrix.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="technical-details">
 <h1>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading">#</a></h1>
-<p>Each element in <span class="math notranslate nohighlight">\(\mathbf{R}\)</span> can be denoted as <span class="math notranslate nohighlight">\(r\)</span> where <span class="math notranslate nohighlight">\(r\)</span> is the correlation between two variants, ranging from -1 to 1. If it is 1 or -1, it means that the two variants are in <strong>perfect LD</strong> (markers are perfect proxies for each other). If <span class="math notranslate nohighlight">\(r^2=0\)</span>, it indicates that no association between markers.</p>
+<p>Each element in <span class="math notranslate nohighlight">\(\mathbf{R}\)</span> can be denoted as <span class="math notranslate nohighlight">\(r_{ij}\)</span>, the correlation between the <span class="math notranslate nohighlight">\(i\)</span>-th and <span class="math notranslate nohighlight">\(j\)</span>-th variants, ranging from -1 to 1. If it is 1 or -1, it means that the two variants are in <strong>perfect LD</strong> (markers are perfect proxies for each other). If <span class="math notranslate nohighlight">\(r_{ij}^2=0\)</span>, it indicates that no association between markers.</p>
 <section id="interpreting-ld-values">
 <h2>Interpreting LD Values<a class="headerlink" href="#interpreting-ld-values" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>High LD (<span class="math notranslate nohighlight">\(r^2 &gt; 0.8\)</span>)</strong>:</p>
+<li><p><strong>High LD (<span class="math notranslate nohighlight">\(r_{ij}^2 &gt; 0.8\)</span>)</strong>:</p>
 <ul>
 <li><p>Alleles at different loci appear together <strong>much more frequently</strong> than expected</p></li>
 <li><p>Frequencies of alleles in high LD are similar to each other</p></li>
@@ -629,13 +631,13 @@ document.write(`
 <li><p>Less recombination between markers</p></li>
 </ul>
 </li>
-<li><p><strong>Moderate LD (<span class="math notranslate nohighlight">\(0.2 &lt; r^2 &lt; 0.8\)</span>)</strong>:</p>
+<li><p><strong>Moderate LD (<span class="math notranslate nohighlight">\(0.2 &lt; r_{ij}^2 &lt; 0.8\)</span>)</strong>:</p>
 <ul>
 <li><p>Some association between loci, but not strong enough for perfect tagging</p></li>
 <li><p>Partial information about one locus given the other</p></li>
 </ul>
 </li>
-<li><p><strong>Low LD (<span class="math notranslate nohighlight">\(r^2 &lt; 0.2\)</span>)</strong>:</p>
+<li><p><strong>Low LD (<span class="math notranslate nohighlight">\(r_{ij}^2 &lt; 0.2\)</span>)</strong>:</p>
 <ul>
 <li><p>Loci segregate nearly independently</p></li>
 <li><p>May indicate distant physical location or sufficient time for recombination</p></li>
@@ -645,53 +647,20 @@ document.write(`
 </section>
 <section id="ld-blocks">
 <h2>LD Blocks<a class="headerlink" href="#ld-blocks" title="Link to this heading">#</a></h2>
-<p>LD blocks are the regions of the genome with consistently high LD among SNPs.</p>
+<p><strong>LD blocks</strong> are genome regions with consistently high LD among SNPs, separated by recombination hotspots. SNPs within a block are highly correlated and inherited together as haplotypes (introduced later in <a class="reference external" href="https://statfungen.github.io/statgen-primer/factor_analysis.html">Lecture: factor analysis</a>).</p>
+<p><strong>Key features</strong>:</p>
 <ul class="simple">
-<li><p><strong>Characteristics</strong>:</p>
-<ul>
-<li><p>Typically separated by recombination hotspots</p></li>
-<li><p>SNPs within a block are highly correlated and tend to be inherited together</p></li>
-<li><p>Block size typically ranges from a few kb to &gt;100 kb</p></li>
-<li><p>Can be visualized as triangular “heat maps” of pairwise LD values</p></li>
+<li><p>Block size: typically a few kb to &gt;100 kb</p></li>
+<li><p>Define natural haplotype units for analysis</p></li>
+<li><p>Allow efficient tagging: genotype fewer SNPs to capture maximum information</p></li>
+<li><p>Visualized as triangular LD heatmaps</p></li>
 </ul>
-</li>
-<li><p><strong>Significance</strong>:</p>
-<ul>
-<li><p>Allow efficient tagging of untyped variants using representative SNPs</p></li>
-<li><p>Reduce genotyping costs by capturing maximum information with minimum markers</p></li>
-<li><p>Define natural units for haplotype analysis</p></li>
-<li><p>Inform optimal imputation strategies</p></li>
-</ul>
-</li>
-<li><p><strong>Different patterns across populations</strong>:</p>
-<ul>
-<li><p>African populations:</p>
-<ul>
-<li><p>Shorter LD blocks (typically 5-15 kb)</p></li>
-<li><p>More haplotype diversity</p></li>
-<li><p>Due to older population age and larger ancestral effective population size</p></li>
-</ul>
-</li>
-<li><p>European populations:</p>
-<ul>
-<li><p>Intermediate LD blocks (typically 15-50 kb)</p></li>
-<li><p>Reflects out-of-Africa bottleneck and subsequent population expansion</p></li>
-</ul>
-</li>
-<li><p>East Asian populations:</p>
-<ul>
-<li><p>Often longer LD blocks (can exceed 50 kb)</p></li>
-<li><p>Due to more recent bottlenecks and founder effects</p></li>
-</ul>
-</li>
-<li><p><strong>Isolated populations</strong> (e.g., Finnish, Sardinian):</p>
-<ul>
-<li><p>Even more extensive LD</p></li>
-<li><p>Due to founder effects and genetic drift in small populations</p></li>
-</ul>
-</li>
-</ul>
-</li>
+<p><strong>Population differences</strong>:</p>
+<ul class="simple">
+<li><p><strong>African</strong>: Shorter blocks (~5-15 kb) due to older, larger ancestral population</p></li>
+<li><p><strong>European</strong>: Intermediate blocks (~15-50 kb) from out-of-Africa bottleneck</p></li>
+<li><p><strong>East Asian</strong>: Longer blocks (&gt;50 kb) from recent bottlenecks</p></li>
+<li><p><strong>Isolated populations</strong> (Finnish, Sardinian): Most extensive LD from founder effects</p></li>
 </ul>
 </section>
 </section>

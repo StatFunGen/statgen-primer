@@ -180,6 +180,7 @@
 
 
 
+
 <li class="toctree-l1"><a class="reference internal" href="minor_allele_frequency.html">Minor Allele Frequency</a></li>
 
 
@@ -187,6 +188,7 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="Hardy_Weinberg_equilibrium.html">Hardy-Weinberg Equilibrium</a></li>
+
 
 
 
@@ -297,7 +299,7 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="meta_analysis_random_effects.html">Meta-Analysis Random Effects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="meta_analysis_random_effect.html">Meta-Analysis Random Effect</a></li>
 
 
 
@@ -337,7 +339,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayesian Versus Frequentist</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Bayesian_frequentist.html">Bayesian and Frequentist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bayesian_versus_frequentist.html">Bayesian versus Frequentist</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bayes_rule.html">Bayes Rule</a></li>
 
 
@@ -351,7 +353,7 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="p_value.html">p-value and Bayesian Hypothesis Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p_value_and_Bayesian_hypothesis_testing.html">p-value and Bayesian Hypothesis Testing</a></li>
 
 
 
@@ -1092,9 +1094,9 @@ Imputation accuracy: 90.0% (63/70 markers correct)
 </div>
 <p>The results show successful genotype imputation using the HMM:</p>
 <ul class="simple">
-<li><p>Panel A displays the comparison between true genotypes (black), typed markers (blue), and imputed genotypes (green crosses for correct, red circles for incorrect).</p></li>
-<li><p>Panel B is a heatmap showing <span class="math notranslate nohighlight">\(P(Z_m = k | X_{\text{typed}})\)</span> - the posterior probability of copying from each reference haplotype <span class="math notranslate nohighlight">\(k\)</span> (y-axis, 1-20) at each marker position <span class="math notranslate nohighlight">\(m\)</span> (x-axis, 1-100). Darker blue indicates higher probability. The horizontal bands reveal that the target primarily copies from a few reference haplotypes, switching between them due to recombination (as expected from the mosaic structure). The vertical red lines mark typed markers that anchor the inference.</p></li>
-<li><p>Panel C shows imputation confidence (maximum posterior probability across all reference haplotypes), with higher confidence at typed markers and nearby positions due to linkage disequilibrium. The shaded regions highlight untyped markers where imputation was performed. The HMM leverages LD structure in the reference panel to accurately impute most untyped genotypes, with confidence decreasing in regions distant from typed markers.</p></li>
+<li><p>Panel A displays the comparison between true genotypes (black), typed markers (blue), and imputed genotypes (green crosses for correct, red circles for incorrect)</p></li>
+<li><p>Panel B is a heatmap showing <span class="math notranslate nohighlight">\(P(Z_m = k | X_{\text{typed}})\)</span> - the posterior probability of copying from each reference haplotype <span class="math notranslate nohighlight">\(k\)</span> (y-axis, 1-20) at each marker position <span class="math notranslate nohighlight">\(m\)</span> (x-axis, 1-100). Darker blue indicates higher probability. The horizontal bands reveal that the target primarily copies from a few reference haplotypes, switching between them due to recombination (as expected from the mosaic structure). The vertical red lines mark typed markers that anchor the inference</p></li>
+<li><p>Panel C shows imputation confidence (maximum posterior probability across all reference haplotypes), with higher confidence at typed markers and nearby positions due to linkage disequilibrium. The shaded regions highlight untyped markers where imputation was performed. The HMM leverages LD structure in the reference panel to accurately impute most untyped genotypes, with confidence decreasing in regions distant from typed markers</p></li>
 </ul>
 </section>
 </section>
@@ -1319,7 +1321,7 @@ Imputation accuracy: 90.0% (63/70 markers correct)
 <p>Given ancestral haplotype <span class="math notranslate nohighlight">\(k\)</span>, the observed allele follows a Bernoulli distribution:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-p(h_m | Y_m = k, \theta) = \begin{cases} 
+p(h_m | Y_m = k, \theta) = \begin{cases}
 \theta_{mk} &amp; \text{if } h_m = 1 \\
 1 - \theta_{mk} &amp; \text{if } h_m = 0
 \end{cases}
@@ -1360,12 +1362,12 @@ Example: P(observe &#39;0&#39; at marker 1 | cluster 1) = 0.904
 <p>ELAI’s key innovation - the transition has <strong>three terms</strong> for different biological scenarios:</p>
 <div class="math notranslate nohighlight">
 \[
-P(X_m=s, Y_m=k | X_{m-1}=s', Y_{m-1}=k') = 
+P(X_m=s, Y_m=k | X_{m-1}=s', Y_{m-1}=k') =
 \]</div>
 <div class="math notranslate nohighlight">
 \[
-\underbrace{j \cdot a_s \cdot \beta_{sk}}_{\text{Ancestry switch}} + 
-\underbrace{(1-j) \cdot \rho \cdot \beta_{sk} \cdot I(s=s')}_{\text{Haplotype switch}} + 
+\underbrace{j \cdot a_s \cdot \beta_{sk}}_{\text{Ancestry switch}} +
+\underbrace{(1-j) \cdot \rho \cdot \beta_{sk} \cdot I(s=s')}_{\text{Haplotype switch}} +
 \underbrace{(1-j) \cdot (1-\rho) \cdot I(s=s') \cdot I(k=k')}_{\text{No switch}}
 \]</div>
 <ul class="simple">
@@ -1660,13 +1662,13 @@ Global Admixture Proportions:
 <section class="tex2jax_ignore mathjax_ignore" id="extended-reading">
 <h1>Extended Reading<a class="headerlink" href="#extended-reading" title="Link to this heading">#</a></h1>
 <ul class="simple">
-<li><p>Both ELAI and RFMix are local ancestry inference tools used in population genetics to identify ancestry along chromosomes in admixed individuals. In contrast to ELAI’s two-layer hidden Markov model, RFMix employs a discriminative approach using random forests combined with a conditional random field framework for ancestry inference.</p>
+<li><p>Both ELAI and RFMix are local ancestry inference tools used in population genetics to identify ancestry along chromosomes in admixed individuals. In contrast to ELAI’s two-layer hidden Markov model, RFMix employs a discriminative approach using random forests combined with a conditional random field framework for ancestry inference</p>
 <ul>
-<li><p>Guan, Yongtao. <a class="reference external" href="https://academic.oup.com/genetics/article/196/3/625/5935669?login=true">“Detecting structure of haplotypes and local ancestry.”</a> Genetics 196.3 (2014): 625-642.</p></li>
-<li><p>Maples, Brian K., et al. <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0002929713002899?via%3Dihub">“RFMix: a discriminative modeling approach for rapid and robust local-ancestry inference.”</a> The American Journal of Human Genetics 93.2 (2013): 278-288.</p></li>
+<li><p>Guan, Yongtao. <a class="reference external" href="https://academic.oup.com/genetics/article/196/3/625/5935669?login=true">“Detecting structure of haplotypes and local ancestry.”</a> Genetics 196.3 (2014): 625-642</p></li>
+<li><p>Maples, Brian K., et al. <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0002929713002899?via%3Dihub">“RFMix: a discriminative modeling approach for rapid and robust local-ancestry inference.”</a> The American Journal of Human Genetics 93.2 (2013): 278-288</p></li>
 </ul>
 </li>
-<li><p>More about genotype imputation: Section 3.2: Genotype imputation from <a class="reference external" href="https://www.wiley.com/en-us/Handbook+of+Statistical+Genomics%2C+4th+Edition-p-9781119429142">Handbook of Statistical Genomics, 4th edition, by David J. Balding</a>, especially Figure 3.4.</p></li>
+<li><p>More about genotype imputation: Section 3.2: Genotype imputation from <a class="reference external" href="https://www.wiley.com/en-us/Handbook+of+Statistical+Genomics%2C+4th+Edition-p-9781119429142">Handbook of Statistical Genomics, 4th edition, by David J. Balding</a>, especially Figure 3.4</p></li>
 </ul>
 </section>
 

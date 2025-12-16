@@ -59,7 +59,7 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'p_value';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'p_value_and_Bayesian_hypothesis_testing';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Bayesian Normal Mean Model" href="Bayesian_normal_mean_model.html" />
@@ -181,6 +181,7 @@
 
 
 
+
 <li class="toctree-l1"><a class="reference internal" href="minor_allele_frequency.html">Minor Allele Frequency</a></li>
 
 
@@ -188,6 +189,7 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="Hardy_Weinberg_equilibrium.html">Hardy-Weinberg Equilibrium</a></li>
+
 
 
 
@@ -298,7 +300,7 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="meta_analysis_random_effects.html">Meta-Analysis Random Effects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="meta_analysis_random_effect.html">Meta-Analysis Random Effect</a></li>
 
 
 
@@ -338,7 +340,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayesian Versus Frequentist</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Bayesian_frequentist.html">Bayesian and Frequentist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bayesian_versus_frequentist.html">Bayesian versus Frequentist</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bayes_rule.html">Bayes Rule</a></li>
 
 
@@ -472,7 +474,7 @@
       
       
       
-      <li><a href="_sources/p_value.ipynb" target="_blank"
+      <li><a href="_sources/p_value_and_Bayesian_hypothesis_testing.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -646,7 +648,7 @@ P(H_i | \text{D}) = \frac{P(\text{D} | H_i) \cdot P(H_i)}{P(\text{D})}
 <p><strong>Important</strong>: The null hypothesis <span class="math notranslate nohighlight">\(H_0\)</span> can never be “accepted” or “proven true” - it can only be:</p>
 <ul class="simple">
 <li><p><strong>Rejected</strong> (when <span class="math notranslate nohighlight">\(p\text{-value} \leq \alpha\)</span>): Strong evidence against <span class="math notranslate nohighlight">\(H_0\)</span></p></li>
-<li><p><strong>Not rejected</strong> (when <span class="math notranslate nohighlight">\(p\text{-value} &gt; \alpha\)</span>): Insufficient evidence to reject <span class="math notranslate nohighlight">\(H_0\)</span>, doesn’t mean “accepted” or “true”. Absence of evidence is not evidence of absence.</p></li>
+<li><p><strong>Not rejected</strong> (when <span class="math notranslate nohighlight">\(p\text{-value} &gt; \alpha\)</span>): Insufficient evidence to reject <span class="math notranslate nohighlight">\(H_0\)</span>, doesn’t mean “accepted” or “true”. Absence of evidence is not evidence of absence</p></li>
 </ul>
 </section>
 <section id="multiple-testing">
@@ -654,14 +656,14 @@ P(H_i | \text{D}) = \frac{P(\text{D} | H_i) \cdot P(H_i)}{P(\text{D})}
 <p>When conducting multiple hypothesis tests, the probability of making at least one Type I error (false positive) increases dramatically. Multiple testing corrections control for this inflation.</p>
 <p>In such scenarios, multiple testing correction is necessary and it has two types of correction method:</p>
 <ul>
-<li><p><strong>Family-Wise Error Rate (FWER) Control</strong>: control the probability of making at least one false positive across all tests.</p>
+<li><p><strong>Family-Wise Error Rate (FWER) Control</strong>: control the probability of making at least one false positive across all tests</p>
 <div class="math notranslate nohighlight">
 \[
   \alpha_{\text{Bonferroni}} = \frac{\alpha}{M}
   \]</div>
 <p>where <span class="math notranslate nohighlight">\(M\)</span> is the total number of tests and <span class="math notranslate nohighlight">\(\alpha\)</span> is the desired overall significance level. For example, if previously we used 0.05 as the cutoff for 1 million tests, then after correction the cutoff becomes <span class="math notranslate nohighlight">\(5\times10^{-8}\)</span>.</p>
 </li>
-<li><p><strong>False Discovery Rate (FDR) Control</strong>: control the expected proportion of false positives among all discoveries (less stringent than FWER, thus more powerful). For example, Benjamini-Hochberg procedure controls the FDR by ranking <span class="math notranslate nohighlight">\(p\)</span>-values, finding largest <span class="math notranslate nohighlight">\(i\)</span> where <span class="math notranslate nohighlight">\(p(i) \leq (\frac{i}{M}) \times \alpha\)</span>.</p></li>
+<li><p><strong>False Discovery Rate (FDR) Control</strong>: control the expected proportion of false positives among all discoveries (less stringent than FWER, thus more powerful). For example, Benjamini-Hochberg procedure controls the FDR by ranking <span class="math notranslate nohighlight">\(p\)</span>-values, finding largest <span class="math notranslate nohighlight">\(i\)</span> where <span class="math notranslate nohighlight">\(p(i) \leq (\frac{i}{M}) \times \alpha\)</span></p></li>
 </ul>
 </section>
 <section id="permutation-test">
@@ -682,7 +684,7 @@ where \)</span>\mathbb{1}(\cdot)$ is the indicator function</p></li>
 <ul class="simple">
 <li><p><strong>Distribution-free</strong>: No assumptions about the underlying distribution of test statistics</p></li>
 <li><p><strong>Exact for finite samples</strong>: Provides exact <span class="math notranslate nohighlight">\(p\)</span>-values rather than asymptotic approximations</p></li>
-<li><p><strong>Flexible</strong>: Can be applied to any test statistic, including complex or custom statistics. Thus it is often used when the null distribution of test statistic is unknown.</p></li>
+<li><p><strong>Flexible</strong>: Can be applied to any test statistic, including complex or custom statistics. Thus it is often used when the null distribution of test statistic is unknown</p></li>
 </ul>
 <p><strong>Limitations</strong>:</p>
 <ul class="simple">

@@ -30,10 +30,10 @@ The goal is to bridge the knowledge gap between these existing backgrounds and t
 | | | [Maximum Likelihood Estimation](https://statfungen.github.io/statgen-primer/maximum_likelihood_estimation.html) |
 | | | [Likelihood Ratio](https://statfungen.github.io/statgen-primer/likelihood_ratio.html) |
 | | | [Expectation-Maximum Algorithm](https://statfungen.github.io/statgen-primer/expectation_maximum.html) |
-| | Bayesian versus Frequentist | [Bayesian and Frequentist](https://statfungen.github.io/statgen-primer/Bayesian_frequentist.html) |
+| | Bayesian versus Frequentist | [Bayesian versus Frequentist](https://statfungen.github.io/statgen-primer/Bayesian_versus_frequentist.html) |
 | | | [Bayes Rule](https://statfungen.github.io/statgen-primer/Bayes_rule.html) |
 | | | [Bayes Factor](https://statfungen.github.io/statgen-primer/Bayes_factor.html) |
-| | | [P-value](https://statfungen.github.io/statgen-primer/p_value.html) |
+| | | [p-value and Bayesian Hypothesis Testing](https://statfungen.github.io/statgen-primer/p_value_and_Bayesian_hypothesis_testing.html) |
 | | Bayesian Model | [Bayesian Normal Mean Model](https://statfungen.github.io/statgen-primer/Bayesian_normal_mean_model.html) |
 | | | [Bayesian Multivariate Normal Mean Model](https://statfungen.github.io/statgen-primer/Bayesian_multivariate_normal_mean_model.html) |
 | | Multiple Bayesian Models | [Bayesian Model Comparison](https://statfungen.github.io/statgen-primer/Bayesian_model_comparison.html) |

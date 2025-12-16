@@ -49,7 +49,7 @@ parts:
   - caption: Meta-analysis
     chapters:
       - file: meta_analysis_fixed_effect
-      - file: meta_analysis_random_effects
+      - file: meta_analysis_random_effect
   
   - caption: Likelihood
     chapters:
@@ -60,10 +60,10 @@ parts:
   
   - caption: Bayesian Versus Frequentist
     chapters: 
-      - file: Bayesian_frequentist
+      - file: Bayesian_versus_frequentist
       - file: Bayes_rule
       - file: Bayes_factor
-      - file: p_value
+      - file: p_value_and_Bayesian_hypothesis_testing
   
   - caption: Bayesian Regression Models
     chapters:

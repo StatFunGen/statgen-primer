@@ -255,6 +255,13 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Random Effects Models</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="random_effects.html">Random Effects</a></li>
+
+
+
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="proportion_of_variance_explained.html">Proportion of Variance Explained and Heritability</a></li>
 
 
@@ -280,6 +287,7 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="collider.html">Collider</a></li>
+
 
 
 
@@ -579,13 +587,21 @@ document.write(`
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-causal-variant-identification-with-ld">Example 1 – Causal Variant Identification with LD</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-analysis-for-example-1">Conditional Analysis for Example 1</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-start-with-the-most-significant-variant">Step 1: Start with the most significant variant</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-conditional-analysis-for-remaining-variants">Step 2: Conditional analysis for remaining variants</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-causal-variant-identification-with-ld">Example 1 – Causal Variant Identification with LD</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#marginal-effects">Marginal Effects</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#joint-effects">Joint Effects</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-analysis">Conditional Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-start-with-the-most-significant-variant">Step 1: Start with the most significant variant</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-conditional-analysis-for-remaining-variants">Step 2: Conditional analysis for remaining variants</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-simpson-s-paradox">Example 2 – Simpson’s Paradox</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-simpson-s-paradox">Example 2 – Simpson’s Paradox</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#marginal-effect-of-variant">Marginal Effect of Variant</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#effect-of-the-variant-in-the-population">Effect of the Variant in the Population</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#supplementary">Supplementary</a><ul class="visible nav section-nav flex-column">
@@ -636,8 +652,7 @@ document.write(`
 <h1>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading">#</a></h1>
 <section id="marginal-effect">
 <h2>Marginal Effect<a class="headerlink" href="#marginal-effect" title="Link to this heading">#</a></h2>
-<p>In <a class="reference external" href="https://statfungen.github.io/statgen-primer/ordinary_least_squares.html">Lecture: ols</a>, we discuss the single marker linear regression, which actually estimates the marginal effect of each genetic variant, considering each variant can be treated independently.</p>
-<p>The marginal effect of a genetic variant is its association with the trait when analyzed in isolation, without accounting for other variants:</p>
+<p>In <a class="reference external" href="https://statfungen.github.io/statgen-primer/ordinary_least_squares.html">Lecture: ordinary least squares</a>, we discuss the single marker linear regression, which actually estimates the marginal effect of each genetic variant independently. This actually is the <strong>marginal effect</strong> of variants, because other variants are not considered in the model:</p>
 <div class="math notranslate nohighlight">
 \[
 \hat{\beta}_{\text{marginal},j} = (\mathbf{X}_j^T\mathbf{X}_j)^{-1}\mathbf{X}_j^T\mathbf{Y}
@@ -656,16 +671,16 @@ document.write(`
 <section id="key-differences-between-marginal-and-joint-effects">
 <h2>Key Differences Between Marginal and Joint Effects<a class="headerlink" href="#key-differences-between-marginal-and-joint-effects" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>Correlation Structure</strong>:</p>
+<li><p><strong>Statistical Framework</strong>:</p>
 <ul>
-<li><p>Marginal effects ignore correlations (linkage disequilibrium) between variants</p></li>
-<li><p>Joint effects account for correlations between variants</p></li>
+<li><p>Marginal effects: Fit separate simple linear regressions (one predictor per model)</p></li>
+<li><p>Joint effects: Fit a single multiple linear regression (all predictors in one model) - this is the generalization of OLS from one variable to multiple variables, accounting for the correlations between variables</p></li>
 </ul>
 </li>
 <li><p><strong>Interpretation</strong>:</p>
 <ul>
-<li><p>Marginal effect: The expected change in the trait associated with a unit change in the variant, not accounting for other variants</p></li>
-<li><p>Joint effect: The expected change in the trait associated with a unit change in the variant, holding all other variants constant</p></li>
+<li><p>Marginal effects: The expected change in the trait associated with a unit change in the variant, <em>regardless of</em> other variants</p></li>
+<li><p>Joint effects: The expected change in the trait associated with a unit change in the variant, <em>holding all other variants constant</em></p></li>
 </ul>
 </li>
 <li><p><strong>Consistency</strong>:</p>
@@ -677,7 +692,7 @@ document.write(`
 </ul>
 </li>
 <li><p>When variants are correlated, marginal and joint effects will differ</p></li>
-<li><p>Joint effects can be smaller or larger than marginal effects, or even have opposite signs</p></li>
+<li><p>Joint effects can be smaller or larger than marginal effects, or even have opposite signs (see Simpson’s paradox)</p></li>
 </ul>
 </li>
 </ul>
@@ -695,12 +710,11 @@ document.write(`
 <h1>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
 <section id="example-1-causal-variant-identification-with-ld">
 <h2>Example 1 – Causal Variant Identification with LD<a class="headerlink" href="#example-1-causal-variant-identification-with-ld" title="Link to this heading">#</a></h2>
-<p>When testing genetic variants individually, we might find that multiple variants appear to be associated with a trait. But are they all true causal variants? Is it possible that only one or a few of the associations are true, and the others are due to the linkage disequilibrium (correlation between nearby variants) with the true causal variants? In this example we first reveal this with a toy example, then use joint analysis to reveal which variant is truly driving the association.</p>
+<p>When testing genetic variants individually, we might find that multiple variants appear to be associated with the same trait. But are they all true causal variants? Is it possible that only one or a few of the associations are true, and the others are due to the linkage disequilibrium (correlation between nearby variants) with the true causal variants? In this example we first reveal this with a toy example, then use joint analysis to reveal which variant is truly driving the association.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clear the environment</span>
-<span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ls</span><span class="p">())</span>
-<span class="nf">set.seed</span><span class="p">(</span><span class="m">9</span><span class="p">)</span><span class="w">  </span><span class="c1"># For reproducibility</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ls</span><span class="p">())</span>
+<span class="nf">set.seed</span><span class="p">(</span><span class="m">9</span><span class="p">)</span><span class="w"> </span>
 
 <span class="c1"># Define genotypes for 10 individuals at 3 variants</span>
 <span class="c1"># Create correlated genotypes to simulate linkage disequilibrium</span>
@@ -711,12 +725,10 @@ document.write(`
 <span class="c1"># Variant 1 is the true causal variant</span>
 <span class="c1"># Variants 2 and 3 are in LD with variant 1</span>
 <span class="n">variant1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="m">0</span><span class="o">:</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">prob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.4</span><span class="p">,</span><span class="w"> </span><span class="m">0.4</span><span class="p">,</span><span class="w"> </span><span class="m">0.2</span><span class="p">))</span>
-
 <span class="c1"># Create LD: variants 2 and 3 are correlated with variant 1</span>
 <span class="n">variant2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="nf">runif</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0.9</span><span class="p">,</span><span class="w"> </span><span class="n">variant1</span><span class="p">,</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="m">0</span><span class="o">:</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span>
 <span class="n">variant3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="nf">runif</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w"> </span><span class="n">variant1</span><span class="p">,</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="m">0</span><span class="o">:</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span>
 
-<span class="c1"># Combine into matrix</span>
 <span class="n">Xraw_additive</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cbind</span><span class="p">(</span><span class="n">variant1</span><span class="p">,</span><span class="w"> </span><span class="n">variant2</span><span class="p">,</span><span class="w"> </span><span class="n">variant3</span><span class="p">)</span>
 <span class="nf">rownames</span><span class="p">(</span><span class="n">Xraw_additive</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Individual&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">)</span>
 <span class="nf">colnames</span><span class="p">(</span><span class="n">Xraw_additive</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Variant&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">M</span><span class="p">)</span>
@@ -725,7 +737,7 @@ document.write(`
 <span class="n">X</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">scale</span><span class="p">(</span><span class="n">Xraw_additive</span><span class="p">,</span><span class="w"> </span><span class="n">center</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
 
 <span class="c1"># Generate phenotype where only Variant 1 has a true causal effect</span>
-<span class="n">true_beta1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1.5</span><span class="w">  </span><span class="c1"># Strong effect for variant 1</span>
+<span class="n">true_beta1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1.5</span>
 <span class="n">epsilon</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span>
 <span class="n">Y_raw</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">X</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">true_beta1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">epsilon</span><span class="w">  </span><span class="c1"># Only variant 1 affects the trait</span>
 
@@ -735,21 +747,21 @@ document.write(`
 </div>
 </div>
 </div>
-<p>We first recall how we calculate the marginal effect of each variant in <a class="reference external" href="https://statfungen.github.io/statgen-primer/ordinary_least_squares.html">Lecture: ols</a>:</p>
+<section id="marginal-effects">
+<h3>Marginal Effects<a class="headerlink" href="#marginal-effects" title="Link to this heading">#</a></h3>
+<p>We first recall how we calculate the marginal effect of each variant in <a class="reference external" href="https://statfungen.github.io/statgen-primer/ordinary_least_squares.html">Lecture: ordinary least squares</a>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate marginal effects (one SNP at a time)</span>
-<span class="n">p_values</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="n">M</span><span class="p">)</span><span class="w">  </span><span class="c1"># Store p-values</span>
-<span class="n">betas</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="n">M</span><span class="p">)</span><span class="w">     </span><span class="c1"># Store estimated effect sizes</span>
+<span class="n">p_values</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+<span class="n">betas</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
 
 <span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">M</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">SNP</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">X</span><span class="p">[,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w">  </span><span class="c1"># Extract genotype for SNP j</span>
+<span class="w">  </span><span class="n">SNP</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">X</span><span class="p">[,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span>
 <span class="w">  </span><span class="n">model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">SNP</span><span class="p">)</span><span class="w">  </span><span class="c1"># OLS regression: Trait ~ SNP</span>
 <span class="w">  </span><span class="n">summary_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1"># Store p-value and effect size (coefficient)</span>
-<span class="w">  </span><span class="n">p_values</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">summary_model</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">]</span><span class="w">  </span><span class="c1"># p-value for SNP effect</span>
-<span class="w">  </span><span class="n">betas</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">summary_model</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w">     </span><span class="c1"># Estimated beta coefficient</span>
+<span class="w">  </span><span class="n">p_values</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">summary_model</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">]</span>
+<span class="w">  </span><span class="n">betas</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">summary_model</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span>
 <span class="p">}</span>
 
 <span class="n">marginal_OLS_results</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span>
@@ -778,7 +790,10 @@ document.write(`
 </table>
 </div></div>
 </div>
-<p>Based on this result, it seems like all of them are associated with the trait.</p>
+<p>Based on the marginal effects, all of them are associated with the trait.</p>
+</section>
+<section id="joint-effects">
+<h3>Joint Effects<a class="headerlink" href="#joint-effects" title="Link to this heading">#</a></h3>
 <p>Now let’s calculate the joint effects by including all variants in one model:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -818,13 +833,14 @@ document.write(`
 </table>
 </div></div>
 </div>
-<p>Now if there are millions of variants (<span class="math notranslate nohighlight">\(M&gt;&gt;N\)</span>) or the LD between variants are very strong, then we might not be able to fit the model and the joint model might give unstable results. Typically we can start with the strongest signal from marginal analysis, and then test remaining variants conditioning on the lead SNP, and iteratively identify additional independent signals until no variants exceed the significance threshold.</p>
+<p>Now consider a more realistic scenario: if there are millions of variants (<span class="math notranslate nohighlight">\(M&gt;&gt;N\)</span>) or the LD between variants are very strong, then we might not be able to fit the model <span class="math notranslate nohighlight">\(\mathbf{Y} = \mathbf{X} \boldsymbol{\beta} + \boldsymbol{\epsilon}\)</span> or the joint model might give unstable results.</p>
+<p>Typically in practice we can start with the strongest signal from marginal analysis, and then test remaining variants conditioning on the lead SNP, and iteratively identify additional independent signals until no variants exceed the significance threshold.</p>
 </section>
-<section id="conditional-analysis-for-example-1">
-<h2>Conditional Analysis for Example 1<a class="headerlink" href="#conditional-analysis-for-example-1" title="Link to this heading">#</a></h2>
+<section id="conditional-analysis">
+<h3>Conditional Analysis<a class="headerlink" href="#conditional-analysis" title="Link to this heading">#</a></h3>
 <p>Let’s now perform a <strong>conditional analysis</strong> on our toy data to identify which variant(s) truly drive the association. We’ll use the forward selection procedure:</p>
 <section id="step-1-start-with-the-most-significant-variant">
-<h3>Step 1: Start with the most significant variant<a class="headerlink" href="#step-1-start-with-the-most-significant-variant" title="Link to this heading">#</a></h3>
+<h4>Step 1: Start with the most significant variant<a class="headerlink" href="#step-1-start-with-the-most-significant-variant" title="Link to this heading">#</a></h4>
 <p>Based on the marginal analysis, Variant 1 had the smallest p-value. We select it as our lead variant:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -844,14 +860,16 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== STEP 1: Lead Variant Selection ===
 Selected: Variant 1 
 Marginal p-value: 6.077549e-10 
-Marginal effect size: 0.9416 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Marginal effect size: 0.9416 
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="step-2-conditional-analysis-for-remaining-variants">
-<h3>Step 2: Conditional analysis for remaining variants<a class="headerlink" href="#step-2-conditional-analysis-for-remaining-variants" title="Link to this heading">#</a></h3>
+<h4>Step 2: Conditional analysis for remaining variants<a class="headerlink" href="#step-2-conditional-analysis-for-remaining-variants" title="Link to this heading">#</a></h4>
 <p>Now we test each remaining variant <strong>while holding the lead variant constant</strong>. This shows us which additional variants have independent effects:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -917,6 +935,7 @@ Testing remaining variants conditional on Variant 1
 <p>This demonstrates the power of conditional analysis in <strong>causal variant identification</strong>: it helps distinguish between true causal effects and spurious associations due to linkage disequilibrium (LD).</p>
 </section>
 </section>
+</section>
 <section id="example-2-simpson-s-paradox">
 <h2>Example 2 – Simpson’s Paradox<a class="headerlink" href="#example-2-simpson-s-paradox" title="Link to this heading">#</a></h2>
 <p>Sometimes a genetic variant can appear <strong>protective</strong> when analyzed alone, but turn out to be <strong>detrimental</strong> when we account for other factors. This counterintuitive phenomenon is called <strong>Simpson’s paradox</strong> - where the direction of association completely reverses between marginal and joint analysis.</p>
@@ -925,10 +944,9 @@ Testing remaining variants conditional on Variant 1
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ls</span><span class="p">())</span>
-<span class="nf">set.seed</span><span class="p">(</span><span class="m">9</span><span class="p">)</span><span class="w">  </span><span class="c1"># For reproducibility</span>
+<span class="nf">set.seed</span><span class="p">(</span><span class="m">9</span><span class="p">)</span>
 
-<span class="n">N</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">100</span><span class="w">  </span><span class="c1"># Sample size</span>
-
+<span class="n">N</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">100</span>
 <span class="c1"># Create a confounding variable (genetic ancestry)</span>
 <span class="n">ancestry</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rbinom</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w">  </span><span class="c1"># 0 = Population A, 1 = Population B</span>
 </pre></div>
@@ -963,7 +981,8 @@ Population B (ancestry=1) mean genotype: 1.59
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Population B has generally lower disease risk (better healthcare/environment)</span>
 <span class="c1"># But the variant increases risk within each population</span>
 <span class="n">baseline_risk</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="n">ancestry</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w"> </span><span class="m">0.1</span><span class="p">)</span><span class="w">  </span><span class="c1"># Pop A much higher baseline risk</span>
-<span class="n">genetic_effect</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">variant1</span><span class="w">  </span><span class="c1"># Variant increases risk in both populations</span>
+<span class="n">true_effect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.1</span>
+<span class="n">genetic_effect</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">true_effect</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">variant1</span><span class="w">  </span><span class="c1"># Variant increases risk in both populations</span>
 
 <span class="n">disease_prob</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">baseline_risk</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">genetic_effect</span>
 <span class="n">disease</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rbinom</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="nf">pmin</span><span class="p">(</span><span class="n">disease_prob</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">))</span><span class="w">  </span><span class="c1"># Ensure prob ≤ 1</span>
@@ -988,6 +1007,8 @@ Population B disease rate: 0.28
 </div>
 </div>
 </div>
+<section id="marginal-effect-of-variant">
+<h3>Marginal Effect of Variant<a class="headerlink" href="#marginal-effect-of-variant" title="Link to this heading">#</a></h3>
 <p>First, let’s see what happens when we analyze each population separately:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1021,31 +1042,33 @@ Population B: OR = 5.014
 </div>
 </div>
 </div>
+<p>In both population the variant appears to increase the risk of disease.</p>
+</section>
+<section id="effect-of-the-variant-in-the-population">
+<h3>Effect of the Variant in the Population<a class="headerlink" href="#effect-of-the-variant-in-the-population" title="Link to this heading">#</a></h3>
 <p>Then we analyze the data with two ancestries combined:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Marginal analysis (ignoring ancestry - combining both populations)</span>
-<span class="n">marginal_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">glm</span><span class="p">(</span><span class="n">disease</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">variant1</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">binomial</span><span class="p">)</span>
-<span class="n">marginal_OR</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">exp</span><span class="p">(</span><span class="nf">coef</span><span class="p">(</span><span class="n">marginal_model</span><span class="p">)[</span><span class="m">2</span><span class="p">])</span>
-<span class="n">marginal_p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">marginal_model</span><span class="p">)</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">]</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Combining both ancestries and perform analysis</span>
+<span class="n">model_combined_ancestries</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">glm</span><span class="p">(</span><span class="n">disease</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">variant1</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">binomial</span><span class="p">)</span>
+<span class="n">OR_combined_ancestries</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">exp</span><span class="p">(</span><span class="nf">coef</span><span class="p">(</span><span class="n">model_combined_ancestries</span><span class="p">)[</span><span class="m">2</span><span class="p">])</span>
+<span class="n">p_combined_ancestries</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">model_combined_ancestries</span><span class="p">)</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">]</span>
 
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;=== MARGINAL EFFECT (combining populations, ignoring ancestry) ===\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;OR =&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">marginal_OR</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;, p =&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">marginal_p</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Interpretation:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="n">marginal_OR</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Detrimental &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Protective&quot;</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;=== ESTIMATED EFFECT (combining genetic ancestries) ===\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;OR =&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">OR_combined_ancestries</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;, p =&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">p_combined_ancestries</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Interpretation:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="n">OR_combined_ancestries</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Detrimental &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Protective&quot;</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== MARGINAL EFFECT (combining populations, ignoring ancestry) ===
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OR = 0.522 , p = 0.012 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== ESTIMATED EFFECT (combining genetic ancestries) ===
+OR = 0.522 , p = 0.012 
 Interpretation: Protective 
 </pre></div>
 </div>
 </div>
 </div>
-<p>Even though the variant is detrimental in both populations, it appears protective when we ignore ancestry!</p>
+<p>Even though the variant is detrimental in both populations, it appears protective when the ancestry difference between the two populations are not considered. In this case, the genetic ancestry acts as a role of confounder which we will introduce in <a class="reference external" href="https://statfungen.github.io/statgen-primer/confounder.html">Lecture: confounder</a>.</p>
 <p>Why this happens?</p>
 <ol class="arabic simple">
 <li><p><strong>Population B</strong> has higher frequency of risk alleles BUT lower baseline disease risk</p></li>
@@ -1053,6 +1076,7 @@ Interpretation: Protective
 <li><p><strong>Marginally:</strong> The variant appears protective because it’s more common in the healthier population</p></li>
 <li><p><strong>Within each population:</strong> The variant actually increases disease risk</p></li>
 </ol>
+</section>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="supplementary">
@@ -1105,13 +1129,12 @@ Interpretation: Protective
 <span class="w">  </span>
 <span class="w">  </span><span class="nf">scale_color_manual</span><span class="p">(</span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Population A&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;#E31A1C&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Population B&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;#1F78B4&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
 <span class="w">  </span><span class="nf">scale_size_continuous</span><span class="p">(</span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">8</span><span class="p">),</span><span class="w"> </span><span class="n">guide</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;none&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span>
+<span class="w">  </span><span class="nf">scale_x_continuous</span><span class="p">(</span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="o">:</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">  </span><span class="c1"># Only show integer labels</span>
 <span class="w">  </span><span class="nf">labs</span><span class="p">(</span>
 <span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Genetic Variant (Number of Risk Alleles)&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Disease Rate&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Population&quot;</span>
 <span class="w">      </span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span>
 <span class="w">  </span><span class="nf">theme_minimal</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
 <span class="w">  </span><span class="nf">theme</span><span class="p">(</span>
 <span class="w">    </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">14</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">),</span>
@@ -1123,16 +1146,13 @@ Interpretation: Protective
 <span class="w">    </span><span class="n">panel.grid.major</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_line</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;gray&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dotted&quot;</span><span class="p">),</span>
 <span class="w">    </span><span class="n">panel.grid.minor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">(),</span>
 <span class="w">    </span><span class="n">axis.line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_line</span><span class="p">(</span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">),</span>
-<span class="w">    </span><span class="n">axis.ticks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_line</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">),</span>
-<span class="w">    </span><span class="c1"># Add transparent backgrounds</span>
+<span class="w">    </span><span class="n">axis.ticks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_line</span><span class="p">(</span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">),</span>
 <span class="w">    </span><span class="n">panel.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">),</span>
 <span class="w">    </span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span>
 <span class="w">  </span><span class="p">)</span><span class="w"> </span>
-<span class="c1"># Display the plot</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 
-<span class="c1"># Save with transparent background</span>
-<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;./cartoons/marginal_joint_effects.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span>
+<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;./figures/marginal_joint_effects.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span>
 <span class="w">       </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">,</span><span class="w"> </span>
 <span class="w">       </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span>
 <span class="w">       </span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="p">)</span>
@@ -1140,27 +1160,11 @@ Interpretation: Protective
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attaching package: ‘dplyr’
-
-
-The following objects are masked from ‘package:stats’:
-
-    filter, lag
-
-
-The following objects are masked from ‘package:base’:
-
-    intersect, setdiff, setequal, union
-
-
-Warning message:
-“The `size` argument of `element_line()` is deprecated as of ggplot2 3.4.0.
-<span class=" -Color -Color-Cyan">ℹ</span> Please use the `linewidth` argument instead.”
-`geom_smooth()` using formula = &#39;y ~ x&#39;
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>`geom_smooth()` using formula = &#39;y ~ x&#39;
 `geom_smooth()` using formula = &#39;y ~ x&#39;
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/94e8c1e5cca8fc3962d804d87d9d7a539e33332df3c80f4f16b2dddf63b78d05.png"><img alt="_images/94e8c1e5cca8fc3962d804d87d9d7a539e33332df3c80f4f16b2dddf63b78d05.png" src="_images/94e8c1e5cca8fc3962d804d87d9d7a539e33332df3c80f4f16b2dddf63b78d05.png" style="width: 420px; height: 420px;" />
+<a class="reference internal image-reference" href="_images/ac93e41765bccbf21d47b79e9b5943b06304857d435854a347535daad8c427d1.png"><img alt="_images/ac93e41765bccbf21d47b79e9b5943b06304857d435854a347535daad8c427d1.png" src="_images/ac93e41765bccbf21d47b79e9b5943b06304857d435854a347535daad8c427d1.png" style="width: 420px; height: 420px;" />
 </a>
 </div>
 </div>
@@ -1242,13 +1246,21 @@ Warning message:
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-causal-variant-identification-with-ld">Example 1 – Causal Variant Identification with LD</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-analysis-for-example-1">Conditional Analysis for Example 1</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-start-with-the-most-significant-variant">Step 1: Start with the most significant variant</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-conditional-analysis-for-remaining-variants">Step 2: Conditional analysis for remaining variants</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-causal-variant-identification-with-ld">Example 1 – Causal Variant Identification with LD</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#marginal-effects">Marginal Effects</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#joint-effects">Joint Effects</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-analysis">Conditional Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-start-with-the-most-significant-variant">Step 1: Start with the most significant variant</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-conditional-analysis-for-remaining-variants">Step 2: Conditional analysis for remaining variants</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-simpson-s-paradox">Example 2 – Simpson’s Paradox</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-simpson-s-paradox">Example 2 – Simpson’s Paradox</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#marginal-effect-of-variant">Marginal Effect of Variant</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#effect-of-the-variant-in-the-population">Effect of the Variant in the Population</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#supplementary">Supplementary</a><ul class="visible nav section-nav flex-column">

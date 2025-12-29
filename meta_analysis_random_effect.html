@@ -255,6 +255,13 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Random Effects Models</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="random_effects.html">Random Effects</a></li>
+
+
+
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="proportion_of_variance_explained.html">Proportion of Variance Explained and Heritability</a></li>
 
 
@@ -280,6 +287,7 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="collider.html">Collider</a></li>
+
 
 
 
@@ -572,9 +580,9 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-summary">Graphical Summary</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-heterogeneity">What is Heterogeneity?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#heterogeneity">Heterogeneity</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-heterogeneity">Measuring Heterogeneity</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-effect-model">Random Effect Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-between-fixed-and-random-effects">Comparison Between Fixed and Random Effects</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
@@ -616,19 +624,20 @@ document.write(`
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="technical-details">
 <h1>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading">#</a></h1>
-<section id="what-is-heterogeneity">
-<h2>What is Heterogeneity?<a class="headerlink" href="#what-is-heterogeneity" title="Link to this heading">#</a></h2>
-<p><strong>Heterogeneity</strong> refers to the variability in effect sizes across different studies beyond what we’d expect from random sampling error alone. In other words, are the studies telling us the same story, or are they finding genuinely different effects?</p>
-<p><strong>Why does heterogeneity matter?</strong></p>
+<section id="heterogeneity">
+<h2>Heterogeneity<a class="headerlink" href="#heterogeneity" title="Link to this heading">#</a></h2>
+<p><strong>Heterogeneity</strong> refers to the variability in effect sizes across different studies beyond what we’d expect from random sampling error alone. In other words, are the studies telling us the same story, or are they finding genuinely different effects? The source of heterogeneity comes from different genetic ancestries, study designs or measurement methods, and environmental context, etc.</p>
+<p>When heterogeneity is present, assume each study estimates its own true effect drawn from a common distribution.</p>
+<p><strong>Assumption</strong>: True effects follow a distribution</p>
+<div class="math notranslate nohighlight">
+\[
+\beta_k \sim N(\beta, \tau^2)
+\]</div>
+<p>Where:</p>
 <ul class="simple">
-<li><p>If studies are consistent (low heterogeneity), we can confidently combine them</p></li>
-<li><p>If studies are inconsistent (high heterogeneity), we need to account for this variation in our analysis</p></li>
-</ul>
-<p><strong>Sources of heterogeneity:</strong></p>
-<ul class="simple">
-<li><p>Different populations (age, ethnicity, health status)</p></li>
-<li><p>Different study designs or measurement methods</p></li>
-<li><p>Different environmental contexts</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta\)</span> = mean effect across all possible studies (what we want to estimate)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\tau^2\)</span> = between-study variance (how much true effects vary across studies)</p></li>
+<li><p>Each study <span class="math notranslate nohighlight">\(k\)</span> has its own true effect <span class="math notranslate nohighlight">\(\beta_k\)</span></p></li>
 </ul>
 </section>
 <section id="measuring-heterogeneity">
@@ -647,21 +656,8 @@ I^2 = \max\left(0, \frac{Q - (K-1)}{Q} \times 100\%\right)
 </ul>
 <p><strong>Example:</strong> If <span class="math notranslate nohighlight">\(I^2 = 60\%\)</span>, this means 60% of the variation we see across studies reflects real differences in effect sizes, while only 40% is due to random sampling error.</p>
 </section>
-<section id="random-effect-model">
-<h2>Random Effect Model<a class="headerlink" href="#random-effect-model" title="Link to this heading">#</a></h2>
-<p><strong>The Problem:</strong> When studies show heterogeneity, we can’t assume they’re all estimating the same true effect.</p>
-<p><strong>The Solution:</strong> Assume each study estimates its own true effect, but these true effects come from a common distribution.</p>
-<p><strong>Assumption</strong>: True effects follow a distribution</p>
-<div class="math notranslate nohighlight">
-\[
-\beta_k \sim N(\beta, \tau^2)
-\]</div>
-<p>Where:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\beta\)</span> = mean effect across all possible studies (what we want to estimate)</p></li>
-<li><p><span class="math notranslate nohighlight">\(\tau^2\)</span> = between-study variance (how much true effects vary across studies)</p></li>
-<li><p>Each study <span class="math notranslate nohighlight">\(k\)</span> has its own true effect <span class="math notranslate nohighlight">\(\beta_k\)</span></p></li>
-</ul>
+<section id="comparison-between-fixed-and-random-effects">
+<h2>Comparison Between Fixed and Random Effects<a class="headerlink" href="#comparison-between-fixed-and-random-effects" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Aspect</p></th>
@@ -702,11 +698,7 @@ I^2 = \max\left(0, \frac{Q - (K-1)}{Q} \times 100\%\right)
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="example">
 <h1>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
-<p>Imagine you’re trying to understand the effect of a genetic variant across different populations. You have two studies: one from a European population and another from an African population. Both studies found significant associations, but the effect sizes look different.</p>
-<p>The question is: <em>Are these studies measuring the same biological effect, just with some random variation due to sampling? Or do these populations truly have different effect sizes for biological reasons?</em></p>
-<p>This is where the choice between fixed-effects and random-effects meta-analysis becomes crucial. If the populations truly differ (maybe due to different genetic backgrounds or environmental factors), then we shouldn’t assume they share the same effect size. Instead, we should model each study as having its own true effect, drawn from a distribution of possible effects.</p>
-<p>We’ll simulate this scenario where two studies have genuinely different true effect sizes, then see how random-effects meta-analysis handles this heterogeneity compared to a naive approach that ignores it. The key insight is: <em>When studies are heterogeneous, how do we properly account for both within-study uncertainty AND between-study variation?</em></p>
-<p>We first generate the effects for the two studies from a distribution (rather than assigning a fixed value), and assign the variance between two studies:</p>
+<p>We simulate two studies with different true effect sizes (drawn from a distribution with τ² = 0.3) to demonstrate random-effects meta-analysis. This scenario mimics real heterogeneity where populations differ in genetic backgrounds or environmental factors, making the random effects model more appropriate than fixed effects.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="o">=</span><span class="nf">ls</span><span class="p">())</span>
@@ -771,9 +763,23 @@ I^2 = \max\left(0, \frac{Q - (K-1)}{Q} \times 100\%\right)
 <span class="w">  </span><span class="n">SE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">sapply</span><span class="p">(</span><span class="n">studies_data</span><span class="p">,</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="o">$</span><span class="n">se</span><span class="p">)</span>
 <span class="p">)</span>
 <span class="n">studies</span><span class="o">$</span><span class="n">P_Value</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">pnorm</span><span class="p">(</span><span class="o">-</span><span class="nf">abs</span><span class="p">(</span><span class="n">studies</span><span class="o">$</span><span class="n">Observed_Beta</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">studies</span><span class="o">$</span><span class="n">SE</span><span class="p">))</span>
+<span class="n">studies</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A data.frame: 2 × 7</caption>
+<thead>
+	<tr><th scope=col>Study</th><th scope=col>N</th><th scope=col>MAF</th><th scope=col>True_Beta</th><th scope=col>Observed_Beta</th><th scope=col>SE</th><th scope=col>P_Value</th></tr>
+	<tr><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>1</td><td>5000</td><td>0.25</td><td>1.507443</td><td>1.507900</td><td>0.06967405</td><td>7.1981e-104</td></tr>
+	<tr><td>2</td><td>8000</td><td>0.40</td><td>1.998400</td><td>1.973478</td><td>0.04827749</td><td> 0.0000e+00</td></tr>
+</tbody>
+</table>
+</div></div>
 </div>
 <p>We first assess the heterogeneity for this meta-analysis:</p>
 <div class="cell docutils container">
@@ -795,7 +801,6 @@ I^2 = \max\left(0, \frac{Q - (K-1)}{Q} \times 100\%\right)
 
 <span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Heterogeneity Statistics:\n&quot;</span><span class="p">)</span>
 <span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Q statistic:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Degrees of freedom:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
 <span class="nf">cat</span><span class="p">(</span><span class="s">&quot;P-value for heterogeneity:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">p_heterogeneity</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
 <span class="nf">cat</span><span class="p">(</span><span class="s">&quot;I^2 statistic:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">I_squared</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;%\n\n&quot;</span><span class="p">)</span>
 
@@ -809,10 +814,9 @@ I^2 = \max\left(0, \frac{Q - (K-1)}{Q} \times 100\%\right)
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Heterogeneity Statistics:
-Q statistic: 61.44 
-Degrees of freedom: 1 
+Q statistic: 30.168 
 P-value for heterogeneity: 0 
-I^2 statistic: 98.4 %
+I^2 statistic: 96.7 %
 
 HETEROGENEITY DETECTED - Random-effects model is appropriate!
 </pre></div>
@@ -854,47 +858,88 @@ HETEROGENEITY DETECTED - Random-effects model is appropriate!
 </pre></div>
 </div>
 <div class="output text_html"><table class="dataframe">
-<caption>A data.frame: 1 x 4</caption>
+<caption>A data.frame: 1 × 4</caption>
 <thead>
 	<tr><th scope=col>Estimate</th><th scope=col>SE</th><th scope=col>Z_score</th><th scope=col>P_value</th></tr>
 	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;chr&gt;</th></tr>
 </thead>
 <tbody>
-	<tr><td>1.7491</td><td>0.3322</td><td>5.2659</td><td>1.4e-07</td></tr>
+	<tr><td>1.7434</td><td>0.2328</td><td>7.4897</td><td>6.9e-14</td></tr>
 </tbody>
 </table>
 </div></div>
 </div>
-<p>Let’s also look at the weights with and without considering heterogeneity:</p>
+<p>We also perform the fixed effect meta analysis for comparison:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compare weights with and without tau^2</span>
-<span class="n">weight_comparison</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span>
-<span class="w">  </span><span class="n">Study</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">K</span><span class="p">,</span>
-<span class="w">  </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">studies</span><span class="o">$</span><span class="n">N</span><span class="p">,</span>
-<span class="w">  </span><span class="n">SE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">studies</span><span class="o">$</span><span class="n">SE</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span>
-<span class="w">  </span><span class="n">Weight_Fixed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">studies</span><span class="o">$</span><span class="n">Weight</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span>
-<span class="w">  </span><span class="n">Weight_Random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">studies</span><span class="o">$</span><span class="n">Weight_Random</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span>
-<span class="w">  </span><span class="n">Difference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">studies</span><span class="o">$</span><span class="n">Weight_Random</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">studies</span><span class="o">$</span><span class="n">Weight</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Also perform fixed-effects meta-analysis for comparison</span>
+<span class="n">beta_fixed</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">studies</span><span class="o">$</span><span class="n">Observed_Beta</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">w</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+<span class="n">se_fixed</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">w</span><span class="p">))</span>
+<span class="n">z_fixed</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">beta_fixed</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">se_fixed</span>
+<span class="n">p_fixed</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">pnorm</span><span class="p">(</span><span class="o">-</span><span class="nf">abs</span><span class="p">(</span><span class="n">z_fixed</span><span class="p">))</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\nFixed-Effects Meta-Analysis Results:\n&quot;</span><span class="p">)</span>
+<span class="n">results_fixed</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span>
+<span class="w">  </span><span class="n">Estimate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">beta_fixed</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span>
+<span class="w">  </span><span class="n">SE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">se_fixed</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span>
+<span class="w">  </span><span class="n">Z_score</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">z_fixed</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span>
+<span class="w">  </span><span class="n">P_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">format</span><span class="p">(</span><span class="n">p_fixed</span><span class="p">,</span><span class="w"> </span><span class="n">scientific</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">digits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span>
 <span class="p">)</span>
-<span class="n">weight_comparison</span>
+<span class="n">results_fixed</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fixed-Effects Meta-Analysis Results:
+</pre></div>
+</div>
+<div class="output text_html"><table class="dataframe">
+<caption>A data.frame: 1 × 4</caption>
+<thead>
+	<tr><th scope=col>Estimate</th><th scope=col>SE</th><th scope=col>Z_score</th><th scope=col>P_value</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;chr&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>1.8225</td><td>0.0397</td><td>45.9261</td><td>0e+00</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compare the two approaches</span>
+<span class="n">comparison</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span>
+<span class="w">  </span><span class="n">Model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Fixed-Effects&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Random-Effects&quot;</span><span class="p">),</span>
+<span class="w">  </span><span class="n">Estimate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="n">beta_fixed</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">beta_random</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">)),</span>
+<span class="w">  </span><span class="n">SE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="n">se_fixed</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">se_random</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">)),</span>
+<span class="w">  </span><span class="n">CI_Width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="m">1.96</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">se_fixed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="m">1.96</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">se_random</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">)),</span>
+<span class="w">  </span><span class="n">P_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="nf">format</span><span class="p">(</span><span class="n">p_fixed</span><span class="p">,</span><span class="w"> </span><span class="n">scientific</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">digits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span>
+<span class="w">              </span><span class="nf">format</span><span class="p">(</span><span class="n">p_random</span><span class="p">,</span><span class="w"> </span><span class="n">scientific</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">digits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">))</span>
+<span class="p">)</span>
+<span class="n">comparison</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="dataframe">
-<caption>A data.frame: 2 x 6</caption>
+<caption>A data.frame: 2 × 5</caption>
 <thead>
-	<tr><th scope=col>Study</th><th scope=col>N</th><th scope=col>SE</th><th scope=col>Weight_Fixed</th><th scope=col>Weight_Random</th><th scope=col>Difference</th></tr>
-	<tr><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+	<tr><th scope=col>Model</th><th scope=col>Estimate</th><th scope=col>SE</th><th scope=col>CI_Width</th><th scope=col>P_value</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;chr&gt;</th></tr>
 </thead>
 <tbody>
-	<tr><td>1</td><td>5000</td><td>0.0697</td><td>0.324</td><td>0.497</td><td> 0.173</td></tr>
-	<tr><td>2</td><td>8000</td><td>0.0482</td><td>0.676</td><td>0.503</td><td>-0.173</td></tr>
+	<tr><td>Fixed-Effects </td><td>1.8225</td><td>0.0397</td><td>0.1556</td><td>0e+00  </td></tr>
+	<tr><td>Random-Effects</td><td>1.7434</td><td>0.2328</td><td>0.9125</td><td>6.9e-14</td></tr>
 </tbody>
 </table>
 </div></div>
 </div>
+<p>With high heterogeneity (<span class="math notranslate nohighlight">\(I^2 = 96.7\%\)</span>), the fixed-effects and random-effects models yield different results:</p>
+<ul class="simple">
+<li><p><strong>Fixed-effects</strong> (<span class="math notranslate nohighlight">\(\hat{\beta}=1.82\)</span>, SE = 0.04): Assumes a shared fixed effect, producing a smaller SE</p></li>
+<li><p><strong>Random-effects</strong> (<span class="math notranslate nohighlight">\(\hat{\beta}=1.74\)</span>, SE = 0.23): Accounts for between-study variance (<span class="math notranslate nohighlight">\(\tau^2\)</span>), producing wider confidence intervals</p></li>
+</ul>
+<p>The random-effects estimate represents the average effect across populations, while the wider SE appropriately reflects both within-study and between-study uncertainty.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -965,9 +1010,9 @@ HETEROGENEITY DETECTED - Random-effects model is appropriate!
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-summary">Graphical Summary</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-heterogeneity">What is Heterogeneity?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#heterogeneity">Heterogeneity</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-heterogeneity">Measuring Heterogeneity</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-effect-model">Random Effect Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-between-fixed-and-random-effects">Comparison Between Fixed and Random Effects</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>

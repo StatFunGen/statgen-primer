@@ -255,6 +255,13 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Random Effects Models</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="random_effects.html">Random Effects</a></li>
+
+
+
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="proportion_of_variance_explained.html">Proportion of Variance Explained and Heritability</a></li>
 
 
@@ -280,6 +287,7 @@
 
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Collider</a></li>
+
 
 
 
@@ -572,18 +580,15 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-summary">Graphical Summary</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-happens-when-we-control-for-colliders">What Happens When We Control for Colliders</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observed-association-vs-true-effect">Observed Association vs. True Effect</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem-conditioning-on-colliders-creates-bias">The Problem: Conditioning on Colliders Creates Bias</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-happens-selection-bias">Why This Happens: Selection Bias</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-colliders-in-genetic-studies">Common Colliders in Genetic Studies</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-key-principle">The Key Principle</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
 </ul>
 </li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-setup-height-as-a-collider">The Setup: Height as a Collider</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-does-this-create-bias">Why Does This Create Bias?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-setup">Simulation Setup</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-1-correct-approach-no-adjustment-for-height">Analysis 1: Correct Approach (No Adjustment for Height)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-2-incorrect-approach-adjusting-for-the-collider">Analysis 2: Incorrect Approach (Adjusting for the Collider)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-3-stratification-by-height-another-way-to-condition-on-the-collider">Analysis 3: Stratification by Height (Another Way to Condition on the Collider)</a></li>
@@ -626,12 +631,12 @@ X \rightarrow W \leftarrow Y
 <li><p>The arrows (<span class="math notranslate nohighlight">\(\rightarrow\)</span>) indicate the direction of causal influence</p></li>
 </ul>
 <p>This diagram illustrates that a collider (<span class="math notranslate nohighlight">\(W\)</span>) is a variable that is <em>caused by</em> both the exposure (<span class="math notranslate nohighlight">\(X\)</span>) and the outcome (<span class="math notranslate nohighlight">\(Y\)</span>), creating a situation where <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> both flow into <span class="math notranslate nohighlight">\(W\)</span>.</p>
-<p>When we condition on (adjust for, stratify by, or select based on) a collider, we can induce a spurious association between its causes, even if they were originally independent.</p>
+<p>When we condition on (adjust for, stratify by, or select based on) a collider, we can induce a <strong>spurious association</strong> between its causes, even if they were originally independent.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="technical-details">
 <h1>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading">#</a></h1>
-<section id="what-happens-when-we-control-for-colliders">
-<h2>What Happens When We Control for Colliders<a class="headerlink" href="#what-happens-when-we-control-for-colliders" title="Link to this heading">#</a></h2>
+<section id="observed-association-vs-true-effect">
+<h2>Observed Association vs. True Effect<a class="headerlink" href="#observed-association-vs-true-effect" title="Link to this heading">#</a></h2>
 <p>When a collider is present and incorrectly controlled for:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -648,7 +653,7 @@ X \rightarrow W \leftarrow Y
 <p>Unlike confounders, colliders should <strong>NOT</strong> be included in regression models. Including a collider as a covariate can create spurious associations:</p>
 <div class="math notranslate nohighlight">
 \[
-Y = \beta_0 + \beta_1 X + \beta_2 \text{Collider} + \epsilon \quad \text{(WRONG!)}
+\mathbf{Y} = \beta_0 + \beta_1 \mathbf{X} + \beta_2 \text{Collider} + \epsilon \quad \text{(WRONG!)}
 \]</div>
 <p>This regression will give a <strong>biased estimate</strong> of <span class="math notranslate nohighlight">\(\beta_1\)</span> even when the true effect is zero.</p>
 </section>
@@ -656,9 +661,9 @@ Y = \beta_0 + \beta_1 X + \beta_2 \text{Collider} + \epsilon \quad \text{(WRONG!
 <h2>Why This Happens: Selection Bias<a class="headerlink" href="#why-this-happens-selection-bias" title="Link to this heading">#</a></h2>
 <p>Controlling for a collider creates <strong>selection bias</strong> by conditioning on a variable that depends on both exposure and outcome:</p>
 <ol class="arabic simple">
-<li><p><strong>Collider structure</strong>: <span class="math notranslate nohighlight">\(X \rightarrow \text{Collider} \leftarrow Y\)</span></p></li>
-<li><p><strong>Conditioning effect</strong>: When you control for the collider, you’re selecting specific combinations of X and Y</p></li>
-<li><p><strong>Induced association</strong>: This selection creates an artificial association between X and Y</p></li>
+<li><p><strong>Collider structure</strong>: <span class="math notranslate nohighlight">\(\mathbf{X} \rightarrow \text{Collider} \leftarrow \mathbf{Y}\)</span></p></li>
+<li><p><strong>Conditioning effect</strong>: When you control for the collider, you’re selecting specific combinations of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{Y}\)</span></p></li>
+<li><p><strong>Induced association</strong>: This selection creates an artificial association between <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{Y}\)</span></p></li>
 </ol>
 </section>
 <section id="common-colliders-in-genetic-studies">
@@ -676,46 +681,24 @@ Y = \beta_0 + \beta_1 X + \beta_2 \text{Collider} + \epsilon \quad \text{(WRONG!
 <li><p><strong>Colliders</strong>: Don’t control to avoid creating bias</p></li>
 </ul>
 </section>
-<section id="related-topics">
-<h2>Related Topics<a class="headerlink" href="#related-topics" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/ordinary_least_squares.html">Lecture: ordinary least squares</a></p></li>
-<li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/confounder.html">Lecture: confounder</a></p></li>
-</ul>
 </section>
+<section class="tex2jax_ignore mathjax_ignore" id="related-topics">
+<h1>Related Topics<a class="headerlink" href="#related-topics" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/ordinary_least_squares.html">ordinary least squares</a></p></li>
+<li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/confounder.html">confounder</a></p></li>
+</ul>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="example">
 <h1>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
-<p>Here’s a biologically implausible scenario that perfectly demonstrates collider bias: What if we told you that certain genetic variants (autosomal SNPs) are associated with biological sex? That sounds absurd, right? Sex is determined by sex chromosomes (XX or XY), so autosomal SNPs (variants on non-sex chromosomes) should have <strong>zero</strong> association with whether someone is male or female.</p>
-<p>Yet, if we make one seemingly innocent analytical choice—adjusting for height in our model—we can create hundreds of “genome-wide significant” associations between autosomal SNPs and sex. These associations are completely spurious, arising purely from collider bias.</p>
-<p>This example is based on a landmark study <a class="reference external" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4746366/">published in the <em>American Journal of Human Genetics</em></a> that used UK Biobank data to definitively demonstrate collider bias. The researchers deliberately induced this bias to show how adjusting for heritable covariates can create biologically impossible associations.</p>
-<section id="the-setup-height-as-a-collider">
-<h2>The Setup: Height as a Collider<a class="headerlink" href="#the-setup-height-as-a-collider" title="Link to this heading">#</a></h2>
-<p>The causal structure is:</p>
+<p>Can autosomal SNPs (variants on non-sex chromosomes) be associated with biological sex? No. Sex is determined by sex chromosomes, so autosomal variants should have <strong>zero</strong> association with sex. Yet adjusting for height creates spurious genome-wide significant associations between autosomal SNPs and sex, purely from collider bias.</p>
+<p>This demonstrates a key principle from <a class="reference external" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4746366/">Aschard et al. (2015)</a>: adjusting for heritable covariates can create biologically impossible associations.</p>
+<p><strong>The causal structure:</strong></p>
 <div class="math notranslate nohighlight">
 \[
 \text{SNP} \rightarrow \text{Height} \leftarrow \text{Sex}
 \]</div>
-<ul class="simple">
-<li><p>Genetic variants influence height (taller alleles exist)</p></li>
-<li><p>Sex influences height (males are typically taller than females)</p></li>
-<li><p>SNPs and sex are <strong>causally independent</strong> (autosomal variants don’t cause sex)</p></li>
-<li><p>Height is the <strong>collider</strong>—it’s caused by both SNP and sex</p></li>
-</ul>
-<p>When we condition on height (e.g., by only studying tall people, or by including height as a covariate), we induce a spurious association between SNPs and sex, even though no biological relationship exists.</p>
-</section>
-<section id="why-does-this-create-bias">
-<h2>Why Does This Create Bias?<a class="headerlink" href="#why-does-this-create-bias" title="Link to this heading">#</a></h2>
-<p>Think about it this way: If you restrict your analysis to very tall people, you’re selecting a group where:</p>
-<ul class="simple">
-<li><p>Females with height-increasing alleles are more likely to be included</p></li>
-<li><p>Males without height-increasing alleles are more likely to be included</p></li>
-</ul>
-<p>This creates an artificial negative correlation: within tall people, having height-increasing alleles makes you more likely to be female. But this correlation exists <strong>only because we conditioned on height</strong>, not because of any biological relationship between autosomal SNPs and sex.</p>
-<p>Let’s demonstrate this with a simulation.</p>
-</section>
-<section id="simulation-setup">
-<h2>Simulation Setup<a class="headerlink" href="#simulation-setup" title="Link to this heading">#</a></h2>
+<p>Both SNPs and sex influence height, but are causally independent. Height is the <strong>collider</strong>. Conditioning on height (by adjusting for it or stratifying by it) induces a spurious SNP-sex association: among tall people, height-increasing alleles make you more likely to be female; among short people, the reverse. This association exists only because we conditioned on the collider.</p>
 <p>We’ll create data for 10,000 individuals where we know the true relationships. We’ll simulate:</p>
 <ol class="arabic simple">
 <li><p>Sex (independent, ~50% male/female)</p></li>
@@ -755,7 +738,6 @@ Y = \beta_0 + \beta_1 X + \beta_2 \text{Collider} + \epsilon \quad \text{(WRONG!
 </div>
 </div>
 </div>
-</section>
 <section id="analysis-1-correct-approach-no-adjustment-for-height">
 <h2>Analysis 1: Correct Approach (No Adjustment for Height)<a class="headerlink" href="#analysis-1-correct-approach-no-adjustment-for-height" title="Link to this heading">#</a></h2>
 <p>First, let’s test the association between SNP and sex <strong>without</strong> adjusting for height. Since autosomal SNPs don’t cause sex, we should see no association:</p>
@@ -770,26 +752,17 @@ Y = \beta_0 + \beta_1 X + \beta_2 \text{Collider} + \epsilon \quad \text{(WRONG!
 <span class="c1"># Model: sex ~ SNP</span>
 <span class="n">correct_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">sex_scaled</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">snp_scaled</span><span class="p">)</span>
 <span class="n">correct_summary</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">correct_model</span><span class="p">)</span>
-<span class="n">correct_summary</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Analysis 1 (CORRECT - no height adjustment):\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;  beta = %.4f, p = %.4f → No association between SNP and sex\n\n&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="n">correct_summary</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">],</span>
+<span class="w">            </span><span class="n">correct_summary</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
-lm(formula = sex_scaled ~ snp_scaled)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--1.0032 -0.9888 -0.9743  1.0113  1.0257 
-
-Coefficients:
-              Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept) -1.487e-16  1.000e-02   0.000    1.000
-snp_scaled   1.013e-02  1.000e-02   1.013    0.311
-
-Residual standard error: 1 on 9998 degrees of freedom
-Multiple R-squared:  0.0001027,	Adjusted R-squared:  2.65e-06 
-F-statistic: 1.027 on 1 and 9998 DF,  p-value: 0.311
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Analysis 1 (CORRECT - no height adjustment):
+  beta = 0.0101, p = 0.3110 → No association between SNP and sex
 </pre></div>
 </div>
 </div>
@@ -804,29 +777,16 @@ F-statistic: 1.027 on 1 and 9998 DF,  p-value: 0.311
 <span class="c1"># Model: sex ~ SNP + height</span>
 <span class="n">biased_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">sex_scaled</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">snp_scaled</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">height_scaled</span><span class="p">)</span>
 <span class="n">biased_summary</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">biased_model</span><span class="p">)</span>
-<span class="n">biased_summary</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Analysis 2 (WRONG - adjusted for height):\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;  beta = %.4f, p = %.4f → Association between SNP and sex\n\n&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="n">biased_summary</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">],</span>
+<span class="w">            </span><span class="n">biased_summary</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
-lm(formula = sex_scaled ~ snp_scaled + height_scaled)
-
-Residuals:
-     Min       1Q   Median       3Q      Max 
--2.33341 -0.48342 -0.00341  0.48873  2.16265 
-
-Coefficients:
-                Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   -2.340e-16  6.779e-03    0.00        1    
-snp_scaled    -1.178e-01  6.882e-03  -17.12   &lt;2e-16 ***
-height_scaled  7.462e-01  6.882e-03  108.43   &lt;2e-16 ***
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 0.6779 on 9997 degrees of freedom
-Multiple R-squared:  0.5405,	Adjusted R-squared:  0.5404 
-F-statistic:  5879 on 2 and 9997 DF,  p-value: &lt; 2.2e-16
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Analysis 2 (WRONG - adjusted for height):
+  beta = -0.1178, p = 0.0000 → Association between SNP and sex
 </pre></div>
 </div>
 </div>
@@ -846,14 +806,20 @@ F-statistic:  5879 on 2 and 9997 DF,  p-value: &lt; 2.2e-16
 <span class="n">tall_subset</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">height_cm</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">tall_threshold</span>
 <span class="n">tall_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">sex_scaled</span><span class="p">[</span><span class="n">tall_subset</span><span class="p">]</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">snp_scaled</span><span class="p">[</span><span class="n">tall_subset</span><span class="p">])</span>
 <span class="n">tall_summary</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">tall_model</span><span class="p">)</span>
-<span class="n">tall_summary</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Analysis 3a (WRONG - limited to only tall individuals):\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;  beta = %.4f, p = %.4f → Association between SNP and sex\n\n&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="n">tall_summary</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">],</span>
+<span class="w">            </span><span class="n">tall_summary</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">]))</span>
 
 <span class="c1"># Analysis 3b: Only short people</span>
 <span class="nf">print</span><span class="p">(</span><span class="s">&quot;============================ Short group analysis ============================&quot;</span><span class="p">)</span>
 <span class="n">short_subset</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">height_cm</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">short_threshold</span>
 <span class="n">short_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">sex_scaled</span><span class="p">[</span><span class="n">short_subset</span><span class="p">]</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">snp_scaled</span><span class="p">[</span><span class="n">short_subset</span><span class="p">])</span>
 <span class="n">short_summary</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">short_model</span><span class="p">)</span>
-<span class="n">short_summary</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Analysis 3b (WRONG - limited to only short individuals):\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;  beta = %.4f, p = %.4f → Association between SNP and sex\n\n&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="n">short_summary</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">],</span>
+<span class="w">            </span><span class="n">short_summary</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
@@ -861,45 +827,12 @@ F-statistic:  5879 on 2 and 9997 DF,  p-value: &lt; 2.2e-16
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;============================ Tall group analysis ============================&quot;
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
-lm(formula = sex_scaled[tall_subset] ~ snp_scaled[tall_subset])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Analysis 3a (WRONG - limited to only tall individuals):
+  beta = -0.0198, p = 0.0115 → Association between SNP and sex
 
-Residuals:
-    Min      1Q  Median      3Q     Max 
--1.9563  0.0720  0.0720  0.1002  0.1002 
-
-Coefficients:
-                         Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)              0.939679   0.007825 120.089   &lt;2e-16 ***
-snp_scaled[tall_subset] -0.019773   0.007814  -2.531   0.0115 *  
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 0.3821 on 2498 degrees of freedom
-Multiple R-squared:  0.002557,	Adjusted R-squared:  0.002158 
-F-statistic: 6.403 on 1 and 2498 DF,  p-value: 0.01145
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;============================ Short group analysis ============================&quot;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
-lm(formula = sex_scaled[short_subset] ~ snp_scaled[short_subset])
-
-Residuals:
-     Min       1Q   Median       3Q      Max 
--0.08144 -0.08144 -0.04754 -0.04754  1.98638 
-
-Coefficients:
-                          Estimate Std. Error  t value Pr(&gt;|t|)    
-(Intercept)              -0.940756   0.006543 -143.780  &lt; 2e-16 ***
-snp_scaled[short_subset] -0.023730   0.006560   -3.617 0.000304 ***
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 0.3199 on 2498 degrees of freedom
-Multiple R-squared:  0.005211,	Adjusted R-squared:  0.004812 
-F-statistic: 13.08 on 1 and 2498 DF,  p-value: 0.0003037
+[1] &quot;============================ Short group analysis ============================&quot;
+Analysis 3b (WRONG - limited to only short individuals):
+  beta = -0.0237, p = 0.0003 → Association between SNP and sex
 </pre></div>
 </div>
 </div>
@@ -1045,18 +978,15 @@ F-statistic: 13.08 on 1 and 2498 DF,  p-value: 0.0003037
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-summary">Graphical Summary</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-happens-when-we-control-for-colliders">What Happens When We Control for Colliders</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observed-association-vs-true-effect">Observed Association vs. True Effect</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem-conditioning-on-colliders-creates-bias">The Problem: Conditioning on Colliders Creates Bias</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-happens-selection-bias">Why This Happens: Selection Bias</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-colliders-in-genetic-studies">Common Colliders in Genetic Studies</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-key-principle">The Key Principle</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
 </ul>
 </li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-setup-height-as-a-collider">The Setup: Height as a Collider</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-does-this-create-bias">Why Does This Create Bias?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-setup">Simulation Setup</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-1-correct-approach-no-adjustment-for-height">Analysis 1: Correct Approach (No Adjustment for Height)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-2-incorrect-approach-adjusting-for-the-collider">Analysis 2: Incorrect Approach (Adjusting for the Collider)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-3-stratification-by-height-another-way-to-condition-on-the-collider">Analysis 3: Stratification by Height (Another Way to Condition on the Collider)</a></li>

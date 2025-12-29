@@ -255,6 +255,13 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Random Effects Models</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="random_effects.html">Random Effects</a></li>
+
+
+
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="proportion_of_variance_explained.html">Proportion of Variance Explained and Heritability</a></li>
 
 
@@ -280,6 +287,7 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="collider.html">Collider</a></li>
+
 
 
 
@@ -572,15 +580,22 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-summary">Graphical Summary</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-odds">What are Odds?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">Logistic Regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-square-test">Chi-Square Test</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-hwe">Example 1 – HWE</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-gwas">Example 2 – GWAS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-hwe">Example 1 – HWE</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1-chi-square-test-directly-on-the-2-times-2-table">Method 1: Chi-square test directly on the <span class="math notranslate nohighlight">\(2\times 2\)</span> table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-traditional-hwe-chi-square-test-on-genotype-counts">Method 2: Traditional HWE chi-square test on genotype counts</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-gwas">Example 2 – GWAS</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Method 1: Chi-square test directly on the <span class="math notranslate nohighlight">\(2\times 2\)</span> table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-logistic-regression">Method 2 - Logistic Regression</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#supplementary">Supplementary</a><ul class="visible nav section-nav flex-column">
@@ -613,56 +628,46 @@ document.write(`
 <p>To organize and analyze the relationship between these two binary variables, we create a 2×2 contingency table that shows all possible combinations:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head"><p></p></th>
-<th class="head"><p>Variable 1=0</p></th>
-<th class="head"><p>Variable 1=1</p></th>
+<tr class="row-odd"><th class="head text-center"><p></p></th>
+<th class="head text-center"><p><strong>Variable 2=0</strong></p></th>
+<th class="head text-center"><p><strong>Variable 2=1</strong></p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Variable 2=0</p></td>
-<td><p><span class="math notranslate nohighlight">\(N_{00}\)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(N_{10}\)</span></p></td>
+<tr class="row-even"><td class="text-center"><p><strong>Variable 1=0</strong></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(N_{00}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(N_{10}\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>Variable 2=1</p></td>
-<td><p><span class="math notranslate nohighlight">\(N_{01}\)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(N_{11}\)</span></p></td>
+<tr class="row-odd"><td class="text-center"><p><strong>Variable 1=1</strong></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(N_{01}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(N_{11}\)</span></p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>(<span class="math notranslate nohighlight">\(N_{ij}\)</span> = count of individuals with Variable 1=<span class="math notranslate nohighlight">\(i\)</span> and Variable 2=<span class="math notranslate nohighlight">\(j\)</span>)</p>
-<p><strong>Odds for Variable 2=0:</strong> <span class="math notranslate nohighlight">\(\frac{N_{00}}{N_{10}}\)</span></p>
-<p><strong>Odds for Variable 2=1:</strong> <span class="math notranslate nohighlight">\(\frac{N_{01}}{N_{11}}\)</span></p>
-<p><strong>Odds Ratio:</strong></p>
-<div class="math notranslate nohighlight">
-\[
-OR = \frac{\text{Odds for Variable 2=0}}{\text{Odds for Variable 2=1}} = \frac{\frac{N_{00}}{N_{10}}}{\frac{N_{01}}{N_{11}}} = \frac{N_{00} \times N_{11}}{N_{10} \times N_{01}}
-\]</div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="technical-details">
-<h1>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading">#</a></h1>
-<section id="what-are-odds">
-<h2>What are Odds?<a class="headerlink" href="#what-are-odds" title="Link to this heading">#</a></h2>
-<p>Odds tell you how much more likely something is to happen compared to not happen.</p>
+<p>(<span class="math notranslate nohighlight">\(N_{ij}\)</span> = count of samples with Variable 1=<span class="math notranslate nohighlight">\(i\)</span> and Variable 2=<span class="math notranslate nohighlight">\(j\)</span>)</p>
+<p>The <strong>odds</strong> is how much more likely something is to happen compared to not happen:</p>
 <div class="math notranslate nohighlight">
 \[
 \text{Odds} = \frac{p}{1-p}
 \]</div>
-<p><strong>Example:</strong> If 20% of people get a disease, then 80% don’t get it.</p>
-<ul class="simple">
-<li><p>Odds = <span class="math notranslate nohighlight">\(\frac{0.2}{0.8} = 0.25\)</span></p></li>
-<li><p>This means “for every 4 people who don’t get the disease, 1 person gets it”</p></li>
-<li><p>We can say the odds are “1 to 4” or “1:4”</p></li>
-</ul>
+<p>For example, the odds of Variable 2=1 given Variable 1=0 is <span class="math notranslate nohighlight">\(\frac{N_{10}}{N_{00}}\)</span>, and the odds of Variable 2=1 given Variable 1=1 is <span class="math notranslate nohighlight">\(\frac{N_{11}}{N_{01}}\)</span>.</p>
+<p>The <strong>Odds Ratio (OR)</strong> compares these two odds to quantify the association between the variables:</p>
+<div class="math notranslate nohighlight">
+\[
+OR = \frac{\text{Odds for Variable 2=1}}{\text{Odds for Variable 2=0}} = \frac{\frac{N_{11}}{N_{01}}}{\frac{N_{10}}{N_{00}}} = \frac{N_{00} \times N_{11}}{N_{10} \times N_{01}}
+\]</div>
 </section>
+<section class="tex2jax_ignore mathjax_ignore" id="technical-details">
+<h1>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading">#</a></h1>
 <section id="logistic-regression">
 <h2>Logistic Regression<a class="headerlink" href="#logistic-regression" title="Link to this heading">#</a></h2>
 <p>Logistic regression is used when we want to predict a binary outcome (yes/no, diseased/healthy, success/failure).</p>
-<p><strong>The Problem:</strong> Regular linear regression can give predictions outside 0-1 range, which doesn’t make sense for probabilities.</p>
-<p><strong>The Solution:</strong> Instead of modeling probability directly, we model the <strong>log-odds</strong> (logit):</p>
+<p><strong>Problem:</strong> Regular linear regression can give predictions outside 0-1 range, which doesn’t make sense for probabilities.</p>
+<p><strong>Solution:</strong> Instead of modeling probability directly, we model the <strong>log-odds</strong> (logit):</p>
 <div class="math notranslate nohighlight">
 \[
-\ln\left(\frac{p}{1-p}\right) = a + \beta X
+\ln\left(\frac{p}{1-p}\right) = \alpha + \beta X
 \]</div>
 <p><strong>Why this works:</strong></p>
 <ul class="simple">
@@ -670,12 +675,11 @@ OR = \frac{\text{Odds for Variable 2=0}}{\text{Odds for Variable 2=1}} = \frac{\
 <li><p>We can use linear regression on log-odds</p></li>
 <li><p>Then transform back to get probabilities between 0 and 1</p></li>
 </ul>
-<p><strong>Key insight:</strong> The coefficient <span class="math notranslate nohighlight">\(\beta\)</span> tells us how much the log-odds change for each unit increase in X. Since <span class="math notranslate nohighlight">\(OR = e^{\beta}\)</span>, we get the odds ratio directly from the regression!</p>
+<p><strong>Key insight:</strong> The coefficient <span class="math notranslate nohighlight">\(\beta\)</span> tells us how much the log-odds change for each unit increase in <span class="math notranslate nohighlight">\(X\)</span>. Since <span class="math notranslate nohighlight">\(\text{OR} = e^{\beta}\)</span>, we get the odds ratio directly from the regression.</p>
 </section>
 <section id="chi-square-test">
 <h2>Chi-Square Test<a class="headerlink" href="#chi-square-test" title="Link to this heading">#</a></h2>
 <p>The chi-square test helps us determine if the odds ratio we calculated is statistically significant (not due to random chance).</p>
-<p><strong>What it tests:</strong> Whether two variables are independent or associated in a contingency table.</p>
 <p><strong>Null hypothesis:</strong> <span class="math notranslate nohighlight">\(H_0\)</span>: The two variables are independent (OR = 1)</p>
 <p><strong>Test statistic:</strong></p>
 <div class="math notranslate nohighlight">
@@ -684,7 +688,7 @@ OR = \frac{\text{Odds for Variable 2=0}}{\text{Odds for Variable 2=1}} = \frac{\
 \]</div>
 <p><strong>Simple interpretation:</strong></p>
 <ul class="simple">
-<li><p>Large <span class="math notranslate nohighlight">\(\chi^2\)</span> value (p-value&lt;0.05) -&gt; Strong evidence against independence -&gt; Variables are associated (Reject null hypothesis)</p></li>
+<li><p>Large <span class="math notranslate nohighlight">\(\chi^2\)</span> value (<span class="math notranslate nohighlight">\(p-\text{value} &lt; 0.05\)</span>) -&gt; Strong evidence against independence -&gt; Variables are associated (Reject null hypothesis)</p></li>
 <li><p>Small <span class="math notranslate nohighlight">\(\chi^2\)</span> value -&gt; Weak evidence -&gt; Variables might be independent</p></li>
 </ul>
 <p><strong>Connection to OR:</strong> If chi-square test is significant, then our calculated odds ratio is likely a real association, not just random variation.</p>
@@ -696,6 +700,7 @@ OR = \frac{\text{Odds for Variable 2=0}}{\text{Odds for Variable 2=1}} = \frac{\
 <li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/genotype_coding.html">genotype coding</a></p></li>
 <li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/Hardy_Weinberg_equilibrium.html">Hardy Weinberg equilibrium</a></p></li>
 <li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/ordinary_least_squares.html">ordinary least squares</a></p></li>
+<li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/p_value_and_Bayesian_hypothesis_testing.html">p-value and Bayesian hypothesis testing</a></p></li>
 </ul>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="example">
@@ -703,7 +708,7 @@ OR = \frac{\text{Odds for Variable 2=0}}{\text{Odds for Variable 2=1}} = \frac{\
 <section id="example-1-hwe">
 <h2>Example 1 – HWE<a class="headerlink" href="#example-1-hwe" title="Link to this heading">#</a></h2>
 <p>We know that under Hardy-Weinberg equilibrium, maternal and paternal alleles are chosen independently - just like our binomial expansion assumes. But how can we actually test this independence in real data? And what does it look like when this independence breaks down?</p>
-<p>Let’s use data from E.B. Ford’s classic study on the scarlet tiger moth to see how we can set up a 2×2 table and use odds ratios to test for HWE.</p>
+<p>Let’s use data from E.B. Ford’s classic study on the scarlet tiger moth to see how we can set up a <span class="math notranslate nohighlight">\(2\times 2\)</span> table and use odds ratios to test for HWE.</p>
 <p>Here’s the original data from <a class="reference external" href="https://en.wikipedia.org/wiki/Hardy%E2%80%93Weinberg_principle">E.B. Ford (1971) on the scarlet tiger moth</a>:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -756,12 +761,11 @@ f_a = 0.0459
 </div>
 </div>
 </div>
-<p>Now let’s set up our 2×2 contingency table to test independence of maternal and paternal alleles:</p>
+<p>Now let’s set up our <span class="math notranslate nohighlight">\(2\times 2\)</span> contingency table to test independence of maternal and paternal alleles:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up 2x2 contingency table for independence test</span>
 <span class="c1"># For each Aa individual, we split equally between maternal A/paternal a and maternal a/paternal A</span>
-<span class="c1"># since we can&#39;t distinguish these cases</span>
 
 <span class="n">maternal_A_paternal_A</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">N_AA</span><span class="w">                    </span><span class="c1"># AA genotypes</span>
 <span class="n">maternal_A_paternal_a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">N_Aa</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">2</span><span class="w">                </span><span class="c1"># Half of Aa genotypes</span>
@@ -780,7 +784,7 @@ f_a = 0.0459
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="dataframe">
-<caption>A matrix: 2 x 2 of type dbl</caption>
+<caption>A matrix: 2 × 2 of type dbl</caption>
 <thead>
 	<tr><th></th><th scope=col>Paternal A</th><th scope=col>Paternal a</th></tr>
 </thead>
@@ -813,7 +817,8 @@ f_a = 0.0459
 </div>
 <p>The odds ratio tells us the magnitude of deviation from independence, but doesn’t tell us if it’s statistically significant. Under HWE, the odds ratio should equal 1.0, meaning maternal and paternal allele choices are independent.</p>
 <p>To determine significance, we need a chi-square test that accounts for sample size and expected sampling variability. We can do this in two equivalent ways:</p>
-<p><strong>Method 1: Chi-square test directly on the 2×2 table</strong></p>
+<section id="method-1-chi-square-test-directly-on-the-2-times-2-table">
+<h3>Method 1: Chi-square test directly on the <span class="math notranslate nohighlight">\(2\times 2\)</span> table<a class="headerlink" href="#method-1-chi-square-test-directly-on-the-2-times-2-table" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test independence using chi-square test on the 2x2 table</span>
@@ -824,7 +829,7 @@ f_a = 0.0459
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message in chisq.test(contingency_table, correct = FALSE):
-&quot;Chi-squared approximation may be incorrect&quot;
+“Chi-squared approximation may be incorrect”
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	Pearson&#39;s Chi-squared test
@@ -835,7 +840,9 @@ X-squared = 0.83095, df = 1, p-value = 0.362
 </div>
 </div>
 </div>
-<p><strong>Method 2: Traditional HWE chi-square test on genotype counts</strong></p>
+</section>
+<section id="method-2-traditional-hwe-chi-square-test-on-genotype-counts">
+<h3>Method 2: Traditional HWE chi-square test on genotype counts<a class="headerlink" href="#method-2-traditional-hwe-chi-square-test-on-genotype-counts" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate expected genotype counts under HWE</span>
@@ -851,22 +858,8 @@ X-squared = 0.83095, df = 1, p-value = 0.362
 <span class="w">                     </span><span class="n">Observed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N_observed</span><span class="p">,</span><span class="w"> </span>
 <span class="w">                     </span><span class="n">Expected</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">N_expected</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span>
 <span class="w">                     </span><span class="n">Difference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">N_observed</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">N_expected</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">))</span>
-<span class="nf">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Genotype Observed Expected Difference
-1       AA     1469   1467.4        1.6
-2       Aa      138    141.2       -3.2
-3       aa        5      3.4        1.6
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Perform chi-square test</span>
+
+<span class="c1"># Perform chi-square test</span>
 <span class="n">chi_sq</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">((</span><span class="n">N_observed</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">N_expected</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">N_expected</span><span class="p">)</span>
 <span class="n">degrees_freedom</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="w">  </span><span class="c1"># number of genotypes - number of independent alleles = 3 - 2 = 1</span>
 <span class="n">p_value</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">pchisq</span><span class="p">(</span><span class="n">chi_sq</span><span class="p">,</span><span class="w"> </span><span class="n">degrees_freedom</span><span class="p">)</span>
@@ -890,6 +883,7 @@ p-value = 3.619985e-01
 <p>Both methods give the same result because they’re testing the same hypothesis - independence of maternal and paternal alleles.</p>
 <p><strong>Exercise: Test HWE with Modified Data</strong></p>
 <p>Now that you’ve seen how to test HWE when it holds, try modifying the genotype counts to see what happens when independence breaks down. For example, what if we had 1469 AA, 500 Aa, and 0 aa individuals? Or try 1000 AA, 50 Aa, and 200 aa? Change the values of N_AA, N_Aa, and N_aa in the code above and rerun the analysis. Pay attention to how the odds ratio changes from 1.0 and how the p-value reflects the statistical significance of these deviations. This will help you understand what different types of HWE violations look like in practice - whether it’s excess heterozygotes, deficiency of heterozygotes, or other patterns that suggest non-random mating or population structure.</p>
+</section>
 </section>
 <section id="example-2-gwas">
 <h2>Example 2 – GWAS<a class="headerlink" href="#example-2-gwas" title="Link to this heading">#</a></h2>
@@ -947,7 +941,7 @@ p-value = 3.619985e-01
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="dataframe">
-<caption>A data.frame: 5 x 4</caption>
+<caption>A data.frame: 5 × 4</caption>
 <thead>
 	<tr><th></th><th scope=col>Y</th><th scope=col>variant1</th><th scope=col>variant2</th><th scope=col>variant3</th></tr>
 	<tr><th></th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
@@ -962,77 +956,84 @@ p-value = 3.619985e-01
 </table>
 </div></div>
 </div>
-<ul class="simple">
-<li><p><strong>Method 1 - Contingency Table</strong></p></li>
-</ul>
+<section id="id1">
+<h3>Method 1: Chi-square test directly on the <span class="math notranslate nohighlight">\(2\times 2\)</span> table<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <p>For this example, let’s focus on <strong>Variant 1</strong> and create a contingency table.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create contingency table for variant1 (already binary)</span>
-<span class="n">cont_table</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">table</span><span class="p">(</span><span class="n">data</span><span class="o">$</span><span class="n">variant1</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">$</span><span class="n">Y</span><span class="p">)</span>
-<span class="n">cont_table</span>
+<span class="n">contingency_table</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">table</span><span class="p">(</span><span class="n">data</span><span class="o">$</span><span class="n">variant1</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">$</span><span class="n">Y</span><span class="p">)</span>
+<span class="n">contingency_table</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">table</span><span class="p">(</span><span class="n">data</span><span class="o">$</span><span class="n">variant1</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">$</span><span class="n">Y</span><span class="p">)</span>
+<span class="nf">dimnames</span><span class="p">(</span><span class="n">contingency_table</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span>
+<span class="w">  </span><span class="n">Variant_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;1&quot;</span><span class="p">),</span>
+<span class="w">  </span><span class="n">Disease</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Control&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Case&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">contingency_table</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   
-    0 1
-  0 2 1
-  1 1 1
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         Disease
+Variant_1 Control Case
+        0       2    1
+        1       1    1
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extract counts for odds ratio calculation</span>
-<span class="n">N_00</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cont_table</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">]</span><span class="w">  </span><span class="c1"># variant=0, disease=0</span>
-<span class="n">N_01</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cont_table</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">]</span><span class="w">  </span><span class="c1"># variant=0, disease=1</span>
-<span class="n">N_10</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cont_table</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">]</span><span class="w">  </span><span class="c1"># variant=1, disease=0</span>
-<span class="n">N_11</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cont_table</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">]</span><span class="w">  </span><span class="c1"># variant=1, disease=1</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate odds ratio</span>
+<span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">contingency_table</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">]</span><span class="w">  </span><span class="c1"># Maternal A, Paternal A</span>
+<span class="n">b</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">contingency_table</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">]</span><span class="w">  </span><span class="c1"># Maternal A, Paternal a</span>
+<span class="n">c</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">contingency_table</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">]</span><span class="w">  </span><span class="c1"># Maternal a, Paternal A</span>
+<span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">contingency_table</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">]</span><span class="w">  </span><span class="c1"># Maternal a, Paternal a</span>
 
-<span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;N_00 (variant=0, disease=0):&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">N_00</span><span class="p">))</span>
-<span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;N_01 (variant=0, disease=1):&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">N_01</span><span class="p">))</span>
-<span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;N_10 (variant=1, disease=0):&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">N_10</span><span class="p">))</span>
-<span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;N_11 (variant=1, disease=1):&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">N_11</span><span class="p">))</span>
-
-<span class="c1"># Calculate odds ratio manually</span>
-<span class="n">OR_manual</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="n">N_00</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">N_11</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">N_01</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">N_10</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Odds Ratio from contingency table:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">OR_manual</span><span class="p">))</span>
+<span class="n">odds_ratio</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">c</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\nOdds Ratio =&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">odds_ratio</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;N_00 (variant=0, disease=0): 2&quot;
-[1] &quot;N_01 (variant=0, disease=1): 1&quot;
-[1] &quot;N_10 (variant=1, disease=0): 1&quot;
-[1] &quot;N_11 (variant=1, disease=1): 1&quot;
-[1] &quot;Odds Ratio from contingency table: 2&quot;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Odds Ratio = 2 
 </pre></div>
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p><strong>Method 2 - Logistic Regression</strong></p></li>
-</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test independence using chi-square test on the 2x2 table</span>
+<span class="n">chi_sq_independence</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">chisq.test</span><span class="p">(</span><span class="n">contingency_table</span><span class="p">,</span><span class="w"> </span><span class="n">correct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">chi_sq_independence</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message in chisq.test(contingency_table, correct = FALSE):
+“Chi-squared approximation may be incorrect”
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	Pearson&#39;s Chi-squared test
+
+data:  contingency_table
+X-squared = 0.13889, df = 1, p-value = 0.7094
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="method-2-logistic-regression">
+<h3>Method 2 - Logistic Regression<a class="headerlink" href="#method-2-logistic-regression" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run logistic regression</span>
 <span class="n">model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">glm</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">variant1</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">binomial</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="nf">summary</span><span class="p">(</span><span class="n">model</span><span class="p">))</span>
-
-<span class="c1"># Extract coefficient (beta) for variant1</span>
-<span class="n">beta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">coef</span><span class="p">(</span><span class="n">model</span><span class="p">)[</span><span class="s">&quot;variant1&quot;</span><span class="p">]</span>
-<span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Beta coefficient:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">beta</span><span class="p">))</span>
-
-<span class="c1"># Calculate odds ratio from beta</span>
-<span class="n">OR_logistic</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">exp</span><span class="p">(</span><span class="n">beta</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Odds Ratio from logistic regression:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">OR_logistic</span><span class="p">))</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
 glm(formula = Y ~ variant1, family = binomial, data = data)
 
 Coefficients:
@@ -1047,9 +1048,6 @@ Residual deviance: 6.5917  on 3  degrees of freedom
 AIC: 10.592
 
 Number of Fisher Scoring iterations: 4
-
-[1] &quot;Beta coefficient: 0.693147180559743&quot;
-[1] &quot;Odds Ratio from logistic regression: 1.99999999999959&quot;
 </pre></div>
 </div>
 </div>
@@ -1059,20 +1057,16 @@ Number of Fisher Scoring iterations: 4
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extract coefficient (beta) for variant1</span>
 <span class="n">beta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">coef</span><span class="p">(</span><span class="n">model</span><span class="p">)[</span><span class="s">&quot;variant1&quot;</span><span class="p">]</span>
-<span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Beta coefficient:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">beta</span><span class="p">))</span>
+<span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Beta coefficient:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">beta</span><span class="p">)</span>
 
 <span class="c1"># Calculate odds ratio from beta</span>
 <span class="n">OR_logistic</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">exp</span><span class="p">(</span><span class="n">beta</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Odds Ratio from logistic regression:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">OR_logistic</span><span class="p">))</span>
+<span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Odds Ratio from logistic regression:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">OR_logistic</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;Beta coefficient: 0.693147180559743&quot;
-[1] &quot;Odds Ratio from logistic regression: 1.99999999999959&quot;
-</pre></div>
-</div>
-</div>
+<div class="output text_html">'Beta coefficient: 0.693147180559743'</div><div class="output text_html">'Odds Ratio from logistic regression: 1.99999999999959'</div></div>
 </div>
 <p>Both methods should give <strong>identical odds ratios</strong>, demonstrating that:</p>
 <ul class="simple">
@@ -1082,19 +1076,18 @@ Number of Fisher Scoring iterations: 4
 <p>are mathematically equivalent ways of measuring the same association between binary variables.</p>
 </section>
 </section>
+</section>
 <section class="tex2jax_ignore mathjax_ignore" id="supplementary">
 <h1>Supplementary<a class="headerlink" href="#supplementary" title="Link to this heading">#</a></h1>
 <section id="logistic-regression-from-binary-to-continuous-variables">
 <h2>Logistic Regression: From Binary to Continuous Variables<a class="headerlink" href="#logistic-regression-from-binary-to-continuous-variables" title="Link to this heading">#</a></h2>
-<p>This figure illustrates the generalization of logistic regression from binary variables (as used in contingency tables) to continuous variables. The smooth blue curve represents the logistic function, which models how the probability of disease changes as a function of a continuous genotype variable. Unlike linear regression, the logistic curve is S-shaped and naturally constrains predicted probabilities between 0 and 1, making it ideal for binary outcomes.</p>
-<p>The orange points represent actual observed data where individuals either have the disease (y=1) or don’t (y=0), while their x-position indicates their continuous genotype value. The red dashed line at probability 0.5 serves as a decision threshold - individuals above this line are more likely to have the disease than not.</p>
-<p>This visualization demonstrates how logistic regression extends beyond the 2×2 contingency table approach: instead of just comparing two discrete groups, we can now model the relationship between any continuous predictor variable and a binary outcome. The odds ratio interpretation remains the same - it represents how the odds of disease change for each unit increase in the continuous variable - but now we can capture more nuanced, gradual relationships rather than just simple binary comparisons.</p>
+<p>This figure illustrates how logistic regression extends from binary variables (as used in contingency tables) to continuous predictors. The smooth blue curve represents the logistic function, which models how disease probability changes as a continuous genotype variable increases. Unlike linear regression, the S-shaped logistic curve naturally constrains predictions between 0 and 1, making it ideal for binary outcomes.</p>
+<p>The orange points represent observed data where individuals either have disease (<span class="math notranslate nohighlight">\(Y=1\)</span>) or not (<span class="math notranslate nohighlight">\(Y=0\)</span>), while their x-position shows their genotype value. The red dashed line at probability 0.5 serves as a decision threshold.</p>
+<p>This visualization shows how we can move beyond simple <span class="math notranslate nohighlight">\(2 \times 2\)</span> comparisons to model nuanced, gradual relationships between any continuous variable and a binary outcome, while the odds ratio interpretation remains the same.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load necessary library</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
 
-<span class="c1"># Set plot size</span>
 <span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">repr.plot.height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">)</span>
 
 <span class="c1"># Define logistic function</span>
@@ -1133,20 +1126,18 @@ Number of Fisher Scoring iterations: 4
 <span class="w">    </span><span class="n">axis.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">),</span>
 <span class="w">    </span><span class="n">axis.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">(),</span>
 <span class="w">    </span><span class="n">axis.ticks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">()</span>
-<span class="w">    </span><span class="c1"># Y-axis title left at default angle (90 degrees)</span>
 <span class="w">  </span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 
-<span class="c1"># # Save with transparent background</span>
-<span class="c1"># ggsave(&quot;./cartoons/odds_ratio.png&quot;, plot = p, </span>
-<span class="c1">#        width = 10, height = 6, </span>
-<span class="c1">#        bg = &quot;transparent&quot;, </span>
-<span class="c1">#        dpi = 300)</span>
+<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;./figures/odds_ratio.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span>
+<span class="w">       </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span>
+<span class="w">       </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">       </span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/29ed569db0f7c7daa9baf00c4d4f7b9b72cf88c12307a732547eeccc08acc65e.png"><img alt="_images/29ed569db0f7c7daa9baf00c4d4f7b9b72cf88c12307a732547eeccc08acc65e.png" src="_images/29ed569db0f7c7daa9baf00c4d4f7b9b72cf88c12307a732547eeccc08acc65e.png" style="width: 600px; height: 360px;" />
+<a class="reference internal image-reference" href="_images/e5f467a07f372432d08c5a8cf79cc401d8a2fa5e2021a03487f3c904de54d44f.png"><img alt="_images/e5f467a07f372432d08c5a8cf79cc401d8a2fa5e2021a03487f3c904de54d44f.png" src="_images/e5f467a07f372432d08c5a8cf79cc401d8a2fa5e2021a03487f3c904de54d44f.png" style="width: 600px; height: 360px;" />
 </a>
 </div>
 </div>
@@ -1221,15 +1212,22 @@ Number of Fisher Scoring iterations: 4
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-summary">Graphical Summary</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-odds">What are Odds?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">Logistic Regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-square-test">Chi-Square Test</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-hwe">Example 1 – HWE</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-gwas">Example 2 – GWAS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-hwe">Example 1 – HWE</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1-chi-square-test-directly-on-the-2-times-2-table">Method 1: Chi-square test directly on the <span class="math notranslate nohighlight">\(2\times 2\)</span> table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-traditional-hwe-chi-square-test-on-genotype-counts">Method 2: Traditional HWE chi-square test on genotype counts</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-gwas">Example 2 – GWAS</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Method 1: Chi-square test directly on the <span class="math notranslate nohighlight">\(2\times 2\)</span> table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-logistic-regression">Method 2 - Logistic Regression</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#supplementary">Supplementary</a><ul class="visible nav section-nav flex-column">

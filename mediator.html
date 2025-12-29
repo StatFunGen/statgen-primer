@@ -255,6 +255,13 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Random Effects Models</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="random_effects.html">Random Effects</a></li>
+
+
+
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="proportion_of_variance_explained.html">Proportion of Variance Explained and Heritability</a></li>
 
 
@@ -280,6 +287,7 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="collider.html">Collider</a></li>
+
 
 
 
@@ -572,11 +580,10 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-summary">Graphical Summary</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-mediation">What is Mediation?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mediation-vs-other-variable-types">Mediation vs Other Variable Types</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-mediation-framework">The Mediation Framework</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evidence-for-mediation">Evidence for Mediation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-steps">Analysis Steps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mediation-vs-other-variable-types">Mediation vs Other Variable Types</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
@@ -619,33 +626,13 @@ X \rightarrow W \rightarrow Y
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="technical-details">
 <h1>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading">#</a></h1>
-<section id="what-is-mediation">
-<h2>What is Mediation?<a class="headerlink" href="#what-is-mediation" title="Link to this heading">#</a></h2>
-<p>A mediator is a variable that <strong>explains the mechanism</strong> by which a genetic variant affects an outcome. Unlike confounders (which create bias) or colliders (which induce bias when controlled), mediators represent the <strong>actual biological pathway</strong>.</p>
-</section>
-<section id="mediation-vs-other-variable-types">
-<h2>Mediation vs Other Variable Types<a class="headerlink" href="#mediation-vs-other-variable-types" title="Link to this heading">#</a></h2>
-<p>When deciding whether to control for a variable, ask:</p>
-<p><strong>Mediator</strong>: “Does this variable explain HOW the SNP affects the outcome?”</p>
-<ul class="simple">
-<li><p><strong>Action</strong>: Can control to isolate effects not through the mediator</p></li>
-<li><p><strong>Structure</strong>: SNP -&gt; Mediator -&gt; Outcome</p></li>
-</ul>
-<p><strong>Confounder</strong>: “Does this variable affect both SNP and outcome?”</p>
-<ul class="simple">
-<li><p><strong>Action</strong>: Must control to remove bias</p></li>
-<li><p><strong>Structure</strong>: SNP &lt;- Confounder -&gt; Outcome</p></li>
-</ul>
-<p><strong>Collider</strong>: “Is this variable caused by both SNP and outcome?”</p>
-<ul class="simple">
-<li><p><strong>Action</strong>: Never control - creates bias</p></li>
-<li><p><strong>Structure</strong>: SNP -&gt; Collider &lt;- Outcome</p></li>
-</ul>
-</section>
 <section id="the-mediation-framework">
 <h2>The Mediation Framework<a class="headerlink" href="#the-mediation-framework" title="Link to this heading">#</a></h2>
+<p>A mediator <strong>explains the mechanism</strong> by which a genetic variant affects an outcome, representing the <strong>actual biological pathway</strong>:</p>
 <div class="math notranslate nohighlight">
-\[\text{Total Effect} = \text{Effect through Mediator} + \text{Other Effects}\]</div>
+\[
+\text{Total Effect} = \text{Effect through Mediator} + \text{Other Effects}
+\]</div>
 <p>Where:</p>
 <ul class="simple">
 <li><p><strong>Total Effect</strong>: SNP -&gt; Outcome (<span class="math notranslate nohighlight">\(\beta\)</span> without controlling for mediator)</p></li>
@@ -674,13 +661,41 @@ X \rightarrow W \rightarrow Y
 <li><p>If SNP effect reduces -&gt; <strong>Partial mediation</strong></p></li>
 <li><p>If SNP effect unchanged -&gt; <strong>No mediation</strong></p></li>
 </ul>
-<p><strong>Examples of Mediation</strong>:</p>
-<ul class="simple">
-<li><p>SNP -&gt; Gene Expression -&gt; Disease</p></li>
-<li><p>SNP -&gt; Protein Levels -&gt; Metabolic Trait</p></li>
-<li><p>SNP -&gt; Hormone Levels -&gt; Growth/Development</p></li>
-<li><p>SNP -&gt; Enzyme Activity -&gt; Drug Response</p></li>
-</ul>
+</section>
+<section id="mediation-vs-other-variable-types">
+<h2>Mediation vs Other Variable Types<a class="headerlink" href="#mediation-vs-other-variable-types" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Question</p></th>
+<th class="head"><p>Action</p></th>
+<th class="head"><p>Structure</p></th>
+<th class="head"><p>Examples</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Confounder</strong></p></td>
+<td><p>Does this affect both SNP and outcome?</p></td>
+<td><p>Must control to remove bias</p></td>
+<td><p>SNP ← Confounder → Outcome</p></td>
+<td><p>Population ancestry, age, sex, environmental exposures</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Collider</strong></p></td>
+<td><p>Is this caused by both SNP and outcome?</p></td>
+<td><p>Never control—creates bias</p></td>
+<td><p>SNP → Collider ← Outcome</p></td>
+<td><p>Study participation, hospital admission, survival to study age</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Mediator</strong></p></td>
+<td><p>Does this explain HOW SNP affects outcome?</p></td>
+<td><p>Can control to isolate direct effects</p></td>
+<td><p>SNP → Mediator → Outcome</p></td>
+<td><p>Gene expression, protein levels, hormone levels, enzyme activity</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Important:</strong> Whether a variable is a confounder, mediator, or collider depends on your research question and the causal structure of your specific analysis. The same variable can play different roles in different analyses.</p>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="related-topics">
@@ -693,11 +708,7 @@ X \rightarrow W \rightarrow Y
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="example">
 <h1>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
-<p>Imagine you discover that a genetic variant is associated with height. The natural follow-up question is: <em>How does this variant actually influence height?</em> Does it work through growth hormones, bone development, or some other biological pathway?</p>
-<p>Understanding the mechanism matters because it tells us where and how we might intervene. If a variant affects height through growth hormone levels, then measuring growth hormone could help us understand individual differences in height and potentially guide treatment decisions.</p>
-<p>Here’s our classic scenario: We have 5 individuals with different genetic variants, and we want to understand how one particular variant influences height. We suspect that growth hormone might be the key mediator - the biological “middleman” that explains how genes influence height.</p>
-<p>The crucial question is: <em>What happens to the genetic association with height when we account for growth hormone levels? Does the genetic effect disappear (suggesting complete mediation) or remain (suggesting other pathways)?</em></p>
-<p>The crucial question is: <em>If growth hormone is truly the <strong>only</strong> mechanism by which this variant affects height, then controlling for growth hormone levels should remove the genetic association with height.</em> Why? Because if this is the only pathway, then once we account for the mediator, there should be no remaining pathway for the variant to influence height.</p>
+<p>A genetic variant is associated with height—but <em>how</em> does it influence height? We have 5 individuals and suspect growth hormone is the mediator. If growth hormone is the <strong>only</strong> pathway, then controlling for it should eliminate the variant’s association with height. If the association disappears, we have complete mediation; if it merely reduces, we have partial mediation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clear the environment</span>
@@ -722,8 +733,8 @@ X \rightarrow W \rightarrow Y
 
 <span class="n">alt_alleles</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;T&quot;</span><span class="p">)</span>
 
-<span class="c1"># Convert to raw genotype matrix using the additive / dominant / recessive model</span>
-<span class="n">Xraw_additive</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">)</span><span class="w"> </span><span class="c1"># dount number of non-reference alleles</span>
+<span class="c1"># Convert to raw genotype matrix using the additive model</span>
+<span class="n">Xraw_additive</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">)</span><span class="w"> </span><span class="c1"># count number of non-reference alleles</span>
 
 <span class="nf">rownames</span><span class="p">(</span><span class="n">Xraw_additive</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rownames</span><span class="p">(</span><span class="n">geno_matrix</span><span class="p">)</span>
 <span class="nf">colnames</span><span class="p">(</span><span class="n">Xraw_additive</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">geno_matrix</span><span class="p">)</span>
@@ -761,36 +772,30 @@ X \rightarrow W \rightarrow Y
 
 <span class="n">height_raw</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">160</span><span class="w"> </span><span class="o">+</span><span class="w">                      </span><span class="c1"># Base height</span>
 <span class="w">             </span><span class="m">3</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">GH</span><span class="w"> </span><span class="o">+</span><span class="w">                    </span><span class="c1"># Growth hormone effect (mediator pathway)</span>
-<span class="w">             </span><span class="m">1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">X</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w">               </span><span class="c1"># Small direct effect from variant 1</span>
-<span class="w">             </span><span class="m">0.5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">X</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w">             </span><span class="c1"># Small direct effect from variant 2</span>
-<span class="w">             </span><span class="m">0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">X</span><span class="p">[,</span><span class="w"> </span><span class="m">3</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w">               </span><span class="c1"># NO direct effect from variant 3 (fully mediated)</span>
-<span class="w">             </span><span class="nf">rnorm</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w">           </span><span class="c1"># Small noise</span>
+<span class="w">             </span><span class="m">1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">X</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w">                </span><span class="c1"># Small direct effect from variant 1</span>
+<span class="w">             </span><span class="m">0.5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">X</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w">              </span><span class="c1"># Small direct effect from variant 2</span>
+<span class="w">             </span><span class="m">0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">X</span><span class="p">[,</span><span class="w"> </span><span class="m">3</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w">                </span><span class="c1"># NO direct effect from variant 3 (fully mediated)</span>
+<span class="w">             </span><span class="nf">rnorm</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w">            </span><span class="c1"># Small noise</span>
 
 <span class="n">Y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">scale</span><span class="p">(</span><span class="n">height_raw</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Then we perform OLS regression for each SNP:</p>
+<p>Then we perform OLS regression for the third variant:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">p_values</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="n">M</span><span class="p">)</span><span class="w">  </span><span class="c1"># Store p-values</span>
-<span class="n">betas</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="n">M</span><span class="p">)</span><span class="w">     </span><span class="c1"># Store estimated effect sizes</span>
-<span class="n">p_values_adjusted</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="n">M</span><span class="p">)</span><span class="w">  </span><span class="c1"># Store p-values adjusted for GH</span>
-<span class="n">betas_adjusted</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="n">M</span><span class="p">)</span><span class="w">     </span><span class="c1"># Store estimated effect sizes adjusted for GH</span>
-<span class="c1"># Perform OLS regression for each SNP</span>
-<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">M</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">SNP</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">X</span><span class="p">[,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w">  </span><span class="c1"># Extract genotype for SNP j</span>
-<span class="w">  </span><span class="n">model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">SNP</span><span class="p">)</span><span class="w">  </span><span class="c1"># OLS regression: Trait ~ SNP</span>
-<span class="w">  </span><span class="n">adjusted_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">SNP</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">GH</span><span class="p">)</span><span class="w">  </span><span class="c1"># Adjust for GH</span>
-<span class="w">  </span><span class="n">summary_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
-<span class="w">  </span><span class="n">summary_adjusted_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">adjusted_model</span><span class="p">)</span>
-<span class="w">  </span><span class="c1"># Store p-value and effect size (coefficient)</span>
-<span class="w">  </span><span class="n">p_values</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">summary_model</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">]</span><span class="w">  </span><span class="c1"># p-value for SNP effect</span>
-<span class="w">  </span><span class="n">betas</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">summary_model</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w">     </span><span class="c1"># Estimated beta coefficient</span>
-<span class="w">  </span><span class="n">p_values_adjusted</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">summary_adjusted_model</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">]</span><span class="w">  </span><span class="c1"># p-value for SNP effect adjusted for growth hormone</span>
-<span class="w">  </span><span class="n">betas_adjusted</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">summary_adjusted_model</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w">     </span><span class="c1"># Estimated beta coefficient adjusted for growth hormone</span>
-<span class="p">}</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Perform OLS regression for the third variant</span>
+<span class="n">SNP</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">X</span><span class="p">[,</span><span class="w"> </span><span class="m">3</span><span class="p">]</span><span class="w">  </span><span class="c1"># Extract genotype for SNP 3</span>
+<span class="n">model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">SNP</span><span class="p">)</span><span class="w">  </span><span class="c1"># OLS regression: Trait ~ SNP</span>
+<span class="n">adjusted_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">SNP</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">GH</span><span class="p">)</span><span class="w">  </span><span class="c1"># Adjust for GH, OLS regression: Trait ~ SNP + GH</span>
+<span class="n">summary_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">summary_adjusted_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">adjusted_model</span><span class="p">)</span>
+
+<span class="n">p_value</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">summary_model</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">]</span><span class="w">  </span><span class="c1"># p-value for SNP effect</span>
+<span class="n">beta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">summary_model</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w">     </span><span class="c1"># Estimated beta coefficient</span>
+<span class="n">p_value_adjusted</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">summary_adjusted_model</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">]</span><span class="w">  </span><span class="c1"># p-value for SNP effect adjusted for growth hormone</span>
+<span class="n">beta_adjusted</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">summary_adjusted_model</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w">     </span><span class="c1"># Estimated beta coefficient adjusted for growth hormone</span>
 </pre></div>
 </div>
 </div>
@@ -798,29 +803,26 @@ X \rightarrow W \rightarrow Y
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create results table</span>
-<span class="n">results</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">Variant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">X</span><span class="p">),</span><span class="w"> </span><span class="n">Beta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">betas</span><span class="p">,</span><span class="w"> </span><span class="n">P_Value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_values</span><span class="p">,</span><span class="w"> </span>
-<span class="w">                      </span><span class="n">Beta_Adjusted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">betas_adjusted</span><span class="p">,</span><span class="w"> </span><span class="n">P_Value_Adjusted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_values_adjusted</span><span class="p">)</span>
+<span class="n">results</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">Variant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Variant 3&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Beta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">beta</span><span class="p">,</span><span class="w"> </span><span class="n">P_Value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_value</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                      </span><span class="n">Beta_Adjusted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">beta_adjusted</span><span class="p">,</span><span class="w"> </span><span class="n">P_Value_Adjusted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_value_adjusted</span><span class="p">)</span>
 <span class="n">results</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="dataframe">
-<caption>A data.frame: 3 x 5</caption>
+<caption>A data.frame: 1 × 5</caption>
 <thead>
 	<tr><th scope=col>Variant</th><th scope=col>Beta</th><th scope=col>P_Value</th><th scope=col>Beta_Adjusted</th><th scope=col>P_Value_Adjusted</th></tr>
 	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
 </thead>
 <tbody>
-	<tr><td>Variant 1</td><td>-0.3763359</td><td>0.532398192</td><td> 0.2151202</td><td>0.1845598</td></tr>
-	<tr><td>Variant 2</td><td> 0.9133526</td><td>0.030216252</td><td> 0.2247750</td><td>0.5336030</td></tr>
-	<tr><td>Variant 3</td><td> 0.9668181</td><td>0.007219589</td><td>-3.0237908</td><td>0.3374487</td></tr>
+	<tr><td>Variant 3</td><td>0.9277802</td><td>0.02304393</td><td>2.220295</td><td>0.6211939</td></tr>
 </tbody>
 </table>
 </div></div>
 </div>
-<p>The results perfectly demonstrate the concept of mediation in genetic association studies. In the total effect analysis (without controlling for growth hormone), Variant 3 shows significant associations with height (p = 0.007). However, when we control for growth hormone as a mediator, the pattern dramatically changes: Variant 3’s association completely disappears (p-value increases from 0.007 to 0.337), indicating that its effect on height is entirely through the growth hormone pathway rather than through other mechanisms.</p>
-<p>This illustrates the key principle that controlling for a mediator reveals the effect NOT through that mediator. For Variant 3, the loss of significance after controlling for growth hormone confirms that this variant affects height specifically through its influence on growth hormone levels, with no additional pathways contributing to the association. This represents a classic complete mediation scenario in genetic studies.</p>
+<p>Variant 3 shows complete mediation: its association with height (p = 0.023) disappears when controlling for growth hormone (p = 0.62). This confirms that Variant 3 affects height entirely through growth hormone, with no direct pathway.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -891,11 +893,10 @@ X \rightarrow W \rightarrow Y
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-summary">Graphical Summary</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-mediation">What is Mediation?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mediation-vs-other-variable-types">Mediation vs Other Variable Types</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-mediation-framework">The Mediation Framework</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evidence-for-mediation">Evidence for Mediation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-steps">Analysis Steps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mediation-vs-other-variable-types">Mediation vs Other Variable Types</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>

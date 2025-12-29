@@ -59,9 +59,11 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'random_effect';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'random_effects';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Proportion of Variance Explained and Heritability" href="proportion_of_variance_explained.html" />
+    <link rel="prev" title="Summary Statistics" href="summary_statistics.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -123,8 +125,6 @@
     <div class="bd-container__inner bd-page-width">
       
       
-      
-        
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -254,7 +254,14 @@
 
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Random Effects Models</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Random Effects</a></li>
+
+
+
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="proportion_of_variance_explained.html">Proportion of Variance Explained and Heritability</a></li>
 
 
@@ -280,6 +287,7 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="collider.html">Collider</a></li>
+
 
 
 
@@ -474,7 +482,7 @@
       
       
       
-      <li><a href="_sources/random_effect.ipynb" target="_blank"
+      <li><a href="_sources/random_effects.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -574,10 +582,9 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fixed-effects-model">Fixed Effects Model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-effects-model">Random Effects Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-insight">Key Insight</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
 </ul>
 </li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-individual-level-random-effects-simulation">Example 1 – Individual-Level Random Effects Simulation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-apoe-varepsilon4-and-alzheimer-s-disease">Example 2 – APOE <span class="math notranslate nohighlight">\(\varepsilon4\)</span> and Alzheimer’s Disease</a></li>
@@ -609,7 +616,7 @@ document.write(`
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="key-formula">
 <h1>Key Formula<a class="headerlink" href="#key-formula" title="Link to this heading">#</a></h1>
-<p>Under the single marker linear regression, instead of the fixed value of <span class="math notranslate nohighlight">\(\beta\)</span> as we discussed in <a class="reference external" href="https://statfungen.github.io/statgen-primer/ordinary_least_squares.html">Lecture: ols</a>, in the <strong>random effect model</strong>, we acknowledge that we haven’t conditioned on all relevant factors that influence the genetic effect:</p>
+<p>Under the single marker linear regression, instead of the fixed value of <span class="math notranslate nohighlight">\(\beta\)</span> as we discussed in <a class="reference external" href="https://statfungen.github.io/statgen-primer/ordinary_least_squares.html">Lecture: ordinary least squares</a>, in the <strong>random effect model</strong>, we acknowledge that we haven’t conditioned on all relevant factors that influence the genetic effect:</p>
 <div class="math notranslate nohighlight">
 \[
 \mathbf{Y}=\mathbf{X}\beta+\boldsymbol{\epsilon}, \beta \sim N(\beta_0, \sigma_0^2)
@@ -628,6 +635,10 @@ document.write(`
 <h2>Fixed Effects Model<a class="headerlink" href="#fixed-effects-model" title="Link to this heading">#</a></h2>
 <div class="math notranslate nohighlight">
 \[
+\text{Perfect conditioning} \rightarrow \text{Fixed effects}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
 \mathbf{Y} = \mathbf{X}\beta + \boldsymbol{\epsilon}
 \]</div>
 <p>Assumes <span class="math notranslate nohighlight">\(\beta\)</span> is constant across all contexts - this would only be true if we could condition on every single factor that influences the genetic effect:</p>
@@ -642,8 +653,17 @@ document.write(`
 <h2>Random Effects Model<a class="headerlink" href="#random-effects-model" title="Link to this heading">#</a></h2>
 <div class="math notranslate nohighlight">
 \[
+\text{Incomplete conditioning} \rightarrow \text{Random effects}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\text{Unknown factors always exist} \rightarrow \text{Random effects are more reasonable}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
 \mathbf{Y} = \mathbf{X}\beta + \boldsymbol{\epsilon}, \quad \beta \sim N(\beta_0, \sigma_0^2)
 \]</div>
+<p>In practice, we can never achieve complete conditioning because we don’t even know what all the relevant factors are. Random effects models honestly acknowledge this fundamental limitation - there’s always something affecting genetic effects that we haven’t accounted for.</p>
 <p>Acknowledges the reality that <span class="math notranslate nohighlight">\(\beta\)</span> varies because <strong>there will always be unmeasured factors</strong>:</p>
 <ul class="simple">
 <li><p>Environmental factors we didn’t think to measure</p></li>
@@ -652,33 +672,16 @@ document.write(`
 <li><p>Biological processes we haven’t discovered yet</p></li>
 </ul>
 </section>
-<section id="key-insight">
-<h2>Key Insight<a class="headerlink" href="#key-insight" title="Link to this heading">#</a></h2>
-<div class="math notranslate nohighlight">
-\[
-\text{Perfect conditioning} \rightarrow \text{Fixed effects}
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-\text{Incomplete conditioning} \rightarrow \text{Random effects}
-\]</div>
-<p>However,</p>
-<div class="math notranslate nohighlight">
-\[
-\text{Unknown factors always exist} \rightarrow \text{Random effects are more reasonable}
-\]</div>
-<p>In practice, we can never achieve complete conditioning because we don’t even know what all the relevant factors are. Random effects models honestly acknowledge this fundamental limitation - there’s always something affecting genetic effects that we haven’t accounted for.</p>
 </section>
-<section id="related-topics">
-<h2>Related Topics<a class="headerlink" href="#related-topics" title="Link to this heading">#</a></h2>
+<section class="tex2jax_ignore mathjax_ignore" id="related-topics">
+<h1>Related Topics<a class="headerlink" href="#related-topics" title="Link to this heading">#</a></h1>
 <ul class="simple">
-<li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/ordinary_least_squares.html">Lecture: ordinary least squares</a></p></li>
-<li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/summary_statistics.html">Lecture: summary statistics</a></p></li>
-<li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/confounder.html">Lecture: confounder</a></p></li>
-<li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/Bayes_rule.html">Lecture: bayes rule</a></p></li>
-<li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/Bayesian_mixture_model.html">Lecture: bayesian mixture model</a></p></li>
+<li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/ordinary_least_squares.html">ordinary least squares</a></p></li>
+<li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/summary_statistics.html">summary statistics</a></p></li>
+<li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/confounder.html">confounder</a></p></li>
+<li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/Bayes_rule.html">Bayes rule</a></p></li>
+<li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/Bayesian_mixture_model.html">Bayesian mixture model</a></p></li>
 </ul>
-</section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="example">
 <h1>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
@@ -710,8 +713,8 @@ document.write(`
 
 <span class="n">alt_alleles</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;T&quot;</span><span class="p">)</span>
 
-<span class="c1"># Convert to raw genotype matrix using the additive / dominant / recessive model</span>
-<span class="n">Xraw_additive</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">)</span><span class="w"> </span><span class="c1"># dount number of non-reference alleles</span>
+<span class="c1"># Convert to raw genotype matrix using the additive model</span>
+<span class="n">Xraw_additive</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">)</span><span class="w"> </span><span class="c1"># count number of non-reference alleles</span>
 
 <span class="nf">rownames</span><span class="p">(</span><span class="n">Xraw_additive</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rownames</span><span class="p">(</span><span class="n">geno_matrix</span><span class="p">)</span>
 <span class="nf">colnames</span><span class="p">(</span><span class="n">Xraw_additive</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">geno_matrix</span><span class="p">)</span>
@@ -728,7 +731,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Let’s assume that the first variant is the true causal variant and its <span class="math notranslate nohighlight">\(\beta\)</span> comes from a normal distribution <span class="math notranslate nohighlight">\(N(0,1)\)</span>, while the error term comes from a distribution <span class="math notranslate nohighlight">\(N(0,0.3)\)</span>, then the observed trait value would be:</p>
+<p>Let’s assume that the first variant is the true causal variant and its <span class="math notranslate nohighlight">\(\beta\)</span> comes from a normal distribution <span class="math notranslate nohighlight">\(N(0,1)\)</span>, while the error term comes from a distribution <span class="math notranslate nohighlight">\(N(0,0.3^2)\)</span>, then the observed trait value would be:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">beta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
@@ -751,7 +754,7 @@ document.write(`
 .list-inline>li {display: inline-block}
 .list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
 </style>
-<ol class=list-inline><li>-0.591031102584368</li><li>0.026594369016167</li><li>-1.51655309708187</li><li>-1.36265334929581</li><li>1.17848915603162</li></ol>
+<ol class=list-inline><li>-1.51655309708187</li><li>-1.36265334929581</li><li>1.17848915603162</li><li>-0.934151319673365</li><li>1.32360564621202</li></ol>
 </div></div>
 </div>
 </section>
@@ -759,7 +762,7 @@ document.write(`
 <h2>Example 2 – APOE <span class="math notranslate nohighlight">\(\varepsilon4\)</span> and Alzheimer’s Disease<a class="headerlink" href="#example-2-apoe-varepsilon4-and-alzheimer-s-disease" title="Link to this heading">#</a></h2>
 <p>Let’s use a real-world example to understand when genetic effects should be treated as fixed versus random. Consider the APOE <span class="math notranslate nohighlight">\(\varepsilon4\)</span> variant, one of the strongest known genetic risk factors for Alzheimer’s disease.</p>
 <p><strong>Why APOE <span class="math notranslate nohighlight">\(\varepsilon4\)</span> Effects Vary?</strong></p>
-<p>Imagine you’re studying APOE <span class="math notranslate nohighlight">\(\varepsilon4\)</span>’s effect on Alzheimer’s risk. The key insight is that this effect isn’t the same for everyone - it depends on factors we may or may not have measured.</p>
+<p>Imagine you’re studying APOE <span class="math notranslate nohighlight">\(\varepsilon4\)</span>’s effect on the risk of developing Alzheimer’s disease. The key insight is that this effect isn’t the same for everyone - it depends on factors we may or may not have measured.</p>
 <p><strong>When would APOE <span class="math notranslate nohighlight">\(\varepsilon4\)</span> have a “fixed” effect?</strong> Only if we’ve conditioned on all the key factors:</p>
 <ul class="simple">
 <li><p><strong>Ancestry</strong>: European populations show strong APOE <span class="math notranslate nohighlight">\(\varepsilon4\)</span> effects, while some other populations show weaker associations</p></li>
@@ -900,7 +903,7 @@ Effect variation (SD across individuals): 0.738
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="dataframe">
-<caption>A data.frame: 16 x 4</caption>
+<caption>A data.frame: 16 × 4</caption>
 <thead>
 	<tr><th scope=col>Ancestry</th><th scope=col>Sex</th><th scope=col>Elderly</th><th scope=col>Mean_Effect</th></tr>
 	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;lgl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
@@ -946,7 +949,6 @@ Effect variation (SD across individuals): 0.738
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
 <span class="nf">library</span><span class="p">(</span><span class="n">gridExtra</span><span class="p">)</span>
 
-<span class="c1"># Set up data for 5 individuals</span>
 <span class="n">individuals</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">5</span>
 <span class="n">fixed_effect</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.5</span><span class="w">  </span><span class="c1"># Same effect for all individuals</span>
 <span class="nf">set.seed</span><span class="p">(</span><span class="m">42</span><span class="p">)</span>
@@ -971,7 +973,7 @@ Effect variation (SD across individuals): 0.738
 <span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;steelblue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">7</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.9</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
 <span class="w">  </span><span class="nf">geom_line</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;steelblue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
 <span class="w">  </span><span class="nf">annotate</span><span class="p">(</span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fixed_effect</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">0.05</span><span class="p">,</span><span class="w"> </span>
-<span class="w">           </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">expression</span><span class="p">(</span><span class="n">beta</span><span class="p">),</span><span class="w"> </span>
+<span class="w">           </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;beta&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">parse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span>
 <span class="w">           </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">fontface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
 <span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Individual&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Genetic Effect&quot;</span><span class="p">,</span><span class="w"> </span>
 <span class="w">       </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Fixed Effects Model&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
@@ -982,7 +984,11 @@ Effect variation (SD across individuals): 0.738
 <span class="w">    </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hjust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">),</span>
 <span class="w">    </span><span class="n">axis.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">),</span>
 <span class="w">    </span><span class="n">axis.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16</span><span class="p">),</span>
-<span class="w">    </span><span class="n">axis.ticks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">()</span>
+<span class="w">    </span><span class="n">axis.ticks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">(),</span>
+<span class="w">    </span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">),</span>
+<span class="w">    </span><span class="n">panel.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">),</span>
+<span class="w">    </span><span class="n">panel.grid.major</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_line</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;grey90&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">panel.grid.minor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_line</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;grey95&quot;</span><span class="p">)</span>
 <span class="w">  </span><span class="p">)</span>
 
 <span class="c1"># Random Effects Plot</span>
@@ -1004,15 +1010,17 @@ Effect variation (SD across individuals): 0.738
 <span class="w">    </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hjust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">),</span>
 <span class="w">    </span><span class="n">axis.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">),</span>
 <span class="w">    </span><span class="n">axis.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16</span><span class="p">),</span>
-<span class="w">    </span><span class="n">axis.ticks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">()</span>
+<span class="w">    </span><span class="n">axis.ticks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">(),</span>
+<span class="w">    </span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">),</span>
+<span class="w">    </span><span class="n">panel.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">),</span>
+<span class="w">    </span><span class="n">panel.grid.major</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_line</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;grey90&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">panel.grid.minor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_line</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;grey95&quot;</span><span class="p">)</span>
 <span class="w">  </span><span class="p">)</span>
 
 <span class="c1"># Add distribution curve to random effects plot</span>
 <span class="n">x_curve</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">length.out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="p">)</span>
 <span class="n">y_curve</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">dnorm</span><span class="p">(</span><span class="n">x_curve</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.15</span><span class="p">)</span>
-<span class="c1"># Scale and shift the curve to fit on the right side (further away)</span>
-<span class="n">y_curve_scaled</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="n">y_curve</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">y_curve</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">6.5</span><span class="w">  </span><span class="c1"># Scale to fit x-axis range, moved further right</span>
-
+<span class="n">y_curve_scaled</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="n">y_curve</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">y_curve</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">6.5</span>
 <span class="n">curve_data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y_curve_scaled</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x_curve</span><span class="p">)</span>
 
 <span class="c1"># Enhanced Random Effects Plot with distribution</span>
@@ -1026,10 +1034,12 @@ Effect variation (SD across individuals): 0.738
 <span class="w">  </span><span class="nf">geom_path</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">curve_data</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">),</span><span class="w"> </span>
 <span class="w">            </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;purple&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.7</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
 <span class="w">  </span><span class="nf">annotate</span><span class="p">(</span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.55</span><span class="p">,</span><span class="w"> </span>
-<span class="w">           </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">expression</span><span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="m">0</span><span class="p">]),</span><span class="w"> </span>
+<span class="w">           </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;beta[0]&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">           </span><span class="n">parse</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span>
 <span class="w">           </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">fontface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">annotate</span><span class="p">(</span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">7.2</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span>
-<span class="w">           </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">expression</span><span class="p">(</span><span class="n">beta</span><span class="w"> </span><span class="o">%~%</span><span class="w"> </span><span class="nf">N</span><span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="m">0</span><span class="p">],</span><span class="w"> </span><span class="n">sigma</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">^</span><span class="m">2</span><span class="p">)),</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">annotate</span><span class="p">(</span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.75</span><span class="p">,</span><span class="w"> </span>
+<span class="w">           </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;beta %~% N(beta[0], sigma[0]^2)&quot;</span><span class="p">,</span><span class="w">  </span><span class="c1"># String notation</span>
+<span class="w">           </span><span class="n">parse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">  </span><span class="c1"># Parse as expression</span>
 <span class="w">           </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;purple&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">fontface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
 <span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Individual&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Genetic Effect&quot;</span><span class="p">,</span><span class="w"> </span>
 <span class="w">       </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Random Effects Model&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
@@ -1040,7 +1050,11 @@ Effect variation (SD across individuals): 0.738
 <span class="w">    </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hjust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">),</span>
 <span class="w">    </span><span class="n">axis.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">),</span>
 <span class="w">    </span><span class="n">axis.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16</span><span class="p">),</span>
-<span class="w">    </span><span class="n">axis.ticks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">()</span>
+<span class="w">    </span><span class="n">axis.ticks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">(),</span>
+<span class="w">    </span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">),</span>
+<span class="w">    </span><span class="n">panel.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">),</span>
+<span class="w">    </span><span class="n">panel.grid.major</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_line</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;grey90&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">panel.grid.minor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_line</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;grey95&quot;</span><span class="p">)</span>
 <span class="w">  </span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1049,44 +1063,22 @@ Effect variation (SD across individuals): 0.738
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span>
+<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;./figures/random_effects_fixed.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p1</span><span class="p">,</span><span class="w"> </span>
+<span class="w">       </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span>
+<span class="w">       </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">       </span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message in is.na(x):
-&quot;is.na() applied to non-(list or vector) of type &#39;expression&#39;&quot;
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/580965c019cb89eebf06e58c58eb4ef65f830f4843313bb07c7bf5274ea40859.png"><img alt="_images/580965c019cb89eebf06e58c58eb4ef65f830f4843313bb07c7bf5274ea40859.png" src="_images/580965c019cb89eebf06e58c58eb4ef65f830f4843313bb07c7bf5274ea40859.png" style="width: 420px; height: 420px;" />
+<a class="reference internal image-reference" href="_images/7465057b909070cf0ab70d135d091a74f8af114360e41b49ca780d4f42b34f51.png"><img alt="_images/7465057b909070cf0ab70d135d091a74f8af114360e41b49ca780d4f42b34f51.png" src="_images/7465057b909070cf0ab70d135d091a74f8af114360e41b49ca780d4f42b34f51.png" style="width: 420px; height: 420px;" />
 </a>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">p2</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message in is.na(x):
-&quot;is.na() applied to non-(list or vector) of type &#39;expression&#39;&quot;
-Warning message in is.na(x):
-&quot;is.na() applied to non-(list or vector) of type &#39;expression&#39;&quot;
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/a18ce1b1623b20940cbc447be7cb59764bd2dcee0776e473fb2e64b0a7c01327.png"><img alt="_images/a18ce1b1623b20940cbc447be7cb59764bd2dcee0776e473fb2e64b0a7c01327.png" src="_images/a18ce1b1623b20940cbc447be7cb59764bd2dcee0776e473fb2e64b0a7c01327.png" style="width: 420px; height: 420px;" />
-</a>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save individual plots</span>
-<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;./cartoons/random_effects_fixed.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p1</span><span class="p">,</span><span class="w"> </span>
-<span class="w">       </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span>
-<span class="w">       </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">       </span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="p">)</span>
-
-<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;./cartoons/random_effects_random.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p2</span><span class="p">,</span><span class="w"> </span>
+<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;./figures/random_effects_random.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p2</span><span class="p">,</span><span class="w"> </span>
 <span class="w">       </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span>
 <span class="w">       </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span>
 <span class="w">       </span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="p">)</span>
@@ -1094,14 +1086,8 @@ Warning message in is.na(x):
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message in is.na(x):
-&quot;is.na() applied to non-(list or vector) of type &#39;expression&#39;&quot;
-Warning message in is.na(x):
-&quot;is.na() applied to non-(list or vector) of type &#39;expression&#39;&quot;
-Warning message in is.na(x):
-&quot;is.na() applied to non-(list or vector) of type &#39;expression&#39;&quot;
-</pre></div>
-</div>
+<a class="reference internal image-reference" href="_images/874372f6c36424b3b7b5d722202a454a40f9cd8945b99c149990c91dffe82a0e.png"><img alt="_images/874372f6c36424b3b7b5d722202a454a40f9cd8945b99c149990c91dffe82a0e.png" src="_images/874372f6c36424b3b7b5d722202a454a40f9cd8945b99c149990c91dffe82a0e.png" style="width: 420px; height: 420px;" />
+</a>
 </div>
 </div>
 </section>
@@ -1137,6 +1123,24 @@ Warning message in is.na(x):
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="summary_statistics.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Summary Statistics</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="proportion_of_variance_explained.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Proportion of Variance Explained and Heritability</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -1159,10 +1163,9 @@ Warning message in is.na(x):
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fixed-effects-model">Fixed Effects Model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-effects-model">Random Effects Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-insight">Key Insight</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
 </ul>
 </li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-individual-level-random-effects-simulation">Example 1 – Individual-Level Random Effects Simulation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-apoe-varepsilon4-and-alzheimer-s-disease">Example 2 – APOE <span class="math notranslate nohighlight">\(\varepsilon4\)</span> and Alzheimer’s Disease</a></li>

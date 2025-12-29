@@ -255,6 +255,13 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Random Effects Models</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="random_effects.html">Random Effects</a></li>
+
+
+
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="proportion_of_variance_explained.html">Proportion of Variance Explained and Heritability</a></li>
 
 
@@ -280,6 +287,7 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="collider.html">Collider</a></li>
+
 
 
 
@@ -572,10 +580,10 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-summary">Graphical Summary</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-do-we-need-meta-analysis">Why Do We Need Meta-Analysis?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-the-weighting-works">How the Weighting Works</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-meta-analysis">Why Meta-Analysis?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-variance-weighting">Inverse-Variance Weighting</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fixed-effects-assumption">The Fixed-Effects Assumption</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#important-limitations">Important Limitations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations">Limitations</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
@@ -615,55 +623,28 @@ document.write(`
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="technical-details">
 <h1>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading">#</a></h1>
-<section id="why-do-we-need-meta-analysis">
-<h2>Why Do We Need Meta-Analysis?<a class="headerlink" href="#why-do-we-need-meta-analysis" title="Link to this heading">#</a></h2>
-<p><strong>Individual studies have limitations:</strong></p>
-<ul class="simple">
-<li><p>Small sample sizes -&gt; low statistical power</p></li>
-<li><p>Population-specific effects -&gt; limited generalizability</p></li>
-<li><p>Random variation -&gt; unreliable estimates</p></li>
-</ul>
-<p><strong>Meta-analysis provides:</strong></p>
-<ul class="simple">
-<li><p>Larger effective sample size -&gt; higher power to detect true effects</p></li>
-<li><p>More precise effect estimates -&gt; narrower confidence intervals</p></li>
-<li><p>Broader population representation -&gt; better generalizability</p></li>
-</ul>
+<section id="why-meta-analysis">
+<h2>Why Meta-Analysis?<a class="headerlink" href="#why-meta-analysis" title="Link to this heading">#</a></h2>
+<p>Meta-analysis addresses individual study limitations (small samples, random variation, limited generalizability) by combining results to achieve larger effective sample sizes, more precise estimates, and broader population representation.</p>
 </section>
-<section id="how-the-weighting-works">
-<h2>How the Weighting Works<a class="headerlink" href="#how-the-weighting-works" title="Link to this heading">#</a></h2>
-<p>The key insight is that <strong>not all studies should contribute equally</strong>. Studies with more information should have more influence on the final result.</p>
-<p><strong>Weight is based on precision:</strong></p>
+<section id="inverse-variance-weighting">
+<h2>Inverse-Variance Weighting<a class="headerlink" href="#inverse-variance-weighting" title="Link to this heading">#</a></h2>
+<p>The key insight is that <strong>not all studies should contribute equally</strong>. Studies contribute based on their precision:</p>
 <div class="math notranslate nohighlight">
 \[
 w_k = \frac{1}{\text{SE}_k^2}
 \]</div>
 <p>Where <span class="math notranslate nohighlight">\(\text{SE}_k\)</span> is the standard error of study <span class="math notranslate nohighlight">\(k\)</span>.</p>
-<p><strong>This means:</strong></p>
-<ul class="simple">
-<li><p><strong>Large studies</strong> (small SE) get <strong>high weight</strong>: more influence</p></li>
-<li><p><strong>Small studies</strong> (large SE) get <strong>low weight</strong>: less influence</p></li>
-<li><p><strong>Precise studies</strong> contribute more to the final estimate</p></li>
-</ul>
+<p>Large, precise studies (small SE) receive high weight; small, imprecise studies (large SE) receive low weight.</p>
 </section>
 <section id="the-fixed-effects-assumption">
 <h2>The Fixed-Effects Assumption<a class="headerlink" href="#the-fixed-effects-assumption" title="Link to this heading">#</a></h2>
-<p>Fixed-effects meta-analysis assumes that <strong>all studies estimate the same true effect</strong>. Any differences between studies are due to random sampling variation only.</p>
-<p><strong>When to use fixed-effects:</strong></p>
-<ul class="simple">
-<li><p>Studies are very similar (same populations, methods, designs)</p></li>
-<li><p>Low heterogeneity between study results</p></li>
-<li><p>Want to estimate the common effect size</p></li>
-</ul>
-<p><strong>When NOT to use fixed-effects:</strong></p>
-<ul class="simple">
-<li><p>Studies differ substantially in populations or methods</p></li>
-<li><p>High heterogeneity between results</p></li>
-<li><p>Different genetic architectures across populations</p></li>
-</ul>
+<p>Assumes <strong>all studies estimate the same true effect</strong>—differences are only due to sampling variation.</p>
+<p><strong>Use when:</strong> Studies are similar in design, population, and methods with low heterogeneity.</p>
+<p><strong>Avoid when:</strong> Studies differ substantially or show high heterogeneity (use random-effects instead).</p>
 </section>
-<section id="important-limitations">
-<h2>Important Limitations<a class="headerlink" href="#important-limitations" title="Link to this heading">#</a></h2>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>Garbage in, garbage out</strong>: Meta-analysis cannot fix poorly designed individual studies</p></li>
 <li><p><strong>Publication bias</strong>: Published studies may not represent all conducted research</p></li>
@@ -676,18 +657,12 @@ w_k = \frac{1}{\text{SE}_k^2}
 <ul class="simple">
 <li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/ordinary_least_squares.html">ordinary least squares</a></p></li>
 <li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/summary_statistics.html">summary statistics</a></p></li>
+<li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/meta_analysis_random_effect.html">meta analysis random effect</a></p></li>
 </ul>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="example">
 <h1>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
-<p>This example demonstrates a meta-analysis of genetic variants across two European cohorts. We’ll analyze 3 genetic variants (SNPs) that have been genotyped in both cohorts and combine their effects using fixed-effects meta-analysis.</p>
-<p>We first generate the summary statistics for 3 variants from two independent European cohorts with different sample sizes (N=8000 and N=5500), and assuming that they are from the same genetic ancestry so they can be meta-analyzed.</p>
-<p>Then we perform fixed-effects meta-analysis combining results using:</p>
-<ul class="simple">
-<li><p>Sample size weighting (weight proportional to <span class="math notranslate nohighlight">\(\frac{1}{\sqrt{N}}\)</span>)</p></li>
-<li><p>Inverse variance weighting (weight = <span class="math notranslate nohighlight">\(\frac{1}{\text{SE}^2}\)</span>)</p></li>
-</ul>
-<p>Lastly we plot the effect size and p-values for each variant and compare the results from separate cohorts and meta-analysis results. We also compare the variance based on the sample size and inverse variance.</p>
+<p>This example demonstrates fixed-effects meta-analysis for a single genetic variant across two cohorts (N=5,000 and N=8,000). We combine effect estimates using inverse-variance weighting and compare the meta-analysis result to a pooled analysis of all individuals.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="o">=</span><span class="nf">ls</span><span class="p">())</span>
@@ -733,7 +708,7 @@ w_k = \frac{1}{\text{SE}_k^2}
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># 4. Fixed-effect meta-analysis</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># 4. Fixed-effect meta-analysis using inverse-variance weighting</span>
 <span class="n">w1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">se_pop1</span><span class="o">^</span><span class="m">2</span>
 <span class="n">w2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">se_pop2</span><span class="o">^</span><span class="m">2</span>
 
@@ -741,6 +716,12 @@ w_k = \frac{1}{\text{SE}_k^2}
 <span class="n">se_meta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">w1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">w2</span><span class="p">))</span>
 <span class="n">z_meta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">beta_meta</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">se_meta</span>
 <span class="n">p_meta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">pnorm</span><span class="p">(</span><span class="o">-</span><span class="nf">abs</span><span class="p">(</span><span class="n">z_meta</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">Error</span>: object &#39;se_pop1&#39; not found
+<span class="ne">Traceback</span>:
 </pre></div>
 </div>
 </div>
@@ -835,7 +816,7 @@ w_k = \frac{1}{\text{SE}_k^2}
 </table>
 </div></div>
 </div>
-<p>The results are almost identical (after numerical rounding).</p>
+<p>The meta-analysis (<span class="math notranslate nohighlight">\(\hat{\beta} = 1.015\)</span>, SE = 0.040) and pooled analysis (<span class="math notranslate nohighlight">\(\hat{\beta} = 1.013\)</span>, SE = 0.040) yield nearly identical results (after numerical rounding), confirming that fixed-effects meta-analysis is mathematically equivalent to analyzing all individuals together when the true effect is the same across studies.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -906,10 +887,10 @@ w_k = \frac{1}{\text{SE}_k^2}
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-summary">Graphical Summary</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-do-we-need-meta-analysis">Why Do We Need Meta-Analysis?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-the-weighting-works">How the Weighting Works</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-meta-analysis">Why Meta-Analysis?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-variance-weighting">Inverse-Variance Weighting</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fixed-effects-assumption">The Fixed-Effects Assumption</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#important-limitations">Important Limitations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations">Limitations</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>

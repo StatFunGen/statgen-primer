@@ -255,6 +255,13 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Random Effects Models</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="random_effects.html">Random Effects</a></li>
+
+
+
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="proportion_of_variance_explained.html">Proportion of Variance Explained and Heritability</a></li>
 
 
@@ -280,6 +287,7 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="collider.html">Collider</a></li>
+
 
 
 
@@ -573,7 +581,9 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relationship-to-kinship">Relationship to Kinship</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-rare-variants-should-matter-more">Why rare variants should matter more?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scaling-properties">Scaling Properties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-grm-for-statistical-genetics">Why GRM for statistical genetics?</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
@@ -592,7 +602,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="genetic-relationship-matrix">
 <h1>Genetic Relationship Matrix<a class="headerlink" href="#genetic-relationship-matrix" title="Link to this heading">#</a></h1>
-<p>Genetic relationship matrix (GRM) captures how related individuals are to each other at the genomic level by measuring the <strong>proportion of shared genetic variants</strong> across their genomes, and quantifies the <strong>genetic similarity</strong> between every pair of individuals in the population.</p>
+<p>Genetic relationship matrix (GRM) captures how related individuals are to each other at the genomic level by <strong>calculating the correlation</strong> in standardized genotypes across the genome to quantify the <strong>genetic similarity</strong> between every pair of individuals in the population.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="graphical-summary">
 <h1>Graphical Summary<a class="headerlink" href="#graphical-summary" title="Link to this heading">#</a></h1>
@@ -608,21 +618,33 @@ document.write(`
 <p>Where:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is the scaled genotype matrix of <span class="math notranslate nohighlight">\(N\)</span> individuals and <span class="math notranslate nohighlight">\(M\)</span> genetic variants.</p></li>
-<li><p><span class="math notranslate nohighlight">\( \mathbf{G} \)</span> is an <span class="math notranslate nohighlight">\( N \times N \)</span> matrix capturing the pairwise genetic relationships.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{G}\)</span> is an <span class="math notranslate nohighlight">\( N \times N \)</span> matrix capturing the pairwise genetic relationships.</p></li>
 </ul>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="technical-details">
 <h1>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading">#</a></h1>
 <section id="relationship-to-kinship">
 <h2>Relationship to Kinship<a class="headerlink" href="#relationship-to-kinship" title="Link to this heading">#</a></h2>
-<p><strong>What is kinship?</strong> Kinship measures how much DNA two people share from common ancestors. You share about 50% of your DNA with each parent. If you and your cousin both have the same grandparents, you share about 12.5% of your DNA with him or her. Strangers typically share almost no DNA.</p>
-<p><strong>So what’s different about the GRM?</strong> Instead of relying on family trees, the GRM looks directly at thousands of genetic variants and asks: “Based on what I can actually observe in the DNA, how similar are these two people?”</p>
-<p><strong>What’s this about allele frequencies?</strong> Here’s the key insight: if everyone in your population has allele A at some position, then you and I both having A tells us nothing special. But if only 2% of people have allele B, and we both have it, that’s much more informative about our relatedness. The GRM weights rare shared alleles more heavily than common ones.</p>
-<p><strong>Why is this better for statistical genetics?</strong> Kinship coefficients measure the probability that two individuals share alleles identical by descent (IBD) - alleles inherited from a recent common ancestor. The GRM, in contrast, measures actual allele sharing across the genome regardless of recent ancestry. This means the GRM captures both familial relationships and population structure, making it more comprehensive for statistical genetics applications where we want to account for all sources of genetic similarity.</p>
+<p><strong>Kinship vs. GRM</strong></p>
+<p>Kinship quantifies the <em>expected</em> proportion of genome shared identical-by-descent (IBD) from recent common ancestors. Traditional kinship assumes known pedigrees, but IBD can also be estimated directly from genetic data. Parent-offspring pairs share 50% IBD; unrelated individuals share negligible IBD despite ~99.9% overall sequence similarity among humans.</p>
+<p>The GRM instead measures <em>realized</em> genetic similarity directly from observed genotypes, without requiring pedigree information. Rather than tracking inheritance from known ancestors, it asks: “Based on thousands of genetic variants, how similar are these two individuals’ genomes?”</p>
+</section>
+<section id="why-rare-variants-should-matter-more">
+<h2>Why rare variants should matter more?<a class="headerlink" href="#why-rare-variants-should-matter-more" title="Link to this heading">#</a></h2>
+<p>The GRM weights variants by their informativeness. If everyone in the population carries allele A at a locus, observing that two individuals both have A reveals nothing about their relationship. But if only 2% carry the rare allele B, two individuals sharing B is highly informative. By standardizing variants using population allele frequencies, the GRM appropriately weights rare shared alleles more heavily than common ones.</p>
 </section>
 <section id="scaling-properties">
 <h2>Scaling Properties<a class="headerlink" href="#scaling-properties" title="Link to this heading">#</a></h2>
-<p>Because <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is standardized across individuals (each variant has variance = 1), the diagonal elements of <span class="math notranslate nohighlight">\(\mathbf{G}\)</span> aren’t necessarily 1. The diagonal tells you how “typical” each individual is compared to the population average.</p>
+<p>Because variants are standardized to unit variance across individuals (not within individuals), diagonal elements of <strong>G</strong> aren’t necessarily 1. Each diagonal value indicates how genetically “typical” that individual is relative to the population mean.</p>
+</section>
+<section id="why-grm-for-statistical-genetics">
+<h2>Why GRM for statistical genetics?<a class="headerlink" href="#why-grm-for-statistical-genetics" title="Link to this heading">#</a></h2>
+<p>Unlike kinship coefficients that capture only recent familial relationships, the GRM captures <em>all</em> sources of genetic similarity - both close relatedness and subtle population structure among seemingly unrelated individuals. This makes it essential for:</p>
+<ul class="simple">
+<li><p>Mixed models accounting for population stratification and cryptic relatedness</p></li>
+<li><p>Heritability estimation in unrelated cohorts</p></li>
+<li><p>Genomic prediction without pedigree information</p></li>
+</ul>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="related-topics">
@@ -630,12 +652,13 @@ document.write(`
 <ul class="simple">
 <li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/genotype_coding.html">genotype coding</a></p></li>
 <li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/minor_allele_frequency.html">minor allele frequency</a></p></li>
+<li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/linear_mixed_model.html">linear mixed model</a></p></li>
 </ul>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="example">
 <h1>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
-<p>We’ve been working with the same 5 individuals and 3 genetic variants throughout our examples so far. Now let’s see what happens when we use this data to compute a GRM. Which individuals appear most genetically similar to each other? Do any of them look like they might be related? And what do the numbers in the GRM actually tell us about genetic relationships?</p>
-<p>Let’s calculate the GRM step by step and interpret what each element means in terms of genetic similarity.</p>
+<p>Now let’s compute the GRM from our toy dataset of 5 individuals and 3 variants. Which individuals appear most genetically similar? Do any look related? What do the GRM values actually tell us?</p>
+<p>Let’s calculate the GRM step by step and interpret each element.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clear the environment</span>
@@ -660,8 +683,8 @@ document.write(`
 
 <span class="n">alt_alleles</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;T&quot;</span><span class="p">)</span>
 
-<span class="c1"># Convert to raw genotype matrix using the additive / dominant / recessive model</span>
-<span class="n">Xraw_additive</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">)</span><span class="w"> </span><span class="c1"># dount number of non-reference alleles</span>
+<span class="c1"># Convert to raw genotype matrix using the additive model</span>
+<span class="n">Xraw_additive</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">)</span><span class="w"> </span><span class="c1"># count number of non-reference alleles</span>
 
 <span class="nf">rownames</span><span class="p">(</span><span class="n">Xraw_additive</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rownames</span><span class="p">(</span><span class="n">geno_matrix</span><span class="p">)</span>
 <span class="nf">colnames</span><span class="p">(</span><span class="n">Xraw_additive</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">geno_matrix</span><span class="p">)</span>
@@ -687,7 +710,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="dataframe">
-<caption>A matrix: 5 x 3 of type dbl</caption>
+<caption>A matrix: 5 × 3 of type dbl</caption>
 <thead>
 	<tr><th></th><th scope=col>Variant 1</th><th scope=col>Variant 2</th><th scope=col>Variant 3</th></tr>
 </thead>
@@ -712,7 +735,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="dataframe">
-<caption>A matrix: 5 x 5 of type dbl</caption>
+<caption>A matrix: 5 × 5 of type dbl</caption>
 <thead>
 	<tr><th></th><th scope=col>Individual 1</th><th scope=col>Individual 2</th><th scope=col>Individual 3</th><th scope=col>Individual 4</th><th scope=col>Individual 5</th></tr>
 </thead>
@@ -797,7 +820,9 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relationship-to-kinship">Relationship to Kinship</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-rare-variants-should-matter-more">Why rare variants should matter more?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scaling-properties">Scaling Properties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-grm-for-statistical-genetics">Why GRM for statistical genetics?</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>

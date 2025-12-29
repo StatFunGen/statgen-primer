@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'summary_statistics';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Proportion of Variance Explained and Heritability" href="proportion_of_variance_explained.html" />
+    <link rel="next" title="Random Effects" href="random_effects.html" />
     <link rel="prev" title="Marginal and Joint Effects" href="marginal_joint_effects.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -255,6 +255,13 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Random Effects Models</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="random_effects.html">Random Effects</a></li>
+
+
+
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="proportion_of_variance_explained.html">Proportion of Variance Explained and Heritability</a></li>
 
 
@@ -280,6 +287,7 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="collider.html">Collider</a></li>
+
 
 
 
@@ -629,13 +637,13 @@ Z = \frac{\hat{\beta}}{\text{SE}(\hat{\beta})}
 <p>When we perform GWAS analysis using OLS regression on standardized data (<span class="math notranslate nohighlight">\(\mathbf{X}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{Y}\)</span> scaled to mean 0 and variance 1), we obtain:</p>
 <div class="math notranslate nohighlight">
 \[
-\hat{\beta}_j = \frac{\mathbf{X}_j^T \mathbf{Y}}{\mathbf{X}_j^T \mathbf{X}_j} = \mathbf{X}_j^T \mathbf{Y} = \text{Cov}(\mathbf{X}_j, \mathbf{Y}) = r_{\mathbf{X_j}, \mathbf{Y}} 
+\hat{\beta}_j = \frac{\mathbf{X}_j^T \mathbf{Y}}{\mathbf{X}_j^T \mathbf{X}_j} = \mathbf{X}_j^T \mathbf{Y} = \text{Cov}(\mathbf{X}_j, \mathbf{Y}) = r_{\mathbf{X}_j, \mathbf{Y}} 
 \]</div>
 <div class="math notranslate nohighlight">
 \[
 \text{Var}(\hat{\beta}_j) = \frac{\sigma^2}{\mathbf{X}_j^T \mathbf{X}_j} = \sigma^2
 \]</div>
-<p>These become the building blocks for many subsequent analyses. The <span class="math notranslate nohighlight">\(\hat{\beta}\)</span> values from marginal or joint analysis serve as input measurements for methods like fine-mapping, polygenic risk scores, and Mendelian randomization.</p>
+<p>These become the building blocks for many subsequent analyses. The <span class="math notranslate nohighlight">\(\hat{\beta}\)</span> values from marginal or joint analysis serve as input measurements for methods including fine-mapping, polygenic risk scores, and Mendelian randomization.</p>
 </section>
 <section id="standardized-measurements-for-analysis">
 <h2>Standardized Measurements for Analysis<a class="headerlink" href="#standardized-measurements-for-analysis" title="Link to this heading">#</a></h2>
@@ -714,7 +722,7 @@ P = 2 \times (1 - \Phi(|Z|))
 <li><p><strong>SNP (rsID)</strong>: Variant identifier for matching across datasets</p></li>
 <li><p><strong>CHR/BP</strong>: Genomic coordinates for positional analysis</p></li>
 <li><p><strong>A1/A2</strong>: Allele definitions for effect direction consistency</p></li>
-<li><p><strong>MAF/EAF</strong>: Allele frequencies for population matching and quality control</p></li>
+<li><p><strong>MAF/EAF</strong>: Minor Allele Frequency / Effect Allele Frequency for population matching and quality control</p></li>
 <li><p><strong>BETA/SE</strong>: The core association measurements with uncertainty quantification</p></li>
 <li><p><strong>Z-score/P-value</strong>: Standardized significance measures for prioritization</p></li>
 <li><p><strong>N</strong>: Sample size for meta-analysis weighting</p></li>
@@ -732,7 +740,7 @@ P = 2 \times (1 - \Phi(|Z|))
 \[
 \hat{\beta}_j \sim N(\beta_j, \sigma^2)
 \]</div>
-<p>Here, <span class="math notranslate nohighlight">\(\hat{\beta}_j\)</span> is treated as a noisy observation of the true parameter <span class="math notranslate nohighlight">\(\beta_j\)</span> and the <strong>noise</strong> comes from the assumption that it comes from a distribution rather than a fixed value. This allows Bayesian methods to quantify the uncertainty and place informative priors on effect sizes.</p>
+<p>Here, <span class="math notranslate nohighlight">\(\hat{\beta}_j\)</span> is treated as a noisy observation of the true parameter <span class="math notranslate nohighlight">\(\beta_j\)</span> and the <strong>uncertainty</strong> is represented by treating <span class="math notranslate nohighlight">\(\hat{\beta}_j\)</span> as drawn from a distribution centered at the true <span class="math notranslate nohighlight">\(\beta_j\)</span>, rather than as a fixed point estimate.</p>
 <p><em>Note: Don’t worry if this Bayesian perspective seems abstract right now. We recommend revisiting this section after reading through the topics in the Related Topics section, which will provide concrete examples of how this framework is applied in practice.</em></p>
 </section>
 </section>
@@ -750,6 +758,12 @@ P = 2 \times (1 - \Phi(|Z|))
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="example">
 <h1>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
+<p>In this section, we demonstrate how summary statistics are computed in practice through three progressively complex scenarios using the same toy genetic dataset:</p>
+<ul class="simple">
+<li><p>Example 1 shows the basic workflow for generating summary statistics for both continuous (height) and binary (disease status) traits using linear and logistic regression</p></li>
+<li><p>Example 2 illustrates how incorporating covariates (such as age) changes the summary statistics by accounting for additional sources of variation</p></li>
+<li><p>Example 3 contrasts marginal effects (testing each variant independently) with joint effects (testing multiple variants simultaneously in the same model), highlighting how linkage disequilibrium between variants affects the interpretation of genetic associations.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clear the environment</span>
@@ -774,8 +788,8 @@ P = 2 \times (1 - \Phi(|Z|))
 
 <span class="n">alt_alleles</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;T&quot;</span><span class="p">)</span>
 
-<span class="c1"># Convert to raw genotype matrix using the additive / dominant / recessive model</span>
-<span class="n">Xraw_additive</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">)</span><span class="w"> </span><span class="c1"># dount number of non-reference alleles</span>
+<span class="c1"># Convert to raw genotype matrix using the additive model</span>
+<span class="n">Xraw_additive</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">)</span><span class="w"> </span><span class="c1"># count number of non-reference alleles</span>
 
 <span class="nf">rownames</span><span class="p">(</span><span class="n">Xraw_additive</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rownames</span><span class="p">(</span><span class="n">geno_matrix</span><span class="p">)</span>
 <span class="nf">colnames</span><span class="p">(</span><span class="n">Xraw_additive</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">geno_matrix</span><span class="p">)</span>
@@ -835,14 +849,13 @@ P = 2 \times (1 - \Phi(|Z|))
 <p>We perform ordinary least square analysis on each single SNP using <code class="docutils literal notranslate"><span class="pre">lm</span></code> function in R:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">p_values</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="n">M</span><span class="p">)</span><span class="w">  </span><span class="c1"># Store p-values</span>
-<span class="n">betas</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="n">M</span><span class="p">)</span><span class="w">     </span><span class="c1"># Store estimated effect sizes</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">p_values</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+<span class="n">betas</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
 <span class="n">sumstats_height</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sumstats_0</span><span class="w">  </span><span class="c1"># Initialize summary statistics data frame for height</span>
 <span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">M</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">SNP</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">X</span><span class="p">[,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w">  </span><span class="c1"># Extract genotype for SNP j</span>
-<span class="w">  </span><span class="n">model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">SNP</span><span class="p">)</span><span class="w">  </span><span class="c1"># OLS regression: Trait ~ SNP</span>
+<span class="w">  </span><span class="n">SNP</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">X</span><span class="p">[,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span>
+<span class="w">  </span><span class="n">model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">SNP</span><span class="p">)</span><span class="w">  </span><span class="c1"># OLS regression: Trait ~ SNP_j</span>
 <span class="w">  </span><span class="n">summary_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
-<span class="w">  </span><span class="c1"># Store results in standard format</span>
 <span class="w">  </span><span class="n">sumstats_height</span><span class="o">$</span><span class="n">BETA</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">summary_model</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w">  </span><span class="c1"># Effect size</span>
 <span class="w">  </span><span class="n">sumstats_height</span><span class="o">$</span><span class="n">SE</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">summary_model</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">]</span><span class="w">    </span><span class="c1"># Standard error</span>
 <span class="w">  </span><span class="n">sumstats_height</span><span class="o">$</span><span class="n">Z</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">summary_model</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">]</span><span class="w">     </span><span class="c1"># t-statistic (equivalent to Z-score)</span>
@@ -861,7 +874,7 @@ P = 2 \times (1 - \Phi(|Z|))
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="dataframe">
-<caption>A data.frame: 3 x 11</caption>
+<caption>A data.frame: 3 × 11</caption>
 <thead>
 	<tr><th></th><th scope=col>SNP</th><th scope=col>CHR</th><th scope=col>BP</th><th scope=col>ALT</th><th scope=col>REF</th><th scope=col>EAF</th><th scope=col>N</th><th scope=col>BETA</th><th scope=col>SE</th><th scope=col>Z</th><th scope=col>P</th></tr>
 	<tr><th></th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
@@ -877,11 +890,11 @@ P = 2 \times (1 - \Phi(|Z|))
 </section>
 <section id="binary-outcome-disease-status">
 <h3>Binary Outcome — Disease Status<a class="headerlink" href="#binary-outcome-disease-status" title="Link to this heading">#</a></h3>
-<p>Let’s then use logistic regression to compute the summary statistics for a binary trait — disease status (we have done this in <a class="reference external" href="https://statfungen.github.io/statgen-primer/odds_ratio.html">Lecture: odds_ratio</a>).</p>
+<p>Let’s then use logistic regression to compute the summary statistics for a binary trait — disease status (we have done this in <a class="reference external" href="https://statfungen.github.io/statgen-primer/odds_ratio.html">Lecture: odds_ratio</a> but here we use additive model instead of dominant model).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># assign observed disease status for the 5 individuals</span>
-<span class="n">Y_binary</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+<span class="n">Y_binary</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -892,7 +905,7 @@ P = 2 \times (1 - \Phi(|Z|))
 <span class="c1"># Perform GWAS analysis: Test each SNP independently using logistic regression</span>
 <span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">M</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="n">SNP</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">X</span><span class="p">[,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w">  </span><span class="c1"># Extract genotype for SNP j</span>
-<span class="w">  </span><span class="n">model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">glm</span><span class="p">(</span><span class="n">Y_binary</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">SNP</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">binomial</span><span class="p">(</span><span class="n">link</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;logit&quot;</span><span class="p">))</span><span class="w">  </span><span class="c1"># Logistic regression: Binary trait ~ SNP</span>
+<span class="w">  </span><span class="n">model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">glm</span><span class="p">(</span><span class="n">Y_binary</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">SNP</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">binomial</span><span class="p">)</span><span class="w">  </span><span class="c1"># Logistic regression: Binary trait ~ SNP</span>
 <span class="w">  </span><span class="n">summary_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
 <span class="w">  </span>
 <span class="w">  </span><span class="c1"># Store results in standard format</span>
@@ -906,9 +919,9 @@ P = 2 \times (1 - \Phi(|Z|))
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message:
-&quot;glm.fit: fitted probabilities numerically 0 or 1 occurred&quot;
+“glm.fit: fitted probabilities numerically 0 or 1 occurred”
 Warning message:
-&quot;glm.fit: fitted probabilities numerically 0 or 1 occurred&quot;
+“glm.fit: fitted probabilities numerically 0 or 1 occurred”
 </pre></div>
 </div>
 </div>
@@ -922,20 +935,20 @@ Warning message:
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="dataframe">
-<caption>A data.frame: 3 x 11</caption>
+<caption>A data.frame: 3 × 11</caption>
 <thead>
 	<tr><th></th><th scope=col>SNP</th><th scope=col>CHR</th><th scope=col>BP</th><th scope=col>ALT</th><th scope=col>REF</th><th scope=col>EAF</th><th scope=col>N</th><th scope=col>BETA</th><th scope=col>SE</th><th scope=col>Z</th><th scope=col>P</th></tr>
 	<tr><th></th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
 </thead>
 <tbody>
-	<tr><th scope=row>Variant 1</th><td>rs1</td><td>1</td><td>1315</td><td>T</td><td>C</td><td>0.3</td><td>5</td><td>-17.68860</td><td> 7555.904</td><td>-0.0023410307</td><td>0.9981321</td></tr>
-	<tr><th scope=row>Variant 2</th><td>rs2</td><td>1</td><td>2620</td><td>C</td><td>T</td><td>0.4</td><td>5</td><td> 17.20681</td><td> 8564.582</td><td> 0.0020090656</td><td>0.9983970</td></tr>
-	<tr><th scope=row>Variant 3</th><td>rs3</td><td>2</td><td>6290</td><td>T</td><td>A</td><td>0.3</td><td>5</td><td> 41.95806</td><td>72333.584</td><td> 0.0005800633</td><td>0.9995372</td></tr>
+	<tr><th scope=row>Variant 1</th><td>rs1</td><td>1</td><td>1315</td><td>T</td><td>C</td><td>0.3</td><td>5</td><td>  0.9826287</td><td>    1.145783</td><td> 0.8576046390</td><td>0.3911108</td></tr>
+	<tr><th scope=row>Variant 2</th><td>rs2</td><td>1</td><td>2620</td><td>C</td><td>T</td><td>0.4</td><td>5</td><td>-39.4255886</td><td>67380.071390</td><td>-0.0005851224</td><td>0.9995331</td></tr>
+	<tr><th scope=row>Variant 3</th><td>rs3</td><td>2</td><td>6290</td><td>T</td><td>A</td><td>0.3</td><td>5</td><td>-17.6886034</td><td> 7555.904101</td><td>-0.0023410307</td><td>0.9981321</td></tr>
 </tbody>
 </table>
 </div></div>
 </div>
-<p>Note that the SE is extremely large because the sample size in our toy data is too small (5).</p>
+<p>Note that the SE is extremely large because the sample size (5) in our toy data is too small.</p>
 </section>
 </section>
 <section id="example-2-summary-statistics-when-considering-covariates">
@@ -981,7 +994,7 @@ Warning message:
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="dataframe">
-<caption>A data.frame: 3 x 11</caption>
+<caption>A data.frame: 3 × 11</caption>
 <thead>
 	<tr><th></th><th scope=col>SNP</th><th scope=col>CHR</th><th scope=col>BP</th><th scope=col>ALT</th><th scope=col>REF</th><th scope=col>EAF</th><th scope=col>N</th><th scope=col>BETA</th><th scope=col>SE</th><th scope=col>Z</th><th scope=col>P</th></tr>
 	<tr><th></th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
@@ -1003,7 +1016,7 @@ Warning message:
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="dataframe">
-<caption>A data.frame: 3 x 11</caption>
+<caption>A data.frame: 3 × 11</caption>
 <thead>
 	<tr><th></th><th scope=col>SNP</th><th scope=col>CHR</th><th scope=col>BP</th><th scope=col>ALT</th><th scope=col>REF</th><th scope=col>EAF</th><th scope=col>N</th><th scope=col>BETA</th><th scope=col>SE</th><th scope=col>Z</th><th scope=col>P</th></tr>
 	<tr><th></th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
@@ -1058,7 +1071,7 @@ Warning message:
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="dataframe">
-<caption>A data.frame: 3 x 11</caption>
+<caption>A data.frame: 3 × 11</caption>
 <thead>
 	<tr><th></th><th scope=col>SNP</th><th scope=col>CHR</th><th scope=col>BP</th><th scope=col>ALT</th><th scope=col>REF</th><th scope=col>EAF</th><th scope=col>N</th><th scope=col>BETA</th><th scope=col>SE</th><th scope=col>Z</th><th scope=col>P</th></tr>
 	<tr><th></th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
@@ -1080,7 +1093,7 @@ Warning message:
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="dataframe">
-<caption>A data.frame: 3 x 11</caption>
+<caption>A data.frame: 3 × 11</caption>
 <thead>
 	<tr><th></th><th scope=col>SNP</th><th scope=col>CHR</th><th scope=col>BP</th><th scope=col>ALT</th><th scope=col>REF</th><th scope=col>EAF</th><th scope=col>N</th><th scope=col>BETA</th><th scope=col>SE</th><th scope=col>Z</th><th scope=col>P</th></tr>
 	<tr><th></th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
@@ -1104,10 +1117,8 @@ Warning message:
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
 <span class="nf">suppressPackageStartupMessages</span><span class="p">(</span><span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">))</span>
 
-<span class="c1"># Set plot dimensions</span>
 <span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">repr.plot.height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">)</span>
 
-<span class="c1"># Set seed for reproducibility</span>
 <span class="nf">set.seed</span><span class="p">(</span><span class="m">123</span><span class="p">)</span>
 
 <span class="c1"># Generate simulated GWAS data for ~30 SNPs</span>
@@ -1150,31 +1161,18 @@ Warning message:
 
 <span class="c1"># Create the Manhattan plot</span>
 <span class="n">manhattan_plot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">gwas_data</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BPcum</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">logP</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="c1"># Add points - salmon for points above the red line, dark blue for others</span>
 <span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="n">logP</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">-</span><span class="nf">log10</span><span class="p">(</span><span class="m">1e-5</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;significant&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;non_significant&quot;</span><span class="p">)),</span><span class="w"> </span>
 <span class="w">             </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1"># Customize colors</span>
 <span class="w">  </span><span class="nf">scale_color_manual</span><span class="p">(</span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;significant&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;salmon&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;non_significant&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;#183059&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1"># Add significance line (blue line position but red color)</span>
 <span class="w">  </span><span class="nf">geom_hline</span><span class="p">(</span><span class="n">yintercept</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="nf">log10</span><span class="p">(</span><span class="m">1e-5</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dashed&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1"># Customize x-axis (remove axis text)</span>
 <span class="w">  </span><span class="nf">scale_x_continuous</span><span class="p">(</span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1"># Customize y-axis (remove axis text)</span>
 <span class="w">  </span><span class="nf">scale_y_continuous</span><span class="p">(</span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">gwas_data</span><span class="o">$</span><span class="n">logP</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.1</span><span class="p">),</span><span class="w"> </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1"># Labels and theme</span>
 <span class="w">  </span><span class="nf">labs</span><span class="p">(</span>
 <span class="w">    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Manhattan Plot&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Genome-wide Association Study Results&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Chromosome&quot;</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">expression</span><span class="p">(</span><span class="o">-</span><span class="n">log</span><span class="p">[</span><span class="m">10</span><span class="p">](</span><span class="nf">italic</span><span class="p">(</span><span class="n">p</span><span class="p">)))</span>
 <span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1"># Clean theme with larger, bold fonts, thicker axes, and transparent background</span>
 <span class="w">  </span><span class="nf">theme_classic</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
 <span class="w">  </span><span class="nf">theme</span><span class="p">(</span>
 <span class="w">    </span><span class="n">legend.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;none&quot;</span><span class="p">,</span>
@@ -1197,13 +1195,13 @@ Warning message:
 <span class="nf">print</span><span class="p">(</span><span class="n">manhattan_plot</span><span class="p">)</span>
 
 <span class="c1"># Save the figure</span>
-<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;./cartoons/summary_statistics.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">manhattan_plot</span><span class="p">,</span><span class="w"> </span>
+<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;./figures/summary_statistics.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">manhattan_plot</span><span class="p">,</span><span class="w"> </span>
 <span class="w">       </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/a2ffc29582c3880334c98723ff2b97a658c85558ef7f50a214f3751251eaadb6.png"><img alt="_images/a2ffc29582c3880334c98723ff2b97a658c85558ef7f50a214f3751251eaadb6.png" src="_images/a2ffc29582c3880334c98723ff2b97a658c85558ef7f50a214f3751251eaadb6.png" style="width: 600px; height: 360px;" />
+<a class="reference internal image-reference" href="_images/883be67692b900b6218a803c9528cc6c6b379505d3f82562754bd40b38da382c.png"><img alt="_images/883be67692b900b6218a803c9528cc6c6b379505d3f82562754bd40b38da382c.png" src="_images/883be67692b900b6218a803c9528cc6c6b379505d3f82562754bd40b38da382c.png" style="width: 600px; height: 360px;" />
 </a>
 </div>
 </div>
@@ -1250,11 +1248,11 @@ Warning message:
       </div>
     </a>
     <a class="right-next"
-       href="proportion_of_variance_explained.html"
+       href="random_effects.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Proportion of Variance Explained and Heritability</p>
+        <p class="prev-next-title">Random Effects</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

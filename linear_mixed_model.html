@@ -255,6 +255,13 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Random Effects Models</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="random_effects.html">Random Effects</a></li>
+
+
+
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="proportion_of_variance_explained.html">Proportion of Variance Explained and Heritability</a></li>
 
 
@@ -280,6 +287,7 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="collider.html">Collider</a></li>
+
 
 
 
@@ -609,8 +617,8 @@ document.write(`
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\mathbf{Y}\)</span> is the <span class="math notranslate nohighlight">\(N \times 1\)</span> vector of phenotypes</p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is the <span class="math notranslate nohighlight">\(N \times 1\)</span> design matrix for fixed effects (e.g., the specific genetic variant we’re testing, plus measurable covariates like age and sex)</p></li>
-<li><p><span class="math notranslate nohighlight">\(\beta\)</span> is the scalar of fixed genetic effect coefficient (unknown, to be estimated)</p></li>
-<li><p><span class="math notranslate nohighlight">\(\mathbf{g}\)</span> is the <span class="math notranslate nohighlight">\(N \times 1\)</span> vector of random effects that captures <strong>all the genetic factors we can’t or don’t want to model explicitly</strong> - population structure, polygenic background, family relationships, and countless unknown genetic influences</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta\)</span> is the scalar of genetic effect coefficient (unknown, to be estimated, generally fixed but also can be random)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{g} \sim N(0,\sigma^2_g\mathbf{G})\)</span> is the <span class="math notranslate nohighlight">\(N \times 1\)</span> vector of random effects that captures <strong>all the genetic factors we can’t or don’t want to model explicitly</strong> - population structure, polygenic background, family relationships, and countless unknown genetic influences</p></li>
 <li><p><span class="math notranslate nohighlight">\(\boldsymbol{\epsilon}\)</span> is the <span class="math notranslate nohighlight">\(N \times 1\)</span> vector of residual errors, where <span class="math notranslate nohighlight">\(\boldsymbol{\epsilon} \sim N(0, \sigma^2_e\mathbf{I})\)</span></p></li>
 </ul>
 </section>
@@ -618,25 +626,17 @@ document.write(`
 <h1>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading">#</a></h1>
 <section id="random-effects-decomposition-mathbf-g-and-mathbf-zu">
 <h2>Random Effects Decomposition: <span class="math notranslate nohighlight">\(\mathbf{g}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{Zu}\)</span><a class="headerlink" href="#random-effects-decomposition-mathbf-g-and-mathbf-zu" title="Link to this heading">#</a></h2>
-<p>The key insight is that for a genetic variant, there are countless things to account for: age, sex, ancestry, thousands of genes and unknown ones. We can never write the complete model:</p>
+<p>For any genetic variant, we cannot model all contributing factors explicitly (age, sex, ancestry, thousands of genes, unknown factors, etc). Instead of the complete model:</p>
 <div class="math notranslate nohighlight">
 \[
 \mathbf{Y} = \text{genetic variant} + \text{age} + \text{sex} + \text{ancestry} + \text{gene}_1 + \ldots + \text{gene}_{20000} + \text{unknown factors} + \boldsymbol{\epsilon}
 \]</div>
-<p>Instead, we approximate it as:</p>
+<p>We approximate it as:</p>
 <div class="math notranslate nohighlight">
 \[
 \mathbf{Y} = \text{genetic variant} + \text{age} + \text{sex} + \mathbf{g} + \boldsymbol{\epsilon}
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\mathbf{g}\)</span> soaks up the effects of ancestry, polygenic background, and all the other genetic factors we can’t explicitly model. It’s not as precise as conditioning on everything, but it’s the best we can do when complete conditioning is impossible.</p>
-<p><strong>What information should <span class="math notranslate nohighlight">\(\mathbf{g}\)</span> capture?</strong> Ideally, <span class="math notranslate nohighlight">\(\mathbf{g}\)</span> should include:</p>
-<ul class="simple">
-<li><p>Population structure and ancestry differences</p></li>
-<li><p>Polygenic effects from thousands of small-effect variants</p></li>
-<li><p>Family relationships and shared genetic background</p></li>
-<li><p>Gene-gene interactions we haven’t discovered</p></li>
-<li><p>Any other source of genetic similarity between individuals</p></li>
-</ul>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{g}\)</span> soaks up the effects of ancestry, polygenic background, and all the other genetic factors we can’t explicitly model.</p>
 <p>The random effects term <strong>g</strong> can be decomposed as:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -644,11 +644,10 @@ document.write(`
 \]</div>
 <p>where:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\mathbf{g}\)</span> is the <span class="math notranslate nohighlight">\(N \times 1\)</span> vector of random effects for <span class="math notranslate nohighlight">\(N\)</span> individuals, where <span class="math notranslate nohighlight">\(\mathbf{g} \sim N(\mathbf{0}, \sigma^2_g\mathbf{G})\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathbf{G}\)</span> is the genetic relationship matrix (GRM) that measures genetic similarity between individuals, effectively capturing all the unmeasured genetic factors through genome-wide similarity patterns</p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathbf{Z}\)</span> is the <span class="math notranslate nohighlight">\(N \times M\)</span> genotype matrix for <span class="math notranslate nohighlight">\(M\)</span> genetic variants</p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathbf{u} \sim N(0, \sigma_u^2\mathbf{I})\)</span> is a <span class="math notranslate nohighlight">\(M \times 1\)</span> vector of random SNP effects</p></li>
-<li><p>Formally known as the infinitesmal model</p></li>
+<li><p>This formulation is formally known as the infinitesmal model</p></li>
 </ul>
 </section>
 <section id="popular-lmm-methods-in-statistical-genetics">
@@ -669,23 +668,23 @@ document.write(`
 </tr>
 <tr class="row-odd"><td><p><strong>GEMMA</strong></p></td>
 <td><p>Fast genome-wide association studies with population structure control</p></td>
-<td><p>Efficient algorithms for large-scale GWAS with kinship correction</p></td>
+<td><p>Efficient eigendecomposition for kinship correction</p></td>
 <td><p>Computationally efficient for large-scale data</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>BOLT-LMM</strong></p></td>
 <td><p>Ultra-fast mixed model association testing</p></td>
-<td><p>Bayesian sparse linear mixed model approach</p></td>
+<td><p>Bayesian sparse linear mixed model with Monte Carlo sampling</p></td>
 <td><p>Hundreds of thousands of individuals</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>SAIGE</strong></p></td>
 <td><p>Association testing for binary and quantitative traits</p></td>
-<td><p>Handles unbalanced case-control studies efficiently</p></td>
-<td><p>Saddlepoint approximation for computational efficiency</p></td>
+<td><p>Saddlepoint appeoximation for unbalanced case-control data</p></td>
+<td><p>Large-scale biobanks with rare outcomes</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>REGENIE</strong></p></td>
 <td><p>Whole genome regression with prediction</p></td>
-<td><p>Two-step procedure combining whole-genome regression to solve mixed models</p></td>
-<td><p>Use ridge regression instead of conventional LMM</p></td>
+<td><p>Two-step ridge regression avoiding explicit mixed model</p></td>
+<td><p>Ultra-large biobanks (millions of samples)</p></td>
 </tr>
 </tbody>
 </table>
@@ -784,7 +783,7 @@ document.write(`
 </pre></div>
 </div>
 <div class="output text_html"><table class="dataframe">
-<caption>A matrix: 5 x 5 of type dbl</caption>
+<caption>A matrix: 5 × 5 of type dbl</caption>
 <thead>
 	<tr><th></th><th scope=col>Individual 1</th><th scope=col>Individual 2</th><th scope=col>Individual 3</th><th scope=col>Individual 4</th><th scope=col>Individual 5</th></tr>
 </thead>
@@ -831,9 +830,11 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PVE Components:
-PVE_fixed (variant 1) = 0.8187 
-PVE_random (polygenic) = 0.1212 
-PVE_total = 0.67 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PVE_fixed (variant 1) = 1.3277 
+PVE_random (polygenic) = 1.2751 
+PVE_total = 0.6073 
 </pre></div>
 </div>
 </div>

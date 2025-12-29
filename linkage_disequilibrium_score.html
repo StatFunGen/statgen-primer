@@ -255,6 +255,13 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Random Effects Models</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="random_effects.html">Random Effects</a></li>
+
+
+
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="proportion_of_variance_explained.html">Proportion of Variance Explained and Heritability</a></li>
 
 
@@ -280,6 +287,7 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="collider.html">Collider</a></li>
+
 
 
 
@@ -622,7 +630,7 @@ l_j = \sum_{k=1, k \neq j}^M r^2(\textbf{X}_j, \textbf{X}_k)
 \[
 l_j = \sum_{k=1, k \neq j}^M r^2_{j,k}
 \]</div>
-<p>However, this is not an unbiased estimate. We can correct for the bias like this:</p>
+<p>However, this is not an unbiased estimate (because when you calculate it from sample data, it’s an upward-biased estimator of the true population <span class="math notranslate nohighlight">\(r^2\)</span>). We can correct for the bias like this:</p>
 <div class="math notranslate nohighlight">
 \[
 r_\text{adj}^2 =  \hat{r}^2 - \frac{1-\hat{r}^2}{N-2}
@@ -639,12 +647,12 @@ l_j = \sum_{k=1, k \neq j}^M  r_\text{adj}^2
 <p><strong>Key insight</strong>: LD score predicts how much a variant’s marginal effect will be inflated by linkage to other causal variants.</p>
 <section id="effective-number-of-snps">
 <h3>Effective number of SNPs<a class="headerlink" href="#effective-number-of-snps" title="Link to this heading">#</a></h3>
-<p>When there is LD between SNPs, it is useful to have a quantity that describes how many independent SNPs there are. This is the effective number of SNPs, markers or chromosome segments (<span class="math notranslate nohighlight">\(M_e\)</span>), and can be defined as</p>
+<p>When there is LD between SNPs, the effective number of independent SNPs (M_e) quantifies the degree of redundancy:</p>
 <div class="math notranslate nohighlight">
 \[
 M_{e} = \frac{M}{\bar{\boldsymbol{l}}} = \frac{M^2}{\sum_j l_j}
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\bar{\boldsymbol{l}}\)</span> denotes the mean LD score across all SNPs.</p>
+<p>where <span class="math notranslate nohighlight">\(\bar{\boldsymbol{l}}\)</span> is the mean LD score across all <span class="math notranslate nohighlight">\(M\)</span> SNPs. This quantity is useful for multiple testing correction and understanding the effective degrees of freedom in genetic analyses.</p>
 </section>
 </section>
 </section>
@@ -657,7 +665,7 @@ M_{e} = \frac{M}{\bar{\boldsymbol{l}}} = \frac{M^2}{\sum_j l_j}
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="example">
 <h1>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
-<p>We’ve seen how genetic variants can be correlated with each other in <a class="reference external" href="https://statfungen.github.io/statgen-primer/linkage_disequilibrium.html">Lecture: linkage disequilibrium</a>, but how do we summarize the overall “connectedness” of each variant to all others? In statistical genetics, this is captured by the LD score - a single number that tells us how much linkage disequilibrium a variant has with all other variants in the region.</p>
+<p>We’ve seen how genetic variants can be correlated with each other in <a class="reference external" href="https://statfungen.github.io/statgen-primer/linkage_disequilibrium.html">Lecture: linkage disequilibrium</a>, but how do we summarize the overall “connectedness” of each variant to all others? In statistical genetics, this is described by the LD score - a single number that tells us how much linkage disequilibrium a variant has with all other variants in the region.</p>
 <p>But there’s a catch: with small sample sizes, the sample correlation is a biased estimator, meaning even unrelated variants can show non-zero correlations just due to sampling noise. How do we adjust for this bias, and what do LD scores look like before and after this adjustment?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -684,7 +692,7 @@ M_{e} = \frac{M}{\bar{\boldsymbol{l}}} = \frac{M^2}{\sum_j l_j}
 <span class="n">alt_alleles</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;T&quot;</span><span class="p">)</span>
 
 <span class="c1"># Convert to raw genotype matrix using the additive / dominant / recessive model</span>
-<span class="n">Xraw_additive</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">)</span><span class="w"> </span><span class="c1"># dount number of non-reference alleles</span>
+<span class="n">Xraw_additive</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">)</span><span class="w"> </span><span class="c1"># count number of non-reference alleles</span>
 
 <span class="nf">rownames</span><span class="p">(</span><span class="n">Xraw_additive</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rownames</span><span class="p">(</span><span class="n">geno_matrix</span><span class="p">)</span>
 <span class="nf">colnames</span><span class="p">(</span><span class="n">Xraw_additive</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">geno_matrix</span><span class="p">)</span>
@@ -713,7 +721,7 @@ M_{e} = \frac{M}{\bar{\boldsymbol{l}}} = \frac{M^2}{\sum_j l_j}
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="dataframe">
-<caption>A matrix: 3 x 3 of type dbl</caption>
+<caption>A matrix: 3 × 3 of type dbl</caption>
 <thead>
 	<tr><th></th><th scope=col>Variant 1</th><th scope=col>Variant 2</th><th scope=col>Variant 3</th></tr>
 </thead>
@@ -748,7 +756,7 @@ M_{e} = \frac{M}{\bar{\boldsymbol{l}}} = \frac{M^2}{\sum_j l_j}
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="dataframe">
-<caption>A matrix: 1 x 3 of type dbl</caption>
+<caption>A matrix: 1 × 3 of type dbl</caption>
 <thead>
 	<tr><th scope=col>Variant 1</th><th scope=col>Variant 2</th><th scope=col>Variant 3</th></tr>
 </thead>
@@ -783,7 +791,7 @@ M_{e} = \frac{M}{\bar{\boldsymbol{l}}} = \frac{M^2}{\sum_j l_j}
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="dataframe">
-<caption>A matrix: 1 x 3 of type dbl</caption>
+<caption>A matrix: 1 × 3 of type dbl</caption>
 <thead>
 	<tr><th scope=col>Variant 1</th><th scope=col>Variant 2</th><th scope=col>Variant 3</th></tr>
 </thead>
@@ -834,7 +842,7 @@ M_{e} = \frac{M}{\bar{\boldsymbol{l}}} = \frac{M^2}{\sum_j l_j}
 <span class="w">  </span><span class="nf">theme_minimal</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
 <span class="w">  </span><span class="nf">theme</span><span class="p">(</span>
 <span class="w">    </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">14</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">),</span>
-<span class="w">    </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hjust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">),</span>
+<span class="w">    </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">(),</span>
 <span class="w">    </span><span class="n">axis.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">14</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">),</span>
 <span class="w">    </span><span class="n">axis.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">),</span>
 <span class="w">    </span><span class="n">legend.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">14</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">),</span>
@@ -842,7 +850,7 @@ M_{e} = \frac{M}{\bar{\boldsymbol{l}}} = \frac{M^2}{\sum_j l_j}
 <span class="w">    </span><span class="n">panel.grid.major</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_line</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;gray&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dotted&quot;</span><span class="p">),</span>
 <span class="w">    </span><span class="n">panel.grid.minor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">(),</span>
 <span class="w">    </span><span class="n">axis.line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_line</span><span class="p">(</span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">),</span>
-<span class="w">    </span><span class="n">axis.ticks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_line</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">),</span>
+<span class="w">    </span><span class="n">axis.ticks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_line</span><span class="p">(</span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">),</span>
 <span class="w">    </span><span class="c1"># Add transparent backgrounds</span>
 <span class="w">    </span><span class="n">panel.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">),</span>
 <span class="w">    </span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span>
@@ -852,7 +860,7 @@ M_{e} = \frac{M}{\bar{\boldsymbol{l}}} = \frac{M^2}{\sum_j l_j}
 <span class="nf">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 
 <span class="c1"># Save with transparent background</span>
-<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;./cartoons/linkage_disequilibrium_scores.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span>
+<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;./figures/linkage_disequilibrium_scores.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span>
 <span class="w">       </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span>
 <span class="w">       </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span>
 <span class="w">       </span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="p">)</span>
@@ -860,12 +868,7 @@ M_{e} = \frac{M}{\bar{\boldsymbol{l}}} = \frac{M^2}{\sum_j l_j}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message:
-&quot;The `size` argument of `element_line()` is deprecated as of ggplot2 3.4.0.
-<span class=" -Color -Color-Cyan">i</span> Please use the `linewidth` argument instead.&quot;
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/ee6efd1041f4c1ca85f0da4b890f8516c7d51f763cd796ed7e784ec163f75147.png"><img alt="_images/ee6efd1041f4c1ca85f0da4b890f8516c7d51f763cd796ed7e784ec163f75147.png" src="_images/ee6efd1041f4c1ca85f0da4b890f8516c7d51f763cd796ed7e784ec163f75147.png" style="width: 600px; height: 360px;" />
+<a class="reference internal image-reference" href="_images/369d45ba6fbf124d6cc6e433fb7c65ad2afbcc359b78a72b158827490170a8dd.png"><img alt="_images/369d45ba6fbf124d6cc6e433fb7c65ad2afbcc359b78a72b158827490170a8dd.png" src="_images/369d45ba6fbf124d6cc6e433fb7c65ad2afbcc359b78a72b158827490170a8dd.png" style="width: 600px; height: 360px;" />
 </a>
 </div>
 </div>

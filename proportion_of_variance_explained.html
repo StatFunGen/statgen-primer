@@ -580,7 +580,8 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-summary">Graphical Summary</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#components-of-variance">Components of Variance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generative-model">Generative Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-decomposition">Variance Decomposition</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broad-sense-heritability">Broad-sense Heritability</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#narrow-sense-heritability">Narrow-sense Heritability</a></li>
 </ul>
@@ -613,50 +614,77 @@ document.write(`
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="key-formula">
 <h1>Key Formula<a class="headerlink" href="#key-formula" title="Link to this heading">#</a></h1>
-<p>Any phenotype can be modeled as the sum of genetic and environmental effects, i.e., <span class="math notranslate nohighlight">\(\text{Phenotype}~(Y) = \text{Genotype}~(G) + \text{Environment}~(E)\)</span>, and under the assumption that G and E are independent from each other, the <strong>proportion of variance explained (PVE)</strong> by genetic effect alone (also called  broad-sense heritability <span class="math notranslate nohighlight">\(H^2\)</span>) can be derived as</p>
+<p>Any phenotype can be modeled as the sum of genetic (G) and environmental (E) effects, their interaction (G×E), and a residual error term (ε) that captures unexplained variation: <span class="math notranslate nohighlight">\(Y = G + E + G \times E + \epsilon\)</span>. Under the assumptions that (1) genetic and environmental effects are independent, i.e., <span class="math notranslate nohighlight">\(\text{Cov}(G,E) = 0\)</span>, and (2) the error term is uncorrelated with genetic effects, i.e., <span class="math notranslate nohighlight">\(\text{Cov}(G,\epsilon) = 0\)</span>, the <strong>proportion of variance explained (PVE)</strong> by genetic effects alone (also called broad-sense heritability <span class="math notranslate nohighlight">\(H^2\)</span>) can be derived as:</p>
 <div class="math notranslate nohighlight">
 \[
-\text{PVE} = H^2 = \frac{\text{Var}_G}{\text{Var}_Y}
+\text{PVE} = H^2 = \frac{\sigma^2_G}{\sigma^2_Y}
 \]</div>
 <p>where:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\text{Var}_G\)</span> is the genetic variance component</p></li>
-<li><p><span class="math notranslate nohighlight">\(\text{Var}_E\)</span> is the environmental variance component</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma^2_G\)</span> is the genetic variance component</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma^2_Y\)</span> is the total phenotypic variance</p></li>
 </ul>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="technical-details">
 <h1>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading">#</a></h1>
-<section id="components-of-variance">
-<h2>Components of Variance<a class="headerlink" href="#components-of-variance" title="Link to this heading">#</a></h2>
-<p>Any phenotype can be modeled as the sum of genetic and environmental effects:</p>
+<section id="generative-model">
+<h2>Generative Model<a class="headerlink" href="#generative-model" title="Link to this heading">#</a></h2>
+<p>A formal generative model specifies the probability distributions and relationships between variables:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+Y_i | \mu_i, \sigma^2_{\epsilon} &amp;\sim N(\mu_i, \sigma^2_{\epsilon}) \\
+\mu_i &amp;= \beta_0 + G_i + E_i + (G \times E)_i
+\end{align}
+\end{split}\]</div>
+<p>where the components follow:</p>
 <div class="math notranslate nohighlight">
 \[
-\text{Phenotype} (P) = \text{Genotype} (G) + \text{Environment} (E)
+G_i \sim N(0, \sigma^2_G), \quad E_i \sim N(0, \sigma^2_E), \quad (G \times E)_i \sim N(0, \sigma^2_{GE}), \quad \epsilon_i \sim N(0, \sigma^2_{\epsilon})
 \]</div>
-<p>The phenotypic variance in the trait can then be partitioned as:</p>
-<div class="math notranslate nohighlight">
-\[\text{Var}_P = \text{Var}_G + \text{Var}_E + 2\text{Cov}(G,E)\]</div>
-<p>Where:</p>
+<p><strong>Key independence assumptions one can generally make</strong>:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\text{Var}_G\)</span> is the genetic variance component</p></li>
-<li><p><span class="math notranslate nohighlight">\(\text{Var}_E\)</span> is the environmental variance component</p></li>
-<li><p><span class="math notranslate nohighlight">\(\text{Cov}(G,E)\)</span> is the covariance between genetic and environmental effects</p></li>
+<li><p><span class="math notranslate nohighlight">\(G \perp E\)</span> (genetic and environmental effects are independent)</p></li>
+<li><p><span class="math notranslate nohighlight">\(G \perp \epsilon\)</span> (genotype uncorrelated with residual error)</p></li>
+<li><p><span class="math notranslate nohighlight">\(E \perp \epsilon\)</span> (environment uncorrelated with residual error)</p></li>
 </ul>
+<p>Violations occur when omitted confounders correlate with genotype, or when <span class="math notranslate nohighlight">\(G \times E\)</span> interactions exist but aren’t modeled, causing them to be absorbed into <span class="math notranslate nohighlight">\(\epsilon\)</span>.</p>
+</section>
+<section id="variance-decomposition">
+<h2>Variance Decomposition<a class="headerlink" href="#variance-decomposition" title="Link to this heading">#</a></h2>
+<p>Under the independence assumptions:</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma^2_Y = \sigma^2_G + \sigma^2_E + \sigma^2_{GE} + \sigma^2_{\epsilon}
+\]</div>
+<p>If independence is violated (e.g., <span class="math notranslate nohighlight">\(\text{Cov}(G,E) \neq 0\)</span> or <span class="math notranslate nohighlight">\(\text{Cov}(G,\epsilon) \neq 0\)</span>), covariance terms appear:</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma^2_Y  = \sigma^2_G + \sigma^2_E + \sigma^2_{GE} + \sigma^2_{\epsilon} + 2\text{Cov}(G,E) + \text{other terms}
+\]</div>
+<p>This leads to biased heritability estimates. In practice, <span class="math notranslate nohighlight">\(\sigma^2_E\)</span> and <span class="math notranslate nohighlight">\(\sigma^2_{\epsilon}\)</span> are often combined since distinguishing environmental from residual variance requires experimental manipulation.</p>
 </section>
 <section id="broad-sense-heritability">
 <h2>Broad-sense Heritability<a class="headerlink" href="#broad-sense-heritability" title="Link to this heading">#</a></h2>
-<p>In controlled experimental settings, we can design studies where <span class="math notranslate nohighlight">\(\text{Cov}(G,E)\)</span> is minimized and effectively set to zero. In such cases, heritability is defined as the proportion of phenotypic variance attributable to all genetic effects:</p>
 <div class="math notranslate nohighlight">
-\[H^2 = \frac{\text{Var}_G}{\text{Var}_P}\]</div>
-<p>This represents the proportion of phenotypic variance attributable to genetic variance.</p>
+\[
+H^2 = \frac{\sigma^2_G}{\sigma^2_Y} = \frac{\sigma^2_G}{\sigma^2_G + \sigma^2_E + \sigma^2_{GE} + \sigma^2_{\epsilon}}
+\]</div>
+<p>This represents the proportion of phenotypic variance from all genetic effects (additive + dominance + epistatic). <span class="math notranslate nohighlight">\(H^2\)</span> is population- and environment-specific, not a fixed biological constant.</p>
 </section>
 <section id="narrow-sense-heritability">
 <h2>Narrow-sense Heritability<a class="headerlink" href="#narrow-sense-heritability" title="Link to this heading">#</a></h2>
-<p><strong>Narrow-sense heritability</strong> (<span class="math notranslate nohighlight">\(h^2\)</span>): The proportion attributable to only <strong>additive</strong> genetic effects:</p>
+<p>The genetic variance can be decomposed into:</p>
 <div class="math notranslate nohighlight">
-\[h^2 = \frac{\text{Var}_A}{\text{Var}_P}\]</div>
-<p>Where <span class="math notranslate nohighlight">\(\text{Var}_A\)</span> is the additive genetic variance, a component of <span class="math notranslate nohighlight">\(\text{Var}_G\)</span>.</p>
-<p>Other components of <span class="math notranslate nohighlight">\(\text{Var}_G\)</span> includes <span class="math notranslate nohighlight">\(\text{Var}_D\)</span> (dominance variance) and <span class="math notranslate nohighlight">\(\text{Var}_I\)</span> (epistatic variance, i.e., gene-gene interaction)</p>
+\[
+\sigma^2_G = \sigma^2_A + \sigma^2_D +  \sigma^2_R + \sigma^2_I
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\sigma^2_A\)</span> is additive variance, <span class="math notranslate nohighlight">\(\sigma^2_D\)</span> is dominance variance, <span class="math notranslate nohighlight">\(\sigma^2_R\)</span> is recessive variance, and <span class="math notranslate nohighlight">\(\sigma^2_I\)</span> is epistatic variance.</p>
+<div class="math notranslate nohighlight">
+\[
+h^2 = \frac{\sigma^2_A}{\sigma^2_Y}
+\]</div>
+<p>Narrow-sense heritability captures only additive genetic effects. This is what GWAS, eQTL mapping, and polygenic risk scores estimate, since these methods model linear allelic effects. The difference <span class="math notranslate nohighlight">\(H^2 - h^2\)</span> reflects non-additive genetic architecture.</p>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="related-topics">
@@ -670,132 +698,197 @@ document.write(`
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="example">
 <h1>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
-<p>When we say a trait has “50% heritability,” what does that actually mean? Let’s explore this using the same toy example with 5 individuals and see how much of their trait variation comes from genetics versus other factors. The key question is: <em>How much of the differences we see in their trait values can be explained by their genetic differences?</em></p>
-<p>We’ll calculate this step by step, first using a simple scenario where the genetic variant has the same effect size for everyone ,then move on to the case where each person has their own unique genetic effect. This will help us understand what “proportion of variance explained” really means in practice.</p>
+<p>When we say a trait has “50% heritability,” we mean 50% of the variation in that trait across individuals is due to genetic differences. Let’s explore this with 100 individuals whose phenotype is influenced by:</p>
+<ul class="simple">
+<li><p>Variant 1: additive effect</p></li>
+<li><p>Variant 2: dominant effect (any non-zero genotype)</p></li>
+<li><p>Interaction between variants 1 and 2</p></li>
+<li><p>Environmental factor</p></li>
+<li><p>Residual/unexplained variation</p></li>
+</ul>
+<p>We’ll calculate <span class="math notranslate nohighlight">\(H^2\)</span> (broad-sense heritability) and <span class="math notranslate nohighlight">\(h^2\)</span> (narrow-sense heritability) under both fixed and random effect models.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clear the environment</span>
-<span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ls</span><span class="p">())</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ls</span><span class="p">())</span>
 <span class="nf">set.seed</span><span class="p">(</span><span class="m">11</span><span class="p">)</span>
-<span class="c1"># Define genotypes for 5 individuals at 3 variants</span>
-<span class="c1"># These represent actual alleles at each position</span>
-<span class="c1"># For example, Individual 1 has genotypes: CC, CT, AT</span>
-<span class="n">genotypes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span>
-<span class="w"> </span><span class="s">&quot;CC&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CT&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;AT&quot;</span><span class="p">,</span><span class="w">  </span><span class="c1"># Individual 1</span>
-<span class="w"> </span><span class="s">&quot;TT&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;TT&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;AA&quot;</span><span class="p">,</span><span class="w">  </span><span class="c1"># Individual 2</span>
-<span class="w"> </span><span class="s">&quot;CT&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CT&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;AA&quot;</span><span class="p">,</span><span class="w">  </span><span class="c1"># Individual 3</span>
-<span class="w"> </span><span class="s">&quot;CC&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;TT&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;AA&quot;</span><span class="p">,</span><span class="w">  </span><span class="c1"># Individual 4</span>
-<span class="w"> </span><span class="s">&quot;CC&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CC&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;TT&quot;</span><span class="w">   </span><span class="c1"># Individual 5</span>
-<span class="p">)</span>
-<span class="c1"># Reshape into a matrix</span>
-<span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span>
-<span class="n">M</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span>
-<span class="n">geno_matrix</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="n">genotypes</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">byrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
-<span class="nf">rownames</span><span class="p">(</span><span class="n">geno_matrix</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Individual&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">)</span>
-<span class="nf">colnames</span><span class="p">(</span><span class="n">geno_matrix</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Variant&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">M</span><span class="p">)</span>
 
-<span class="n">alt_alleles</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;T&quot;</span><span class="p">)</span>
+<span class="c1"># Define parameters</span>
+<span class="n">N</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">100</span><span class="w">  </span><span class="c1"># Number of individuals</span>
+<span class="n">M</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">2</span><span class="w">    </span><span class="c1"># Number of variants</span>
 
-<span class="c1"># Convert to raw genotype matrix using the additive model</span>
-<span class="n">Xraw_additive</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">)</span><span class="w"> </span><span class="c1"># count number of non-reference alleles</span>
+<span class="c1"># Generate genotype data directly as allele counts (0, 1, 2)</span>
+<span class="c1"># Variant 1: additive effect, MAF = 0.3</span>
+<span class="n">variant1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="m">0</span><span class="o">:</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">prob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.49</span><span class="p">,</span><span class="w"> </span><span class="m">0.42</span><span class="p">,</span><span class="w"> </span><span class="m">0.09</span><span class="p">))</span>
 
-<span class="nf">rownames</span><span class="p">(</span><span class="n">Xraw_additive</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rownames</span><span class="p">(</span><span class="n">geno_matrix</span><span class="p">)</span>
-<span class="nf">colnames</span><span class="p">(</span><span class="n">Xraw_additive</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">geno_matrix</span><span class="p">)</span>
+<span class="c1"># Variant 2: dominance effect, MAF = 0.5</span>
+<span class="n">variant2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="m">0</span><span class="o">:</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">prob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.25</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="m">0.25</span><span class="p">))</span>
 
-<span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">M</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">alleles</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">strsplit</span><span class="p">(</span><span class="n">geno_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">],</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span>
-<span class="w">    </span><span class="n">Xraw_additive</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">alleles</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">alt_alleles</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
+<span class="c1"># Combine into raw genotype matrix</span>
+<span class="n">X_raw</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cbind</span><span class="p">(</span><span class="n">variant1</span><span class="p">,</span><span class="w"> </span><span class="n">variant2</span><span class="p">)</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">X_raw</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Individual&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">X_raw</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Variant1_Additive&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Variant2_Dominant&quot;</span><span class="p">)</span>
 
-<span class="n">X</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">scale</span><span class="p">(</span><span class="n">Xraw_additive</span><span class="p">,</span><span class="w"> </span><span class="n">center</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="c1"># Create dominance coding for variant 2</span>
+<span class="c1"># Dominance coding: 1 if genotype is not 0 (i.e., has at least one alternative allele)</span>
+<span class="n">Xraw_dominance</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="n">X_raw</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
+
+<span class="c1"># Create interaction term: variant1 (additive) × variant2 (dominance)</span>
+<span class="n">Xraw_interaction</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">X_raw</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Xraw_dominance</span>
+
+<span class="c1"># Generate environmental variable</span>
+<span class="c1"># For example, this could represent diet, exercise, stress, etc.</span>
+<span class="n">E_raw</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+
+<span class="c1"># Standardize all components</span>
+<span class="n">X_additive</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">scale</span><span class="p">(</span><span class="n">X_raw</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">center</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="n">X_dominance</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">scale</span><span class="p">(</span><span class="n">Xraw_dominance</span><span class="p">,</span><span class="w"> </span><span class="n">center</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="n">X_interaction</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">scale</span><span class="p">(</span><span class="n">Xraw_interaction</span><span class="p">,</span><span class="w"> </span><span class="n">center</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="n">E</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">scale</span><span class="p">(</span><span class="n">E_raw</span><span class="p">,</span><span class="w"> </span><span class="n">center</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <section id="fixed-effect">
 <h2>Fixed Effect<a class="headerlink" href="#fixed-effect" title="Link to this heading">#</a></h2>
-<p>As we discussed before, in the fixed effect model, the genetic effect <span class="math notranslate nohighlight">\(\beta\)</span> is a constant parameter that applies uniformly to all individuals. We then calculate the PVE of the variants.</p>
+<p>Effect sizes are constant parameters:</p>
+<div class="math notranslate nohighlight">
+\[Y = X_{add} \beta_A + X_{dom} \beta_D + X_{int} \beta_I + E \beta_E + \epsilon\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fixed effect: single beta value for all individuals</span>
-<span class="n">beta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.8</span><span class="w">  </span><span class="c1"># Fixed effect size</span>
-<span class="n">epsilon</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.3</span><span class="p">)</span>
-<span class="n">Y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">X</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">epsilon</span>
-<span class="n">beta</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fixed effects: constant effect sizes</span>
+<span class="n">beta_A</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.8</span><span class="w">   </span><span class="c1"># Additive effect</span>
+<span class="n">beta_D</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.6</span><span class="w">   </span><span class="c1"># Dominance effect</span>
+<span class="n">beta_I</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.4</span><span class="w">   </span><span class="c1"># Interaction effect</span>
+<span class="n">beta_E</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.5</span><span class="w">   </span><span class="c1"># Environmental effect</span>
+
+<span class="c1"># Generate phenotype</span>
+<span class="n">epsilon</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+<span class="n">Y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">X_additive</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta_A</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">X_dominance</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta_D</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">X_interaction</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta_I</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">E</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta_E</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">epsilon</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calculate variance components and heritability:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate variance components</span>
+<span class="n">var_A</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="n">X_additive</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta_A</span><span class="p">)</span>
+<span class="n">var_D</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="n">X_dominance</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta_D</span><span class="p">)</span>
+<span class="n">var_I</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="n">X_interaction</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta_I</span><span class="p">)</span>
+<span class="n">var_G</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">var_A</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">var_D</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">var_I</span>
+<span class="n">var_E</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="n">E</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta_E</span><span class="p">)</span>
+<span class="n">var_epsilon</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="n">epsilon</span><span class="p">)</span>
+<span class="n">var_Y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+
+<span class="c1"># Calculate heritabilities</span>
+<span class="n">H2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">var_G</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">var_Y</span>
+<span class="n">h2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">var_A</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">var_Y</span>
+
+<span class="c1"># Display results</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Heritability:\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;  H² (broad-sense):      &quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">H2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;  h² (narrow-sense):     &quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">h2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;  H² - h² (non-additive):&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">H2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">h2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create pie chart of variance components</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">RColorBrewer</span><span class="p">)</span>
+<span class="n">colors</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">brewer.pal</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Set2&quot;</span><span class="p">)</span>
+
+<span class="n">variance_data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">var_A</span><span class="p">,</span><span class="w"> </span><span class="n">var_D</span><span class="p">,</span><span class="w"> </span><span class="n">var_I</span><span class="p">,</span><span class="w"> </span><span class="n">var_E</span><span class="p">,</span><span class="w"> </span><span class="n">var_epsilon</span><span class="p">)</span>
+<span class="n">variance_labels</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span>
+<span class="w">  </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;Additive (&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">var_A</span><span class="o">/</span><span class="n">var_Y</span><span class="o">*</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;%)&quot;</span><span class="p">),</span>
+<span class="w">  </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;Dominance (&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">var_D</span><span class="o">/</span><span class="n">var_Y</span><span class="o">*</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;%)&quot;</span><span class="p">),</span>
+<span class="w">  </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;Interaction (&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">var_I</span><span class="o">/</span><span class="n">var_Y</span><span class="o">*</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;%)&quot;</span><span class="p">),</span>
+<span class="w">  </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;Environment (&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">var_E</span><span class="o">/</span><span class="n">var_Y</span><span class="o">*</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;%)&quot;</span><span class="p">),</span>
+<span class="w">  </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;Residual (&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">var_epsilon</span><span class="o">/</span><span class="n">var_Y</span><span class="o">*</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;%)&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="nf">pie</span><span class="p">(</span><span class="n">variance_data</span><span class="p">,</span><span class="w"> </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variance_labels</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">colors</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Variance Component Decomposition (Fixed Effects)&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.9</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">0.8</div></div>
-</div>
-<p>Now let’s calculate the PVE using the definition as well:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate PVE using the definition: PVE = Var(G) / Var(Y)</span>
-<span class="n">PVE</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="n">X</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="nf">var</span><span class="p">(</span><span class="n">X</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="n">epsilon</span><span class="p">))</span>
-<span class="n">PVE</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Heritability:
+  H² (broad-sense):       0.4138 
+  h² (narrow-sense):      0.2283 
+  H² - h² (non-additive): 0.1855 
 </pre></div>
 </div>
+<a class="reference internal image-reference" href="_images/4c549258b04807c40872650adc340bb6a72656ff0163ca32f2605d668923adc4.png"><img alt="_images/4c549258b04807c40872650adc340bb6a72656ff0163ca32f2605d668923adc4.png" src="_images/4c549258b04807c40872650adc340bb6a72656ff0163ca32f2605d668923adc4.png" style="width: 420px; height: 420px;" />
+</a>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html">0.784225923945872</div></div>
 </div>
 </section>
 <section id="random-effect">
 <h2>Random effect<a class="headerlink" href="#random-effect" title="Link to this heading">#</a></h2>
-<p>Following the example in <a class="reference external" href="https://statfungen.github.io/statgen-primer/random_effect.html">Lecture: random effect</a>, we then calculate the PVE of the first variant.</p>
+<p>Effect sizes are drawn from distributions for each individual:</p>
+<div class="math notranslate nohighlight">
+\[\beta_{A,i} \sim N(0, \sigma^2_{\beta_A}), \quad \beta_{D,i} \sim N(0, \sigma^2_{\beta_D}), \quad \beta_{I,i} \sim N(0, \sigma^2_{\beta_I}), \quad \beta_{E,i} \sim N(0, \sigma^2_{\beta_E})\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">beta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
-<span class="n">beta</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Random effects: draw effect sizes from distributions</span>
+<span class="n">beta_A_random</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.0</span><span class="p">)</span>
+<span class="n">beta_D_random</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">)</span>
+<span class="n">beta_I_random</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span>
+<span class="n">beta_E_random</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Generate phenotype and calculate heritability:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate phenotype with random effects</span>
+<span class="n">epsilon</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+<span class="n">Y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">X_additive</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta_A_random</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">X_dominance</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta_D_random</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">X_interaction</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta_I_random</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">E</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta_E_random</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">epsilon</span>
+
+<span class="c1"># Calculate variance components</span>
+<span class="n">var_A_random</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="n">X_additive</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta_A_random</span><span class="p">)</span>
+<span class="n">var_D_random</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="n">X_dominance</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta_D_random</span><span class="p">)</span>
+<span class="n">var_I_random</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="n">X_interaction</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta_I_random</span><span class="p">)</span>
+<span class="n">var_G_random</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">var_A_random</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">var_D_random</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">var_I_random</span>
+<span class="n">var_E_random</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="n">E</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta_E_random</span><span class="p">)</span>
+<span class="n">var_epsilon_random</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="n">epsilon</span><span class="p">)</span>
+<span class="n">var_Y_random</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+
+<span class="c1"># Calculate heritabilities</span>
+<span class="n">H2_random</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">var_G_random</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">var_Y_random</span>
+<span class="n">h2_random</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">var_A_random</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">var_Y_random</span>
+
+<span class="c1"># Display results</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Heritability (Random Effects):\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;  H² (broad-sense):      &quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">H2_random</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;  h² (narrow-sense):     &quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">h2_random</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;  H² - h² (non-additive):&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">H2_random</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">h2_random</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create pie chart of variance components</span>
+<span class="n">variance_data_random</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">var_A_random</span><span class="p">,</span><span class="w"> </span><span class="n">var_D_random</span><span class="p">,</span><span class="w"> </span><span class="n">var_I_random</span><span class="p">,</span><span class="w"> </span><span class="n">var_E_random</span><span class="p">,</span><span class="w"> </span><span class="n">var_epsilon_random</span><span class="p">)</span>
+<span class="n">variance_labels_random</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span>
+<span class="w">  </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;Additive (&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">var_A_random</span><span class="o">/</span><span class="n">var_Y_random</span><span class="o">*</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;%)&quot;</span><span class="p">),</span>
+<span class="w">  </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;Dominance (&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">var_D_random</span><span class="o">/</span><span class="n">var_Y_random</span><span class="o">*</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;%)&quot;</span><span class="p">),</span>
+<span class="w">  </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;Interaction (&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">var_I_random</span><span class="o">/</span><span class="n">var_Y_random</span><span class="o">*</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;%)&quot;</span><span class="p">),</span>
+<span class="w">  </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;Environment (&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">var_E_random</span><span class="o">/</span><span class="n">var_Y_random</span><span class="o">*</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;%)&quot;</span><span class="p">),</span>
+<span class="w">  </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;Residual (&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">var_epsilon_random</span><span class="o">/</span><span class="n">var_Y_random</span><span class="o">*</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;%)&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="nf">pie</span><span class="p">(</span><span class="n">variance_data_random</span><span class="p">,</span><span class="w"> </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variance_labels_random</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">colors</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Variance Component Decomposition (Random Effects)&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.9</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
-.list-inline {list-style: none; margin:0; padding: 0}
-.list-inline>li {display: inline-block}
-.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
-</style>
-<ol class=list-inline><li>0.438793320642639</li><li>1.48787059522956</li><li>0.0601650977954321</li><li>-0.849012867932317</li><li>2.3396930572073</li></ol>
-</div></div>
-</div>
-<p>Now let’s calculate the PVE using the definition.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate PVE using the definition: PVE = Var(G) / Var(Y)</span>
-<span class="n">epsilon</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.3</span><span class="p">)</span>
-<span class="n">Y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w">  </span><span class="n">X</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">epsilon</span>
-<span class="n">PVE_variant1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="n">X</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
-<span class="n">PVE_variant1</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Heritability (Random Effects):
+  H² (broad-sense):       0.5112 
+  h² (narrow-sense):      0.2328 
+  H² - h² (non-additive): 0.2784 
 </pre></div>
 </div>
+<a class="reference internal image-reference" href="_images/d062d0cf835d97b9c60855e5dc6949895ffe28b3ebb4e9c3f1f95c318c2beb14.png"><img alt="_images/d062d0cf835d97b9c60855e5dc6949895ffe28b3ebb4e9c3f1f95c318c2beb14.png" src="_images/d062d0cf835d97b9c60855e5dc6949895ffe28b3ebb4e9c3f1f95c318c2beb14.png" style="width: 420px; height: 420px;" />
+</a>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html">0.730989835353857</div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">cov</span><span class="p">(</span><span class="n">X</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta</span><span class="p">,</span><span class="w"> </span><span class="n">epsilon</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html">0.311787626831546</div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">var</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
-<span class="nf">var</span><span class="p">(</span><span class="n">X</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta</span><span class="p">)</span>
-<span class="nf">var</span><span class="p">(</span><span class="n">epsilon</span><span class="p">)</span>
-<span class="nf">var</span><span class="p">(</span><span class="n">X</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="n">epsilon</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="nf">cov</span><span class="p">(</span><span class="n">X</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta</span><span class="p">,</span><span class="w"> </span><span class="n">epsilon</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html">2.76114631216009</div><div class="output text_html">2.01836988811382</div><div class="output text_html">0.119201170383186</div><div class="output text_html">2.76114631216009</div></div>
 </div>
 </section>
 </section>
@@ -868,7 +961,8 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-summary">Graphical Summary</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#components-of-variance">Components of Variance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generative-model">Generative Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-decomposition">Variance Decomposition</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broad-sense-heritability">Broad-sense Heritability</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#narrow-sense-heritability">Narrow-sense Heritability</a></li>
 </ul>

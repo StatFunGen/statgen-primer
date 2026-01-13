@@ -329,7 +329,6 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="likelihood_ratio.html">Likelihood Ratio</a></li>
 
 
@@ -354,14 +353,13 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="Bayes_factor.html">Bayes Factor</a></li>
 
 
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="p_value_and_Bayesian_hypothesis_testing.html">p-value and Bayesian Hypothesis Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p_value_and_Bayesian_hypothesis_testing.html"><span class="math notranslate nohighlight">\(p\)</span>-value and Bayesian Hypothesis Testing</a></li>
 
 
 
@@ -378,9 +376,7 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="Bayesian_multivariate_normal_mean_model.html">Bayesian Multivariate Normal Mean Model</a></li>
-
 
 
 
@@ -390,7 +386,6 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Multiple Bayesian Models</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Bayesian_model_comparison.html">Bayesian Model Comparison</a></li>
-
 
 
 
@@ -588,39 +583,18 @@ document.write(`
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-genotype-imputation">Example 1: Genotype Imputation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-generate-data">Step 1: Generate Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-define-hmm-parameters">Step 2: Define HMM Parameters</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transition-probability-p-z-m-k-z-m-1-j">2.1 Transition Probability <span class="math notranslate nohighlight">\(P(Z_m = k | Z_{m-1} = j)\)</span></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#emission-probability-p-x-m-x-z-m-k">2.2 Emission Probability <span class="math notranslate nohighlight">\(P(X_m = x | Z_m = k)\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-genotype-imputation">Example 1 – Genotype Imputation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hmm-parameters-and-probabilities">HMM Parameters and Probabilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-backward-algorithm">Forward-Backward Algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#results-and-visualization">Results and Visualization</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-run-forward-backward-algorithm">Step 3: Run Forward-Backward Algorithm</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-probability-alpha-m-k">3.1 Forward Probability <span class="math notranslate nohighlight">\(\alpha_m(k)\)</span></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-probability-beta-m-k">3.2 Backward Probability <span class="math notranslate nohighlight">\(\beta_m(k)\)</span></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-posterior-and-impute-genotypes">3.3 Compute Posterior and Impute Genotypes</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-results">Step 4: Results</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-local-ancestry-inference-with-elai">Example 2: Local Ancestry Inference with ELAI</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Step 1: Generate Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-define-model-parameters-and-probability-functions">Step 2: Define Model Parameters and Probability Functions</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#allele-frequencies-theta-mk">2.1 Allele Frequencies <span class="math notranslate nohighlight">\(\theta_{mk}\)</span></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#beta-beta-sk-layer-connection-matrix">2.2 Beta <span class="math notranslate nohighlight">\(\beta_{sk}\)</span>: Layer Connection Matrix</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transition-parameters-j-and-rho">2.3 Transition Parameters <span class="math notranslate nohighlight">\(j\)</span> and <span class="math notranslate nohighlight">\(\rho\)</span></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#emission-probability-p-h-m-y-m-k">2.4 Emission Probability <span class="math notranslate nohighlight">\(P(h_m | Y_m = k)\)</span></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transition-probability-p-x-m-s-y-m-k-x-m-1-s-y-m-1-k">2.5 Transition Probability <span class="math notranslate nohighlight">\(P(X_m=s, Y_m=k | X_{m-1}=s', Y_{m-1}=k')\)</span></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Step 3: Run Forward-Backward Algorithm</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-probability-alpha-m-s-k">3.1 Forward Probability <span class="math notranslate nohighlight">\(\alpha_m(s,k)\)</span></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-probability-beta-m-s-k">3.2 Backward Probability <span class="math notranslate nohighlight">\(\beta_m(s,k)\)</span></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-probability-p-x-m-s-h-1-m">3.3 Posterior Probability <span class="math notranslate nohighlight">\(P(X_m=s | h_{1:M})\)</span></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Step 4: Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-local-ancestry-inference-with-elai">Example 2 – Local Ancestry Inference with ELAI</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">HMM Parameters and Probabilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Forward-Backward Algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Results and Visualization</a></li>
 </ul>
 </li>
 </ul>
@@ -640,7 +614,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="hidden-markov-model">
 <h1>Hidden Markov Model<a class="headerlink" href="#hidden-markov-model" title="Link to this heading">#</a></h1>
-<p>A Hidden Markov Model (HMM) is a statistical model for sequential data where unobservable states (e.g., underlying ancestry) evolve over time according to a Markov chain, and at each time point we observe noisy or indirect measurements that depend on the current hidden state.</p>
+<p>A Hidden Markov Model (HMM) is a statistical model for sequential data where unobservable states evolve over time according to a Markov chain, and at each time point we observe noisy or indirect measurements that depend only on the current hidden state.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="graphical-summary">
 <h1>Graphical Summary<a class="headerlink" href="#graphical-summary" title="Link to this heading">#</a></h1>
@@ -742,7 +716,7 @@ document.write(`
 <section class="tex2jax_ignore mathjax_ignore" id="example">
 <h1>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
 <section id="example-1-genotype-imputation">
-<h2>Example 1: Genotype Imputation<a class="headerlink" href="#example-1-genotype-imputation" title="Link to this heading">#</a></h2>
+<h2>Example 1 – Genotype Imputation<a class="headerlink" href="#example-1-genotype-imputation" title="Link to this heading">#</a></h2>
 <p><strong>Problem</strong>: Genotyping arrays are cost-effective but only measure a subset of genetic variants. Given an individual genotyped at sparse markers and a reference panel with dense genotypes, can we infer (impute) the missing genotypes at untyped markers?</p>
 <p><strong>HMM Solution</strong>: Model each individual’s haplotype as a mosaic copied from reference haplotypes, with occasional switches due to recombination. The HMM has:</p>
 <ol class="arabic simple">
@@ -751,8 +725,8 @@ document.write(`
 <li><p><strong>Transitions</strong>: Recombination events causing switches between reference haplotypes</p></li>
 </ol>
 <p>This Li and Stephens (2003) model captures linkage disequilibrium through the haplotype copying process.</p>
-<section id="step-1-generate-data">
-<h3>Step 1: Generate Data<a class="headerlink" href="#step-1-generate-data" title="Link to this heading">#</a></h3>
+<section id="setup">
+<h3>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h3>
 <p>We create a reference panel with complete haplotypes, then simulate a target individual genotyped only at a subset of markers.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -831,10 +805,9 @@ Target individual: 30 typed markers, 70 to impute
 </div>
 </div>
 </section>
-<section id="step-2-define-hmm-parameters">
-<h3>Step 2: Define HMM Parameters<a class="headerlink" href="#step-2-define-hmm-parameters" title="Link to this heading">#</a></h3>
-<section id="transition-probability-p-z-m-k-z-m-1-j">
-<h4>2.1 Transition Probability <span class="math notranslate nohighlight">\(P(Z_m = k | Z_{m-1} = j)\)</span><a class="headerlink" href="#transition-probability-p-z-m-k-z-m-1-j" title="Link to this heading">#</a></h4>
+<section id="hmm-parameters-and-probabilities">
+<h3>HMM Parameters and Probabilities<a class="headerlink" href="#hmm-parameters-and-probabilities" title="Link to this heading">#</a></h3>
+<p><strong>Transition Probability</strong> <span class="math notranslate nohighlight">\(P(Z_m = k | Z_{m-1} = j)\)</span></p>
 <p>The probability of switching from copying reference haplotype <span class="math notranslate nohighlight">\(j\)</span> to haplotype <span class="math notranslate nohighlight">\(k\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -863,9 +836,7 @@ P(Z_m = k | Z_{m-1} = j) = \begin{cases}
 </div>
 </div>
 </div>
-</section>
-<section id="emission-probability-p-x-m-x-z-m-k">
-<h4>2.2 Emission Probability <span class="math notranslate nohighlight">\(P(X_m = x | Z_m = k)\)</span><a class="headerlink" href="#emission-probability-p-x-m-x-z-m-k" title="Link to this heading">#</a></h4>
+<p><strong>Emission Probability</strong> <span class="math notranslate nohighlight">\(P(X_m = x | Z_m = k)\)</span></p>
 <p>The probability of observing allele <span class="math notranslate nohighlight">\(x\)</span> given we’re copying from reference haplotype <span class="math notranslate nohighlight">\(k\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -898,12 +869,10 @@ P(X_m = x | Z_m = k) = \begin{cases}
 </div>
 </div>
 </section>
-</section>
-<section id="step-3-run-forward-backward-algorithm">
-<h3>Step 3: Run Forward-Backward Algorithm<a class="headerlink" href="#step-3-run-forward-backward-algorithm" title="Link to this heading">#</a></h3>
+<section id="forward-backward-algorithm">
+<h3>Forward-Backward Algorithm<a class="headerlink" href="#forward-backward-algorithm" title="Link to this heading">#</a></h3>
 <p>We use forward-backward to compute posterior probabilities of copying from each reference haplotype at each position.</p>
-<section id="forward-probability-alpha-m-k">
-<h4>3.1 Forward Probability <span class="math notranslate nohighlight">\(\alpha_m(k)\)</span><a class="headerlink" href="#forward-probability-alpha-m-k" title="Link to this heading">#</a></h4>
+<p><strong>Forward Probability</strong> <span class="math notranslate nohighlight">\(\alpha_m(k)\)</span></p>
 <div class="math notranslate nohighlight">
 \[
 \alpha_m(k) = P(X_{1:m}, Z_m = k)
@@ -939,9 +908,7 @@ P(X_m = x | Z_m = k) = \begin{cases}
 </div>
 </div>
 </div>
-</section>
-<section id="backward-probability-beta-m-k">
-<h4>3.2 Backward Probability <span class="math notranslate nohighlight">\(\beta_m(k)\)</span><a class="headerlink" href="#backward-probability-beta-m-k" title="Link to this heading">#</a></h4>
+<p><strong>Backward Probability</strong> <span class="math notranslate nohighlight">\(\beta_m(k)\)</span></p>
 <div class="math notranslate nohighlight">
 \[
 \beta_m(k) = P(X_{m+1:M} | Z_m = k)
@@ -971,9 +938,7 @@ P(X_m = x | Z_m = k) = \begin{cases}
 </div>
 </div>
 </div>
-</section>
-<section id="compute-posterior-and-impute-genotypes">
-<h4>3.3 Compute Posterior and Impute Genotypes<a class="headerlink" href="#compute-posterior-and-impute-genotypes" title="Link to this heading">#</a></h4>
+<p><strong>Compute Posterior and Impute Genotypes</strong></p>
 <p>For each untyped marker, compute <span class="math notranslate nohighlight">\(P(Z_m = k | X_{\text{typed}}) \propto \alpha_m(k) \cdot \beta_m(k)\)</span>, then impute the genotype as the expected value over reference haplotypes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1019,9 +984,8 @@ Imputation accuracy: 90.0% (63/70 markers correct)
 </div>
 </div>
 </section>
-</section>
-<section id="step-4-results">
-<h3>Step 4: Results<a class="headerlink" href="#step-4-results" title="Link to this heading">#</a></h3>
+<section id="results-and-visualization">
+<h3>Results and Visualization<a class="headerlink" href="#results-and-visualization" title="Link to this heading">#</a></h3>
 <p>We visualize the imputation process and accuracy.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1109,7 +1073,7 @@ Imputation accuracy: 90.0% (63/70 markers correct)
 </section>
 </section>
 <section id="example-2-local-ancestry-inference-with-elai">
-<h2>Example 2: Local Ancestry Inference with ELAI<a class="headerlink" href="#example-2-local-ancestry-inference-with-elai" title="Link to this heading">#</a></h2>
+<h2>Example 2 – Local Ancestry Inference with ELAI<a class="headerlink" href="#example-2-local-ancestry-inference-with-elai" title="Link to this heading">#</a></h2>
 <p><strong>Problem</strong>: When populations mix through migration and intermarriage, their descendants carry chromosomal segments from different ancestral populations. Given an admixed individual’s genome and reference panels from ancestral populations, can we infer which population each genomic segment originated from?</p>
 <p><strong>ELAI’s Solution</strong>: A two-layer Hidden Markov Model that captures genetic variation at two scales:</p>
 <ol class="arabic simple">
@@ -1126,7 +1090,7 @@ Imputation accuracy: 90.0% (63/70 markers correct)
 </ol>
 <p>This hierarchical structure models both the ancestry switches created by admixture and the haplotype copying process within populations.</p>
 <section id="id1">
-<h3>Step 1: Generate Data<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<h3>Setup<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <p>We first create reference populations with distinct allele frequencies, then simulate an admixed individual as a mosaic of segments from these populations (mimicking recombination history during admixture).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1192,8 +1156,8 @@ Imputation accuracy: 90.0% (63/70 markers correct)
 </div>
 </div>
 </section>
-<section id="step-2-define-model-parameters-and-probability-functions">
-<h3>Step 2: Define Model Parameters and Probability Functions<a class="headerlink" href="#step-2-define-model-parameters-and-probability-functions" title="Link to this heading">#</a></h3>
+<section id="id2">
+<h3>HMM Parameters and Probabilities<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <p>We now set up ELAI’s two-layer HMM by defining the model parameters and the emission/transition probabilities.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1211,8 +1175,7 @@ Imputation accuracy: 90.0% (63/70 markers correct)
 </div>
 </div>
 </div>
-<section id="allele-frequencies-theta-mk">
-<h4>2.1 Allele Frequencies <span class="math notranslate nohighlight">\(\theta_{mk}\)</span><a class="headerlink" href="#allele-frequencies-theta-mk" title="Link to this heading">#</a></h4>
+<p><strong>Allele Frequencies</strong> <span class="math notranslate nohighlight">\(\theta_{mk}\)</span></p>
 <p>Each lower-layer cluster represents an ancestral haplotype with its own allele frequency at each marker. These frequencies determine the emission probabilities.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1258,9 +1221,7 @@ Imputation accuracy: 90.0% (63/70 markers correct)
 </div></div>
 </div>
 <p><strong>Interpretation</strong>: <span class="math notranslate nohighlight">\(\theta_{mk}\)</span> = probability that ancestral haplotype <span class="math notranslate nohighlight">\(k\)</span> carries allele “1” at marker <span class="math notranslate nohighlight">\(m\)</span>.</p>
-</section>
-<section id="beta-beta-sk-layer-connection-matrix">
-<h4>2.2 Beta <span class="math notranslate nohighlight">\(\beta_{sk}\)</span>: Layer Connection Matrix<a class="headerlink" href="#beta-beta-sk-layer-connection-matrix" title="Link to this heading">#</a></h4>
+<p><strong>Layer Connection Matrix</strong> <span class="math notranslate nohighlight">\(\beta_{sk}\)</span></p>
 <p><span class="math notranslate nohighlight">\(\beta_{sk}\)</span> connects the two layers - the probability that lower-layer cluster <span class="math notranslate nohighlight">\(k\)</span> belongs to upper-layer population <span class="math notranslate nohighlight">\(s\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1293,9 +1254,7 @@ Imputation accuracy: 90.0% (63/70 markers correct)
 </div></div>
 </div>
 <p><strong>Interpretation</strong>: For example, <span class="math notranslate nohighlight">\(\beta_{1,1} = 0.6\)</span> means “if in population 1, 60% chance of copying from lower cluster 1.”</p>
-</section>
-<section id="transition-parameters-j-and-rho">
-<h4>2.3 Transition Parameters <span class="math notranslate nohighlight">\(j\)</span> and <span class="math notranslate nohighlight">\(\rho\)</span><a class="headerlink" href="#transition-parameters-j-and-rho" title="Link to this heading">#</a></h4>
+<p><strong>Transition Parameters</strong> <span class="math notranslate nohighlight">\(j\)</span> and <span class="math notranslate nohighlight">\(\rho\)</span></p>
 <p>These parameters control state changes along the chromosome.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1323,9 +1282,7 @@ Imputation accuracy: 90.0% (63/70 markers correct)
 <li><p><span class="math notranslate nohighlight">\(j\)</span> (upper layer): Ancestry switch rate between populations</p></li>
 <li><p><span class="math notranslate nohighlight">\(\rho\)</span> (lower layer): Haplotype switch rate within a population</p></li>
 </ul>
-</section>
-<section id="emission-probability-p-h-m-y-m-k">
-<h4>2.4 Emission Probability <span class="math notranslate nohighlight">\(P(h_m | Y_m = k)\)</span><a class="headerlink" href="#emission-probability-p-h-m-y-m-k" title="Link to this heading">#</a></h4>
+<p>** Emission Probability** <span class="math notranslate nohighlight">\(P(h_m | Y_m = k)\)</span></p>
 <p>Given ancestral haplotype <span class="math notranslate nohighlight">\(k\)</span>, the observed allele follows a Bernoulli distribution:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1364,9 +1321,7 @@ Example: P(observe &#39;0&#39; at marker 1 | cluster 1) = 0.904
 </div>
 </div>
 <p><strong>Interpretation</strong>: Once you know which ancestral haplotype you’re copying from, the allele probability is straightforward.</p>
-</section>
-<section id="transition-probability-p-x-m-s-y-m-k-x-m-1-s-y-m-1-k">
-<h4>2.5 Transition Probability <span class="math notranslate nohighlight">\(P(X_m=s, Y_m=k | X_{m-1}=s', Y_{m-1}=k')\)</span><a class="headerlink" href="#transition-probability-p-x-m-s-y-m-k-x-m-1-s-y-m-1-k" title="Link to this heading">#</a></h4>
+<p><strong>Transition Probability</strong> <span class="math notranslate nohighlight">\(P(X_m=s, Y_m=k | X_{m-1}=s', Y_{m-1}=k')\)</span></p>
 <p>ELAI’s key innovation - the transition has <strong>three terms</strong> for different biological scenarios:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1421,12 +1376,10 @@ Example: P(switch from (s=1, k=1) to (s=2, k=3)) = 0.0021
 </div>
 </div>
 </section>
-</section>
-<section id="id2">
-<h3>Step 3: Run Forward-Backward Algorithm<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<section id="id3">
+<h3>Forward-Backward Algorithm<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <p>We apply the forward-backward algorithm to compute posterior probabilities.</p>
-<section id="forward-probability-alpha-m-s-k">
-<h4>3.1 Forward Probability <span class="math notranslate nohighlight">\(\alpha_m(s,k)\)</span><a class="headerlink" href="#forward-probability-alpha-m-s-k" title="Link to this heading">#</a></h4>
+<p><strong>Forward Probability</strong> <span class="math notranslate nohighlight">\(\alpha_m(s,k)\)</span></p>
 <div class="math notranslate nohighlight">
 \[
 \alpha_m(s,k) = P(h_{1:m}, X_m=s, Y_m=k)
@@ -1484,9 +1437,7 @@ Forward algorithm completed for all 50 markers
 </div>
 </div>
 <p><strong>Key insight</strong>: Forward probabilities accumulate information from the past.</p>
-</section>
-<section id="backward-probability-beta-m-s-k">
-<h4>3.2 Backward Probability <span class="math notranslate nohighlight">\(\beta_m(s,k)\)</span><a class="headerlink" href="#backward-probability-beta-m-s-k" title="Link to this heading">#</a></h4>
+<p><strong>Backward Probability</strong> <span class="math notranslate nohighlight">\(\beta_m(s,k)\)</span></p>
 <div class="math notranslate nohighlight">
 \[
 \beta_m(s,k) = P(h_{m+1:M} | X_m=s, Y_m=k)
@@ -1528,9 +1479,7 @@ Forward algorithm completed for all 50 markers
 </div>
 </div>
 <p><strong>Key insight</strong>: Backward probabilities accumulate information from the future.</p>
-</section>
-<section id="posterior-probability-p-x-m-s-h-1-m">
-<h4>3.3 Posterior Probability <span class="math notranslate nohighlight">\(P(X_m=s | h_{1:M})\)</span><a class="headerlink" href="#posterior-probability-p-x-m-s-h-1-m" title="Link to this heading">#</a></h4>
+<p><strong>Posterior Probability</strong> <span class="math notranslate nohighlight">\(P(X_m=s | h_{1:M})\)</span></p>
 <p>Combining forward and backward:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1589,9 +1538,8 @@ Global Admixture Proportions:
 </div>
 </div>
 </section>
-</section>
-<section id="id3">
-<h3>Step 4: Results<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<section id="id4">
+<h3>Results and Visualization<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <p>The posterior probability <span class="math notranslate nohighlight">\(P(X_m=s | \text{all data})\)</span> quantifies confidence in each ancestry assignment.</p>
 <p>The four panels show the complete inference pipeline:</p>
 <ul class="simple">
@@ -1748,39 +1696,18 @@ Global Admixture Proportions:
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-genotype-imputation">Example 1: Genotype Imputation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-generate-data">Step 1: Generate Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-define-hmm-parameters">Step 2: Define HMM Parameters</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transition-probability-p-z-m-k-z-m-1-j">2.1 Transition Probability <span class="math notranslate nohighlight">\(P(Z_m = k | Z_{m-1} = j)\)</span></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#emission-probability-p-x-m-x-z-m-k">2.2 Emission Probability <span class="math notranslate nohighlight">\(P(X_m = x | Z_m = k)\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-genotype-imputation">Example 1 – Genotype Imputation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hmm-parameters-and-probabilities">HMM Parameters and Probabilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-backward-algorithm">Forward-Backward Algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#results-and-visualization">Results and Visualization</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-run-forward-backward-algorithm">Step 3: Run Forward-Backward Algorithm</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-probability-alpha-m-k">3.1 Forward Probability <span class="math notranslate nohighlight">\(\alpha_m(k)\)</span></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-probability-beta-m-k">3.2 Backward Probability <span class="math notranslate nohighlight">\(\beta_m(k)\)</span></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-posterior-and-impute-genotypes">3.3 Compute Posterior and Impute Genotypes</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-results">Step 4: Results</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-local-ancestry-inference-with-elai">Example 2: Local Ancestry Inference with ELAI</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Step 1: Generate Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-define-model-parameters-and-probability-functions">Step 2: Define Model Parameters and Probability Functions</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#allele-frequencies-theta-mk">2.1 Allele Frequencies <span class="math notranslate nohighlight">\(\theta_{mk}\)</span></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#beta-beta-sk-layer-connection-matrix">2.2 Beta <span class="math notranslate nohighlight">\(\beta_{sk}\)</span>: Layer Connection Matrix</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transition-parameters-j-and-rho">2.3 Transition Parameters <span class="math notranslate nohighlight">\(j\)</span> and <span class="math notranslate nohighlight">\(\rho\)</span></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#emission-probability-p-h-m-y-m-k">2.4 Emission Probability <span class="math notranslate nohighlight">\(P(h_m | Y_m = k)\)</span></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transition-probability-p-x-m-s-y-m-k-x-m-1-s-y-m-1-k">2.5 Transition Probability <span class="math notranslate nohighlight">\(P(X_m=s, Y_m=k | X_{m-1}=s', Y_{m-1}=k')\)</span></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Step 3: Run Forward-Backward Algorithm</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-probability-alpha-m-s-k">3.1 Forward Probability <span class="math notranslate nohighlight">\(\alpha_m(s,k)\)</span></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-probability-beta-m-s-k">3.2 Backward Probability <span class="math notranslate nohighlight">\(\beta_m(s,k)\)</span></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-probability-p-x-m-s-h-1-m">3.3 Posterior Probability <span class="math notranslate nohighlight">\(P(X_m=s | h_{1:M})\)</span></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Step 4: Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-local-ancestry-inference-with-elai">Example 2 – Local Ancestry Inference with ELAI</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">HMM Parameters and Probabilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Forward-Backward Algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Results and Visualization</a></li>
 </ul>
 </li>
 </ul>

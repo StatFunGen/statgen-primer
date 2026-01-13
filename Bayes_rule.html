@@ -330,7 +330,6 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="likelihood_ratio.html">Likelihood Ratio</a></li>
 
 
@@ -355,14 +354,13 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="Bayes_factor.html">Bayes Factor</a></li>
 
 
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="p_value_and_Bayesian_hypothesis_testing.html">p-value and Bayesian Hypothesis Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p_value_and_Bayesian_hypothesis_testing.html"><span class="math notranslate nohighlight">\(p\)</span>-value and Bayesian Hypothesis Testing</a></li>
 
 
 
@@ -379,9 +377,7 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="Bayesian_multivariate_normal_mean_model.html">Bayesian Multivariate Normal Mean Model</a></li>
-
 
 
 
@@ -391,7 +387,6 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Multiple Bayesian Models</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Bayesian_model_comparison.html">Bayesian Model Comparison</a></li>
-
 
 
 
@@ -579,16 +574,19 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Bayes Rule</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-summary">Graphical Summary</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-setup">Model Setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-prior-beliefs">Setting Prior Beliefs</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-bayes-rule">Applying Bayes’ Rule</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-principle">Core Principle</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conjugate-priors">Conjugate Priors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-in-statistical-genetics">Applications in Statistical Genetics</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#supplementary">Supplementary</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Graphical Summary</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#likelihood-and-log-likelihood">Likelihood and Log-likelihood</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-prior-beliefs">Setting Prior Beliefs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-bayes-rule">Applying Bayes’ Rule</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results">Results</a></li>
 </ul>
 </li>
 </ul>
@@ -605,7 +603,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="bayes-rule">
 <h1>Bayes Rule<a class="headerlink" href="#bayes-rule" title="Link to this heading">#</a></h1>
-<p>Bayes’ rule arises when you want to make statements about an unknown quantity (e.g., a parameter, hypothesis, or event) given everything you know about a specific situation (data, and generative model for the data) so you can <strong>condition on all the knowns and treat the unknown as distributions</strong>, scaled by the overall likelihood of data to calibrate.</p>
+<p>Bayes’ rule arises when you want to make statements about an unknown quantity (e.g., a parameter, hypothesis, or event) given everything you know about a specific situation (data and generative model for the data) so you can <strong>condition on all the knowns and treat the unknown as distributions</strong>, scaled by the overall likelihood of data to calibrate.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="graphical-summary">
 <h1>Graphical Summary<a class="headerlink" href="#graphical-summary" title="Link to this heading">#</a></h1>
@@ -613,35 +611,50 @@ document.write(`
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="key-formula">
 <h1>Key Formula<a class="headerlink" href="#key-formula" title="Link to this heading">#</a></h1>
+<p>Bayes’ rule provides the foundation for updating our beliefs about parameters based on observed data. It tells us how to compute the posterior probability of a parameter <span class="math notranslate nohighlight">\(\theta\)</span> given data <span class="math notranslate nohighlight">\(\text{D}\)</span> by combining the likelihood of the data with our prior beliefs:</p>
 <div class="math notranslate nohighlight">
 \[
-P(\theta|D) = \frac{P(D|\theta) × P(\theta)} {P(D)}
+P(\theta|\text{D}) = \frac{P(\text{D}|\theta) \times P(\theta)} {P(\text{D})}
 \]</div>
+<p>where:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(P(\theta|D)\)</span> is the posterior (probability of parameter <span class="math notranslate nohighlight">\(\theta\)</span> given data <span class="math notranslate nohighlight">\(D\)</span>)</p></li>
-<li><p><span class="math notranslate nohighlight">\(P(D|\theta)\)</span> is the likelihood (probability of observing data <span class="math notranslate nohighlight">\(D\)</span> given parameter <span class="math notranslate nohighlight">\(\theta\)</span>)</p></li>
-<li><p><span class="math notranslate nohighlight">\(P(\theta)\)</span> is the prior (initial belief about parameter <span class="math notranslate nohighlight">\(\theta\)</span>)</p></li>
-<li><p><span class="math notranslate nohighlight">\(P(D)\)</span> is the evidence/marginal likelihood (total probability of observing data <span class="math notranslate nohighlight">\(D\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(\theta|\text{D})\)</span> is the <strong>posterior</strong> – probability of parameter <span class="math notranslate nohighlight">\(\theta\)</span> given data <span class="math notranslate nohighlight">\(\text{D}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(\text{D}|\theta)\)</span> is the <strong>likelihood</strong> – probability of observing data <span class="math notranslate nohighlight">\(\text{D}\)</span> given parameter <span class="math notranslate nohighlight">\(\theta\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(\theta)\)</span> is the <strong>prior</strong> – initial belief about parameter <span class="math notranslate nohighlight">\(\theta\)</span> before seeing data</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(\text{D})\)</span> is the <strong>evidence</strong> (or marginal likelihood) – total probability of observing data <span class="math notranslate nohighlight">\(\text{D}\)</span></p></li>
 </ul>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="technical-details">
 <h1>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading">#</a></h1>
+<section id="core-principle">
+<h2>Core Principle<a class="headerlink" href="#core-principle" title="Link to this heading">#</a></h2>
+<p>Bayes’ rule updates prior beliefs with observed evidence to obtain posterior probabilities. Unlike frequentist approaches that treat parameters as fixed unknowns, Bayesian inference treats parameters as random variables, enabling direct probabilistic statements about them.</p>
+<p><strong>The Denominator (Evidence):</strong>
+The evidence <span class="math notranslate nohighlight">\(P(\text{D})\)</span> acts as a normalizing constant:</p>
+<div class="math notranslate nohighlight">
+\[
+P(\text{D}) = \int P(\text{D}|\theta) P(\theta) \, d\theta
+\]</div>
+<p>This marginal likelihood is often intractable to compute directly, motivating approximation methods like Markov Chain Monte Carlo (MCMC) or variational inference.</p>
+</section>
+<section id="conjugate-priors">
+<h2>Conjugate Priors<a class="headerlink" href="#conjugate-priors" title="Link to this heading">#</a></h2>
+<p>When the prior and posterior belong to the same distributional family, we call the prior <strong>conjugate</strong>. Conjugate priors yield closed-form posterior distributions, simplifying computation. Common examples include:</p>
 <ul class="simple">
-<li><p>Interpretation:</p>
-<ul>
-<li><p>Bayes’ Rule allows learning from data by adjusting prior beliefs with evidence</p></li>
-<li><p>Posterior probabilities quantify uncertainty about hypotheses or parameters conditioned on all known information</p></li>
-<li><p>Unlike frequentist approaches, Bayesian inference treats parameters as random variables with probability distributions, enabling direct probabilistic statements about parameters</p></li>
+<li><p>Beta prior with binomial likelihood → Beta posterior</p></li>
+<li><p>Normal prior with normal likelihood → Normal posterior</p></li>
+<li><p>Dirichlet prior with multinomial likelihood → Dirichlet posterior</p></li>
 </ul>
-</li>
-<li><p>Applications in statistical genetics:</p>
-<ul>
-<li><p>Inferring the probability that a genetic variant affects a trait given observed data</p></li>
-<li><p>Incorporating prior biological knowledge (e.g., functional annotations) in association studies</p></li>
-<li><p>Performing fine-mapping to prioritize causal variants among many candidates</p></li>
+</section>
+<section id="applications-in-statistical-genetics">
+<h2>Applications in Statistical Genetics<a class="headerlink" href="#applications-in-statistical-genetics" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Estimate the probability a genetic variant affects a trait given observed association data</p></li>
+<li><p>Incorporate functional annotations as informative priors in fine-mapping studies</p></li>
+<li><p>Prioritize causal variants among correlated candidates in linkage disequilibrium regions</p></li>
+<li><p>Model genotype uncertainty in low-coverage sequencing data</p></li>
 </ul>
-</li>
-</ul>
+</section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="related-topics">
 <h1>Related Topics<a class="headerlink" href="#related-topics" title="Link to this heading">#</a></h1>
@@ -653,16 +666,18 @@ P(\theta|D) = \frac{P(D|\theta) × P(\theta)} {P(D)}
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="example">
 <h1>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
-<p>In our previous likelihood analysis, we found that among our three theories about genetic effects (<span class="math notranslate nohighlight">\(\beta = 0\)</span>, <span class="math notranslate nohighlight">\(\beta = 0.5\)</span>, <span class="math notranslate nohighlight">\(\beta = 1.0\)</span>), the data supported <span class="math notranslate nohighlight">\(\beta = 0.5\)</span> most strongly. But this raises a new question: What if we had some prior beliefs about which theory was more plausible before seeing the data?</p>
-<p>For example, maybe from previous studies, we thought large genetic effects (<span class="math notranslate nohighlight">\(\beta = 1.0\)</span>) were rare, while small or no effects were more common. How do we <strong>combine our prior knowledge with what the data tells us to get a final, updated belief</strong>?</p>
-<p>This is exactly what Bayes’ rule does - it gives us a formal way to update our beliefs based on new evidence. We start with prior probabilities about each theory, multiply by the likelihood (which we already calculated), and get posterior probabilities that represent our updated beliefs after seeing the data.</p>
-<p>(Here for simplicity we are still working with the three separate models, but the same thing applies when we consider <span class="math notranslate nohighlight">\(\beta\)</span> comes from a distribution, which is exactly what we did in <a class="reference external" href="https://statfungen.github.io/statgen-primer/Bayes_factor.html">Lecture: Bayes factor</a>.)</p>
-<section id="model-setup">
-<h2>Model Setup<a class="headerlink" href="#model-setup" title="Link to this heading">#</a></h2>
+<p>In our previous <a class="reference external" href="https://statfungen.github.io/statgen-primer/likelihood.html">Lecture: likelihood</a> analysis, we found that among three models (<span class="math notranslate nohighlight">\(\beta = 0\)</span>, <span class="math notranslate nohighlight">\(\beta = 0.5\)</span>, <span class="math notranslate nohighlight">\(\beta = 1.0\)</span>), the data supported Model 2, <span class="math notranslate nohighlight">\(\beta = 0.5\)</span> most strongly. In <a class="reference external" href="https://statfungen.github.io/statgen-primer/maximum_likelihood_estimation.html">Lecture: maximum likelihood estimation</a>, we addressed this by finding <span class="math notranslate nohighlight">\(\hat{\theta}_\text{MLE}\)</span>. But what if we had prior beliefs about which model was more plausible before seeing the data?</p>
+<p>For example, from previous studies we might believe large genetic effects (<span class="math notranslate nohighlight">\(\beta = 1.0\)</span>) are rare, while small or no effects are more common. How do we <strong>combine prior knowledge with observed data to get updated beliefs</strong>?</p>
+<p>Bayes’ rule provides the formal framework: start with prior probabilities for each model, multiply by the likelihood, and obtain posterior probabilities representing updated beliefs after seeing the data.</p>
+<p>(For simplicity we work with three discrete models, but the same principle applies when <span class="math notranslate nohighlight">\(\beta\)</span> follows a continuous distribution, as in <a class="reference external" href="https://statfungen.github.io/statgen-primer/Bayes_factor.html">Lecture: Bayes factor</a>.)</p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clear the environment</span>
 <span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ls</span><span class="p">())</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
 <span class="nf">set.seed</span><span class="p">(</span><span class="m">19</span><span class="p">)</span><span class="w">  </span><span class="c1"># For reproducibility</span>
 
 <span class="c1"># Generate genotype data for 5 individuals at 1 variant</span>
@@ -683,13 +698,8 @@ P(\theta|D) = \frac{P(D|\theta) × P(\theta)} {P(D)}
 
 <span class="c1"># Standardize genotypes</span>
 <span class="n">X</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">scale</span><span class="p">(</span><span class="n">Xraw_additive</span><span class="p">,</span><span class="w"> </span><span class="n">center</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)[,</span><span class="m">1</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set true beta and generate phenotype data</span>
+
+<span class="c1"># Set true beta and generate phenotype data</span>
 <span class="n">true_beta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.4</span>
 <span class="n">true_sd</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1.0</span>
 
@@ -698,24 +708,36 @@ P(\theta|D) = \frac{P(D|\theta) × P(\theta)} {P(D)}
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attaching package: ‘dplyr’
+
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+</pre></div>
 </div>
+</div>
+</div>
+</section>
+<section id="likelihood-and-log-likelihood">
+<h2>Likelihood and Log-likelihood<a class="headerlink" href="#likelihood-and-log-likelihood" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Likelihood function for normal distribution</span>
 <span class="n">likelihood</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">beta</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="p">,</span><span class="w"> </span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="c1"># Calculate expected values under the model</span>
 <span class="w">  </span><span class="n">mu</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1"># Calculate likelihood (product of normal densities)</span>
 <span class="w">  </span><span class="nf">prod</span><span class="p">(</span><span class="nf">dnorm</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mu</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sd</span><span class="p">,</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">))</span>
 <span class="p">}</span>
 
 <span class="c1"># Log-likelihood function (more numerically stable)</span>
 <span class="n">log_likelihood</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">beta</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="p">,</span><span class="w"> </span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="c1"># Calculate expected values under the model</span>
 <span class="w">  </span><span class="n">mu</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1"># Calculate log-likelihood (sum of log normal densities)</span>
 <span class="w">  </span><span class="nf">sum</span><span class="p">(</span><span class="nf">dnorm</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mu</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sd</span><span class="p">,</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span>
 <span class="p">}</span>
 </pre></div>
@@ -726,7 +748,7 @@ P(\theta|D) = \frac{P(D|\theta) × P(\theta)} {P(D)}
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test three different models with different beta values</span>
 <span class="n">beta_values</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="m">1.0</span><span class="p">)</span><span class="w">  </span><span class="c1"># Three different effect sizes to test</span>
-<span class="n">model_names</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;Model &quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;(beta = &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">beta_values</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;)&quot;</span><span class="p">)</span>
+<span class="n">model_names</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;Model &quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\n(beta = &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">beta_values</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;)&quot;</span><span class="p">)</span>
 
 <span class="c1"># Calculate likelihoods and log-likelihoods</span>
 <span class="n">results</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span>
@@ -752,15 +774,18 @@ P(\theta|D) = \frac{P(D|\theta) × P(\theta)} {P(D)}
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="dataframe">
-<caption>A data.frame: 3 x 4</caption>
+<caption>A data.frame: 3 × 4</caption>
 <thead>
 	<tr><th scope=col>Model</th><th scope=col>Beta</th><th scope=col>Likelihood</th><th scope=col>Log_Likelihood</th></tr>
 	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
 </thead>
 <tbody>
-	<tr><td>Model 1(beta = 0)  </td><td>0.0</td><td>0.0019210299</td><td>-6.254894</td></tr>
-	<tr><td>Model 2(beta = 0.5)</td><td>0.5</td><td>0.0021961524</td><td>-6.121048</td></tr>
-	<tr><td>Model 3(beta = 1)  </td><td>1.0</td><td>0.0009236263</td><td>-6.987203</td></tr>
+	<tr><td>Model 1
+(beta = 0)  </td><td>0.0</td><td>0.0019210299</td><td>-6.254894</td></tr>
+	<tr><td>Model 2
+(beta = 0.5)</td><td>0.5</td><td>0.0021961524</td><td>-6.121048</td></tr>
+	<tr><td>Model 3
+(beta = 1)  </td><td>1.0</td><td>0.0009236263</td><td>-6.987203</td></tr>
 </tbody>
 </table>
 </div></div>
@@ -768,11 +793,17 @@ P(\theta|D) = \frac{P(D|\theta) × P(\theta)} {P(D)}
 </section>
 <section id="setting-prior-beliefs">
 <h2>Setting Prior Beliefs<a class="headerlink" href="#setting-prior-beliefs" title="Link to this heading">#</a></h2>
-<p>Now let’s specify our prior beliefs about each model. Suppose based on the pQTL analysis results, we have the following prior belief about the models:</p>
+<p>Now let’s specify our prior beliefs about each model. Suppose based on protein quantitative trait loci (pQTL) analysis results, we have the following prior beliefs:</p>
+<ul class="simple">
+<li><p><strong>Model 1</strong> (<span class="math notranslate nohighlight">\(\beta = 0\)</span>): Prior probability = 0.2. No genetic effect is less likely, as pQTL studies typically identify variants with measurable effects on protein levels.</p></li>
+<li><p><strong>Model 2</strong> (<span class="math notranslate nohighlight">\(\beta = 0.5\)</span>): Prior probability = 0.4. Moderate effects are most commonly observed in pQTL studies, receiving the highest prior probability.</p></li>
+<li><p><strong>Model 3</strong> (<span class="math notranslate nohighlight">\(\beta = 1.0\)</span>): Prior probability = 0.4. Substantial effects are also plausible in pQTL studies, where cis-acting variants can have strong regulatory impacts.</p></li>
+</ul>
+<p>These priors sum to 1.0, representing mutually exclusive hypotheses that exhaust all possibilities under consideration.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prior probabilities (must sum to 1)</span>
-<span class="n">priors</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.35</span><span class="p">,</span><span class="w"> </span><span class="m">0.35</span><span class="p">,</span><span class="w"> </span><span class="m">0.3</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prior probabilities</span>
+<span class="n">priors</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.2</span><span class="p">,</span><span class="w"> </span><span class="m">0.4</span><span class="p">,</span><span class="w"> </span><span class="m">0.4</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -788,15 +819,12 @@ P(\theta|D) = \frac{P(D|\theta) × P(\theta)} {P(D)}
 <span class="c1"># Calculate the evidence P(D) = sum of (likelihood × prior) for all models</span>
 <span class="n">evidence</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">likelihoods</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">priors</span><span class="p">)</span>
 
-<span class="nf">names</span><span class="p">(</span><span class="n">priors</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;beta=0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;beta=0.5&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;beta=1.0&quot;</span><span class="p">)</span>
-
 <span class="c1"># Calculate posterior for each model using Bayes&#39; rule</span>
 <span class="n">posteriors</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="n">likelihoods</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">priors</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">evidence</span>
-<span class="nf">names</span><span class="p">(</span><span class="n">posteriors</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;beta=0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;beta=0.5&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;beta=1.0&quot;</span><span class="p">)</span>
 
 <span class="c1"># Create summary table</span>
-<span class="n">bayes_table</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span>
-<span class="w">  </span><span class="n">Model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;beta=0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;beta=0.5&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;beta=1.0&quot;</span><span class="p">),</span>
+<span class="n">Bayes_table</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span>
+<span class="w">  </span><span class="n">Model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;Model &quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\n(beta = &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">beta_values</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;)&quot;</span><span class="p">),</span>
 <span class="w">  </span><span class="n">Prior</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">priors</span><span class="p">,</span>
 <span class="w">  </span><span class="n">Likelihood</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">likelihoods</span><span class="p">,</span>
 <span class="w">  </span><span class="n">Posterior</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">posteriors</span>
@@ -808,69 +836,35 @@ P(\theta|D) = \frac{P(D|\theta) × P(\theta)} {P(D)}
 <p>The prior, likelihood and posterior for each model is:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">bayes_table</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">Bayes_table</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="dataframe">
-<caption>A data.frame: 3 x 4</caption>
+<caption>A data.frame: 3 × 4</caption>
 <thead>
-	<tr><th></th><th scope=col>Model</th><th scope=col>Prior</th><th scope=col>Likelihood</th><th scope=col>Posterior</th></tr>
-	<tr><th></th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+	<tr><th scope=col>Model</th><th scope=col>Prior</th><th scope=col>Likelihood</th><th scope=col>Posterior</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
 </thead>
 <tbody>
-	<tr><th scope=row>beta=0</th><td>beta=0  </td><td>0.35</td><td>0.0019210299</td><td>0.3913392</td></tr>
-	<tr><th scope=row>beta=0.5</th><td>beta=0.5</td><td>0.35</td><td>0.0021961524</td><td>0.4473852</td></tr>
-	<tr><th scope=row>beta=1.0</th><td>beta=1.0</td><td>0.30</td><td>0.0009236263</td><td>0.1612756</td></tr>
+	<tr><td>Model 1
+(beta = 0)  </td><td>0.2</td><td>0.0019210299</td><td>0.2354034</td></tr>
+	<tr><td>Model 2
+(beta = 0.5)</td><td>0.4</td><td>0.0021961524</td><td>0.5382339</td></tr>
+	<tr><td>Model 3
+(beta = 1)  </td><td>0.4</td><td>0.0009236263</td><td>0.2263627</td></tr>
 </tbody>
 </table>
 </div></div>
 </div>
+</section>
+<section id="results">
+<h2>Results<a class="headerlink" href="#results" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">))</span>
-
-<span class="c1"># Plot 1: Prior beliefs</span>
-<span class="nf">barplot</span><span class="p">(</span><span class="n">priors</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Prior Beliefs&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Probability&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;lightblue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0.7</span><span class="p">))</span>
-
-<span class="c1"># Plot 2: Normalized likelihoods (for visual comparison)</span>
-<span class="n">norm_likelihood</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">likelihoods</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">likelihoods</span><span class="p">)</span>
-<span class="nf">names</span><span class="p">(</span><span class="n">norm_likelihood</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;beta=0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;beta=0.5&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;beta=1.0&quot;</span><span class="p">)</span>
-
-<span class="nf">barplot</span><span class="p">(</span><span class="n">norm_likelihood</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Data Evidence\n(Normalized)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Relative Support&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;lightcoral&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0.7</span><span class="p">))</span>
-
-<span class="c1"># Plot 3: Posterior beliefs</span>
-<span class="nf">barplot</span><span class="p">(</span><span class="n">posteriors</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Updated Beliefs\n(Posterior)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Probability&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;lightgreen&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0.7</span><span class="p">))</span>
-
-<span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/f67e203a2c1fabaef604a97c56bff03dd9ea160ecf6612938d9286475a23d52b.png"><img alt="_images/f67e203a2c1fabaef604a97c56bff03dd9ea160ecf6612938d9286475a23d52b.png" src="_images/f67e203a2c1fabaef604a97c56bff03dd9ea160ecf6612938d9286475a23d52b.png" style="width: 420px; height: 420px;" />
-</a>
-</div>
-</div>
-<p>The beauty of Bayes’ rule is that it provides a principled way to incorporate both prior knowledge and new evidence. Our final belief (posterior) balances what we thought before seeing the data with what the evidence tells us.</p>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="supplementary">
-<h1>Supplementary<a class="headerlink" href="#supplementary" title="Link to this heading">#</a></h1>
-<section id="id1">
-<h2>Graphical Summary<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Beautiful ggplot2 visualization for Bayes rule</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
-
-<span class="c1"># Prepare data for ggplot - we need to reshape our results</span>
-<span class="n">df_bayes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span>
-<span class="w">  </span><span class="n">Model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;beta=0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;beta=0.5&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;beta=1.0&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">each</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">),</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df_Bayes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span>
+<span class="w">  </span><span class="n">Model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;Model &quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\n(beta = &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">beta_values</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;)&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">each</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">),</span>
 <span class="w">  </span><span class="n">Stage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Prior&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Likelihood&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Posterior&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">times</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">),</span>
 <span class="w">  </span><span class="n">Probability</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span>
 <span class="w">    </span><span class="c1"># beta=0: prior, likelihood, posterior</span>
@@ -883,11 +877,10 @@ P(\theta|D) = \frac{P(D|\theta) × P(\theta)} {P(D)}
 <span class="p">)</span>
 
 <span class="c1"># Set factor levels for proper ordering</span>
-<span class="n">df_bayes</span><span class="o">$</span><span class="n">Stage</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">factor</span><span class="p">(</span><span class="n">df_bayes</span><span class="o">$</span><span class="n">Stage</span><span class="p">,</span><span class="w"> </span><span class="n">levels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Prior&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Likelihood&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Posterior&quot;</span><span class="p">))</span>
-<span class="n">df_bayes</span><span class="o">$</span><span class="n">Model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">factor</span><span class="p">(</span><span class="n">df_bayes</span><span class="o">$</span><span class="n">Model</span><span class="p">,</span><span class="w"> </span><span class="n">levels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;beta=0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;beta=0.5&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;beta=1.0&quot;</span><span class="p">))</span>
+<span class="n">df_Bayes</span><span class="o">$</span><span class="n">Stage</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">factor</span><span class="p">(</span><span class="n">df_Bayes</span><span class="o">$</span><span class="n">Stage</span><span class="p">,</span><span class="w"> </span><span class="n">levels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Prior&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Likelihood&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Posterior&quot;</span><span class="p">))</span>
+<span class="n">df_Bayes</span><span class="o">$</span><span class="n">Model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">factor</span><span class="p">(</span><span class="n">df_Bayes</span><span class="o">$</span><span class="n">Model</span><span class="p">,</span><span class="w"> </span><span class="n">levels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;Model &quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\n(beta = &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">beta_values</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;)&quot;</span><span class="p">))</span>
 
-<span class="c1"># Create the beautiful plot</span>
-<span class="n">p_bayes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">df_bayes</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Stage</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Probability</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Model</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="n">p_Bayes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">df_Bayes</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Stage</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Probability</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Model</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
 <span class="w">  </span><span class="nf">geom_col</span><span class="p">(</span><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">position_dodge</span><span class="p">(</span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">),</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.6</span><span class="p">,</span><span class="w"> </span>
 <span class="w">           </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;black&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
 <span class="w">  </span><span class="nf">geom_text</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scales</span><span class="o">::</span><span class="nf">percent</span><span class="p">(</span><span class="n">Probability</span><span class="p">,</span><span class="w"> </span><span class="n">accuracy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.1</span><span class="p">)),</span><span class="w"> </span>
@@ -900,7 +893,7 @@ P(\theta|D) = \frac{P(D|\theta) × P(\theta)} {P(D)}
 <span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">,</span>
 <span class="w">    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Bayesian Update: From Prior Beliefs to Posterior Knowledge&quot;</span>
 <span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">ylim</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">df_bayes</span><span class="o">$</span><span class="n">Probability</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.15</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">ylim</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">df_Bayes</span><span class="o">$</span><span class="n">Probability</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.15</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
 <span class="w">  </span><span class="nf">theme_minimal</span><span class="p">(</span><span class="n">base_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">14</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
 <span class="w">  </span><span class="nf">theme</span><span class="p">(</span>
 <span class="w">    </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">(),</span>
@@ -911,45 +904,38 @@ P(\theta|D) = \frac{P(D|\theta) × P(\theta)} {P(D)}
 <span class="w">    </span><span class="n">legend.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">),</span>
 <span class="w">    </span><span class="n">legend.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bottom&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="n">panel.grid.minor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">(),</span>
-<span class="w">    </span><span class="n">panel.grid.major.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">()</span>
+<span class="w">    </span><span class="n">panel.grid.major.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">(),</span>
+<span class="w">    </span><span class="n">panel.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">),</span>
+<span class="w">    </span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span>
 <span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">annotate</span><span class="p">(</span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">df_bayes</span><span class="o">$</span><span class="n">Probability</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.1</span><span class="p">,</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">annotate</span><span class="p">(</span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">df_Bayes</span><span class="o">$</span><span class="n">Probability</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.1</span><span class="p">,</span><span class="w"> </span>
 <span class="w">           </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Initial\nBeliefs&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">fontface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;italic&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">annotate</span><span class="p">(</span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">df_bayes</span><span class="o">$</span><span class="n">Probability</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.1</span><span class="p">,</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">annotate</span><span class="p">(</span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">df_Bayes</span><span class="o">$</span><span class="n">Probability</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.1</span><span class="p">,</span><span class="w"> </span>
 <span class="w">           </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Data\nEvidence&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">fontface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;italic&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">annotate</span><span class="p">(</span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">df_bayes</span><span class="o">$</span><span class="n">Probability</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.1</span><span class="p">,</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">annotate</span><span class="p">(</span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">df_Bayes</span><span class="o">$</span><span class="n">Probability</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.1</span><span class="p">,</span><span class="w"> </span>
 <span class="w">           </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Updated\nBeliefs&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">fontface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;italic&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3.5</span><span class="p">)</span>
 
 <span class="c1"># Display the plot</span>
-<span class="nf">print</span><span class="p">(</span><span class="n">p_bayes</span><span class="p">)</span>
-
-
-<span class="c1"># Save plot to file</span>
-<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;./cartoons/Bayes_rule.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_bayes</span><span class="p">,</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">p_Bayes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/9be6db89a349f43cd732c2338fcc6657fc026847a173018c2887c88fc0c988ef.png"><img alt="_images/9be6db89a349f43cd732c2338fcc6657fc026847a173018c2887c88fc0c988ef.png" src="_images/9be6db89a349f43cd732c2338fcc6657fc026847a173018c2887c88fc0c988ef.png" style="width: 420px; height: 420px;" />
+</a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;./figures/Bayes_rule.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_Bayes</span><span class="p">,</span>
 <span class="w">       </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span>
 <span class="w">       </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span>
 <span class="w">       </span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attaching package: &#39;dplyr&#39;
-
-
-The following objects are masked from &#39;package:stats&#39;:
-
-    filter, lag
-
-
-The following objects are masked from &#39;package:base&#39;:
-
-    intersect, setdiff, setequal, union
-</pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/e0c16e23fe5739308f37e4fb034086e9901ce7be43db05ea28a14324d660bbb5.png"><img alt="_images/e0c16e23fe5739308f37e4fb034086e9901ce7be43db05ea28a14324d660bbb5.png" src="_images/e0c16e23fe5739308f37e4fb034086e9901ce7be43db05ea28a14324d660bbb5.png" style="width: 420px; height: 420px;" />
-</a>
-</div>
-</div>
+<p>The beauty of Bayes’ rule is that it provides a principled way to incorporate both prior knowledge and new evidence. Our final belief (posterior) balances what we thought before seeing the data with what the evidence tells us.</p>
 </section>
 </section>
 
@@ -1020,16 +1006,19 @@ The following objects are masked from &#39;package:base&#39;:
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Bayes Rule</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-summary">Graphical Summary</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-setup">Model Setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-prior-beliefs">Setting Prior Beliefs</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-bayes-rule">Applying Bayes’ Rule</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-principle">Core Principle</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conjugate-priors">Conjugate Priors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-in-statistical-genetics">Applications in Statistical Genetics</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#supplementary">Supplementary</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Graphical Summary</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#likelihood-and-log-likelihood">Likelihood and Log-likelihood</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-prior-beliefs">Setting Prior Beliefs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-bayes-rule">Applying Bayes’ Rule</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results">Results</a></li>
 </ul>
 </li>
 </ul>

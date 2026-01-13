@@ -330,7 +330,6 @@
 
 
 
-
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Likelihood Ratio</a></li>
 
 
@@ -355,14 +354,13 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="Bayes_factor.html">Bayes Factor</a></li>
 
 
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="p_value_and_Bayesian_hypothesis_testing.html">p-value and Bayesian Hypothesis Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p_value_and_Bayesian_hypothesis_testing.html"><span class="math notranslate nohighlight">\(p\)</span>-value and Bayesian Hypothesis Testing</a></li>
 
 
 
@@ -379,9 +377,7 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="Bayesian_multivariate_normal_mean_model.html">Bayesian Multivariate Normal Mean Model</a></li>
-
 
 
 
@@ -391,7 +387,6 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Multiple Bayesian Models</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Bayesian_model_comparison.html">Bayesian Model Comparison</a></li>
-
 
 
 
@@ -588,8 +583,8 @@ document.write(`
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-setup">Model Setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-likelihood-and-log-likelihood">Compute Likelihood and Log-likelihood</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#likelihood-and-log-likelihood">Likelihood and Log-likelihood</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Likelihood Ratio Test</a></li>
 </ul>
 </li>
@@ -628,16 +623,16 @@ document.write(`
 <p>Where:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\text{LR}\)</span> is the likelihood ratio</p></li>
-<li><p><span class="math notranslate nohighlight">\(\mathcal{L}(\text{M}_1 \mid \text{D})\)</span> is the likelihood function for Model 1 given data D</p></li>
-<li><p><span class="math notranslate nohighlight">\(\mathcal{L}(\text{M}_2 \mid \text{D})\)</span> is the likelihood function for Model 2 given data D</p></li>
 <li><p><span class="math notranslate nohighlight">\(\text{D}\)</span> represents the observed data</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathcal{L}(\text{M}_1 \mid \text{D})\)</span> is the likelihood function for Model 1 <span class="math notranslate nohighlight">\(\text{M}_1\)</span> given data <span class="math notranslate nohighlight">\(\text{D}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathcal{L}(\text{M}_2 \mid \text{D})\)</span> is the likelihood function for Model 2 <span class="math notranslate nohighlight">\(\text{M}_2\)</span> given data <span class="math notranslate nohighlight">\(\text{D}\)</span></p></li>
 </ul>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="technical-details">
 <h1>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading">#</a></h1>
 <section id="basic-interpretation">
 <h2>Basic Interpretation<a class="headerlink" href="#basic-interpretation" title="Link to this heading">#</a></h2>
-<p>For the likelihood ratio (LR):</p>
+<p>For the likelihood ratio (<span class="math notranslate nohighlight">\(\text{LR}\)</span>):</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\text{LR} &gt; 1\)</span>: Model 1 better explains the data</p></li>
 <li><p><span class="math notranslate nohighlight">\(\text{LR} &lt; 1\)</span>: Model 2 better explains the data</p></li>
@@ -648,74 +643,48 @@ document.write(`
 <section id="properties">
 <h2>Properties<a class="headerlink" href="#properties" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>The likelihood ratio is always non-negative: <span class="math notranslate nohighlight">\(\text{LR} \geq 0\)</span></p></li>
+<li><p>The likelihood ratio is always non-negative (because likelihood is always between 0 and 1): <span class="math notranslate nohighlight">\(\text{LR} \geq 0\)</span></p></li>
 <li><p>Can be used to compare any two models</p></li>
-<li><p>Forms the basis for many statistical tests and model selection criteria</p></li>
-<li><p>In genetics, commonly used for testing association between variants and traits</p></li>
+<li><p>Forms the basis for many statistical tests and model selection criteria, e.g., testing association between variants and traits</p></li>
 </ul>
 </section>
 <section id="wilks-theorem">
 <h2>Wilks’ Theorem<a class="headerlink" href="#wilks-theorem" title="Link to this heading">#</a></h2>
-<p>Let’s assume we are dealing with distributions parameterized by <span class="math notranslate nohighlight">\(\theta\)</span>. To generalize the case of simple hypotheses, let’s assume that <span class="math notranslate nohighlight">\(H_0\)</span> specifies that <span class="math notranslate nohighlight">\(\theta\)</span> lives in some set <span class="math notranslate nohighlight">\(\Theta_0\)</span> and <span class="math notranslate nohighlight">\(H_1\)</span> specifies that <span class="math notranslate nohighlight">\(\theta \in \Theta_1\)</span>. Let <span class="math notranslate nohighlight">\(\Omega = \Theta_0 \cup \Theta_1\)</span>. A somewhat natural extension to the likelihood ratio test statistic we discussed above is the generalized log-likelihood ratio:</p>
+<p>Let’s assume we are dealing with models parameterized by <span class="math notranslate nohighlight">\(\theta\)</span>. To generalize the case of simple hypotheses, let’s assume that <span class="math notranslate nohighlight">\(H_0\)</span> specifies that <span class="math notranslate nohighlight">\(\theta\)</span> lives in some set <span class="math notranslate nohighlight">\(\Theta_0\)</span> and <span class="math notranslate nohighlight">\(H_1\)</span> specifies that <span class="math notranslate nohighlight">\(\theta \in \Theta_1\)</span>. Let <span class="math notranslate nohighlight">\(\Omega = \Theta_0 \cup \Theta_1\)</span>. A somewhat natural extension to the likelihood ratio test statistic we discussed above is the generalized log-likelihood ratio:</p>
 <div class="math notranslate nohighlight">
 \[
-\Lambda^* = \log \frac{\max_{\theta \in \Theta_1} f(X_1,...,X_n|\theta)}{\max_{\theta \in \Theta_0} f(X_1,...,X_n|\theta)}
+\Lambda^* = \log \frac{\max_{\theta \in \Theta_1} \mathcal{L}(\theta)}{\max_{\theta \in \Theta_0} \mathcal{L}(\theta)} 
 \]</div>
 <p>For technical reasons, it is preferable to use the following related quantity:</p>
 <div class="math notranslate nohighlight">
 \[
-\Lambda_n = 2 \log \frac{\max_{\theta \in \Omega} f(X_1,...,X_n|\theta)}{\max_{\theta \in \Theta_0} f(X_1,...,X_n|\theta)}
+\Lambda_n = 2 \log \frac{\max_{\theta \in \Omega} \mathcal{L}(\theta)}{\max_{\theta \in \Theta_0} \mathcal{L}\theta}
 \]</div>
 <p>Just like before, larger values of <span class="math notranslate nohighlight">\(\Lambda_n\)</span> provide stronger evidence against <span class="math notranslate nohighlight">\(H_0\)</span>.</p>
-<p><strong>Wilks’s Theorem</strong>: Suppose that the dimension of <span class="math notranslate nohighlight">\(\Omega\)</span> is <span class="math notranslate nohighlight">\(v\)</span> and the dimension of <span class="math notranslate nohighlight">\(\Theta_0\)</span> is <span class="math notranslate nohighlight">\(r\)</span>. Under regularity conditions and assuming <span class="math notranslate nohighlight">\(H_0\)</span> is true, the distribution of <span class="math notranslate nohighlight">\(\Lambda_n\)</span> tends to a chi-squared distribution with degrees of freedom equal to <span class="math notranslate nohighlight">\(v−r\)</span> as the sample size tends to infinity.</p>
+<p><strong>Wilks’s Theorem</strong> states that, suppose that the dimension of <span class="math notranslate nohighlight">\(\Omega\)</span> is <span class="math notranslate nohighlight">\(v\)</span> and the dimension of <span class="math notranslate nohighlight">\(\Theta_0\)</span> is <span class="math notranslate nohighlight">\(r\)</span>. Under regularity conditions and assuming <span class="math notranslate nohighlight">\(H_0\)</span> is true, the distribution of <span class="math notranslate nohighlight">\(\Lambda_n\)</span> tends to a chi-squared distribution with degrees of freedom equal to <span class="math notranslate nohighlight">\(v−r\)</span> as the sample size tends to infinity.</p>
 <p>With this theorem in hand (and for <span class="math notranslate nohighlight">\(n\)</span> large), we can compare the value of our log-likehood ratio to the expected values from a <span class="math notranslate nohighlight">\(\chi^2_{v−r}\)</span> distribution.</p>
 </section>
 <section id="likelihood-ratio-test">
 <h2>Likelihood Ratio Test<a class="headerlink" href="#likelihood-ratio-test" title="Link to this heading">#</a></h2>
-<p>The likelihood ratio test statistic is:</p>
+<p>The likelihood ratio test (LRT) compares nested models to test whether a more complex model provides a significantly better fit than a simpler one.</p>
+<p><strong>Test Statistic:</strong></p>
 <div class="math notranslate nohighlight">
 \[
-\Lambda = -2 \ln \left( \frac{\mathcal{L}(\text{M}_0 \mid \text{D})}{\mathcal{L}(\text{M}_1 \mid \text{D})} \right) = -2[\ell(\text{M}_0 \mid \text{D}) - \ell(\text{M}_1 \mid \text{D})]
+\Lambda = -2 \log \left( \frac{\mathcal{L}(\text{M}_0 \mid \text{D})}{\mathcal{L}(\text{M}_1 \mid \text{D})} \right) = -2[\ell(\text{M}_0 \mid \text{D}) - \ell(\text{M}_1 \mid \text{D})]
 \]</div>
-<p>Where:</p>
+<p>where <span class="math notranslate nohighlight">\(\text{M}_0\)</span> is the null (simpler) model and <span class="math notranslate nohighlight">\(\text{M}_1\)</span> is the alternative (more complex) model.</p>
+<p>According to <strong>Wilks’ Theorem</strong>, under regularity conditions, <span class="math notranslate nohighlight">\(\Lambda\)</span> asymptotically follows <span class="math notranslate nohighlight">\(\chi^2_{\text{df}}\)</span> where <span class="math notranslate nohighlight">\(\text{df}\)</span> is the difference in the number of parameters between the two models. Given significance level <span class="math notranslate nohighlight">\(\alpha\)</span>, reject <span class="math notranslate nohighlight">\(H_0\)</span> if <span class="math notranslate nohighlight">\(\Lambda &gt; \chi^2_{\text{df},\alpha}\)</span>.</p>
+<p><strong>Key Limitations:</strong></p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\Lambda\)</span> is the likelihood ratio test statistic</p></li>
-<li><p><span class="math notranslate nohighlight">\(\text{M}_0\)</span> is the null (restricted) model</p></li>
-<li><p><span class="math notranslate nohighlight">\(\text{M}_1\)</span> is the alternative (unrestricted) model</p></li>
-<li><p><span class="math notranslate nohighlight">\(\mathcal{L}(\text{M} \mid \text{D})\)</span> is the likelihood function for model M given data D</p></li>
-<li><p><span class="math notranslate nohighlight">\(\ell(\text{M} \mid \text{D}) = \log \mathcal{L}(\text{M} \mid \text{D})\)</span> is the log-likelihood function</p></li>
-</ul>
-<p>The likelihood ratio test (LRT) is used to compare nested models by testing whether a more complex model provides a significantly better fit than a simpler model. This is a frequentist approach instead of Bayesian.</p>
+<li><p><strong>Nested models required</strong> – Cannot compare non-nested models</p>
 <ul>
-<li><p>Decision Rule</p>
-<p>Under the null hypothesis, <span class="math notranslate nohighlight">\(\Lambda\)</span> asymptotically follows a chi-square distribution:</p>
-<div class="math notranslate nohighlight">
-\[
-    \Lambda \sim \chi^2_{\text{df}}
-    \]</div>
-<p>Where <span class="math notranslate nohighlight">\(\text{df}\)</span> is the difference in the number of parameters between <span class="math notranslate nohighlight">\(\text{M}_1\)</span> and <span class="math notranslate nohighlight">\(\text{M}_0\)</span>.</p>
-</li>
-<li><p>Test Procedure</p>
-<ol class="arabic simple">
-<li><p><strong>Fit both models</strong>: Calculate the maximum likelihood estimates for both <span class="math notranslate nohighlight">\(\text{M}_0\)</span> and <span class="math notranslate nohighlight">\(\text{M}_1\)</span></p></li>
-<li><p><strong>Calculate test statistic</strong>: Compute <span class="math notranslate nohighlight">\(\Lambda = -2[\ell(\hat{\theta}_0 \mid \text{D}) - \ell(\hat{\theta}_1 \mid \text{D})]\)</span></p></li>
-<li><p><strong>Determine degrees of freedom</strong>: <span class="math notranslate nohighlight">\(df = \text{number of parameters in } \text{M}_1 - \text{number of parameters in } \text{M}_0\)</span></p></li>
-<li><p><strong>Compare to critical value</strong>: Reject <span class="math notranslate nohighlight">\(H_0\)</span> if <span class="math notranslate nohighlight">\(\Lambda &gt; \chi^2_{df,\alpha}\)</span> where <span class="math notranslate nohighlight">\(\alpha\)</span> is the significance level</p></li>
-</ol>
-</li>
-<li><p>Limitations of LRT</p>
-<ul class="simple">
-<li><p>Requires <strong>nested models</strong> - cannot compare non-nested models</p>
-<ul>
-<li><p><strong>Counterexample</strong>: Taking likelihood ratios between different variants (e.g., Variant A vs Variant B) and assuming it follows <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution for variant selection. This is incorrect because models with different variants are <strong>non-nested - neither is a subset of the other</strong></p></li>
-<li><p>You can compute the likelihood ratio, but you cannot conduct a likelihood ratio test</p></li>
+<li><p><em>Counterexample</em>: Comparing different genetic variants (Variant A vs. Variant B) is invalid because neither model is a subset of the other (i.e., <strong>non-nested</strong>)</p></li>
+<li><p>You can compute the likelihood ratio, but you cannot conduct a valid likelihood ratio test</p></li>
 </ul>
 </li>
-<li><p><strong>Asymptotic approximation</strong> may be poor with small sample sizes</p></li>
-<li><p><strong>Regularity conditions</strong> must be satisfied for chi-square approximation to hold</p></li>
-<li><p><strong>Multiple testing</strong> issues when performing many simultaneous tests</p></li>
-</ul>
-</li>
+<li><p><strong>Asymptotic approximation</strong> – May perform poorly with small sample sizes</p></li>
+<li><p><strong>Regularity conditions</strong> – Must be satisfied for chi-square approximation to hold</p></li>
+<li><p><strong>Multiple testing</strong> – Requires correction when performing many simultaneous tests</p></li>
 </ul>
 </section>
 </section>
@@ -730,19 +699,25 @@ document.write(`
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="example">
 <h1>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
-<p>In the previous example in <a class="reference external" href="https://statfungen.github.io/statgen-primer/likelihood.html">Lecture: likelihood</a>, we saw how likelihood tells us which theory about genetic effects is most plausible given our data. But that raises several follow-up questions: <strong>How much more plausible is one theory compared to another?</strong> And more importantly - is any observed effect statistically significant, or could it just be random noise?</p>
-<p>This example tackles all these questions using the same genetic data (where the true effect was <span class="math notranslate nohighlight">\(\beta = 0.4\)</span>). We’ll start with <strong>likelihood ratios</strong> to directly compare theories by taking the ratio of their likelihoods.</p>
-<p>But we won’t stop there. We’ll also find the <strong>maximum likelihood estimation</strong> to identify the single best parameter value as we did in Example 2 in <a class="reference external" href="https://statfungen.github.io/statgen-primer/maximum_likelihood_estimation.html">Lecture: maximum likelihood estimation</a>, and then use the <strong>likelihood ratio test</strong> to determine whether we have statistically significant evidence for a genetic effect. This complete pipeline shows how likelihood analysis progresses from exploring individual theories to making formal statistical decisions about whether effects are real or just chance.</p>
-<section id="model-setup">
-<h2>Model Setup<a class="headerlink" href="#model-setup" title="Link to this heading">#</a></h2>
+<p>In <a class="reference external" href="https://statfungen.github.io/statgen-primer/likelihood.html">Lecture: likelihood</a>, we compared three genetic effect models using likelihood. Now we extend this analysis to answer: <strong>Is the observed effect statistically significant, or just random noise?</strong></p>
+<p>Using the same genetic data (true effect <span class="math notranslate nohighlight">\(\beta = 0.4\)</span>), we’ll:</p>
+<ol class="arabic simple">
+<li><p>Compare models using <strong>likelihood ratios</strong></p></li>
+<li><p>Find the optimal parameter via <strong>maximum likelihood estimation</strong></p></li>
+<li><p>Test significance using the <strong>likelihood ratio test</strong></p></li>
+</ol>
+<p>This pipeline demonstrates the complete workflow from parameter estimation to hypothesis testing.</p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <p>Let’s first generate the genotype data and trait values for 5 individuals.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clear the environment</span>
 <span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ls</span><span class="p">())</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
 <span class="nf">set.seed</span><span class="p">(</span><span class="m">19</span><span class="p">)</span><span class="w">  </span><span class="c1"># For reproducibility</span>
 
-<span class="c1"># Generate genotype data for 5 individuals at 1 variant</span>
+<span class="c1"># Generate genotype data for 5 individuals at a single variant</span>
 <span class="n">N</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">5</span>
 <span class="n">genotypes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;CC&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CT&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;TT&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CT&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CC&quot;</span><span class="p">)</span><span class="w">  </span><span class="c1"># Individual genotypes</span>
 <span class="nf">names</span><span class="p">(</span><span class="n">genotypes</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Individual&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">)</span>
@@ -772,8 +747,8 @@ document.write(`
 </div>
 </div>
 </section>
-<section id="compute-likelihood-and-log-likelihood">
-<h2>Compute Likelihood and Log-likelihood<a class="headerlink" href="#compute-likelihood-and-log-likelihood" title="Link to this heading">#</a></h2>
+<section id="likelihood-and-log-likelihood">
+<h2>Likelihood and Log-likelihood<a class="headerlink" href="#likelihood-and-log-likelihood" title="Link to this heading">#</a></h2>
 <p>Now, let’s create two functions to compute the likelihood and log-likelihood under different models (in this case, different <span class="math notranslate nohighlight">\(\beta\)</span>s) for the effect of a genetic variant on the phenotype:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -781,7 +756,6 @@ document.write(`
 <span class="n">likelihood</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">beta</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="p">,</span><span class="w"> </span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="c1"># Calculate expected values under the model</span>
 <span class="w">  </span><span class="n">mu</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta</span>
-<span class="w">  </span>
 <span class="w">  </span><span class="c1"># Calculate likelihood (product of normal densities)</span>
 <span class="w">  </span><span class="nf">prod</span><span class="p">(</span><span class="nf">dnorm</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mu</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sd</span><span class="p">,</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">))</span>
 <span class="p">}</span>
@@ -790,7 +764,6 @@ document.write(`
 <span class="n">log_likelihood</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">beta</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="p">,</span><span class="w"> </span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="c1"># Calculate expected values under the model</span>
 <span class="w">  </span><span class="n">mu</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta</span>
-<span class="w">  </span>
 <span class="w">  </span><span class="c1"># Calculate log-likelihood (sum of log normal densities)</span>
 <span class="w">  </span><span class="nf">sum</span><span class="p">(</span><span class="nf">dnorm</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mu</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sd</span><span class="p">,</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span>
 <span class="p">}</span>
@@ -828,7 +801,7 @@ document.write(`
 </pre></div>
 </div>
 <div class="output text_html"><table class="dataframe">
-<caption>A data.frame: 3 x 4</caption>
+<caption>A data.frame: 3 × 4</caption>
 <thead>
 	<tr><th scope=col>Model</th><th scope=col>Beta</th><th scope=col>Likelihood</th><th scope=col>Log_Likelihood</th></tr>
 	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
@@ -850,8 +823,6 @@ document.write(`
 
 <span class="n">lr_results</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span>
 <span class="w">  </span><span class="n">Comparison</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">character</span><span class="p">(</span><span class="n">n_pairs</span><span class="p">),</span>
-<span class="w">  </span><span class="n">First</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">character</span><span class="p">(</span><span class="n">n_pairs</span><span class="p">),</span>
-<span class="w">  </span><span class="n">Second</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">character</span><span class="p">(</span><span class="n">n_pairs</span><span class="p">),</span>
 <span class="w">  </span><span class="n">LR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="n">n_pairs</span><span class="p">),</span>
 <span class="w">  </span><span class="n">Log_LR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="n">n_pairs</span><span class="p">),</span>
 <span class="w">  </span><span class="n">Interpretation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">character</span><span class="p">(</span><span class="n">n_pairs</span><span class="p">),</span>
@@ -877,8 +848,6 @@ document.write(`
 <span class="w">  </span>
 <span class="w">  </span><span class="c1"># Store results</span>
 <span class="w">  </span><span class="n">lr_results</span><span class="o">$</span><span class="n">Comparison</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Model&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">m1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;vs Model&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">m2</span><span class="p">)</span>
-<span class="w">  </span><span class="n">lr_results</span><span class="o">$</span><span class="n">First</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">results</span><span class="o">$</span><span class="n">Model</span><span class="p">[</span><span class="n">m1</span><span class="p">]</span>
-<span class="w">  </span><span class="n">lr_results</span><span class="o">$</span><span class="n">Second</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">results</span><span class="o">$</span><span class="n">Model</span><span class="p">[</span><span class="n">m2</span><span class="p">]</span>
 <span class="w">  </span><span class="n">lr_results</span><span class="o">$</span><span class="n">LR</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lr_value</span>
 <span class="w">  </span><span class="n">lr_results</span><span class="o">$</span><span class="n">Log_LR</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">log_lr_value</span>
 <span class="w">  </span><span class="n">lr_results</span><span class="o">$</span><span class="n">Interpretation</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">interpretation</span>
@@ -896,22 +865,25 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="dataframe">
-<caption>A data.frame: 3 x 6</caption>
+<caption>A data.frame: 3 × 4</caption>
 <thead>
-	<tr><th scope=col>Comparison</th><th scope=col>First</th><th scope=col>Second</th><th scope=col>LR</th><th scope=col>Log_LR</th><th scope=col>Interpretation</th></tr>
-	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;chr&gt;</th></tr>
+	<tr><th scope=col>Comparison</th><th scope=col>LR</th><th scope=col>Log_LR</th><th scope=col>Interpretation</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;chr&gt;</th></tr>
 </thead>
 <tbody>
-	<tr><td>Model 1 vs Model 2</td><td>Model 1 (beta = 0)  </td><td>Model 2 (beta = 0.5)</td><td>0.8747253</td><td>-0.1338454</td><td>Model 2 better supported</td></tr>
-	<tr><td>Model 1 vs Model 3</td><td>Model 1 (beta = 0)  </td><td>Model 3 (beta = 1)  </td><td>2.0798778</td><td> 0.7323091</td><td>Model 1 better supported</td></tr>
-	<tr><td>Model 2 vs Model 3</td><td>Model 2 (beta = 0.5)</td><td>Model 3 (beta = 1)  </td><td>2.3777498</td><td> 0.8661546</td><td>Model 2 better supported</td></tr>
+	<tr><td>Model 1 vs Model 2</td><td>0.8747253</td><td>-0.1338454</td><td>Model 2 better supported</td></tr>
+	<tr><td>Model 1 vs Model 3</td><td>2.0798778</td><td> 0.7323091</td><td>Model 1 better supported</td></tr>
+	<tr><td>Model 2 vs Model 3</td><td>2.3777498</td><td> 0.8661546</td><td>Model 2 better supported</td></tr>
 </tbody>
 </table>
 </div></div>
 </div>
-<p>Based on these likelihood ratio results, we can see clear patterns in model support from our genetic data. Model 2 (<span class="math notranslate nohighlight">\(\beta = 0.5\)</span>) <span class="math notranslate nohighlight">\(\beta\)</span> receives the strongest overall support, as evidenced by it being favored over both Model 1 (LR = 0.87, meaning Model 2 is 1/0.87 ≈ 1.14 times more likely) and Model 3 (LR = 2.38, meaning Model 2 is 2.38 times more likely than Model 3).</p>
-<p>Interestingly, Model 1 (<span class="math notranslate nohighlight">\(\beta = 0\)</span>) is actually better supported than Model 3 (<span class="math notranslate nohighlight">\(\beta = 1.0\)</span>) with a likelihood ratio of 2.08, suggesting that no genetic effect is more plausible than a large effect of <span class="math notranslate nohighlight">\(\beta = 1.0\)</span>.</p>
-<p>This pattern makes biological sense given that our true effect size used to generate the data was <span class="math notranslate nohighlight">\(\beta = 0.4\)</span> - Model 2 (<span class="math notranslate nohighlight">\(\beta = 0.5\)</span>) is closest to this true value, followed by Model 1 (<span class="math notranslate nohighlight">\(\beta = 0\)</span>), while Model 3 (<span class="math notranslate nohighlight">\(\beta = 1.0\)</span>) substantially overestimates the genetic effect. The likelihood ratios thus correctly identify the model parameters that best approximate the true underlying biological relationship between genotype and phenotype.</p>
+<p>The likelihood ratios reveal clear patterns in model support:</p>
+<ul class="simple">
+<li><p><strong>Model 2</strong> (<span class="math notranslate nohighlight">\(\beta = 0.5\)</span>) receives strongest support, being 1.14× more likely than Model 1 and 2.38× more likely than Model 3</p></li>
+<li><p><strong>Model 1</strong> (<span class="math notranslate nohighlight">\(\beta = 0\)</span>) is 2.08× more likely than Model 3 (<span class="math notranslate nohighlight">\(\beta = 1.0\)</span>), suggesting no effect is more plausible than a large effect</p></li>
+</ul>
+<p>This ranking makes sense given the true effect (<span class="math notranslate nohighlight">\(\beta = 0.4\)</span>) used to generate the data: Model 2 is closest to the truth, followed by Model 1, while Model 3 substantially overestimates the genetic effect.</p>
 </section>
 <section id="id1">
 <h2>Likelihood Ratio Test<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
@@ -964,7 +936,7 @@ Log-likelihood at MLE: -6.054
 <span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Log-likelihood (Null):&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">log_lik_null</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
 <span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Log-likelihood (MLE):&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">log_lik_mle</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
 <span class="nf">cat</span><span class="p">(</span><span class="s">&quot;LRT Statistic:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">lrt_statistic</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;P-value:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">p_value</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;p-value:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">p_value</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
 
 <span class="c1"># Statistical decision</span>
 <span class="n">alpha</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.05</span>
@@ -984,56 +956,87 @@ H1: beta != 0 (MLE)
 Log-likelihood (Null): -6.2549 
 Log-likelihood (MLE): -6.054 
 LRT Statistic: 0.4018 
-P-value: 0.5262 
+p-value: 0.5262 
 Result: FAIL TO REJECT null - insufficient evidence for genetic effect
 </pre></div>
 </div>
 </div>
 </div>
+<p>Note that we can also use the <code class="docutils literal notranslate"><span class="pre">qchisq</span></code> function in R to compute the critical value corresponding to a given significance level (in this case, 0.95) and degrees of freedom, and we compare to the LRT results:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">qchisq</span><span class="p">(</span><span class="m">0.95</span><span class="p">,</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html">3.84145882069412</div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualize the test</span>
-<span class="n">x_vals</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="n">length.out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1000</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parameters</span>
+<span class="n">x_vals</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="m">0.2</span><span class="p">,</span><span class="w"> </span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="n">length.out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1000</span><span class="p">)</span>
 <span class="n">chi_sq_density</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">dchisq</span><span class="p">(</span><span class="n">x_vals</span><span class="p">,</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">)</span>
+<span class="n">critical_value</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">qchisq</span><span class="p">(</span><span class="m">0.95</span><span class="p">,</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">)</span>
 
-<span class="nf">plot</span><span class="p">(</span><span class="n">x_vals</span><span class="p">,</span><span class="w"> </span><span class="n">chi_sq_density</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;l&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;blue&quot;</span><span class="p">,</span>
-<span class="w">     </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Likelihood Ratio Test&quot;</span><span class="p">,</span>
-<span class="w">     </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;LRT Statistic&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Density&quot;</span><span class="p">)</span>
+<span class="c1"># Data frames</span>
+<span class="n">df_chi</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x_vals</span><span class="p">,</span><span class="w"> </span><span class="n">density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chi_sq_density</span><span class="p">)</span>
+<span class="n">df_reject</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset</span><span class="p">(</span><span class="n">df_chi</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">critical_value</span><span class="p">)</span>
 
-<span class="c1"># Shade rejection area</span>
-<span class="n">x_shade</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">x_vals</span><span class="p">[</span><span class="n">x_vals</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nf">qchisq</span><span class="p">(</span><span class="m">0.95</span><span class="p">,</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">)]</span>
-<span class="n">y_shade</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">dchisq</span><span class="p">(</span><span class="n">x_shade</span><span class="p">,</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">)</span>
-<span class="nf">polygon</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">lrt_statistic</span><span class="p">,</span><span class="w"> </span><span class="n">x_shade</span><span class="p">,</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">x_shade</span><span class="p">)),</span><span class="w"> </span>
-<span class="w">         </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">y_shade</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w"> </span>
-<span class="w">         </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rgb</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0.3</span><span class="p">),</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span>
+<span class="c1"># Plot</span>
+<span class="n">p_lrt</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">df_chi</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">density</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_line</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;darkblue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.8</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_area</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df_reject</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">density</span><span class="p">),</span>
+<span class="w">            </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="c1"># Critical value line</span>
+<span class="w">  </span><span class="nf">annotate</span><span class="p">(</span><span class="s">&quot;segment&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">critical_value</span><span class="p">,</span><span class="w"> </span><span class="n">xend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">critical_value</span><span class="p">,</span><span class="w"> </span>
+<span class="w">           </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">yend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">dchisq</span><span class="p">(</span><span class="n">critical_value</span><span class="p">,</span><span class="w"> </span><span class="n">df</span><span class="p">),</span>
+<span class="w">           </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="c1"># Observed LRT statistic line</span>
+<span class="w">  </span><span class="nf">annotate</span><span class="p">(</span><span class="s">&quot;segment&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lrt_statistic</span><span class="p">,</span><span class="w"> </span><span class="n">xend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lrt_statistic</span><span class="p">,</span><span class="w"> </span>
+<span class="w">           </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">yend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">dchisq</span><span class="p">(</span><span class="n">lrt_statistic</span><span class="p">,</span><span class="w"> </span><span class="n">df</span><span class="p">),</span>
+<span class="w">           </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;orange&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dashed&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="c1"># Labels</span>
+<span class="w">  </span><span class="nf">annotate</span><span class="p">(</span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lrt_statistic</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">0.85</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">chi_sq_density</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.1</span><span class="p">,</span>
+<span class="w">           </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;LRT =&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">lrt_statistic</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">)),</span><span class="w"> </span>
+<span class="w">           </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;orange&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">fontface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">annotate</span><span class="p">(</span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lrt_statistic</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">0.75</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">chi_sq_density</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.05</span><span class="p">,</span>
+<span class="w">           </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;p =&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">p_value</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">)),</span><span class="w"> </span>
+<span class="w">           </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;orange&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">fontface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">annotate</span><span class="p">(</span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">critical_value</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.05</span><span class="p">,</span>
+<span class="w">           </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Rejection Region&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">           </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">fontface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">expression</span><span class="p">(</span><span class="nf">bold</span><span class="p">(</span><span class="n">LRT</span><span class="o">~</span><span class="n">Statistic</span><span class="p">)),</span><span class="w"> </span>
+<span class="w">       </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">expression</span><span class="p">(</span><span class="nf">bold</span><span class="p">(</span><span class="n">Density</span><span class="p">)))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">scale_x_continuous</span><span class="p">(</span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">scale_y_continuous</span><span class="p">(</span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">expansion</span><span class="p">(</span><span class="n">mult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0.05</span><span class="p">)))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme_minimal</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme</span><span class="p">(</span>
+<span class="w">    </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">14</span><span class="p">),</span>
+<span class="w">    </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hjust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">),</span>
+<span class="w">    </span><span class="n">axis.title.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">axis.title.y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">axis.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="p">),</span>
+<span class="w">    </span><span class="n">panel.grid.major</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">(),</span>
+<span class="w">    </span><span class="n">panel.grid.minor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">(),</span>
+<span class="w">    </span><span class="n">axis.line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_line</span><span class="p">(</span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">),</span>
+<span class="w">    </span><span class="n">axis.ticks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_line</span><span class="p">(</span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">),</span>
+<span class="w">    </span><span class="n">panel.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">),</span>
+<span class="w">    </span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span>
+<span class="w">  </span><span class="p">)</span>
 
-<span class="nf">abline</span><span class="p">(</span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lrt_statistic</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;orange&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
-<span class="nf">abline</span><span class="p">(</span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">qchisq</span><span class="p">(</span><span class="m">0.95</span><span class="p">,</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span>
-
-<span class="nf">text</span><span class="p">(</span><span class="n">lrt_statistic</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">0.3</span><span class="p">,</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">chi_sq_density</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w"> </span>
-<span class="w">     </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;LRT =&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">lrt_statistic</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">)),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">font</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
-<span class="nf">text</span><span class="p">(</span><span class="n">lrt_statistic</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">chi_sq_density</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.4</span><span class="p">,</span><span class="w"> </span>
-<span class="w">     </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;p =&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">p_value</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">)),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">p_lrt</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/fa60fdae2162160b017519ccf1c855b3d9bfa5d7e224f1a85387d371c059f573.png"><img alt="_images/fa60fdae2162160b017519ccf1c855b3d9bfa5d7e224f1a85387d371c059f573.png" src="_images/fa60fdae2162160b017519ccf1c855b3d9bfa5d7e224f1a85387d371c059f573.png" style="width: 420px; height: 420px;" />
+<a class="reference internal image-reference" href="_images/717fd78c2ae0cb9e36a879193758e9c59322291bac309c3fcf4dbb292030fc7a.png"><img alt="_images/717fd78c2ae0cb9e36a879193758e9c59322291bac309c3fcf4dbb292030fc7a.png" src="_images/717fd78c2ae0cb9e36a879193758e9c59322291bac309c3fcf4dbb292030fc7a.png" style="width: 420px; height: 420px;" />
 </a>
 </div>
 </div>
-<p>The true effect size in our simulation was <span class="math notranslate nohighlight">\(\beta = 0.4\)</span>, and our MLE correctly estimated it (<span class="math notranslate nohighlight">\(\hat{\beta} \approx 0.4\)</span>), but the LRT failed to detect it as statistically significant. This illustrates an important distinction between <strong>effect size</strong> and <strong>statistical significance</strong>.</p>
-<p>The main issue is <strong>small sample size</strong>. With only 5 individuals, we have very little statistical power to detect genetic effects. Even though the effect exists and our estimate is correct, there’s too much uncertainty around the estimate to conclusively rule out that it could be due to random chance.</p>
-<p>This is actually very realistic for genetics research - most real genetic effects require hundreds or thousands of individuals to detect with statistical confidence. A non-significant LRT result doesn’t mean no effect exists; it means we don’t have enough data to prove an effect exists beyond reasonable doubt.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save and display</span>
+<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;./figures/likelihood_LRT.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_lrt</span><span class="p">,</span><span class="w"> </span>
+<span class="w">       </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The true effect size was <span class="math notranslate nohighlight">\(\beta = 0.4\)</span>, and our MLE correctly estimated it (<span class="math notranslate nohighlight">\(\hat{\beta} \approx 0.4\)</span>), yet the LRT failed to detect statistical significance. This illustrates the distinction between <strong>effect size</strong> and <strong>statistical significance</strong>.</p>
+<p>The issue is <strong>small sample size</strong> (n=5). While the effect exists and our estimate is accurate, there’s too much uncertainty to rule out random chance. Most genetic effects require hundreds or thousands of individuals to detect with statistical confidence.</p>
+<p>A non-significant result doesn’t mean no effect exists - it means insufficient data to prove the effect beyond reasonable doubt.</p>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="supplementary">
@@ -1042,28 +1045,27 @@ Result: FAIL TO REJECT null - insufficient evidence for genetic effect
 <h2>Graphical Summary<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
 
 <span class="c1"># Prepare the data from our analysis</span>
 <span class="n">df_scatter</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span>
 <span class="w"> </span><span class="n">Genotype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X</span><span class="p">,</span>
-<span class="w"> </span><span class="n">Phenotype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Y_true</span>
+<span class="w"> </span><span class="n">Phenotype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Y</span>
 <span class="p">)</span>
 
 <span class="c1"># Create sequence for smooth lines</span>
 <span class="n">x_vals</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="nf">min</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">length.out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="p">)</span>
 
-<span class="c1"># Create data frame for regression lines using only beta = 0 and beta = 0.5</span>
+<span class="c1"># Create data frame for regression lines using Model 1 (beta=0) and Model 2 (beta=0.5)</span>
 <span class="n">selected_betas</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span>
 <span class="n">lines_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span>
 <span class="w"> </span><span class="n">Genotype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="n">x_vals</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span>
 <span class="w"> </span><span class="n">Phenotype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span>
-<span class="w">   </span><span class="n">selected_betas</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x_vals</span><span class="p">,</span><span class="w">  </span><span class="c1"># beta = 0</span>
-<span class="w">   </span><span class="n">selected_betas</span><span class="p">[</span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x_vals</span><span class="w">   </span><span class="c1"># beta = 0.5</span>
+<span class="w">   </span><span class="n">selected_betas</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x_vals</span><span class="p">,</span><span class="w">  </span><span class="c1"># Model 1: beta = 0</span>
+<span class="w">   </span><span class="n">selected_betas</span><span class="p">[</span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x_vals</span><span class="w">   </span><span class="c1"># Model 2: beta = 0.5</span>
 <span class="w"> </span><span class="p">),</span>
-<span class="w"> </span><span class="n">Model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">factor</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;beta =&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">selected_betas</span><span class="p">),</span><span class="w"> </span><span class="n">each</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">x_vals</span><span class="p">)),</span>
-<span class="w">                </span><span class="n">levels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;beta =&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">selected_betas</span><span class="p">))</span>
+<span class="w"> </span><span class="n">Model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">factor</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Model 1 (beta = 0)&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Model 2 (beta = 0.5)&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">each</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">x_vals</span><span class="p">)),</span>
+<span class="w">                </span><span class="n">levels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Model 1 (beta = 0)&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Model 2 (beta = 0.5)&quot;</span><span class="p">))</span>
 <span class="p">)</span>
 
 <span class="c1"># Create plot</span>
@@ -1075,27 +1077,20 @@ Result: FAIL TO REJECT null - insufficient evidence for genetic effect
 <span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
 <span class="w"> </span><span class="nf">theme_minimal</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
 <span class="w"> </span><span class="nf">theme</span><span class="p">(</span>
-<span class="w">   </span><span class="c1"># Font styling</span>
 <span class="w">   </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">),</span>
 <span class="w">   </span><span class="n">axis.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">),</span>
-<span class="w">   </span>
-<span class="w">   </span><span class="c1"># Hide axis tick labels</span>
 <span class="w">   </span><span class="n">axis.text.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">(),</span>
 <span class="w">   </span><span class="n">axis.text.y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">(),</span>
-<span class="w">   </span>
-<span class="w">   </span><span class="c1"># Customize grid and axes</span>
 <span class="w">   </span><span class="n">panel.grid.major</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_line</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;gray&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dotted&quot;</span><span class="p">),</span>
 <span class="w">   </span><span class="n">panel.grid.minor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">(),</span>
 <span class="w">   </span><span class="n">axis.line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_line</span><span class="p">(</span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">),</span>
 <span class="w">   </span><span class="n">axis.ticks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_line</span><span class="p">(</span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">),</span>
-<span class="w">   </span>
-<span class="w">   </span><span class="c1"># Transparent background</span>
 <span class="w">   </span><span class="n">panel.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">),</span>
 <span class="w">   </span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span>
 <span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
 <span class="w"> </span><span class="nf">geom_line</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lines_df</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Genotype</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Phenotype</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Model</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Model</span><span class="p">),</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w"> </span><span class="nf">scale_color_manual</span><span class="p">(</span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;beta = 0&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;beta = 0.5&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
-<span class="w"> </span><span class="nf">scale_linetype_manual</span><span class="p">(</span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;beta = 0&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dashed&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;beta = 0.5&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dashed&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w"> </span><span class="nf">scale_color_manual</span><span class="p">(</span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Model 1 (beta = 0)&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Model 2 (beta = 0.5)&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w"> </span><span class="nf">scale_linetype_manual</span><span class="p">(</span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Model 1 (beta = 0)&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dashed&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Model 2 (beta = 0.5)&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dashed&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
 <span class="w"> </span><span class="nf">theme</span><span class="p">(</span>
 <span class="w">   </span><span class="n">legend.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">(),</span>
 <span class="w">   </span><span class="n">legend.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bottom&quot;</span><span class="p">,</span>
@@ -1104,73 +1099,26 @@ Result: FAIL TO REJECT null - insufficient evidence for genetic effect
 
 <span class="c1"># Show and save plot</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;./cartoons/likelihood_ratio.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">,</span>
+<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;./figures/likelihood_ratio.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">,</span>
 <span class="w">      </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/070fc2c78720da57579fbdea2f949d5f18552cf49281633bb20a924021222a83.png"><img alt="_images/070fc2c78720da57579fbdea2f949d5f18552cf49281633bb20a924021222a83.png" src="_images/070fc2c78720da57579fbdea2f949d5f18552cf49281633bb20a924021222a83.png" style="width: 420px; height: 420px;" />
-</a>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
-<span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">repr.plot.height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">)</span>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attaching package: ‘dplyr’
 
-<span class="c1"># Parameters</span>
-<span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span>
-<span class="n">x_vals</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">500</span><span class="p">)</span>
-<span class="n">chi_vals</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">dchisq</span><span class="p">(</span><span class="n">x_vals</span><span class="p">,</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">)</span>
-<span class="n">x_obs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">3.84</span><span class="w">  </span><span class="c1"># example observed test statistic</span>
 
-<span class="c1"># Data frames</span>
-<span class="n">df_chi</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x_vals</span><span class="p">,</span><span class="w"> </span><span class="n">density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chi_vals</span><span class="p">)</span>
-<span class="n">df_reject</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset</span><span class="p">(</span><span class="n">df_chi</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">x_obs</span><span class="p">)</span>
+The following objects are masked from ‘package:stats’:
 
-<span class="c1"># Plot</span>
-<span class="n">p_lrt</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">df_chi</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">density</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">geom_line</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;darkblue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.8</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">geom_area</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df_reject</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">density</span><span class="p">),</span>
-<span class="w">            </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">annotate</span><span class="p">(</span><span class="s">&quot;segment&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x_obs</span><span class="p">,</span><span class="w"> </span><span class="n">xend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x_obs</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">yend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">dchisq</span><span class="p">(</span><span class="n">x_obs</span><span class="p">,</span><span class="w"> </span><span class="n">df</span><span class="p">),</span>
-<span class="w">           </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dashed&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">annotate</span><span class="p">(</span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x_obs</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.025</span><span class="p">,</span>
-<span class="w">           </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Rejection Region&quot;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">           </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">fontface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">expression</span><span class="p">(</span><span class="nf">bold</span><span class="p">(</span><span class="n">LRT</span><span class="o">~</span><span class="n">Statistic</span><span class="p">)),</span><span class="w"> </span>
-<span class="w">       </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">expression</span><span class="p">(</span><span class="nf">bold</span><span class="p">(</span><span class="n">Chi</span><span class="o">^</span><span class="m">2</span><span class="o">~</span><span class="n">Density</span><span class="p">)))</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">scale_x_continuous</span><span class="p">(</span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">scale_y_continuous</span><span class="p">(</span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">expansion</span><span class="p">(</span><span class="n">mult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0.05</span><span class="p">)))</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">theme_minimal</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">theme</span><span class="p">(</span>
-<span class="w">    </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">14</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">),</span>
-<span class="w">    </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">(),</span>
-<span class="w">    </span><span class="n">axis.text.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">(),</span>
-<span class="w">    </span><span class="n">axis.text.y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">(),</span>
-<span class="w">    </span><span class="n">axis.title.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">22</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">),</span>
-<span class="w">    </span><span class="n">axis.title.y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">22</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">),</span>
-<span class="w">    </span><span class="n">panel.grid.major</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_line</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;gray&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dotted&quot;</span><span class="p">),</span>
-<span class="w">    </span><span class="n">panel.grid.minor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">(),</span>
-<span class="w">    </span><span class="n">axis.line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_line</span><span class="p">(</span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">),</span>
-<span class="w">    </span><span class="n">axis.ticks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_line</span><span class="p">(</span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">),</span>
-<span class="w">    </span><span class="n">panel.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">),</span>
-<span class="w">    </span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span>
-<span class="w">  </span><span class="p">)</span>
+    filter, lag
 
-<span class="c1"># Display and save</span>
-<span class="nf">print</span><span class="p">(</span><span class="n">p_lrt</span><span class="p">)</span>
 
-<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;./cartoons/likelihood_LRT.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_lrt</span><span class="p">,</span><span class="w"> </span>
-<span class="w">       </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span>
-<span class="w">       </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">       </span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="p">)</span>
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/aa3a8e285cdbe6b4ff4ea2cde92260fa155db4f9a5cd5127f5f64aece73736c1.png"><img alt="_images/aa3a8e285cdbe6b4ff4ea2cde92260fa155db4f9a5cd5127f5f64aece73736c1.png" src="_images/aa3a8e285cdbe6b4ff4ea2cde92260fa155db4f9a5cd5127f5f64aece73736c1.png" style="width: 600px; height: 360px;" />
+<a class="reference internal image-reference" href="_images/22df3ffba72d6567e96197d03a8194ed4710dd05a95359aa95903db0dd374310.png"><img alt="_images/22df3ffba72d6567e96197d03a8194ed4710dd05a95359aa95903db0dd374310.png" src="_images/22df3ffba72d6567e96197d03a8194ed4710dd05a95359aa95903db0dd374310.png" style="width: 420px; height: 420px;" />
 </a>
 </div>
 </div>
@@ -1178,7 +1126,9 @@ Result: FAIL TO REJECT null - insufficient evidence for genetic effect
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="extended-reading">
 <h1>Extended Reading<a class="headerlink" href="#extended-reading" title="Link to this heading">#</a></h1>
-<p><a class="reference external" href="https://stephens999.github.io/fiveMinuteStats/wilks.html">Matthew Stephen’s fiveMinuteStats: Likelihood Ratio: Wilks’s Theorem</a></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://stephens999.github.io/fiveMinuteStats/wilks.html">Likelihood Ratio: Wilks’s Theorem</a> from Matthew Stephen’s fiveMinuteStats</p></li>
+</ul>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1257,8 +1207,8 @@ Result: FAIL TO REJECT null - insufficient evidence for genetic effect
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-setup">Model Setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-likelihood-and-log-likelihood">Compute Likelihood and Log-likelihood</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#likelihood-and-log-likelihood">Likelihood and Log-likelihood</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Likelihood Ratio Test</a></li>
 </ul>
 </li>

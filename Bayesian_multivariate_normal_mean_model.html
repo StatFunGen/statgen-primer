@@ -330,7 +330,6 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="likelihood_ratio.html">Likelihood Ratio</a></li>
 
 
@@ -355,14 +354,13 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="Bayes_factor.html">Bayes Factor</a></li>
 
 
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="p_value_and_Bayesian_hypothesis_testing.html">p-value and Bayesian Hypothesis Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p_value_and_Bayesian_hypothesis_testing.html"><span class="math notranslate nohighlight">\(p\)</span>-value and Bayesian Hypothesis Testing</a></li>
 
 
 
@@ -379,9 +377,7 @@
 
 
 
-
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Bayesian Multivariate Normal Mean Model</a></li>
-
 
 
 
@@ -391,7 +387,6 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Multiple Bayesian Models</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Bayesian_model_comparison.html">Bayesian Model Comparison</a></li>
-
 
 
 
@@ -578,39 +573,26 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Bayesian Multivariate Normal Mean Model</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-summary">Graphical Summary</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-form">General Form</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-effects-meta-analysis">Random Effects Meta-Analysis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fixed-effects-meta-analysis">Fixed Effects Meta-Analysis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trait-specific-effects">Trait-Specific Effects</a></li>
-</ul>
-</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bayesian-perspective-joint-uncertainty">The Bayesian Perspective: Joint Uncertainty</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-assumptions">Model Assumptions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prior-distribution-joint-uncertainty">Prior Distribution: Joint Uncertainty</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#likelihood-what-we-can-condition-on">Likelihood: What We Can Condition On</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-distribution-updated-joint-uncertainty">Posterior Distribution: Updated Joint Uncertainty</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-as-weighted-combination">Interpretation as Weighted Combination</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-cases-of-the-bivariate-model">Special Cases of the Bivariate Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-setup">Model Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prior-distribution">Prior Distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#likelihood">Likelihood</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-distribution">Posterior Distribution</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-as-weighted-combination">Posterior as Weighted Combination</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generalization-to-multivariate-case">Generalization to Multivariate Case</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-to-p-dimensions">Extension to <span class="math notranslate nohighlight">\(p\)</span> Dimensions</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-simulated-data">Generate Simulated Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-multivariate-model-setup">Bayesian Multivariate Model Setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-the-multivariate-posterior-by-conditioning-on-data">Calculate the Multivariate Posterior by Conditioning on Data</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sufficient-statistics">Sufficient Statistics</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-formulas">Posterior Formulas</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-information-sharing-through-joint-uncertainty">Interpretation: Information Sharing Through Joint Uncertainty</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#supplementary">Supplementary</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Graphical Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Prior Distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-covariance-matrices">Estimating the Covariance Matrices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Posterior Distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-bayesian-update">Visualizing the Bayesian Update</a></li>
 </ul>
 </li>
 </ul>
@@ -627,7 +609,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="bayesian-multivariate-normal-mean-model">
 <h1>Bayesian Multivariate Normal Mean Model<a class="headerlink" href="#bayesian-multivariate-normal-mean-model" title="Link to this heading">#</a></h1>
-<p>The Bayesian multivariate normal mean model extends the univariate case by treating <strong>multiple unknown mean parameters</strong> as <strong>jointly uncertain</strong> through a multivariate normal distribution, then conditioning on observed data while accounting for correlations between parameters, which allows uncertainty about one parameter to inform and reduce uncertainty about others in ways that independent analyses cannot achieve.</p>
+<p>The Bayesian multivariate normal mean model treats multiple parameters as jointly uncertain through a multivariate normal prior, allowing correlated parameters to inform each other when updating on data.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="graphical-summary">
 <h1>Graphical Summary<a class="headerlink" href="#graphical-summary" title="Link to this heading">#</a></h1>
@@ -635,8 +617,6 @@ document.write(`
 <!-- ![fig](./cartoons/Bayesian_multivariate_normal_mean_model.svg) --></section>
 <section class="tex2jax_ignore mathjax_ignore" id="key-formula">
 <h1>Key Formula<a class="headerlink" href="#key-formula" title="Link to this heading">#</a></h1>
-<section id="general-form">
-<h2>General Form<a class="headerlink" href="#general-form" title="Link to this heading">#</a></h2>
 <p>In the bivariate normal mean model, if our joint uncertainty about the parameters is represented by the prior:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -683,70 +663,51 @@ document.write(`
 <li><p>Subscript <span class="math notranslate nohighlight">\(1\)</span> = posterior parameters (updated uncertainty after conditioning)</p></li>
 <li><p><span class="math notranslate nohighlight">\(\rho_0, \rho_1\)</span> = prior and posterior correlations quantifying how uncertainty about one parameter relates to uncertainty about the other</p></li>
 </ul>
-<p><strong>This general framework encompasses several things we have discussed previously as special cases</strong>:</p>
-</section>
-<section id="random-effects-meta-analysis">
-<h2>Random Effects Meta-Analysis<a class="headerlink" href="#random-effects-meta-analysis" title="Link to this heading">#</a></h2>
-<p>When <span class="math notranslate nohighlight">\(\rho_0 = 0\)</span> and <span class="math notranslate nohighlight">\(\sigma_{a,0} = \sigma_{b,0} = \sigma\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{pmatrix}
-\sigma^2 &amp; 0 \\
-0 &amp; \sigma^2
-\end{pmatrix}
-\end{split}\]</div>
-<ul class="simple">
-<li><p><strong>No correlation</strong> between trait effects (<span class="math notranslate nohighlight">\(\rho_0 = 0\)</span>)</p></li>
-<li><p><strong>Equal uncertainty</strong> for both traits (<span class="math notranslate nohighlight">\(\sigma_{a,0} = \sigma_{b,0}\)</span>)</p></li>
-<li><p>Effects are independent but equally variable across studies</p></li>
-</ul>
-</section>
-<section id="fixed-effects-meta-analysis">
-<h2>Fixed Effects Meta-Analysis<a class="headerlink" href="#fixed-effects-meta-analysis" title="Link to this heading">#</a></h2>
-<p>When <span class="math notranslate nohighlight">\(\sigma_{a,0} = \sigma_{b,0}\)</span> and <span class="math notranslate nohighlight">\(\rho_0 = 1\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{pmatrix}
-\sigma^2 &amp; \sigma^2 \\
-\sigma^2 &amp; \sigma^2
-\end{pmatrix}
-\end{split}\]</div>
-<ul class="simple">
-<li><p><strong>Perfect correlation</strong> between trait effects (<span class="math notranslate nohighlight">\(\rho_0 = 1\)</span>)</p></li>
-<li><p><strong>Equal uncertainty</strong> for both traits</p></li>
-<li><p>Effects move together completely - if one is high, the other is high</p></li>
-</ul>
-</section>
-<section id="trait-specific-effects">
-<h2>Trait-Specific Effects<a class="headerlink" href="#trait-specific-effects" title="Link to this heading">#</a></h2>
-<p>When <span class="math notranslate nohighlight">\(\sigma_{a,0} = 0\)</span> or <span class="math notranslate nohighlight">\(\sigma_{b,0} = 0\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{pmatrix}
-0 &amp; 0 \\
-0 &amp; \sigma_{b,0}^2
-\end{pmatrix} \quad \text{or} \quad
-\begin{pmatrix}
-\sigma_{a,0}^2 &amp; 0 \\
-0 &amp; 0
-\end{pmatrix}
-\end{split}\]</div>
-<ul class="simple">
-<li><p><strong>One trait has no effect</strong> (zero variance)</p></li>
-<li><p><strong>Other trait varies</strong> across studies</p></li>
-<li><p>Variant affects only one trait</p></li>
-</ul>
-</section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="technical-details">
 <h1>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading">#</a></h1>
-<section id="the-bayesian-perspective-joint-uncertainty">
-<h2>The Bayesian Perspective: Joint Uncertainty<a class="headerlink" href="#the-bayesian-perspective-joint-uncertainty" title="Link to this heading">#</a></h2>
-<p>In the multivariate case, we extend our treatment of uncertainty by recognizing that multiple parameters may be jointly uncertain, and that our inability to condition on one parameter may be related to our inability to condition on others through correlation structures.</p>
+<section id="special-cases-of-the-bivariate-model">
+<h2>Special Cases of the Bivariate Model<a class="headerlink" href="#special-cases-of-the-bivariate-model" title="Link to this heading">#</a></h2>
+<p>The general framework above encompasses several things we have discussed previously as special cases:</p>
+<ul>
+<li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/meta_analysis_fixed_effect.html"><strong>Meta-analysis assuming fixed effects</strong></a>:</p>
+<p>When <span class="math notranslate nohighlight">\(\sigma_{a,0} = \sigma_{b,0} = \sigma_0\)</span> and <span class="math notranslate nohighlight">\(\rho_0 = 1\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \boldsymbol{\Sigma}_0 = \begin{pmatrix}
+    \sigma_0^2 &amp; \sigma_0^2 \\
+    \sigma_0^2 &amp; \sigma_0^2
+    \end{pmatrix}
+    \end{split}\]</div>
+<p>Effects are <strong>perfectly correlated</strong> - they move together completely.</p>
+</li>
+<li><p><a class="reference external" href="https://statfungen.github.io/statgen-primer/meta_analysis_random_effect.html"><strong>Meta-analysis assuming random effects</strong></a>:</p>
+<p>When <span class="math notranslate nohighlight">\(\rho_0 = 0\)</span> and <span class="math notranslate nohighlight">\(\sigma_{a,0} = \sigma_{b,0} = \sigma_0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \boldsymbol{\Sigma}_0 = \begin{pmatrix}
+    \sigma_0^2 &amp; 0 \\
+    0 &amp; \sigma_0^2
+    \end{pmatrix}
+    \end{split}\]</div>
+<p>Effects are <strong>independent</strong> with <strong>equal prior uncertainty</strong>.</p>
+</li>
+<li><p><strong>Single-Trait Effects</strong>:</p>
+<p>When <span class="math notranslate nohighlight">\(\sigma_{a,0} = 0\)</span> (or <span class="math notranslate nohighlight">\(\sigma_{b,0} = 0\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \boldsymbol{\Sigma}_0 = \begin{pmatrix}
+    0 &amp; 0 \\
+    0 &amp; \sigma_{b,0}^2
+    \end{pmatrix}
+    \end{split}\]</div>
+<p>Variant affects <strong>only one trait</strong> (zero uncertainty for the other means we’re certain it has no effect).</p>
+</li>
+</ul>
 </section>
-<section id="model-assumptions">
-<h2>Model Assumptions<a class="headerlink" href="#model-assumptions" title="Link to this heading">#</a></h2>
-<p>In the Bayesian bivariate normal mean model, we treat the joint uncertainty about multiple parameters systematically:</p>
+<section id="model-setup">
+<h2>Model Setup<a class="headerlink" href="#model-setup" title="Link to this heading">#</a></h2>
+<p>In the Bayesian bivariate normal mean model:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{pmatrix}
@@ -754,94 +715,56 @@ Y_{i,a} \\
 Y_{i,b}
 \end{pmatrix} \sim \mathcal{N}\left(X_i \begin{pmatrix} \beta_a \\ \beta_b \end{pmatrix}, \boldsymbol{\Sigma} \right) \quad \text{for } i = 1, 2, \ldots, N
 \end{split}\]</div>
-<p>where:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\boldsymbol{\beta} = \begin{pmatrix} \beta_a \\ \beta_b \end{pmatrix}\)</span> represents our joint uncertainty about both mean parameters</p></li>
-<li><p><span class="math notranslate nohighlight">\(\boldsymbol{\Sigma}\)</span> is the known covariance matrix (we condition on this)</p></li>
-<li><p><span class="math notranslate nohighlight">\(X_i\)</span> are observed covariates (we condition on these)</p></li>
-</ul>
-<p><strong>Key insight</strong>: Since we cannot condition on the true values of either <span class="math notranslate nohighlight">\(\beta_a\)</span> or <span class="math notranslate nohighlight">\(\beta_b\)</span>, we treat them as jointly random variables, allowing their uncertainties to be correlated.</p>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{\beta} = \begin{pmatrix} \beta_a \\ \beta_b \end{pmatrix}\)</span> represents joint uncertainty about both parameters, and <span class="math notranslate nohighlight">\(\boldsymbol{\Sigma}\)</span> is the known covariance matrix.</p>
 </section>
-<section id="prior-distribution-joint-uncertainty">
-<h2>Prior Distribution: Joint Uncertainty<a class="headerlink" href="#prior-distribution-joint-uncertainty" title="Link to this heading">#</a></h2>
-<p>We express our joint uncertainty about the parameter vector through a multivariate normal distribution:</p>
+<section id="prior-distribution">
+<h2>Prior Distribution<a class="headerlink" href="#prior-distribution" title="Link to this heading">#</a></h2>
 <div class="math notranslate nohighlight">
 \[
 \boldsymbol{\beta} \sim \mathcal{N}(\boldsymbol{\beta}_0, \boldsymbol{\Sigma}_0)
 \]</div>
-<p>where:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\boldsymbol{\beta}_0\)</span> represents our best joint guess about both parameters</p></li>
-<li><p><span class="math notranslate nohighlight">\(\boldsymbol{\Sigma}_0\)</span> quantifies not only our uncertainty about each parameter individually, but also how these uncertainties are related</p></li>
-</ul>
-<p>The probability density function reflects this joint uncertainty:</p>
-<div class="math notranslate nohighlight">
-\[
-p(\boldsymbol{\beta}) \propto \exp\left(-\frac{1}{2}(\boldsymbol{\beta} - \boldsymbol{\beta}_0)^T \boldsymbol{\Sigma}_0^{-1} (\boldsymbol{\beta} - \boldsymbol{\beta}_0)\right)
-\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{\Sigma}_0\)</span> quantifies uncertainty about each parameter and how these uncertainties are correlated.</p>
 </section>
-<section id="likelihood-what-we-can-condition-on">
-<h2>Likelihood: What We Can Condition On<a class="headerlink" href="#likelihood-what-we-can-condition-on" title="Link to this heading">#</a></h2>
-<p>The likelihood represents what we can condition on - the observed data given our uncertain parameter vector:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{pmatrix}
-Y_{i,a} \\
-Y_{i,b}
-\end{pmatrix} \bigg| \boldsymbol{\beta}, \boldsymbol{\Sigma} \sim \mathcal{N}\left(X_i \boldsymbol{\beta}, \boldsymbol{\Sigma} \right) \quad \text{for } i = 1, 2, \ldots, N
-\end{split}\]</div>
-<p>For all observations, the likelihood is:</p>
+<section id="likelihood">
+<h2>Likelihood<a class="headerlink" href="#likelihood" title="Link to this heading">#</a></h2>
 <div class="math notranslate nohighlight">
 \[
 p(\mathbf{Y}|\boldsymbol{\beta}) \propto \exp\left(-\frac{1}{2} \sum_{i=1}^N (\mathbf{Y}_i - X_i\boldsymbol{\beta})^T \boldsymbol{\Sigma}^{-1} (\mathbf{Y}_i - X_i\boldsymbol{\beta})\right)
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\mathbf{Y}_i = \begin{pmatrix} Y_{i,a} \\ Y_{i,b} \end{pmatrix}\)</span>.</p>
 </section>
-<section id="posterior-distribution-updated-joint-uncertainty">
-<h2>Posterior Distribution: Updated Joint Uncertainty<a class="headerlink" href="#posterior-distribution-updated-joint-uncertainty" title="Link to this heading">#</a></h2>
-<p>Using Bayes’ theorem, we condition on all available information to update our joint uncertainty:</p>
+<section id="posterior-distribution">
+<h2>Posterior Distribution<a class="headerlink" href="#posterior-distribution" title="Link to this heading">#</a></h2>
 <div class="math notranslate nohighlight">
 \[
 p(\boldsymbol{\beta}|\mathbf{Y}) \propto p(\mathbf{Y}|\boldsymbol{\beta}) p(\boldsymbol{\beta})
 \]</div>
-<p>The posterior distribution follows a bivariate normal distribution:</p>
+<p>The posterior is:</p>
 <div class="math notranslate nohighlight">
 \[
 \boldsymbol{\beta} \mid \mathbf{Y} \sim \mathcal{N}\left( \boldsymbol{\beta}_1, \boldsymbol{\Sigma}_1 \right)
 \]</div>
-<p>where the parameters are:</p>
+<p>where:</p>
 <div class="math notranslate nohighlight">
 \[
-\boldsymbol{\Sigma}_1^{-1} = \boldsymbol{\Sigma}_0^{-1} + \sum_{i=1}^N X_i^2 \boldsymbol{\Sigma}^{-1} = \boldsymbol{\Sigma}_0^{-1} + T_1 \boldsymbol{\Sigma}^{-1}
+\boldsymbol{\Sigma}_1^{-1} = \boldsymbol{\Sigma}_0^{-1} + T_1 \boldsymbol{\Sigma}^{-1}, \quad \boldsymbol{\beta}_1 = \boldsymbol{\Sigma}_1 \left( \boldsymbol{\Sigma}_0^{-1} \boldsymbol{\beta}_0 + \boldsymbol{\Sigma}^{-1} \mathbf{T}_2 \right)
 \]</div>
-<div class="math notranslate nohighlight">
-\[
-\boldsymbol{\beta}_1 = \boldsymbol{\Sigma}_1 \left( \boldsymbol{\Sigma}_0^{-1} \boldsymbol{\beta}_0 + \boldsymbol{\Sigma}^{-1} \sum_{i=1}^N X_i \mathbf{Y}_i \right) = \boldsymbol{\Sigma}_1 \left( \boldsymbol{\Sigma}_0^{-1} \boldsymbol{\beta}_0 + \boldsymbol{\Sigma}^{-1} \mathbf{T}_2 \right)
-\]</div>
-<p>These can be written in terms of sufficient statistics:</p>
+<p>with sufficient statistics:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 T_1 = \sum_{i=1}^N X_i^2, \quad \mathbf{T}_2 = \sum_{i=1}^N X_i \mathbf{Y}_i = \begin{pmatrix} \sum_{i=1}^N X_i Y_{i,a} \\ \sum_{i=1}^N X_i Y_{i,b} \end{pmatrix}
 \end{split}\]</div>
-<p><strong>Key insight</strong>: Notice that <span class="math notranslate nohighlight">\(\boldsymbol{\Sigma}_1\)</span> has smaller variances than <span class="math notranslate nohighlight">\(\boldsymbol{\Sigma}_0\)</span> - conditioning on data reduces our joint uncertainty about all parameters.</p>
-<section id="interpretation-as-weighted-combination">
-<h3>Interpretation as Weighted Combination<a class="headerlink" href="#interpretation-as-weighted-combination" title="Link to this heading">#</a></h3>
-<p>The posterior mean represents a weighted combination of our prior beliefs and what we learned from data:</p>
+<section id="posterior-as-weighted-combination">
+<h3>Posterior as Weighted Combination<a class="headerlink" href="#posterior-as-weighted-combination" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[
 \boldsymbol{\beta}_1 = \boldsymbol{W} \cdot \frac{\mathbf{T}_2}{T_1} + (\boldsymbol{I} - \boldsymbol{W}) \cdot \boldsymbol{\beta}_0
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\boldsymbol{W}\)</span> is a weight matrix that depends on the relative amount of information in the data versus our prior uncertainty.</p>
-<p>This shows how conditioning works in the multivariate case:</p>
-<ul class="simple">
-<li><p><strong>More informative data</strong>: <span class="math notranslate nohighlight">\(\boldsymbol{W} \approx \boldsymbol{I}\)</span>, we trust the data more</p></li>
-<li><p><strong>More uncertain prior</strong>: <span class="math notranslate nohighlight">\(\boldsymbol{W} \approx \boldsymbol{I}\)</span>, we let data dominate since our prior was vague</p></li>
-<li><p><strong>Less uncertain prior</strong>: <span class="math notranslate nohighlight">\(\boldsymbol{W} \approx \boldsymbol{0}\)</span>, we stick closer to our prior beliefs</p></li>
-</ul>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{W}\)</span> balances prior beliefs and observed data based on their relative information content.</p>
 </section>
 </section>
-<section id="generalization-to-multivariate-case">
-<h2>Generalization to Multivariate Case<a class="headerlink" href="#generalization-to-multivariate-case" title="Link to this heading">#</a></h2>
+<section id="extension-to-p-dimensions">
+<h2>Extension to <span class="math notranslate nohighlight">\(p\)</span> Dimensions<a class="headerlink" href="#extension-to-p-dimensions" title="Link to this heading">#</a></h2>
 <p>The bivariate formulation extends naturally to the general <span class="math notranslate nohighlight">\(p\)</span>-dimensional multivariate case by replacing:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(2 \times 2\)</span> matrices with <span class="math notranslate nohighlight">\(p \times p\)</span> matrices</p></li>
@@ -864,79 +787,81 @@ T_1 = \sum_{i=1}^N X_i^2, \quad \mathbf{T}_2 = \sum_{i=1}^N X_i \mathbf{Y}_i = \
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="example">
 <h1>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
-<p>In our previous example in <a class="reference external" href="https://statfungen.github.io/statgen-primer/Bayesian_normal_mean_model.html#">Lecture: Bayesian normal mean model</a>, we analyzed how genetic variants affect a single trait (phenotype) using a Bayesian normal mean model. But what if we want to study <strong>genetic effects on multiple related traits simultaneously</strong>?</p>
-<p>For example, a genetic variant might affect both height and weight, and these traits are likely correlated. Analyzing them together can be more powerful than analyzing each separately because:</p>
+<p>In the <a class="reference external" href="https://statfungen.github.io/statgen-primer/Bayesian_normal_mean_model.html#">Lecture: Bayesian normal mean model</a>, we analyzed genetic effects on a single trait. Now we extend this to <strong>multiple correlated traits</strong> - specifically, we analyze how a genetic variant affects both height and weight simultaneously.</p>
+<p><strong>Why analyze traits jointly?</strong></p>
 <ul class="simple">
-<li><p>We can share information about our uncertainty across traits</p></li>
-<li><p>Our inability to condition on one effect can inform our uncertainty about another</p></li>
-<li><p>We can capture correlations between effects that separate analyses miss</p></li>
+<li><p>A variant may affect multiple traits with correlated effects</p></li>
+<li><p>Traits themselves are often correlated (e.g., height and weight)</p></li>
+<li><p>Joint analysis allows information about one effect to inform our uncertainty about the other</p></li>
 </ul>
-<p>This example shows how to implement a <strong>Bayesian multivariate normal mean model</strong> where we treat the genetic effect vector <span class="math notranslate nohighlight">\(\boldsymbol{\beta} = [\beta_a, \beta_b]\)</span> as jointly uncertain. Instead of separate analyses, we get a joint posterior distribution that reflects our updated uncertainty about both effects and their relationship.</p>
-<p>Using simulated data where a genetic variant affects both height (true effect <span class="math notranslate nohighlight">\(\beta_a = 0.3\)</span>) and weight (true effect <span class="math notranslate nohighlight">\(\beta_b = 0.4\)</span>) with correlated residuals, we’ll see how our joint uncertainty about the effect vector gets updated when we condition on multivariate trait data.</p>
-<section id="generate-simulated-data">
-<h2>Generate Simulated Data<a class="headerlink" href="#generate-simulated-data" title="Link to this heading">#</a></h2>
-<p>Let’s create genetic data for 5 individuals where one variant affects both height and weight.</p>
+<p><strong>Model</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\begin{pmatrix} Y_{i,a} \\ Y_{i,b} \end{pmatrix} \bigg| \boldsymbol{\beta}, \boldsymbol{\Sigma} &amp;\sim \mathcal{N}\left(X_i \boldsymbol{\beta}, \boldsymbol{\Sigma} \right) \quad \text{[likelihood]} \\
+\boldsymbol{\beta} | \boldsymbol{\Sigma}_0 &amp;\sim \mathcal{N}(\boldsymbol{\beta}_0, \boldsymbol{\Sigma}_0) \quad \text{[prior]} \\
+\boldsymbol{\Sigma}, \boldsymbol{\Sigma}_0 &amp; \text{ estimated from data} \quad \text{[hyperparameters]}
+\end{align}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{\beta} = \begin{pmatrix} \beta_a \\ \beta_b \end{pmatrix}\)</span> represents the joint effects on traits a (height) and b (weight).</p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
+<p>We use the same genotype data from the <a class="reference external" href="https://statfungen.github.io/statgen-primer/Bayesian_normal_mean_model.html#">Lecture: Bayesian normal mean model</a>, but now generate two correlated traits (height and weight) for each individual.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clear the environment and set reproducibility</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clear the environment</span>
 <span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ls</span><span class="p">())</span>
-<span class="nf">set.seed</span><span class="p">(</span><span class="m">27</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">MASS</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">mvtnorm</span><span class="p">)</span><span class="w">  </span><span class="c1"># For dmvnorm</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ellipse</span><span class="p">)</span>
+<span class="nf">set.seed</span><span class="p">(</span><span class="m">19</span><span class="p">)</span><span class="w">  </span><span class="c1"># For reproducibility</span>
 
-<span class="nf">library</span><span class="p">(</span><span class="n">MASS</span><span class="p">)</span><span class="w">  </span><span class="c1"># for multivariate normal generation</span>
-
-<span class="c1"># Generate genotype data that we can condition on</span>
+<span class="c1"># Generate genotype data for 5 individuals at a single variant</span>
 <span class="n">N</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">5</span>
-<span class="n">genotypes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;CC&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CT&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;TT&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CT&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CC&quot;</span><span class="p">)</span>
+<span class="n">genotypes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;CC&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CT&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;TT&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CT&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CC&quot;</span><span class="p">)</span><span class="w">  </span><span class="c1"># Individual genotypes</span>
 <span class="nf">names</span><span class="p">(</span><span class="n">genotypes</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Individual&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">)</span>
 
-<span class="c1"># Convert to additive coding and standardize (observed data we condition on)</span>
+<span class="c1"># Define alternative allele</span>
 <span class="n">alt_allele</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;T&quot;</span>
+
+<span class="c1"># Convert to additive genotype coding (count of alternative alleles)</span>
 <span class="n">Xraw_additive</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
 <span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="n">alleles</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">strsplit</span><span class="p">(</span><span class="n">genotypes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span>
 <span class="w">  </span><span class="n">Xraw_additive</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">alleles</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">alt_allele</span><span class="p">)</span>
 <span class="p">}</span>
+<span class="nf">names</span><span class="p">(</span><span class="n">Xraw_additive</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">genotypes</span><span class="p">)</span>
+
+<span class="c1"># Standardize genotypes</span>
 <span class="n">X</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">scale</span><span class="p">(</span><span class="n">Xraw_additive</span><span class="p">,</span><span class="w"> </span><span class="n">center</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)[,</span><span class="m">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attaching package: ‘ellipse’
 
-<span class="c1"># True effects we CANNOT condition on (unknown in practice)</span>
-<span class="n">true_beta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.3</span><span class="p">,</span><span class="w"> </span><span class="m">0.4</span><span class="p">)</span><span class="w">  </span><span class="c1"># [height_effect, weight_effect]</span>
-<span class="nf">names</span><span class="p">(</span><span class="n">true_beta</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Height&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Weight&quot;</span><span class="p">)</span>
 
-<span class="c1"># Known residual covariance (what we can condition on)</span>
-<span class="n">Sigma_known</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">1.0</span><span class="p">,</span><span class="w"> </span><span class="m">0.6</span><span class="p">,</span><span class="w">   </span><span class="c1"># height variance = 1, covariance = 0.6</span>
-<span class="w">                        </span><span class="m">0.6</span><span class="p">,</span><span class="w"> </span><span class="m">1.2</span><span class="p">),</span><span class="w">  </span><span class="c1"># weight variance = 1.2</span>
-<span class="w">                      </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
-<span class="nf">rownames</span><span class="p">(</span><span class="n">Sigma_known</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">Sigma_known</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Height&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Weight&quot;</span><span class="p">)</span>
+The following object is masked from ‘package:graphics’:
 
-<span class="c1"># Generate observed trait data</span>
-<span class="n">Y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
-<span class="kr">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">genetic_effects</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">true_beta</span><span class="w">  </span><span class="c1"># What we cannot observe directly</span>
-<span class="w">  </span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mvrnorm</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">mu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">genetic_effects</span><span class="p">,</span><span class="w"> </span><span class="n">Sigma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Sigma_known</span><span class="p">)</span>
-<span class="p">}</span>
-<span class="nf">colnames</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Height&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Weight&quot;</span><span class="p">)</span>
-<span class="nf">rownames</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Individual&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">)</span>
+    pairs
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># True genetic effects on height and weight</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set true effects and residual covariance for data generation</span>
 <span class="n">true_beta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.3</span><span class="p">,</span><span class="w"> </span><span class="m">0.4</span><span class="p">)</span><span class="w">  </span><span class="c1"># [height_effect, weight_effect]</span>
-<span class="nf">names</span><span class="p">(</span><span class="n">true_beta</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Height&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Weight&quot;</span><span class="p">)</span>
+<span class="n">true_Sigma</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">1.0</span><span class="p">,</span><span class="w"> </span><span class="m">0.6</span><span class="p">,</span><span class="w">   </span><span class="c1"># height variance = 1, covariance = 0.6</span>
+<span class="w">                       </span><span class="m">0.6</span><span class="p">,</span><span class="w"> </span><span class="m">1.2</span><span class="p">),</span><span class="w">  </span><span class="c1"># weight variance = 1.2</span>
+<span class="w">                     </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
 
-<span class="c1"># Residual covariance matrix (height and weight are correlated)</span>
-<span class="n">Sigma</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">1.0</span><span class="p">,</span><span class="w"> </span><span class="m">0.6</span><span class="p">,</span><span class="w">   </span><span class="c1"># height variance = 1, height-weight covariance = 0.6</span>
-<span class="w">                  </span><span class="m">0.6</span><span class="p">,</span><span class="w"> </span><span class="m">1.2</span><span class="p">),</span><span class="w">  </span><span class="c1"># weight variance = 1.2</span>
-<span class="w">                </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
-<span class="nf">rownames</span><span class="p">(</span><span class="n">Sigma</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">Sigma</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Height&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Weight&quot;</span><span class="p">)</span>
-
-<span class="c1"># Generate correlated phenotypes</span>
+<span class="c1"># Generate correlated phenotypes for height and weight</span>
 <span class="n">Y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
 <span class="kr">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="n">genetic_effects</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">true_beta</span>
-<span class="w">  </span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mvrnorm</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">mu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">genetic_effects</span><span class="p">,</span><span class="w"> </span><span class="n">Sigma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Sigma</span><span class="p">)</span>
+<span class="w">  </span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mvrnorm</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">mu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">genetic_effects</span><span class="p">,</span><span class="w"> </span><span class="n">Sigma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">true_Sigma</span><span class="p">)</span>
 <span class="p">}</span>
 <span class="nf">colnames</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Height&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Weight&quot;</span><span class="p">)</span>
 <span class="nf">rownames</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Individual&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">)</span>
@@ -944,529 +869,257 @@ T_1 = \sum_{i=1}^N X_i^2, \quad \mathbf{T}_2 = \sum_{i=1}^N X_i \mathbf{Y}_i = \
 </div>
 </div>
 </div>
+<p>To apply the Bayesian multivariate normal mean model, we need to specify the <strong>prior distribution</strong> for the effect vector <span class="math notranslate nohighlight">\(\boldsymbol{\beta}\)</span> and estimate the covariance matrices. We assume the prior mean is zero (no prior expectation about effects):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\boldsymbol{\beta} \sim \mathcal{N}(\boldsymbol{\beta}_0, \boldsymbol{\Sigma}_0) \quad \text{where } \boldsymbol{\beta}_0 = \begin{pmatrix} 0 \\ 0 \end{pmatrix}
+\end{split}\]</div>
+<p>The <strong>prior covariance</strong> <span class="math notranslate nohighlight">\(\boldsymbol{\Sigma}_0\)</span> quantifies our joint uncertainty about both effects, and the <strong>residual covariance</strong> <span class="math notranslate nohighlight">\(\boldsymbol{\Sigma}\)</span> captures the correlation between traits. We will estimate both from the data using maximum likelihood.</p>
 </section>
-<section id="bayesian-multivariate-model-setup">
-<h2>Bayesian Multivariate Model Setup<a class="headerlink" href="#bayesian-multivariate-model-setup" title="Link to this heading">#</a></h2>
-<p>First we express our joint uncertainty through a prior distribution.</p>
+<section id="id1">
+<h2>Prior Distribution<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prior: Our joint uncertainty about the effect vector</span>
-<span class="n">beta_0</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w">  </span><span class="c1"># Best guess: no effects</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define prior distribution</span>
+<span class="c1"># Prior mean: no prior expectation about effects on either trait</span>
+<span class="n">beta_0</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
 <span class="nf">names</span><span class="p">(</span><span class="n">beta_0</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Height&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Weight&quot;</span><span class="p">)</span>
-
-<span class="c1"># Prior covariance: Quantifies our joint uncertainty</span>
-<span class="n">Sigma_0</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0.25</span><span class="p">,</span><span class="w"> </span><span class="m">0.1</span><span class="p">,</span><span class="w">    </span><span class="c1"># modest uncertainty, slight correlation</span>
-<span class="w">                    </span><span class="m">0.1</span><span class="p">,</span><span class="w">  </span><span class="m">0.25</span><span class="p">),</span><span class="w">   </span><span class="c1"># expecting effects might be related</span>
-<span class="w">                  </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
-<span class="nf">rownames</span><span class="p">(</span><span class="n">Sigma_0</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">Sigma_0</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Height&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Weight&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="calculate-the-multivariate-posterior-by-conditioning-on-data">
-<h2>Calculate the Multivariate Posterior by Conditioning on Data<a class="headerlink" href="#calculate-the-multivariate-posterior-by-conditioning-on-data" title="Link to this heading">#</a></h2>
-<p>Now we condition on all observed information to update our joint uncertainty. For the multivariate normal-normal conjugate model, we have closed-form solutions.</p>
-<section id="sufficient-statistics">
-<h3>Sufficient Statistics<a class="headerlink" href="#sufficient-statistics" title="Link to this heading">#</a></h3>
-<p>The sufficient statistics for the multivariate case are:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(T_1 = \sum_{i=1}^N X_i^2\)</span> (same as univariate case)</p></li>
-<li><p><span class="math notranslate nohighlight">\(\mathbf{T}_2 = \sum_{i=1}^N X_i \mathbf{Y}_i\)</span> (vector of cross-products)</p></li>
-</ul>
-</section>
-<section id="posterior-formulas">
-<h3>Posterior Formulas<a class="headerlink" href="#posterior-formulas" title="Link to this heading">#</a></h3>
-<p>The posterior parameters are:</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{\Sigma}_1^{-1} = T_1 \boldsymbol{\Sigma}^{-1} + \boldsymbol{\Sigma}_0^{-1}\]</div>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{\beta}_1 = \boldsymbol{\Sigma}_1 (T_1 \boldsymbol{\Sigma}^{-1} \hat{\boldsymbol{\beta}} + \boldsymbol{\Sigma}_0^{-1} \boldsymbol{\beta}_0)\]</div>
-<p>where <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\beta}} = \mathbf{T}_2 / T_1\)</span> is the data’s estimate.</p>
+<section id="estimating-the-covariance-matrices">
+<h2>Estimating the Covariance Matrices<a class="headerlink" href="#estimating-the-covariance-matrices" title="Link to this heading">#</a></h2>
+<p><strong>Why estimate covariances?</strong> We need <span class="math notranslate nohighlight">\(\boldsymbol{\Sigma}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{\Sigma}_0\)</span> to compute the posterior, but we don’t know their true values.</p>
+<p>With only 5 observations, estimating all parameters of two 2×2 covariance matrices is challenging. For this pedagogical example, we’ll use a <strong>simplified approach</strong>: estimate the residual covariance from the sample data and use a sensible prior covariance structure.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sufficient statistics from conditioning on observed data</span>
-<span class="n">T1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">X</span><span class="o">^</span><span class="m">2</span><span class="p">)</span>
-<span class="n">T2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">colSums</span><span class="p">(</span><span class="n">X</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Y</span><span class="p">)</span><span class="w">  </span><span class="c1"># What data tells us about effects</span>
-<span class="n">beta_hat_data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">T2</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">T1</span><span class="w">   </span><span class="c1"># Data&#39;s estimate (what we&#39;d get from separate OLS)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Estimate residual covariance from sample</span>
+<span class="c1"># Use sample covariance as estimate for Sigma</span>
+<span class="n">Sigma_mle</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cov</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">Sigma_mle</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">Sigma_mle</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Height&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Weight&quot;</span><span class="p">)</span>
 
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;What we learn from conditioning on data:\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Data&#39;s joint estimate (beta_hat):&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">beta_hat_data</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;(True effects were:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">true_beta</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;)\n\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Estimated residual covariance (Sigma):\n&quot;</span><span class="p">)</span>
+<span class="nf">round</span><span class="p">(</span><span class="n">Sigma_mle</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">)</span>
+
+<span class="c1"># For the prior covariance, use a modest assumption:</span>
+<span class="c1"># - Moderate uncertainty (variances around 0.2-0.3)</span>
+<span class="c1"># - Some correlation between effects (traits often have correlated genetic effects)</span>
+<span class="n">Sigma_0_mle</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0.25</span><span class="p">,</span><span class="w"> </span><span class="m">0.10</span><span class="p">,</span>
+<span class="w">                        </span><span class="m">0.10</span><span class="p">,</span><span class="w"> </span><span class="m">0.25</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">Sigma_0_mle</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">Sigma_0_mle</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Height&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Weight&quot;</span><span class="p">)</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\nPrior covariance (Sigma_0):\n&quot;</span><span class="p">)</span>
+<span class="nf">round</span><span class="p">(</span><span class="n">Sigma_0_mle</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>What we learn from conditioning on data:
-Data&#39;s joint estimate (beta_hat): 0.615 0.206 
-(True effects were: 0.3 0.4 )
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimated residual covariance (Sigma):
+</pre></div>
+</div>
+<div class="output text_html"><table class="dataframe">
+<caption>A matrix: 2 × 2 of type dbl</caption>
+<thead>
+	<tr><th></th><th scope=col>Height</th><th scope=col>Weight</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>Height</th><td>0.705</td><td>0.547</td></tr>
+	<tr><th scope=row>Weight</th><td>0.547</td><td>0.742</td></tr>
+</tbody>
+</table>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prior covariance (Sigma_0):
+</pre></div>
+</div>
+<div class="output text_html"><table class="dataframe">
+<caption>A matrix: 2 × 2 of type dbl</caption>
+<thead>
+	<tr><th></th><th scope=col>Height</th><th scope=col>Weight</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>Height</th><td>0.25</td><td>0.10</td></tr>
+	<tr><th scope=row>Weight</th><td>0.10</td><td>0.25</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="id2">
+<h2>Posterior Distribution<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>With the estimated covariance matrices, we can now compute the posterior distribution using the formulas from the Technical Details section.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate sufficient statistics</span>
+<span class="n">T1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">X</span><span class="o">^</span><span class="m">2</span><span class="p">)</span>
+<span class="n">T2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">colSums</span><span class="p">(</span><span class="n">X</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Y</span><span class="p">)</span><span class="w">  </span><span class="c1"># Vector of cross-products</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Sufficient statistics from data:\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;T1 (sum of X^2):&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">T1</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;T2 (sum of X*Y):&quot;</span><span class="p">),</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">T2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sufficient statistics from data:
+T1 (sum of X^2): 4 
+T2 (sum of X*Y): 2.9829 2.0888
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Posterior: Updated joint uncertainty after conditioning</span>
-<span class="n">Sigma_inv</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">solve</span><span class="p">(</span><span class="n">Sigma_known</span><span class="p">)</span>
-<span class="n">Sigma_0_inv</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">solve</span><span class="p">(</span><span class="n">Sigma_0</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Posterior computation using estimated covariances and prior mean beta_0</span>
+<span class="n">Sigma_inv</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">solve</span><span class="p">(</span><span class="n">Sigma_mle</span><span class="p">)</span>
+<span class="n">Sigma_0_inv</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">solve</span><span class="p">(</span><span class="n">Sigma_0_mle</span><span class="p">)</span>
 
-<span class="c1"># Joint posterior covariance (always smaller than prior - conditioning reduces uncertainty)</span>
+<span class="c1"># Posterior covariance (uncertainty always decreases)</span>
 <span class="n">Sigma_1_inv</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">T1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Sigma_inv</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Sigma_0_inv</span>
 <span class="n">Sigma_1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">solve</span><span class="p">(</span><span class="n">Sigma_1_inv</span><span class="p">)</span>
 
-<span class="c1"># Joint posterior mean (weighted combination of prior beliefs and data)</span>
-<span class="n">beta_1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Sigma_1</span><span class="w"> </span><span class="o">%*%</span><span class="w"> </span><span class="p">(</span><span class="n">T1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Sigma_inv</span><span class="w"> </span><span class="o">%*%</span><span class="w"> </span><span class="n">beta_hat_data</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Sigma_0_inv</span><span class="w"> </span><span class="o">%*%</span><span class="w"> </span><span class="n">beta_0</span><span class="p">)</span>
+<span class="c1"># Posterior mean (weighted combination of prior and data)</span>
+<span class="n">beta_1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Sigma_1</span><span class="w"> </span><span class="o">%*%</span><span class="w"> </span><span class="p">(</span><span class="n">T1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Sigma_inv</span><span class="w"> </span><span class="o">%*%</span><span class="w"> </span><span class="p">(</span><span class="n">T2</span><span class="o">/</span><span class="n">T1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Sigma_0_inv</span><span class="w"> </span><span class="o">%*%</span><span class="w"> </span><span class="n">beta_0</span><span class="p">)</span>
 
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Updated joint uncertainty after conditioning (posterior):\n&quot;</span><span class="p">)</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">Sigma_1</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">Sigma_1</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Height&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Weight&quot;</span><span class="p">)</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">beta_1</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Height&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Weight&quot;</span><span class="p">)</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\nPosterior Results:\n&quot;</span><span class="p">)</span>
 <span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Posterior mean vector (beta_1):\n&quot;</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="n">beta_1</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">))</span>
+<span class="nf">round</span><span class="p">(</span><span class="n">beta_1</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">)</span>
 <span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\nPosterior covariance matrix (Sigma_1):\n&quot;</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="n">Sigma_1</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">))</span>
+<span class="nf">round</span><span class="p">(</span><span class="n">Sigma_1</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">)</span>
 
-<span class="c1"># Check that uncertainty decreased</span>
 <span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\nUncertainty reduction:\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Prior uncertainty (marginal variances):&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="nf">diag</span><span class="p">(</span><span class="n">Sigma_0</span><span class="p">),</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Posterior uncertainty (marginal variances):&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="nf">diag</span><span class="p">(</span><span class="n">Sigma_1</span><span class="p">),</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Prior marginal variances:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="nf">diag</span><span class="p">(</span><span class="n">Sigma_0_mle</span><span class="p">),</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Posterior marginal variances:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="nf">diag</span><span class="p">(</span><span class="n">Sigma_1</span><span class="p">),</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Updated joint uncertainty after conditioning (posterior):
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Posterior Results:
 Posterior mean vector (beta_1):
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        [,1]
-Height 0.314
-Weight 0.075
-
-Posterior covariance matrix (Sigma_1):
-       Height Weight
-Height 0.1235 0.0618
-Weight 0.0618 0.1359
-
-Uncertainty reduction:
-Prior uncertainty (marginal variances): 0.25 0.25 
-Posterior uncertainty (marginal variances): 0.1235 0.1359 
+<div class="output text_html"><table class="dataframe">
+<caption>A matrix: 2 × 1 of type dbl</caption>
+<tbody>
+	<tr><th scope=row>Height</th><td>0.4236</td></tr>
+	<tr><th scope=row>Weight</th><td>0.2439</td></tr>
+</tbody>
+</table>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Posterior covariance matrix (Sigma_1):
+</pre></div>
+</div>
+<div class="output text_html"><table class="dataframe">
+<caption>A matrix: 2 × 2 of type dbl</caption>
+<thead>
+	<tr><th></th><th scope=col>Height</th><th scope=col>Weight</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>Height</th><td>0.0984</td><td>0.0662</td></tr>
+	<tr><th scope=row>Weight</th><td>0.0662</td><td>0.1021</td></tr>
+</tbody>
+</table>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Uncertainty reduction:
+Prior marginal variances: 0.25 0.25 
+Posterior marginal variances: 0.0984 0.1021 
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="interpretation-information-sharing-through-joint-uncertainty">
-<h3>Interpretation: Information Sharing Through Joint Uncertainty<a class="headerlink" href="#interpretation-information-sharing-through-joint-uncertainty" title="Link to this heading">#</a></h3>
-<p>The beauty of joint modeling is how information about one trait affects our uncertainty about another.</p>
+<section id="visualizing-the-bayesian-update">
+<h2>Visualizing the Bayesian Update<a class="headerlink" href="#visualizing-the-bayesian-update" title="Link to this heading">#</a></h2>
+<p>Let’s visualize how observing data updates our joint beliefs about both effects. We’ll show the prior and posterior distributions as contour ellipses in the two-dimensional parameter space.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compare with what we&#39;d get from independent analyses</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Comparison with independent analyses:\n&quot;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create visualization of prior and posterior distributions</span>
 
-<span class="c1"># Height analysis alone</span>
-<span class="n">var_height_indep</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">T1</span><span class="o">/</span><span class="n">Sigma_known</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="o">/</span><span class="n">Sigma_0</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">])</span>
-<span class="n">mean_height_indep</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">var_height_indep</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">T1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta_hat_data</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="o">/</span><span class="n">Sigma_known</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">])</span>
-
-<span class="c1"># Weight analysis alone  </span>
-<span class="n">var_weight_indep</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">T1</span><span class="o">/</span><span class="n">Sigma_known</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="o">/</span><span class="n">Sigma_0</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">])</span>
-<span class="n">mean_weight_indep</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">var_weight_indep</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">T1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta_hat_data</span><span class="p">[</span><span class="m">2</span><span class="p">]</span><span class="o">/</span><span class="n">Sigma_known</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">])</span>
-
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Independent analysis results:\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Height effect: mean =&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">mean_height_indep</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span>
-<span class="w">    </span><span class="s">&quot;, var =&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">var_height_indep</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Weight effect: mean =&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">mean_weight_indep</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span>
-<span class="w">    </span><span class="s">&quot;, var =&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">var_weight_indep</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
-
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\nJoint analysis results:\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Height effect: mean =&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">beta_1</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span>
-<span class="w">    </span><span class="s">&quot;, var =&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">Sigma_1</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Weight effect: mean =&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">beta_1</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span>
-<span class="w">    </span><span class="s">&quot;, var =&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">Sigma_1</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Comparison with independent analyses:
-Independent analysis results:
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Height effect: mean = 0.308 , var = 0.125 
-Weight effect: mean = 0.093 , var = 0.1364 
-
-Joint analysis results:
-Height effect: mean = 0.314 , var = 0.1235 
-Weight effect: mean = 0.075 , var = 0.1359 
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="supplementary">
-<h1>Supplementary<a class="headerlink" href="#supplementary" title="Link to this heading">#</a></h1>
-<section id="id1">
-<h2>Graphical Summary<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add this code after your existing genetic effects analysis</span>
-
-<span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">ellipse</span><span class="p">)</span>
-
-<span class="c1"># Set plot limits based on the data</span>
-<span class="n">xlim</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-1.8</span><span class="p">,</span><span class="w"> </span><span class="m">1.8</span><span class="p">)</span><span class="w">  </span><span class="c1"># Height effect range</span>
+<span class="c1"># Set plot limits</span>
+<span class="n">xlim</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-1.5</span><span class="p">,</span><span class="w"> </span><span class="m">1.5</span><span class="p">)</span><span class="w">  </span><span class="c1"># Height effect range</span>
 <span class="n">ylim</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-1.5</span><span class="p">,</span><span class="w"> </span><span class="m">1.5</span><span class="p">)</span><span class="w">  </span><span class="c1"># Weight effect range</span>
 
-<span class="c1"># Create multiple contour levels for gradient effect</span>
-<span class="n">contour_levels</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="m">0.1</span><span class="p">,</span><span class="w"> </span><span class="m">0.9</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.2</span><span class="p">)</span><span class="w">  </span><span class="c1"># Multiple levels for gradient</span>
+<span class="c1"># Create contour levels for confidence ellipses</span>
+<span class="n">contour_levels</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w"> </span><span class="m">0.95</span><span class="p">)</span>
 <span class="n">ellipse_data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">()</span>
 
 <span class="kr">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">contour_levels</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="c1"># Prior ellipse</span>
-<span class="w">  </span><span class="n">prior_ellipse</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ellipse</span><span class="p">(</span><span class="n">Sigma_0</span><span class="p">,</span><span class="w"> </span><span class="n">centre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">beta_0</span><span class="p">,</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">contour_levels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="w">  </span><span class="n">prior_ellipse</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ellipse</span><span class="p">(</span><span class="n">Sigma_0_mle</span><span class="p">,</span><span class="w"> </span><span class="n">centre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">beta_0</span><span class="p">,</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">contour_levels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 <span class="w">  </span><span class="n">prior_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prior_ellipse</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prior_ellipse</span><span class="p">[,</span><span class="m">2</span><span class="p">],</span><span class="w"> </span>
 <span class="w">                        </span><span class="n">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">contour_levels</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Prior&quot;</span><span class="p">,</span>
-<span class="w">                        </span><span class="n">alpha_val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">contour_levels</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w">  </span><span class="c1"># Reverse alpha: higher density = darker</span>
-<span class="w">                        </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Prior&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">))</span><span class="w">  </span><span class="c1"># Add group to separate ellipses</span>
+<span class="w">                        </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Prior&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">))</span>
 <span class="w">  </span>
 <span class="w">  </span><span class="c1"># Posterior ellipse</span>
-<span class="w">  </span><span class="n">post_ellipse</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ellipse</span><span class="p">(</span><span class="n">Sigma_1</span><span class="p">,</span><span class="w"> </span><span class="n">centre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">beta_1</span><span class="p">,</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">contour_levels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="w">  </span><span class="n">post_ellipse</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ellipse</span><span class="p">(</span><span class="n">Sigma_1</span><span class="p">,</span><span class="w"> </span><span class="n">centre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">as.vector</span><span class="p">(</span><span class="n">beta_1</span><span class="p">),</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">contour_levels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 <span class="w">  </span><span class="n">post_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">post_ellipse</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">post_ellipse</span><span class="p">[,</span><span class="m">2</span><span class="p">],</span><span class="w"> </span>
 <span class="w">                       </span><span class="n">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">contour_levels</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Posterior&quot;</span><span class="p">,</span>
-<span class="w">                       </span><span class="n">alpha_val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">contour_levels</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w">  </span><span class="c1"># Reverse alpha: higher density = darker</span>
-<span class="w">                       </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Posterior&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">))</span><span class="w">  </span><span class="c1"># Add group to separate ellipses</span>
+<span class="w">                       </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Posterior&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">))</span>
 <span class="w">  </span>
 <span class="w">  </span><span class="n">ellipse_data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rbind</span><span class="p">(</span><span class="n">ellipse_data</span><span class="p">,</span><span class="w"> </span><span class="n">prior_df</span><span class="p">,</span><span class="w"> </span><span class="n">post_df</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="c1"># Create the plot</span>
 <span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="c1"># Gradient contour lines (using alpha for fade effect and group to prevent connections)</span>
+<span class="w">  </span><span class="c1"># Contour ellipses</span>
 <span class="w">  </span><span class="nf">geom_path</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ellipse_data</span><span class="p">,</span><span class="w"> </span>
-<span class="w">            </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpha_val</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">group</span><span class="p">),</span><span class="w"> </span>
-<span class="w">            </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">            </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">group</span><span class="p">),</span><span class="w"> </span>
+<span class="w">            </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span>
 <span class="w">  </span><span class="c1"># Mean points</span>
-<span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">beta_0</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">beta_0</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Prior&quot;</span><span class="p">),</span><span class="w"> </span>
-<span class="w">             </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Prior&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">beta_1</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">beta_1</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Posterior&quot;</span><span class="p">),</span><span class="w"> </span>
-<span class="w">             </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Posterior&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">true_beta</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">true_beta</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;True&quot;</span><span class="p">),</span><span class="w"> </span>
-<span class="w">             </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;True&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;darkgreen&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">beta_0</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">beta_0</span><span class="p">[</span><span class="m">2</span><span class="p">]),</span><span class="w"> </span>
+<span class="w">             </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;tomato&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">beta_1</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">beta_1</span><span class="p">[</span><span class="m">2</span><span class="p">]),</span><span class="w"> </span>
+<span class="w">             </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;darkgreen&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">  </span>
+
+<span class="w">  </span><span class="c1"># True effect point</span>
+<span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">true_beta</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">true_beta</span><span class="p">[</span><span class="m">2</span><span class="p">]),</span><span class="w"> </span>
+<span class="w">             </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="c1"># shape 8 is a star</span>
 <span class="w">  </span>
-<span class="w">  </span><span class="c1"># Color and shape scales</span>
-<span class="w">  </span><span class="nf">scale_color_manual</span><span class="p">(</span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Prior&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Posterior&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Distribution&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">scale_shape_manual</span><span class="p">(</span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Prior&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Posterior&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;True&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18</span><span class="p">),</span><span class="w"> </span>
-<span class="w">                     </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Parameter&quot;</span><span class="p">,</span>
-<span class="w">                     </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Prior Mean&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Posterior Mean&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;True Effects&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">scale_alpha_identity</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">  </span><span class="c1"># Use alpha values directly</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">expression</span><span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="n">a</span><span class="p">]),</span><span class="w"> </span>
-<span class="w">       </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">expression</span><span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="n">b</span><span class="p">]))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="c1"># Scales and labels</span>
+<span class="w">  </span><span class="nf">scale_color_manual</span><span class="p">(</span>
+<span class="w">    </span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Prior&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;tomato&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Posterior&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;darkgreen&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Prior&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Posterior&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">scale_linetype_manual</span><span class="p">(</span>
+<span class="w">    </span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Prior&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dashed&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Posterior&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;solid&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Prior&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Posterior&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">expression</span><span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="n">a</span><span class="p">]</span><span class="o">~</span><span class="s">&quot;(Effect on Height)&quot;</span><span class="p">),</span><span class="w"> </span>
+<span class="w">       </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">expression</span><span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">~</span><span class="s">&quot;(Effect on Weight)&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
 <span class="w">  </span><span class="nf">xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">ylim</span><span class="p">(</span><span class="n">ylim</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">theme_minimal</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="c1"># Theme</span>
+<span class="w">  </span><span class="nf">theme_minimal</span><span class="p">(</span><span class="n">base_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
 <span class="w">  </span><span class="nf">theme</span><span class="p">(</span>
-<span class="w">    </span><span class="c1"># Font styling</span>
-<span class="w">    </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">),</span>
-<span class="w">    </span><span class="n">axis.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">),</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="c1"># Customize grid and axes</span>
-<span class="w">    </span><span class="n">panel.grid.major</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_line</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;gray&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dotted&quot;</span><span class="p">),</span>
-<span class="w">    </span><span class="n">panel.grid.minor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">(),</span>
-<span class="w">    </span><span class="n">axis.line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_line</span><span class="p">(</span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">),</span>
-<span class="w">    </span><span class="n">axis.ticks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_line</span><span class="p">(</span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">),</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="c1"># Transparent background</span>
+<span class="w">    </span><span class="n">axis.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">axis.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">legend.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">(),</span>
+<span class="w">    </span><span class="n">legend.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">legend.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bottom&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="n">panel.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">),</span>
 <span class="w">    </span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">),</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="c1"># Legend styling</span>
-<span class="w">    </span><span class="n">legend.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;right&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="n">legend.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">),</span>
-<span class="w">    </span><span class="n">legend.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">)</span>
-<span class="w">  </span><span class="p">)</span>
+<span class="w">    </span><span class="n">panel.grid.major</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_line</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;gray90&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">panel.grid.minor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">()</span>
+<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">guides</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">guide_legend</span><span class="p">(</span><span class="n">override.aes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)))</span>
 
-<span class="c1"># Show and save plot</span>
-<span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="n">repr.plot.height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">)</span>
+<span class="c1"># Display plot</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;./cartoons/Bayesian_multivariate_normal_mean_model.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">,</span>
-<span class="w">       </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/fcdfdaf2e0f4353b3975c5960e2620c971e82e68fa7502c3dd333113037e15d4.png"><img alt="_images/fcdfdaf2e0f4353b3975c5960e2620c971e82e68fa7502c3dd333113037e15d4.png" src="_images/fcdfdaf2e0f4353b3975c5960e2620c971e82e68fa7502c3dd333113037e15d4.png" style="width: 480px; height: 360px;" />
+<a class="reference internal image-reference" href="_images/b22e50e7cfee2bbdff243cb15f9059c3077a04d60a90d14bf9846de98cee08c3.png"><img alt="_images/b22e50e7cfee2bbdff243cb15f9059c3077a04d60a90d14bf9846de98cee08c3.png" src="_images/b22e50e7cfee2bbdff243cb15f9059c3077a04d60a90d14bf9846de98cee08c3.png" style="width: 420px; height: 420px;" />
 </a>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Bayesian Bivariate Normal Mean Model Visualization</span>
-<span class="c1"># This code illustrates Bayesian inference for estimating the mean of a bivariate normal distribution</span>
-
-<span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">mvtnorm</span><span class="p">)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">gridExtra</span><span class="p">)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">viridis</span><span class="p">)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">ellipse</span><span class="p">)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
-
-<span class="nf">set.seed</span><span class="p">(</span><span class="m">123</span><span class="p">)</span>
-
-<span class="c1"># =============================================================================</span>
-<span class="c1"># 1. SETUP: Define true parameters and generate data</span>
-<span class="c1"># =============================================================================</span>
-
-<span class="c1"># True parameters (unknown in practice)</span>
-<span class="n">true_mean</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">)</span>
-<span class="n">true_cov</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
-
-<span class="c1"># Generate observed data</span>
-<span class="n">n</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">30</span>
-<span class="n">data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rmvnorm</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">true_mean</span><span class="p">,</span><span class="w"> </span><span class="n">sigma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">true_cov</span><span class="p">)</span>
-<span class="nf">colnames</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;X1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;X2&quot;</span><span class="p">)</span>
-
-<span class="c1"># Sample statistics</span>
-<span class="n">sample_mean</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">colMeans</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Sample mean:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">sample_mean</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
-
-<span class="c1"># =============================================================================</span>
-<span class="c1"># 2. BAYESIAN SETUP</span>
-<span class="c1"># =============================================================================</span>
-
-<span class="c1"># Prior specification (conjugate prior for bivariate normal mean)</span>
-<span class="c1"># Assume known covariance matrix (true_cov) for simplicity</span>
-<span class="n">prior_mean</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w">  </span><span class="c1"># Prior belief about the mean</span>
-<span class="n">prior_cov</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">  </span><span class="c1"># Prior uncertainty</span>
-
-<span class="c1"># Posterior parameters (conjugate update)</span>
-<span class="c1"># Posterior precision = Prior precision + Data precision</span>
-<span class="n">prior_precision</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">solve</span><span class="p">(</span><span class="n">prior_cov</span><span class="p">)</span>
-<span class="n">data_precision</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">solve</span><span class="p">(</span><span class="n">true_cov</span><span class="p">)</span>
-<span class="n">posterior_precision</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">prior_precision</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">data_precision</span>
-<span class="n">posterior_cov</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">solve</span><span class="p">(</span><span class="n">posterior_precision</span><span class="p">)</span>
-
-<span class="c1"># Posterior mean</span>
-<span class="n">posterior_mean</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">posterior_cov</span><span class="w"> </span><span class="o">%*%</span><span class="w"> </span><span class="p">(</span><span class="n">prior_precision</span><span class="w"> </span><span class="o">%*%</span><span class="w"> </span><span class="n">prior_mean</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">data_precision</span><span class="w"> </span><span class="o">%*%</span><span class="w"> </span><span class="n">sample_mean</span><span class="p">)</span>
-
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Prior mean:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">prior_mean</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Posterior mean:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">posterior_mean</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;True mean:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">true_mean</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
-
-<span class="c1"># =============================================================================</span>
-<span class="c1"># 3. VISUALIZATION FUNCTIONS</span>
-<span class="c1"># =============================================================================</span>
-
-<span class="c1"># Function to create contour data for bivariate normal</span>
-<span class="n">create_contour_data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">mean_vec</span><span class="p">,</span><span class="w"> </span><span class="n">cov_mat</span><span class="p">,</span><span class="w"> </span><span class="n">xlim</span><span class="p">,</span><span class="w"> </span><span class="n">ylim</span><span class="p">,</span><span class="w"> </span><span class="n">grid_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="n">xlim</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">xlim</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">length.out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grid_size</span><span class="p">)</span>
-<span class="w">  </span><span class="n">y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="n">ylim</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">ylim</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">length.out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grid_size</span><span class="p">)</span>
-<span class="w">  </span><span class="n">grid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">expand.grid</span><span class="p">(</span><span class="n">X1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">X2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="n">density</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">dmvnorm</span><span class="p">(</span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">grid</span><span class="p">),</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean_vec</span><span class="p">,</span><span class="w"> </span><span class="n">sigma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cov_mat</span><span class="p">)</span>
-<span class="w">  </span><span class="n">grid</span><span class="o">$</span><span class="n">density</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">density</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="kr">return</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="c1"># Set plotting limits</span>
-<span class="n">xlim</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-4</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">)</span>
-<span class="n">ylim</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-2</span><span class="p">,</span><span class="w"> </span><span class="m">7</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;./figures/Bayesian_multivariate_normal_mean_model.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">,</span>
+<span class="w">       </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading required package: viridisLite
-
-
-Attaching package: &#39;dplyr&#39;
-
-
-The following object is masked from &#39;package:gridExtra&#39;:
-
-    combine
-
-
-The following object is masked from &#39;package:MASS&#39;:
-
-    select
-
-
-The following objects are masked from &#39;package:stats&#39;:
-
-    filter, lag
-
-
-The following objects are masked from &#39;package:base&#39;:
-
-    intersect, setdiff,
-    setequal, union
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample mean: 2.046 3.155 
-Prior mean: 0 0 
-Posterior mean: 2.016 3.095 
-True mean: 2 3 
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># =============================================================================</span>
-<span class="c1"># 4. CREATE VISUALIZATIONS</span>
-<span class="c1"># =============================================================================</span>
-
-<span class="c1"># Plot 1: Data scatter plot with true mean</span>
-<span class="n">p1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="nf">data.frame</span><span class="p">(</span><span class="n">data</span><span class="p">),</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X1</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X2</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;steelblue&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">X1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">true_mean</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">X2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">true_mean</span><span class="p">[</span><span class="m">2</span><span class="p">]),</span><span class="w"> </span>
-<span class="w">             </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X1</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X2</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">X1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sample_mean</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">X2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sample_mean</span><span class="p">[</span><span class="m">2</span><span class="p">]),</span><span class="w"> </span>
-<span class="w">             </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X1</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X2</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;darkgreen&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">17</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Observed Data&quot;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">       </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Red: True mean, Green: Sample mean&quot;</span><span class="p">,</span>
-<span class="w">       </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;X₁&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;X₂&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">ylim</span><span class="p">(</span><span class="n">ylim</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">theme_minimal</span><span class="p">()</span>
-<span class="w">  </span><span class="n">p1</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/a2fac039913079988ece77d22a7d3834083ae93570d22169c380f97179c916bf.png"><img alt="_images/a2fac039913079988ece77d22a7d3834083ae93570d22169c380f97179c916bf.png" src="_images/a2fac039913079988ece77d22a7d3834083ae93570d22169c380f97179c916bf.png" style="width: 420px; height: 420px;" />
-</a>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot 2: Prior distribution</span>
-<span class="n">prior_grid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">create_contour_data</span><span class="p">(</span><span class="n">prior_mean</span><span class="p">,</span><span class="w"> </span><span class="n">prior_cov</span><span class="p">,</span><span class="w"> </span><span class="n">xlim</span><span class="p">,</span><span class="w"> </span><span class="n">ylim</span><span class="p">)</span>
-<span class="n">p2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">prior_grid</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X1</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X2</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">density</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">geom_contour_filled</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w"> </span><span class="n">bins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">X1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prior_mean</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">X2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prior_mean</span><span class="p">[</span><span class="m">2</span><span class="p">]),</span><span class="w"> </span>
-<span class="w">             </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X1</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X2</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;white&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18</span><span class="p">,</span><span class="w"> </span><span class="n">inherit.aes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">scale_fill_viridis_d</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Density&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Prior Distribution&quot;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">       </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Pi(beta) ~ N(0, 4I)&quot;</span><span class="p">,</span>
-<span class="w">       </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;beta_a&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;beta_b&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">ylim</span><span class="p">(</span><span class="n">ylim</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">theme_minimal</span><span class="p">()</span>
-<span class="n">p2</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/304bdad9ee6720a63e7c122bf397a39ba797e5b45c943f653dff0b99c4dd4552.png"><img alt="_images/304bdad9ee6720a63e7c122bf397a39ba797e5b45c943f653dff0b99c4dd4552.png" src="_images/304bdad9ee6720a63e7c122bf397a39ba797e5b45c943f653dff0b99c4dd4552.png" style="width: 420px; height: 420px;" />
-</a>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot 3: Likelihood function (centered at sample mean)</span>
-<span class="n">likelihood_cov</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">true_cov</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">n</span><span class="w">  </span><span class="c1"># Standard error of sample mean</span>
-<span class="n">likelihood_grid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">create_contour_data</span><span class="p">(</span><span class="n">sample_mean</span><span class="p">,</span><span class="w"> </span><span class="n">likelihood_cov</span><span class="p">,</span><span class="w"> </span><span class="n">xlim</span><span class="p">,</span><span class="w"> </span><span class="n">ylim</span><span class="p">)</span>
-<span class="n">p3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">likelihood_grid</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X1</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X2</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">density</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">geom_contour_filled</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w"> </span><span class="n">bins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">X1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sample_mean</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">X2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sample_mean</span><span class="p">[</span><span class="m">2</span><span class="p">]),</span><span class="w"> </span>
-<span class="w">             </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X1</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X2</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;white&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">17</span><span class="p">,</span><span class="w"> </span><span class="n">inherit.aes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">scale_fill_viridis_d</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Likelihood&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Likelihood Function&quot;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="c1">#    subtitle = &quot;L(μ|data) ∝ exp(-½n(μ-x̄)ᵀΣ⁻¹(μ-x̄))&quot;,</span>
-<span class="w">       </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;beta_a&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;beta_b&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">ylim</span><span class="p">(</span><span class="n">ylim</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">theme_minimal</span><span class="p">()</span>
-<span class="n">p3</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/94cc9f8f94016d6d509ad8b61925ffbcf8afad8ea1accf5de854c45c87b86130.png"><img alt="_images/94cc9f8f94016d6d509ad8b61925ffbcf8afad8ea1accf5de854c45c87b86130.png" src="_images/94cc9f8f94016d6d509ad8b61925ffbcf8afad8ea1accf5de854c45c87b86130.png" style="width: 420px; height: 420px;" />
-</a>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">posterior_grid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">create_contour_data</span><span class="p">(</span><span class="n">posterior_mean</span><span class="p">,</span><span class="w"> </span><span class="n">posterior_cov</span><span class="p">,</span><span class="w"> </span><span class="n">xlim</span><span class="p">,</span><span class="w"> </span><span class="n">ylim</span><span class="p">)</span>
-<span class="n">p4</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">posterior_grid</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X1</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X2</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">density</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">geom_contour_filled</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w"> </span><span class="n">bins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">X1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">posterior_mean</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">X2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">posterior_mean</span><span class="p">[</span><span class="m">2</span><span class="p">]),</span><span class="w"> </span>
-<span class="w">             </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X1</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X2</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;white&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18</span><span class="p">,</span><span class="w"> </span><span class="n">inherit.aes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">X1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">true_mean</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">X2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">true_mean</span><span class="p">[</span><span class="m">2</span><span class="p">]),</span><span class="w"> </span>
-<span class="w">             </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X1</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X2</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">inherit.aes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">scale_fill_viridis_d</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Density&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Posterior Distribution&quot;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">       </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;pi(beta|data) is proportion to pi(beta) × L(beta|data)\nWhite: Posterior mean, Red: True mean&quot;</span><span class="p">,</span>
-<span class="w">       </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;beta_a&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;beta_b&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">ylim</span><span class="p">(</span><span class="n">ylim</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">theme_minimal</span><span class="p">()</span>
-<span class="n">p4</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/fc38f6e328d91755a2a205140fe1ee955e58dd659d4dbd2280c99cf35a70a470.png"><img alt="_images/fc38f6e328d91755a2a205140fe1ee955e58dd659d4dbd2280c99cf35a70a470.png" src="_images/fc38f6e328d91755a2a205140fe1ee955e58dd659d4dbd2280c99cf35a70a470.png" style="width: 420px; height: 420px;" />
-</a>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create confidence ellipses</span>
-<span class="n">conf_levels</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="m">0.95</span><span class="p">)</span>
-<span class="n">colors</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">)</span>
-<span class="n">ellipse_data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">()</span>
-
-<span class="kr">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">conf_levels</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="c1"># Prior ellipse</span>
-<span class="w">  </span><span class="n">prior_ellipse</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ellipse</span><span class="p">(</span><span class="n">prior_cov</span><span class="p">,</span><span class="w"> </span><span class="n">centre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prior_mean</span><span class="p">,</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">conf_levels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-<span class="w">  </span><span class="n">prior_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">prior_ellipse</span><span class="p">,</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">conf_levels</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Prior&quot;</span><span class="p">)</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1"># Posterior ellipse</span>
-<span class="w">  </span><span class="n">post_ellipse</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ellipse</span><span class="p">(</span><span class="n">posterior_cov</span><span class="p">,</span><span class="w"> </span><span class="n">centre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">posterior_mean</span><span class="p">,</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">conf_levels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-<span class="w">  </span><span class="n">post_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">post_ellipse</span><span class="p">,</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">conf_levels</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Posterior&quot;</span><span class="p">)</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="n">ellipse_data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rbind</span><span class="p">(</span><span class="n">ellipse_data</span><span class="p">,</span><span class="w"> </span><span class="n">prior_df</span><span class="p">,</span><span class="w"> </span><span class="n">post_df</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="n">p5</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="c1"># Data points</span>
-<span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">data</span><span class="p">),</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X1</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X2</span><span class="p">),</span><span class="w"> </span>
-<span class="w">             </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.6</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;gray50&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="c1"># Confidence ellipses</span>
-<span class="w">  </span><span class="nf">geom_path</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ellipse_data</span><span class="p">,</span><span class="w"> </span>
-<span class="w">            </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">factor</span><span class="p">(</span><span class="n">level</span><span class="p">)),</span><span class="w"> </span>
-<span class="w">            </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="c1"># Mean points</span>
-<span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">X1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prior_mean</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">X2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prior_mean</span><span class="p">[</span><span class="m">2</span><span class="p">]),</span><span class="w"> </span>
-<span class="w">             </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X1</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X2</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">X1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">posterior_mean</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">X2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">posterior_mean</span><span class="p">[</span><span class="m">2</span><span class="p">]),</span><span class="w"> </span>
-<span class="w">             </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X1</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X2</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">X1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">true_mean</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">X2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">true_mean</span><span class="p">[</span><span class="m">2</span><span class="p">]),</span><span class="w"> </span>
-<span class="w">             </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X1</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X2</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;black&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">scale_color_manual</span><span class="p">(</span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Prior&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Posterior&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">scale_linetype_manual</span><span class="p">(</span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;0.5&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;solid&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;0.95&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dashed&quot;</span><span class="p">),</span>
-<span class="w">                       </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;50%&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;95%&quot;</span><span class="p">),</span>
-<span class="w">                       </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Confidence&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Bayesian Learning: Prior to Posterior&quot;</span><span class="p">,</span>
-<span class="w">       </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Diamonds: Prior/Posterior means, Cross: True mean&quot;</span><span class="p">,</span>
-<span class="w">       </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;μ₁&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;μ₂&quot;</span><span class="p">,</span>
-<span class="w">       </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Distribution&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">ylim</span><span class="p">(</span><span class="n">ylim</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">theme_minimal</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">theme</span><span class="p">(</span><span class="n">legend.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bottom&quot;</span><span class="p">)</span>
-
-<span class="nf">print</span><span class="p">(</span><span class="n">p5</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message:
-&quot;Using `size` aesthetic for
-lines was deprecated in
-ggplot2 3.4.0.
-<span class=" -Color -Color-Cyan">i</span> Please use `linewidth`
-  instead.&quot;
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/aecf2c8e15d4352224aca38d7d8b8276a8b467d8740b240aad5ec64efc49a26c.png"><img alt="_images/aecf2c8e15d4352224aca38d7d8b8276a8b467d8740b240aad5ec64efc49a26c.png" src="_images/aecf2c8e15d4352224aca38d7d8b8276a8b467d8740b240aad5ec64efc49a26c.png" style="width: 420px; height: 420px;" />
-</a>
 </div>
 </div>
 </section>
@@ -1538,39 +1191,26 @@ ggplot2 3.4.0.
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Bayesian Multivariate Normal Mean Model</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-summary">Graphical Summary</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-form">General Form</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-effects-meta-analysis">Random Effects Meta-Analysis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fixed-effects-meta-analysis">Fixed Effects Meta-Analysis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trait-specific-effects">Trait-Specific Effects</a></li>
-</ul>
-</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bayesian-perspective-joint-uncertainty">The Bayesian Perspective: Joint Uncertainty</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-assumptions">Model Assumptions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prior-distribution-joint-uncertainty">Prior Distribution: Joint Uncertainty</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#likelihood-what-we-can-condition-on">Likelihood: What We Can Condition On</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-distribution-updated-joint-uncertainty">Posterior Distribution: Updated Joint Uncertainty</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-as-weighted-combination">Interpretation as Weighted Combination</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-cases-of-the-bivariate-model">Special Cases of the Bivariate Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-setup">Model Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prior-distribution">Prior Distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#likelihood">Likelihood</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-distribution">Posterior Distribution</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-as-weighted-combination">Posterior as Weighted Combination</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generalization-to-multivariate-case">Generalization to Multivariate Case</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-to-p-dimensions">Extension to <span class="math notranslate nohighlight">\(p\)</span> Dimensions</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-simulated-data">Generate Simulated Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-multivariate-model-setup">Bayesian Multivariate Model Setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-the-multivariate-posterior-by-conditioning-on-data">Calculate the Multivariate Posterior by Conditioning on Data</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sufficient-statistics">Sufficient Statistics</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-formulas">Posterior Formulas</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-information-sharing-through-joint-uncertainty">Interpretation: Information Sharing Through Joint Uncertainty</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#supplementary">Supplementary</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Graphical Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Prior Distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-covariance-matrices">Estimating the Covariance Matrices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Posterior Distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-bayesian-update">Visualizing the Bayesian Update</a></li>
 </ul>
 </li>
 </ul>

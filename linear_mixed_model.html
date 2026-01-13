@@ -330,7 +330,6 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="likelihood_ratio.html">Likelihood Ratio</a></li>
 
 
@@ -355,14 +354,13 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="Bayes_factor.html">Bayes Factor</a></li>
 
 
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="p_value_and_Bayesian_hypothesis_testing.html">p-value and Bayesian Hypothesis Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p_value_and_Bayesian_hypothesis_testing.html"><span class="math notranslate nohighlight">\(p\)</span>-value and Bayesian Hypothesis Testing</a></li>
 
 
 
@@ -379,9 +377,7 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="Bayesian_multivariate_normal_mean_model.html">Bayesian Multivariate Normal Mean Model</a></li>
-
 
 
 
@@ -391,7 +387,6 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Multiple Bayesian Models</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Bayesian_model_comparison.html">Bayesian Model Comparison</a></li>
-
 
 
 
@@ -585,7 +580,12 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Linear Mixed Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-pve">Estimating PVE</a></li>
+</ul>
+</li>
 </ul>
 
             </nav>
@@ -705,6 +705,8 @@ document.write(`
 <h1>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
 <p>What happens when we acknowledge that our trait is influenced not just by one specific variant, but also by a “genetic background” from all the other variants we’re not explicitly testing? Let’s see how linear mixed models capture this reality.</p>
 <p>We’ll use the same 5 individuals, but now we’ll model two sources of genetic influence: a fixed effect from one specific variant we’re studying, plus a random polygenic effect that represents the combined influence of all variants acting as genetic background. How much does each component contribute to the total genetic influence on our trait?</p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clear the environment</span>
@@ -749,6 +751,9 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
+<section id="id1">
+<h2>Linear Mixed Model<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <p>We generate the data according to a linear mixed model:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -797,6 +802,9 @@ document.write(`
 </table>
 </div></div>
 </div>
+</section>
+<section id="estimating-pve">
+<h2>Estimating PVE<a class="headerlink" href="#estimating-pve" title="Link to this heading">#</a></h2>
 <p>We can estimate the PVE again by each component:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -840,6 +848,7 @@ PVE_total = 0.6073
 </div>
 </div>
 <p>Note that the same framework applies when the genetic effect <span class="math notranslate nohighlight">\(\beta\)</span> is modeled as a random effect rather than fixed.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -915,7 +924,12 @@ PVE_total = 0.6073
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Linear Mixed Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-pve">Estimating PVE</a></li>
+</ul>
+</li>
 </ul>
 
   </nav></div>

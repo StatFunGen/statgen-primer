@@ -330,7 +330,6 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="likelihood_ratio.html">Likelihood Ratio</a></li>
 
 
@@ -355,14 +354,13 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="Bayes_factor.html">Bayes Factor</a></li>
 
 
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="p_value_and_Bayesian_hypothesis_testing.html">p-value and Bayesian Hypothesis Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p_value_and_Bayesian_hypothesis_testing.html"><span class="math notranslate nohighlight">\(p\)</span>-value and Bayesian Hypothesis Testing</a></li>
 
 
 
@@ -379,9 +377,7 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="Bayesian_multivariate_normal_mean_model.html">Bayesian Multivariate Normal Mean Model</a></li>
-
 
 
 
@@ -391,7 +387,6 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Multiple Bayesian Models</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Bayesian_model_comparison.html">Bayesian Model Comparison</a></li>
-
 
 
 
@@ -587,7 +582,14 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-in-each-population">Regression in Each Population</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#meta-analysis">Meta-analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merging-populations">Merging Populations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-of-results">Comparison of Results</a></li>
+</ul>
+</li>
 </ul>
 
             </nav>
@@ -663,12 +665,13 @@ w_k = \frac{1}{\text{SE}_k^2}
 <section class="tex2jax_ignore mathjax_ignore" id="example">
 <h1>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
 <p>This example demonstrates fixed-effects meta-analysis for a single genetic variant across two cohorts (N=5,000 and N=8,000). We combine effect estimates using inverse-variance weighting and compare the meta-analysis result to a pooled analysis of all individuals.</p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="o">=</span><span class="nf">ls</span><span class="p">())</span>
 <span class="nf">set.seed</span><span class="p">(</span><span class="m">17</span><span class="p">)</span>
 
-<span class="c1"># 1. Simulate genotype data (0/1/2) for a single SNP</span>
 <span class="n">N1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">5000</span>
 <span class="n">N2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">8000</span>
 <span class="n">maf1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.3</span>
@@ -690,10 +693,12 @@ w_k = \frac{1}{\text{SE}_k^2}
 </div>
 </div>
 </div>
+</section>
+<section id="regression-in-each-population">
+<h2>Regression in Each Population<a class="headerlink" href="#regression-in-each-population" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># 3. Run regression in each population</span>
-<span class="n">lm_pop1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">y_pop1</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">variant_pop1</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">lm_pop1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">y_pop1</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">variant_pop1</span><span class="p">)</span>
 <span class="n">lm_pop2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">y_pop2</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">variant_pop2</span><span class="p">)</span>
 
 <span class="c1"># Extract summary statistics</span>
@@ -706,22 +711,18 @@ w_k = \frac{1}{\text{SE}_k^2}
 </div>
 </div>
 </div>
+</section>
+<section id="meta-analysis">
+<h2>Meta-analysis<a class="headerlink" href="#meta-analysis" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># 4. Fixed-effect meta-analysis using inverse-variance weighting</span>
-<span class="n">w1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">se_pop1</span><span class="o">^</span><span class="m">2</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">w1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">se_pop1</span><span class="o">^</span><span class="m">2</span>
 <span class="n">w2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">se_pop2</span><span class="o">^</span><span class="m">2</span>
 
 <span class="n">beta_meta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="n">beta_pop1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">w1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">beta_pop2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">w2</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">w1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">w2</span><span class="p">)</span>
 <span class="n">se_meta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">w1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">w2</span><span class="p">))</span>
 <span class="n">z_meta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">beta_meta</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">se_meta</span>
 <span class="n">p_meta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">pnorm</span><span class="p">(</span><span class="o">-</span><span class="nf">abs</span><span class="p">(</span><span class="n">z_meta</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">Error</span>: object &#39;se_pop1&#39; not found
-<span class="ne">Traceback</span>:
 </pre></div>
 </div>
 </div>
@@ -736,22 +737,24 @@ w_k = \frac{1}{\text{SE}_k^2}
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="dataframe">
-<caption>A data.frame: 1 x 4</caption>
+<caption>A data.frame: 1 × 4</caption>
 <thead>
 	<tr><th scope=col>beta_meta</th><th scope=col>se_meta</th><th scope=col>z_meta</th><th scope=col>p_meta</th></tr>
 	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
 </thead>
 <tbody>
-	<tr><td>1.015251</td><td>0.04011815</td><td>25.30654</td><td>2.706622e-141</td></tr>
+	<tr><td>1.004472</td><td>0.04011568</td><td>25.03938</td><td>2.278672e-138</td></tr>
 </tbody>
 </table>
 </div></div>
 </div>
+</section>
+<section id="merging-populations">
+<h2>Merging Populations<a class="headerlink" href="#merging-populations" title="Link to this heading">#</a></h2>
 <p>Alternatively we can simply combine all individuals into one and calculate the summary statistics for this variant.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># 5. Pooled analysis</span>
-<span class="n">variant_all</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">variant_pop1</span><span class="p">,</span><span class="w"> </span><span class="n">variant_pop2</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">variant_all</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">variant_pop1</span><span class="p">,</span><span class="w"> </span><span class="n">variant_pop2</span><span class="p">)</span>
 <span class="n">y_all</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">y_pop1</span><span class="p">,</span><span class="w"> </span><span class="n">y_pop2</span><span class="p">)</span>
 
 <span class="n">lm_all</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">y_all</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">variant_all</span><span class="p">)</span>
@@ -773,50 +776,52 @@ w_k = \frac{1}{\text{SE}_k^2}
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="dataframe">
-<caption>A data.frame: 1 x 4</caption>
+<caption>A data.frame: 1 × 4</caption>
 <thead>
 	<tr><th scope=col>beta_all</th><th scope=col>se_all</th><th scope=col>z_all</th><th scope=col>p_all</th></tr>
 	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
 </thead>
 <tbody>
-	<tr><td>1.013051</td><td>0.03998501</td><td>25.33578</td><td>1.289396e-141</td></tr>
+	<tr><td>1.002556</td><td>0.03998447</td><td>25.07364</td><td>9.644327e-139</td></tr>
 </tbody>
 </table>
 </div></div>
 </div>
+</section>
+<section id="comparison-of-results">
+<h2>Comparison of Results<a class="headerlink" href="#comparison-of-results" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># 6. Compare results</span>
-
-<span class="n">res_meta</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">res_meta</span>
 <span class="n">res_merged</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="dataframe">
-<caption>A data.frame: 1 x 4</caption>
+<caption>A data.frame: 1 × 4</caption>
 <thead>
 	<tr><th scope=col>beta_meta</th><th scope=col>se_meta</th><th scope=col>z_meta</th><th scope=col>p_meta</th></tr>
 	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
 </thead>
 <tbody>
-	<tr><td>1.015251</td><td>0.04011815</td><td>25.30654</td><td>2.706622e-141</td></tr>
+	<tr><td>1.004472</td><td>0.04011568</td><td>25.03938</td><td>2.278672e-138</td></tr>
 </tbody>
 </table>
 </div><div class="output text_html"><table class="dataframe">
-<caption>A data.frame: 1 x 4</caption>
+<caption>A data.frame: 1 × 4</caption>
 <thead>
 	<tr><th scope=col>beta_all</th><th scope=col>se_all</th><th scope=col>z_all</th><th scope=col>p_all</th></tr>
 	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
 </thead>
 <tbody>
-	<tr><td>1.013051</td><td>0.03998501</td><td>25.33578</td><td>1.289396e-141</td></tr>
+	<tr><td>1.002556</td><td>0.03998447</td><td>25.07364</td><td>9.644327e-139</td></tr>
 </tbody>
 </table>
 </div></div>
 </div>
 <p>The meta-analysis (<span class="math notranslate nohighlight">\(\hat{\beta} = 1.015\)</span>, SE = 0.040) and pooled analysis (<span class="math notranslate nohighlight">\(\hat{\beta} = 1.013\)</span>, SE = 0.040) yield nearly identical results (after numerical rounding), confirming that fixed-effects meta-analysis is mathematically equivalent to analyzing all individuals together when the true effect is the same across studies.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -894,7 +899,14 @@ w_k = \frac{1}{\text{SE}_k^2}
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-in-each-population">Regression in Each Population</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#meta-analysis">Meta-analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merging-populations">Merging Populations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-of-results">Comparison of Results</a></li>
+</ul>
+</li>
 </ul>
 
   </nav></div>

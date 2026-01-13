@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>p-value and Bayesian Hypothesis Testing &#8212; Statistical backgrounds for genetics trainees</title>
+    <title>\(p\)-value and Bayesian Hypothesis Testing &#8212; Statistical backgrounds for genetics trainees</title>
   
   
   
@@ -330,7 +330,6 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="likelihood_ratio.html">Likelihood Ratio</a></li>
 
 
@@ -355,14 +354,13 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="Bayes_factor.html">Bayes Factor</a></li>
 
 
 
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">p-value and Bayesian Hypothesis Testing</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><span class="math notranslate nohighlight">\(p\)</span>-value and Bayesian Hypothesis Testing</a></li>
 
 
 
@@ -379,9 +377,7 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="Bayesian_multivariate_normal_mean_model.html">Bayesian Multivariate Normal Mean Model</a></li>
-
 
 
 
@@ -391,7 +387,6 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Multiple Bayesian Models</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Bayesian_model_comparison.html">Bayesian Model Comparison</a></li>
-
 
 
 
@@ -576,25 +571,28 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">p-value and Bayesian Hypothesis Testing</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><span class="math notranslate nohighlight">\(p\)</span>-value and Bayesian Hypothesis Testing</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-summary">Graphical Summary</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formulas">Key Formulas</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#p-value"><span class="math notranslate nohighlight">\(p\)</span>-value</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#property">Property</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitation-of-p-value">Limitation of <span class="math notranslate nohighlight">\(p\)</span>-value</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-testing">Multiple Testing</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#permutation-test">Permutation test</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-testing">Multiple Testing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#permutation-test">Permutation Test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#p-value"><span class="math notranslate nohighlight">\(p\)</span>-value</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-hypothesis-testing">Bayesian Hypothesis Testing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequentist-vs-bayesian-paradigms">Frequentist vs. Bayesian Paradigms</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#association-testing">Association Testing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-testing-correction">Multiple Testing Correction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bonferroni-correction">Bonferroni Correction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#benjamini-hochberg-fdr-control">Benjamini-Hochberg FDR Control</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#permutation-testing-for-egene-discovery">Permutation Testing for eGene Discovery</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extending-to-genome-wide-study-multiple-genes-and-fdr-control">Extending to Genome-Wide Study: Multiple Genes and FDR Control</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#genome-wide-egene-discovery-fdr-control-across-multiple-genes">Genome-Wide eGene Discovery: FDR Control Across Multiple Genes</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#supplementary">Supplementary</a><ul class="visible nav section-nav flex-column">
@@ -620,110 +618,137 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="p-value-and-bayesian-hypothesis-testing">
-<h1>p-value and Bayesian Hypothesis Testing<a class="headerlink" href="#p-value-and-bayesian-hypothesis-testing" title="Link to this heading">#</a></h1>
-<p>In hypothesis testing, frequentists generally use <strong>p-value</strong> to evaluate the evidence against the null hypothesis; <strong>Bayesian hypothesis testing</strong>, however, directly computes the probability of any hypothesis given observed data.</p>
+<h1><span class="math notranslate nohighlight">\(p\)</span>-value and Bayesian Hypothesis Testing<a class="headerlink" href="#p-value-and-bayesian-hypothesis-testing" title="Link to this heading">#</a></h1>
+<p>In hypothesis testing, frequentists generally use <em>p</em>-value to evaluate the evidence against the null hypothesis;*Bayesian hypothesis testing, however, directly computes the probability of any hypothesis given observed data.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="graphical-summary">
 <h1>Graphical Summary<a class="headerlink" href="#graphical-summary" title="Link to this heading">#</a></h1>
 <p><img alt="Fig" src="_images/Slide25.png" /></p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="key-formula">
-<h1>Key Formula<a class="headerlink" href="#key-formula" title="Link to this heading">#</a></h1>
-<p>The p-value represents the probability of observing a test statistic at least as extreme as what was actually observed, assuming the null hypothesis is true.</p>
+<section class="tex2jax_ignore mathjax_ignore" id="key-formulas">
+<h1>Key Formulas<a class="headerlink" href="#key-formulas" title="Link to this heading">#</a></h1>
+<p>The <span class="math notranslate nohighlight">\(p\)</span>-value is the probability of observing a test statistic at least as extreme as the one observed, assuming the null hypothesis is true.</p>
 <div class="math notranslate nohighlight">
 \[
-p\text{-value} = P(\text{Reject } H_0 | H_0 \text{ is true})
+p\text{-value} = P(\text{Reject } H_0 | H_0 \text{ is true}) = P(T \geq t_{\text{obs}} \mid H_0)
 \]</div>
-<p>In Bayesian hypothesis testing,</p>
+<p>where <span class="math notranslate nohighlight">\(T\)</span> is the test statistic and <span class="math notranslate nohighlight">\(t_{\text{obs}}\)</span> is the observed value.</p>
+<p>Posterior probability of hypothesis <span class="math notranslate nohighlight">\(H_i\)</span> given data <span class="math notranslate nohighlight">\(\text{D}\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
-P(H_i | \text{D}) = \frac{P(\text{D} | H_i) \cdot P(H_i)}{P(\text{D})}
+P(H_i \mid \text{D}) = \frac{P(\text{D} \mid H_i) \cdot P(H_i)}{P(\text{D})}
 \]</div>
+<p>And one can use Bayes factor to compare hypotheses <span class="math notranslate nohighlight">\(H_1\)</span> and <span class="math notranslate nohighlight">\(H_0\)</span>: <span class="math notranslate nohighlight">\(\text{BF}_{10} = \frac{P(D \mid H_1)}{P(D \mid H_0)}\)</span></p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="technical-details">
 <h1>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading">#</a></h1>
-<section id="p-value">
-<h2><span class="math notranslate nohighlight">\(p\)</span>-value<a class="headerlink" href="#p-value" title="Link to this heading">#</a></h2>
-<section id="property">
-<h3>Property<a class="headerlink" href="#property" title="Link to this heading">#</a></h3>
-<ol class="arabic simple">
-<li><p><strong>Monotonic Relationship</strong>: Smaller p-values correspond to more extreme test statistics</p></li>
-<li><p><strong>Significance Level</strong>: We reject <span class="math notranslate nohighlight">\(H_0\)</span> if <span class="math notranslate nohighlight">\(p\text{-value} \leq \alpha\)</span> (<span class="math notranslate nohighlight">\(\alpha\)</span> is the significance level)</p></li>
-</ol>
-</section>
-<section id="limitation-of-p-value">
-<h3>Limitation of <span class="math notranslate nohighlight">\(p\)</span>-value<a class="headerlink" href="#limitation-of-p-value" title="Link to this heading">#</a></h3>
-<p><strong>Important</strong>: The null hypothesis <span class="math notranslate nohighlight">\(H_0\)</span> can never be “accepted” or “proven true” - it can only be:</p>
-<ul class="simple">
-<li><p><strong>Rejected</strong> (when <span class="math notranslate nohighlight">\(p\text{-value} \leq \alpha\)</span>): Strong evidence against <span class="math notranslate nohighlight">\(H_0\)</span></p></li>
-<li><p><strong>Not rejected</strong> (when <span class="math notranslate nohighlight">\(p\text{-value} &gt; \alpha\)</span>): Insufficient evidence to reject <span class="math notranslate nohighlight">\(H_0\)</span>, doesn’t mean “accepted” or “true”. Absence of evidence is not evidence of absence</p></li>
-</ul>
-</section>
 <section id="multiple-testing">
-<h3>Multiple Testing<a class="headerlink" href="#multiple-testing" title="Link to this heading">#</a></h3>
-<p>When conducting multiple hypothesis tests, the probability of making at least one Type I error (false positive) increases dramatically. Multiple testing corrections control for this inflation.</p>
-<p>In such scenarios, multiple testing correction is necessary and it has two types of correction method:</p>
+<h2>Multiple Testing<a class="headerlink" href="#multiple-testing" title="Link to this heading">#</a></h2>
+<p>When conducting multiple hypothesis tests, the probability of making at least one Type I error (false positive) increases. Multiple testing corrections control this inflation.</p>
+<p>Two main correction approaches:</p>
 <ul>
-<li><p><strong>Family-Wise Error Rate (FWER) Control</strong>: control the probability of making at least one false positive across all tests</p>
+<li><p><strong>Family-Wise Error Rate (FWER)</strong>: Controls the probability of making at least one false positive across all tests</p>
 <div class="math notranslate nohighlight">
 \[
   \alpha_{\text{Bonferroni}} = \frac{\alpha}{M}
   \]</div>
-<p>where <span class="math notranslate nohighlight">\(M\)</span> is the total number of tests and <span class="math notranslate nohighlight">\(\alpha\)</span> is the desired overall significance level. For example, if previously we used 0.05 as the cutoff for 1 million tests, then after correction the cutoff becomes <span class="math notranslate nohighlight">\(5\times10^{-8}\)</span>.</p>
+<p>where <span class="math notranslate nohighlight">\(M\)</span> is the number of tests and <span class="math notranslate nohighlight">\(\alpha\)</span> is the desired significance level. Example: for <span class="math notranslate nohighlight">\(M = 1{,}000{,}000\)</span> tests with <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span>, the corrected threshold is <span class="math notranslate nohighlight">\(5 \times 10^{-8}\)</span>.</p>
 </li>
-<li><p><strong>False Discovery Rate (FDR) Control</strong>: control the expected proportion of false positives among all discoveries (less stringent than FWER, thus more powerful). For example, Benjamini-Hochberg procedure controls the FDR by ranking <span class="math notranslate nohighlight">\(p\)</span>-values, finding largest <span class="math notranslate nohighlight">\(i\)</span> where <span class="math notranslate nohighlight">\(p(i) \leq (\frac{i}{M}) \times \alpha\)</span></p></li>
+<li><p><strong>False Discovery Rate (FDR)</strong>: Controls the expected proportion of false positives among rejected hypotheses (less stringent than FWER, thus more powerful). The Benjamini-Hochberg procedure ranks <span class="math notranslate nohighlight">\(p\)</span>-values and rejects all <span class="math notranslate nohighlight">\(H_0\)</span> where <span class="math notranslate nohighlight">\(p_{(i)} \leq \frac{i}{M} \cdot \alpha\)</span> for the largest such <span class="math notranslate nohighlight">\(i\)</span>.</p></li>
 </ul>
 </section>
 <section id="permutation-test">
-<h3>Permutation test<a class="headerlink" href="#permutation-test" title="Link to this heading">#</a></h3>
-<p>Permutation test is a simple way of obtaining null distribution of a test statistics. It answers the question: “Could I have gotten this result just by random chance?” It does this by shuffling the data many times to see what results you’d get if there were truly no real effect - just randomness. The <span class="math notranslate nohighlight">\(p\)</span>-values obtained from permutation are sometimes called <em>empirical <span class="math notranslate nohighlight">\(p\)</span>-values</em>.</p>
+<h2>Permutation Test<a class="headerlink" href="#permutation-test" title="Link to this heading">#</a></h2>
+<p>A method for obtaining the null distribution of a test statistic by shuffling data many times to simulate pure randomness. The resulting <span class="math notranslate nohighlight">\(p\)</span>-values are called <em>empirical <span class="math notranslate nohighlight">\(p\)</span>-values</em>.</p>
 <p><strong>Procedure</strong>:</p>
 <ol class="arabic simple">
-<li><p>Calculate the test statistic <span class="math notranslate nohighlight">\(T_{\text{obs}}\)</span> on the observed data</p></li>
-<li><p>Randomly permute the labels/outcomes <span class="math notranslate nohighlight">\(B\)</span> times (typically <span class="math notranslate nohighlight">\(B=10,000\)</span>)</p></li>
-<li><p>For each permutation <span class="math notranslate nohighlight">\(b\)</span>, calculate the test statistic <span class="math notranslate nohighlight">\(T_b\)</span></p></li>
-<li><p>Compute the empirical <span class="math notranslate nohighlight">\(p\)</span>-value:
+<li><p>Calculate test statistic <span class="math notranslate nohighlight">\(T_{\text{obs}}\)</span> on observed data</p></li>
+<li><p>Randomly permute labels/outcomes <span class="math notranslate nohighlight">\(B\)</span> times (typically <span class="math notranslate nohighlight">\(B = 10{,}000\)</span>)</p></li>
+<li><p>Calculate test statistic <span class="math notranslate nohighlight">\(T_b\)</span> for each permutation <span class="math notranslate nohighlight">\(b\)</span></p></li>
+<li><p>Compute empirical <span class="math notranslate nohighlight">\(p\)</span>-value:
 $<span class="math notranslate nohighlight">\(
 p\text{-value} = \frac{1 + \sum_{b=1}^{B} \mathbb{1}(T_b \geq T_{\text{obs}})}{B + 1}
-\)</span><span class="math notranslate nohighlight">\(
-where \)</span>\mathbb{1}(\cdot)$ is the indicator function</p></li>
+\)</span>$</p></li>
 </ol>
 <p><strong>Advantages</strong>:</p>
 <ul class="simple">
-<li><p><strong>Distribution-free</strong>: No assumptions about the underlying distribution of test statistics</p></li>
-<li><p><strong>Exact for finite samples</strong>: Provides exact <span class="math notranslate nohighlight">\(p\)</span>-values rather than asymptotic approximations</p></li>
-<li><p><strong>Flexible</strong>: Can be applied to any test statistic, including complex or custom statistics. Thus it is often used when the null distribution of test statistic is unknown</p></li>
+<li><p><strong>Distribution-free</strong>: No assumptions about test statistic distribution</p></li>
+<li><p><strong>Exact</strong>: Provides exact <span class="math notranslate nohighlight">\(p\)</span>-values for finite samples</p></li>
+<li><p><strong>Flexible</strong>: Works with any test statistic, useful when null distribution is unknown</p></li>
 </ul>
 <p><strong>Limitations</strong>:</p>
 <ul class="simple">
-<li><p><strong>Computationally intensive</strong>: Requires many iterations, especially problematic for large-scale studies (e.g., GWAS with millions of tests)</p></li>
-<li><p><strong>Assumes exchangeability</strong>: Under <span class="math notranslate nohighlight">\(H_0\)</span>, observations must be exchangeable (permuting them doesn’t change the distribution)</p></li>
-<li><p><strong>Still requires multiple testing correction</strong>: When performing many permutation tests, FWER or FDR control is still needed</p></li>
+<li><p><strong>Computationally intensive</strong>: Problematic for large-scale studies (e.g., GWAS)</p></li>
+<li><p><strong>Assumes exchangeability</strong>: Under <span class="math notranslate nohighlight">\(H_0\)</span>, observation order must be irrelevant</p></li>
+<li><p><strong>Multiple testing correction still needed</strong>: FWER or FDR control required for many tests</p></li>
 </ul>
 </section>
+<section id="p-value">
+<h2><span class="math notranslate nohighlight">\(p\)</span>-value<a class="headerlink" href="#p-value" title="Link to this heading">#</a></h2>
+<p><strong>Monotonic Relationship</strong>: Smaller <span class="math notranslate nohighlight">\(p\)</span>-values correspond to more extreme test statistics.</p>
+<p><strong>Decision Rule</strong>: Reject <span class="math notranslate nohighlight">\(H_0\)</span> if <span class="math notranslate nohighlight">\(p\)</span>-value <span class="math notranslate nohighlight">\(\leq \alpha\)</span> (where <span class="math notranslate nohighlight">\(\alpha\)</span> is the significance level).</p>
+<p><strong>Interpretation Limit</strong>: <span class="math notranslate nohighlight">\(H_0\)</span> can never be “accepted” or “proven true”. It can only be:</p>
+<ul class="simple">
+<li><p><strong>Rejected</strong> (<span class="math notranslate nohighlight">\(p\)</span>-value <span class="math notranslate nohighlight">\(\leq \alpha\)</span>): Evidence against <span class="math notranslate nohighlight">\(H_0\)</span></p></li>
+<li><p><strong>Not rejected</strong> (<span class="math notranslate nohighlight">\(p\)</span>-value <span class="math notranslate nohighlight">\(&gt; \alpha\)</span>): Insufficient evidence against <span class="math notranslate nohighlight">\(H_0\)</span></p></li>
+</ul>
+<p>Failure to reject <span class="math notranslate nohighlight">\(H_0\)</span> does not imply <span class="math notranslate nohighlight">\(H_0\)</span> is true. Absence of evidence is not evidence of absence.</p>
 </section>
 <section id="bayesian-hypothesis-testing">
 <h2>Bayesian Hypothesis Testing<a class="headerlink" href="#bayesian-hypothesis-testing" title="Link to this heading">#</a></h2>
-<p>In contrast, Bayesian hypothesis testing is a lot easier to interpret, it simply means the probability of accepting the hypothesis given the observed data.</p>
+<p>Bayesian hypothesis testing directly computes the probability that a hypothesis is true given the observed data: <span class="math notranslate nohighlight">\(P(H_i \mid D)\)</span>. This is more intuitive than frequentist <span class="math notranslate nohighlight">\(p\)</span>-values, which condition on the hypothesis being true.</p>
+<p><strong>Key advantages</strong>:</p>
+<ul class="simple">
+<li><p><strong>Direct probability statements</strong>: Can state “<span class="math notranslate nohighlight">\(H_1\)</span> has 95% probability of being true given the data”</p></li>
+<li><p><strong>No multiple testing problem</strong>: Each hypothesis evaluated independently; posterior probabilities remain valid</p></li>
+<li><p><strong>Incorporates prior knowledge</strong>: Prior beliefs <span class="math notranslate nohighlight">\(P(H_i)\)</span> are explicitly integrated into inference</p></li>
+</ul>
+<p><strong>Bayes Factor interpretation</strong>: The Bayes Factor <span class="math notranslate nohighlight">\(\text{BF}_{10}\)</span> quantifies evidence strength:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\text{BF}_{10} &gt; 10\)</span>: Strong evidence for <span class="math notranslate nohighlight">\(H_1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{BF}_{10} = 1\)</span>: No evidence either way</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{BF}_{10} &lt; 0.1\)</span>: Strong evidence for <span class="math notranslate nohighlight">\(H_0\)</span></p></li>
+</ul>
+<p><strong>Limitation</strong>: Results depend on prior specification, which can be subjective. Different priors may lead to different conclusions, especially with limited data.</p>
 </section>
 <section id="frequentist-vs-bayesian-paradigms">
 <h2>Frequentist vs. Bayesian Paradigms<a class="headerlink" href="#frequentist-vs-bayesian-paradigms" title="Link to this heading">#</a></h2>
 <p><strong>The fundamental question</strong>: What does probability mean?</p>
-<p><strong>Frequentist (<span class="math notranslate nohighlight">\(p\)</span>-value)</strong>:</p>
-<ul class="simple">
-<li><p>Probability = long-run frequency over repeated experiments</p></li>
-<li><p>Parameters are fixed; data varies across hypothetical repetitions</p></li>
-<li><p>Answers: <span class="math notranslate nohighlight">\(P(\text{Data} \mid H_0)\)</span> — “How extreme is my data if <span class="math notranslate nohighlight">\(H_0\)</span> were true?”</p></li>
-<li><p><strong>Cannot say</strong>: “Probability that <span class="math notranslate nohighlight">\(H_0\)</span> is true”</p></li>
-</ul>
-<p><strong>Bayesian (Posterior probability)</strong>:</p>
-<ul class="simple">
-<li><p>Probability = degree of belief/uncertainty</p></li>
-<li><p>Parameters vary; observed data is fixed</p></li>
-<li><p>Answers: <span class="math notranslate nohighlight">\(P(H_0 \mid \text{Data})\)</span> — “How probable is <span class="math notranslate nohighlight">\(H_0\)</span> given my data?”</p></li>
-<li><p><strong>Can say</strong>: “There’s a 95% probability the parameter is in this interval”</p></li>
-</ul>
-<p><strong>Multiple testing</strong>: Frequentists require explicit corrections (Bonferroni, FDR); Bayesians incorporate prior beliefs that naturally regularize.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Aspect</p></th>
+<th class="head"><p>Frequentist</p></th>
+<th class="head"><p>Bayesian</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Probability</strong></p></td>
+<td><p>Long-run frequency over repeated experiments</p></td>
+<td><p>Degree of belief/uncertainty</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>What varies</strong></p></td>
+<td><p>Data varies across hypothetical repetitions; parameters are fixed</p></td>
+<td><p>Parameters vary; observed data is fixed</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Question answered</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(P(\text{Data} \mid H_0)\)</span> — “How extreme is my data if <span class="math notranslate nohighlight">\(H_0\)</span> were true?”</p></td>
+<td><p><span class="math notranslate nohighlight">\(P(H_0 \mid \text{Data})\)</span> — “How probable is <span class="math notranslate nohighlight">\(H_0\)</span> given my data?”</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Can say</strong></p></td>
+<td><p>“<span class="math notranslate nohighlight">\(p\)</span>-value = 0.03” (probability of data or more extreme under <span class="math notranslate nohighlight">\(H_0\)</span>)</p></td>
+<td><p>“There’s a 95% probability the parameter is in this interval”</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Cannot say</strong></p></td>
+<td><p>“Probability that <span class="math notranslate nohighlight">\(H_0\)</span> is true”</p></td>
+<td><p>“Long-run error rate is 5%” (no repeated sampling framework)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Multiple testing</strong></p></td>
+<td><p>Requires explicit corrections (Bonferroni, FDR)</p></td>
+<td><p>Prior beliefs naturally regularize; no formal correction needed</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="related-topics">
@@ -737,402 +762,238 @@ where \)</span>\mathbb{1}(\cdot)$ is the indicator function</p></li>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="example">
 <h1>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
-<p>QTL analysis tries to answer the question of <strong>“Which genetic variants (SNPs) are associated with gene expression levels?”</strong>.</p>
-<p>We’ll demonstrate this with a simple example:</p>
-<ul class="simple">
-<li><p>Multiple individuals with genotype data at several SNP variants</p></li>
-<li><p>Gene expression measurements for a single gene</p></li>
-<li><p>Testing each SNP for association with expression</p></li>
-<li><p>Controlling for multiple testing using different approaches</p></li>
-</ul>
-<p>Let’s start with a realistic scenario: we have genotype data for 200 individuals at 15 SNPs in a region of interest, and we measure expression of a target gene.</p>
+<p>In quantitative trait locus (QTL) analysis, we ask: do genetic variants affect gene expression?</p>
+<p><strong>Scenario:</strong> We have SNP genotypes and gene expression data from multiple individuals. For each SNP, we test whether different genotypes correspond to different expression levels, then correct for testing multiple SNPs.</p>
+<p>We have genotype data for 200 individuals at 25 SNPs in a region of interest, and gene expression measurements for each individual.</p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="o">=</span><span class="nf">ls</span><span class="p">())</span>
-<span class="nf">set.seed</span><span class="p">(</span><span class="m">83</span><span class="p">)</span>
+<span class="nf">set.seed</span><span class="p">(</span><span class="m">38</span><span class="p">)</span>
 
-<span class="c1"># Parameters for simulation</span>
-<span class="n">n_samples</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">200</span><span class="w">      </span><span class="c1"># Number of individuals</span>
-<span class="n">n_snps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">25</span><span class="w">          </span><span class="c1"># Number of SNPs to test</span>
-<span class="n">n_true_snps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">2</span><span class="w">      </span><span class="c1"># Number of SNPs truly associated with expression</span>
+<span class="n">n_samples</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">200</span>
+<span class="n">n_snps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">25</span>
+<span class="n">ld_rho</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.8</span>
 
-<span class="c1"># Simulate genotypes with Linkage Disequilibrium (LD)</span>
-<span class="c1"># Strategy: Create a causal founder haplotype and introduce recombination</span>
-<span class="c1"># to create LD structure between nearby variants</span>
-
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Simulating genotypes with Linkage Disequilibrium (LD)...\n&quot;</span><span class="p">)</span>
-
-<span class="c1"># Start with a founder haplotype (allele frequencies)</span>
-<span class="n">allele_freqs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">runif</span><span class="p">(</span><span class="n">n_snps</span><span class="p">,</span><span class="w"> </span><span class="m">0.2</span><span class="p">,</span><span class="w"> </span><span class="m">0.8</span><span class="p">)</span>
-
-<span class="c1"># Create two haplotypes (two copies per individual)</span>
-<span class="c1"># We&#39;ll use a simple LD model: nearby SNPs are correlated</span>
-<span class="n">haplotype1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_samples</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_snps</span><span class="p">)</span>
-<span class="n">haplotype2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_samples</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_snps</span><span class="p">)</span>
-
-<span class="c1"># Generate first SNP independently</span>
-<span class="n">haplotype1</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rbinom</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">prob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">allele_freqs</span><span class="p">[</span><span class="m">1</span><span class="p">])</span>
-<span class="n">haplotype2</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rbinom</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">prob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">allele_freqs</span><span class="p">[</span><span class="m">1</span><span class="p">])</span>
-
-<span class="c1"># For subsequent SNPs, create LD with previous SNP</span>
-<span class="c1"># LD correlation parameter (higher = stronger LD)</span>
-<span class="n">ld_rho</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.8</span><span class="w">  </span><span class="c1"># Correlation parameter for LD (range 0-1, higher = stronger LD)</span>
+<span class="n">hap1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">hap2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">n_samples</span><span class="p">,</span><span class="w"> </span><span class="n">n_snps</span><span class="p">)</span>
+<span class="n">hap1</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rbinom</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span>
+<span class="n">hap2</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rbinom</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span>
 
 <span class="kr">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="n">n_snps</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="c1"># Each SNP is correlated with the previous one</span>
-<span class="w">  </span><span class="c1"># With probability (1-rho), SNP changes from previous; with probability rho, stays same</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1"># Haplotype 1: LD with SNP i-1</span>
-<span class="w">  </span><span class="n">haplotype1</span><span class="p">[,</span><span class="w"> </span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">haplotype1</span><span class="p">[,</span><span class="w"> </span><span class="n">i</span><span class="m">-1</span><span class="p">]</span><span class="w">  </span><span class="c1"># Start with previous SNP allele</span>
-<span class="w">  </span><span class="c1"># Randomly flip some alleles to create variation</span>
-<span class="w">  </span><span class="n">flip_idx1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">runif</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">ld_rho</span>
-<span class="w">  </span><span class="n">haplotype1</span><span class="p">[</span><span class="n">flip_idx1</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">haplotype1</span><span class="p">[</span><span class="n">flip_idx1</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">]</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1"># Haplotype 2: LD with SNP i-1 (independent from haplotype 1)</span>
-<span class="w">  </span><span class="n">haplotype2</span><span class="p">[,</span><span class="w"> </span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">haplotype2</span><span class="p">[,</span><span class="w"> </span><span class="n">i</span><span class="m">-1</span><span class="p">]</span><span class="w">  </span><span class="c1"># Start with previous SNP allele</span>
-<span class="w">  </span><span class="n">flip_idx2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">runif</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">ld_rho</span>
-<span class="w">  </span><span class="n">haplotype2</span><span class="p">[</span><span class="n">flip_idx2</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">haplotype2</span><span class="p">[</span><span class="n">flip_idx2</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">]</span>
+<span class="w">  </span><span class="n">hap1</span><span class="p">[,</span><span class="w"> </span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">hap1</span><span class="p">[,</span><span class="w"> </span><span class="n">i</span><span class="m">-1</span><span class="p">]</span>
+<span class="w">  </span><span class="n">hap2</span><span class="p">[,</span><span class="w"> </span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">hap2</span><span class="p">[,</span><span class="w"> </span><span class="n">i</span><span class="m">-1</span><span class="p">]</span>
+<span class="w">  </span><span class="n">flip1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">runif</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">ld_rho</span>
+<span class="w">  </span><span class="n">flip2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">runif</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">ld_rho</span>
+<span class="w">  </span><span class="n">hap1</span><span class="p">[</span><span class="n">flip1</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">hap1</span><span class="p">[</span><span class="n">flip1</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">]</span>
+<span class="w">  </span><span class="n">hap2</span><span class="p">[</span><span class="n">flip2</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">hap2</span><span class="p">[</span><span class="n">flip2</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">]</span>
 <span class="p">}</span>
 
-<span class="c1"># Combine haplotypes to get diploid genotypes (0, 1, or 2 alternate alleles)</span>
-<span class="n">genotypes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">haplotype1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">haplotype2</span>
-
+<span class="n">genotypes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">hap1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">hap2</span>
 <span class="nf">colnames</span><span class="p">(</span><span class="n">genotypes</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;SNP_&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">n_snps</span><span class="p">)</span>
 
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Simulated genotype matrix with LD structure:\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Dimensions:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">nrow</span><span class="p">(</span><span class="n">genotypes</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;samples x&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">ncol</span><span class="p">(</span><span class="n">genotypes</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;SNPs\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;LD correlation parameter (rho):&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ld_rho</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;First few rows:\n&quot;</span><span class="p">)</span>
-<span class="nf">head</span><span class="p">(</span><span class="n">genotypes</span><span class="p">)</span>
-
-<span class="c1"># Calculate and display LD structure (correlation matrix)</span>
-<span class="n">ld_matrix</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cor</span><span class="p">(</span><span class="n">genotypes</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Genotype matrix:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n_samples</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;samples ×&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n_snps</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;SNPs\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;LD parameter (rho):&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ld_rho</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">genotypes</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">6</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Simulating genotypes with Linkage Disequilibrium (LD)...
-Simulated genotype matrix with LD structure:
-Dimensions: 200 samples x 25 SNPs
-LD correlation parameter (rho): 0.8 
-First few rows:
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Genotype matrix: 200 samples × 25 SNPs
+LD parameter (rho): 0.8 
 </pre></div>
 </div>
 <div class="output text_html"><table class="dataframe">
-<caption>A matrix: 6 × 25 of type dbl</caption>
+<caption>A matrix: 6 × 6 of type dbl</caption>
 <thead>
-	<tr><th scope=col>SNP_1</th><th scope=col>SNP_2</th><th scope=col>SNP_3</th><th scope=col>SNP_4</th><th scope=col>SNP_5</th><th scope=col>SNP_6</th><th scope=col>SNP_7</th><th scope=col>SNP_8</th><th scope=col>SNP_9</th><th scope=col>SNP_10</th><th scope=col>⋯</th><th scope=col>SNP_16</th><th scope=col>SNP_17</th><th scope=col>SNP_18</th><th scope=col>SNP_19</th><th scope=col>SNP_20</th><th scope=col>SNP_21</th><th scope=col>SNP_22</th><th scope=col>SNP_23</th><th scope=col>SNP_24</th><th scope=col>SNP_25</th></tr>
+	<tr><th scope=col>SNP_1</th><th scope=col>SNP_2</th><th scope=col>SNP_3</th><th scope=col>SNP_4</th><th scope=col>SNP_5</th><th scope=col>SNP_6</th></tr>
 </thead>
 <tbody>
-	<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>⋯</td><td>1</td><td>1</td><td>2</td><td>2</td><td>0</td><td>1</td><td>2</td><td>1</td><td>2</td><td>1</td></tr>
-	<tr><td>1</td><td>2</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>⋯</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td></tr>
-	<tr><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>2</td><td>⋯</td><td>1</td><td>2</td><td>2</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-	<tr><td>1</td><td>2</td><td>2</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>⋯</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
-	<tr><td>0</td><td>0</td><td>0</td><td>1</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>⋯</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
-	<tr><td>1</td><td>2</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>⋯</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>2</td><td>1</td></tr>
+	<tr><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+	<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>2</td></tr>
+	<tr><td>0</td><td>0</td><td>0</td><td>1</td><td>2</td><td>2</td></tr>
+	<tr><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+	<tr><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td></tr>
+	<tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
 </tbody>
 </table>
 </div></div>
 </div>
-<p>Now we simulate expression levels. We’ll make <strong>SNP1 and SNP2 truly associated with expression</strong> (with effect sizes), and the other SNPs have no real association. The expression will also include random noise.</p>
+<p>We then simulate expression with <strong>SNP1 and SNP2 as causal variants</strong> plus noise.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simulate expression: true effects from SNP_1 and SNP_2, plus noise</span>
-<span class="c1"># Expression = effect1*SNP1 + effect2*SNP2 + noise</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">effect1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1.5</span>
+<span class="n">effect2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1.2</span>
 
-<span class="n">effect_snp1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1.5</span><span class="w">     </span><span class="c1"># Effect size for SNP_1</span>
-<span class="n">effect_snp2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1.2</span><span class="w">     </span><span class="c1"># Effect size for SNP_2</span>
+<span class="n">expression</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">effect1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">genotypes</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span>
+<span class="w">              </span><span class="n">effect2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">genotypes</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">+</span>
+<span class="w">              </span><span class="nf">rnorm</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
 
-<span class="n">expression</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">effect_snp1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">genotypes</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
-<span class="w">              </span><span class="n">effect_snp2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">genotypes</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
-<span class="w">              </span><span class="nf">rnorm</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
-
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Simulated expression data (n =&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n_samples</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;samples):\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;True effects: SNP_1 (effect =&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">effect_snp1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;) and SNP_2 (effect =&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">effect_snp2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;)\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Mean expression:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="nf">mean</span><span class="p">(</span><span class="n">expression</span><span class="p">),</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;SD expression:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="nf">sd</span><span class="p">(</span><span class="n">expression</span><span class="p">),</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;First few samples:\n&quot;</span><span class="p">)</span>
-<span class="nf">cbind</span><span class="p">(</span><span class="n">genotypes</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">],</span><span class="w"> </span><span class="n">expression</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">expression</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">])</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;True effects: SNP_1 =&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">effect1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, SNP_2 =&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">effect2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Expression: mean =&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="nf">mean</span><span class="p">(</span><span class="n">expression</span><span class="p">),</span><span class="w"> </span><span class="m">2</span><span class="p">),</span>
+<span class="w">    </span><span class="s">&quot;, SD =&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="nf">sd</span><span class="p">(</span><span class="n">expression</span><span class="p">),</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Simulated expression data (n = 200 samples):
-True effects: SNP_1 (effect = 1.5 ) and SNP_2 (effect = 1.2 )
-Mean expression: 1.83 
-SD expression: 2.29 
-First few samples:
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True effects: SNP_1 = 1.5 , SNP_2 = 1.2 
+Expression: mean = 2.85 , SD = 2.59 
 </pre></div>
 </div>
-<div class="output text_html"><table class="dataframe">
-<caption>A matrix: 5 × 6 of type dbl</caption>
-<thead>
-	<tr><th scope=col>SNP_1</th><th scope=col>SNP_2</th><th scope=col>SNP_3</th><th scope=col>SNP_4</th><th scope=col>SNP_5</th><th scope=col>expression</th></tr>
-</thead>
-<tbody>
-	<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1.4516029</td></tr>
-	<tr><td>1</td><td>2</td><td>1</td><td>1</td><td>1</td><td>6.6169700</td></tr>
-	<tr><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>4.8286530</td></tr>
-	<tr><td>1</td><td>2</td><td>2</td><td>0</td><td>1</td><td>4.1347712</td></tr>
-	<tr><td>0</td><td>0</td><td>0</td><td>1</td><td>2</td><td>0.2250084</td></tr>
-</tbody>
-</table>
-</div></div>
 </div>
-<p>We first perform the marginal effect of each variant:</p>
+</div>
+</section>
+<section id="association-testing">
+<h2>Association Testing<a class="headerlink" href="#association-testing" title="Link to this heading">#</a></h2>
+<p>We first test the marginal effect of each variant: <code class="docutils literal notranslate"><span class="pre">expression</span> <span class="pre">~</span> <span class="pre">genotype</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test each SNP for association with expression</span>
-<span class="c1"># Perform linear regression: expression ~ genotype for each SNP</span>
-
-<span class="n">p_values</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="n">n_snps</span><span class="p">)</span>
-<span class="n">effect_sizes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="n">n_snps</span><span class="p">)</span>
-<span class="n">test_statistics</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="n">n_snps</span><span class="p">)</span>
-
-<span class="c1"># Loop through each SNP and test for association</span>
-<span class="kr">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">n_snps</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="c1"># Fit linear regression model: expression ~ genotype</span>
-<span class="w">  </span><span class="n">model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">expression</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">genotypes</span><span class="p">[,</span><span class="w"> </span><span class="n">i</span><span class="p">])</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1"># Extract p-value from the slope coefficient test</span>
-<span class="w">  </span><span class="c1"># (We want the p-value for the SNP effect, not the intercept)</span>
-<span class="w">  </span><span class="n">summary_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
-<span class="w">  </span><span class="n">p_values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">summary_model</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">]</span><span class="w">  </span><span class="c1"># p-value of SNP coefficient</span>
-<span class="w">  </span><span class="n">effect_sizes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">summary_model</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w">  </span><span class="c1"># effect size (slope)</span>
-<span class="w">  </span><span class="n">test_statistics</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">summary_model</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">]</span><span class="w">  </span><span class="c1"># t-statistic</span>
-<span class="p">}</span>
-
-<span class="c1"># Create a results table</span>
-<span class="n">results</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span>
 <span class="w">  </span><span class="n">SNP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">genotypes</span><span class="p">),</span>
-<span class="w">  </span><span class="n">Effect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">effect_sizes</span><span class="p">,</span>
-<span class="w">  </span><span class="n">T_statistic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">test_statistics</span><span class="p">,</span>
-<span class="w">  </span><span class="n">P_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_values</span><span class="p">,</span>
-<span class="w">  </span><span class="n">Minus_log10_P</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="nf">log10</span><span class="p">(</span><span class="n">p_values</span><span class="p">)</span>
+<span class="w">  </span><span class="n">Effect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span>
+<span class="w">  </span><span class="n">T_stat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span>
+<span class="w">  </span><span class="n">P_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span>
 <span class="p">)</span>
 
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Association test results for all SNPs:\n&quot;</span><span class="p">)</span>
-<span class="n">results</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Association test results for all SNPs:
-</pre></div>
-</div>
-<div class="output text_html"><table class="dataframe">
-<caption>A data.frame: 25 × 5</caption>
-<thead>
-	<tr><th scope=col>SNP</th><th scope=col>Effect</th><th scope=col>T_statistic</th><th scope=col>P_value</th><th scope=col>Minus_log10_P</th></tr>
-	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
-</thead>
-<tbody>
-	<tr><td>SNP_1 </td><td> 1.93449131</td><td> 7.6451924</td><td>8.827948e-13</td><td>12.05414024</td></tr>
-	<tr><td>SNP_2 </td><td> 1.36793160</td><td> 6.3769180</td><td>1.247657e-09</td><td> 8.90390462</td></tr>
-	<tr><td>SNP_3 </td><td> 0.51383262</td><td> 2.2170445</td><td>2.775781e-02</td><td> 1.55661483</td></tr>
-	<tr><td>SNP_4 </td><td> 0.39898620</td><td> 1.6581493</td><td>9.887071e-02</td><td> 1.00493233</td></tr>
-	<tr><td>SNP_5 </td><td> 0.08025969</td><td> 0.3528669</td><td>7.245636e-01</td><td> 0.13992350</td></tr>
-	<tr><td>SNP_6 </td><td> 0.21135756</td><td> 0.8837714</td><td>3.778914e-01</td><td> 0.42263295</td></tr>
-	<tr><td>SNP_7 </td><td> 0.30456995</td><td> 1.3741282</td><td>1.709554e-01</td><td> 0.76711727</td></tr>
-	<tr><td>SNP_8 </td><td> 0.25950796</td><td> 1.1682952</td><td>2.440925e-01</td><td> 0.61244556</td></tr>
-	<tr><td>SNP_9 </td><td>-0.03794598</td><td>-0.1692696</td><td>8.657574e-01</td><td> 0.06260378</td></tr>
-	<tr><td>SNP_10</td><td> 0.07044569</td><td> 0.3073153</td><td>7.589264e-01</td><td> 0.11980036</td></tr>
-	<tr><td>SNP_11</td><td> 0.39991997</td><td> 1.7391096</td><td>8.356968e-02</td><td> 1.07795129</td></tr>
-	<tr><td>SNP_12</td><td> 0.06295861</td><td> 0.2760378</td><td>7.828069e-01</td><td> 0.10634536</td></tr>
-	<tr><td>SNP_13</td><td> 0.42302369</td><td> 1.8880812</td><td>6.047748e-02</td><td> 1.21840634</td></tr>
-	<tr><td>SNP_14</td><td> 0.24341806</td><td> 1.0512110</td><td>2.944430e-01</td><td> 0.53099881</td></tr>
-	<tr><td>SNP_15</td><td> 0.12128865</td><td> 0.5156009</td><td>6.067084e-01</td><td> 0.21702000</td></tr>
-	<tr><td>SNP_16</td><td> 0.07144974</td><td> 0.3084373</td><td>7.580738e-01</td><td> 0.12028849</td></tr>
-	<tr><td>SNP_17</td><td>-0.10638566</td><td>-0.4891288</td><td>6.252919e-01</td><td> 0.20391722</td></tr>
-	<tr><td>SNP_18</td><td>-0.29318567</td><td>-1.3328340</td><td>1.841180e-01</td><td> 0.73490385</td></tr>
-	<tr><td>SNP_19</td><td>-0.22209777</td><td>-1.0453395</td><td>2.971406e-01</td><td> 0.52703800</td></tr>
-	<tr><td>SNP_20</td><td>-0.10917106</td><td>-0.4787788</td><td>6.326243e-01</td><td> 0.19885416</td></tr>
-	<tr><td>SNP_21</td><td> 0.13770909</td><td> 0.6009118</td><td>5.485860e-01</td><td> 0.26075527</td></tr>
-	<tr><td>SNP_22</td><td>-0.07920915</td><td>-0.3418736</td><td>7.328086e-01</td><td> 0.13500947</td></tr>
-	<tr><td>SNP_23</td><td>-0.20258240</td><td>-0.8236013</td><td>4.111571e-01</td><td> 0.38599225</td></tr>
-	<tr><td>SNP_24</td><td>-0.08857198</td><td>-0.3854757</td><td>7.002988e-01</td><td> 0.15471663</td></tr>
-	<tr><td>SNP_25</td><td>-0.22254703</td><td>-0.9874677</td><td>3.246186e-01</td><td> 0.48862665</td></tr>
-</tbody>
-</table>
-</div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="p">[</span><span class="n">results</span><span class="o">$</span><span class="n">P_value</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0.05</span><span class="p">,</span><span class="w"> </span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><table class="dataframe">
-<caption>A data.frame: 3 × 5</caption>
-<thead>
-	<tr><th></th><th scope=col>SNP</th><th scope=col>Effect</th><th scope=col>T_statistic</th><th scope=col>P_value</th><th scope=col>Minus_log10_P</th></tr>
-	<tr><th></th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
-</thead>
-<tbody>
-	<tr><th scope=row>1</th><td>SNP_1</td><td>1.9344913</td><td>7.645192</td><td>8.827948e-13</td><td>12.054140</td></tr>
-	<tr><th scope=row>2</th><td>SNP_2</td><td>1.3679316</td><td>6.376918</td><td>1.247657e-09</td><td> 8.903905</td></tr>
-	<tr><th scope=row>3</th><td>SNP_3</td><td>0.5138326</td><td>2.217044</td><td>2.775781e-02</td><td> 1.556615</td></tr>
-</tbody>
-</table>
-</div></div>
-</div>
-<p>Now let’s try to control for multiple testing by using the Bonferroni Correction, which adjusts the threshold to <span class="math notranslate nohighlight">\(\frac{\alpha}{M} = \frac{0.05}{15}\)</span>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Apply Bonferroni correction</span>
-<span class="c1"># Bonferroni threshold: alpha / M</span>
-<span class="n">alpha</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.05</span>
-<span class="n">bonferroni_threshold</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">n_snps</span>
-
-<span class="c1"># Identify significant SNPs under Bonferroni correction</span>
-<span class="n">bonferroni_sig</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">results</span><span class="o">$</span><span class="n">P_value</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">bonferroni_threshold</span>
-
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Bonferroni Correction (alpha = 0.05)\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;=========================================\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Adjusted significance threshold:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">bonferroni_threshold</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Number of significant SNPs:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">bonferroni_sig</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\nSignificant SNPs under Bonferroni:\n&quot;</span><span class="p">)</span>
-<span class="kr">if</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="n">bonferroni_sig</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">results</span><span class="p">[</span><span class="n">bonferroni_sig</span><span class="p">,</span><span class="w"> </span><span class="p">]</span>
-<span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nf">cat</span><span class="p">(</span><span class="s">&quot;(None)\n&quot;</span><span class="p">)</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bonferroni Correction (alpha = 0.05)
-=========================================
-Adjusted significance threshold: 0.002 
-Number of significant SNPs: 2 
-
-Significant SNPs under Bonferroni:
-</pre></div>
-</div>
-<div class="output text_html"><table class="dataframe">
-<caption>A data.frame: 2 × 5</caption>
-<thead>
-	<tr><th></th><th scope=col>SNP</th><th scope=col>Effect</th><th scope=col>T_statistic</th><th scope=col>P_value</th><th scope=col>Minus_log10_P</th></tr>
-	<tr><th></th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
-</thead>
-<tbody>
-	<tr><th scope=row>1</th><td>SNP_1</td><td>1.934491</td><td>7.645192</td><td>8.827948e-13</td><td>12.054140</td></tr>
-	<tr><th scope=row>2</th><td>SNP_2</td><td>1.367932</td><td>6.376918</td><td>1.247657e-09</td><td> 8.903905</td></tr>
-</tbody>
-</table>
-</div></div>
-</div>
-<p>Note that after applying Bonferroni correction, the number of significant variants decreases.</p>
-<p>We can also use FDR to control the expected proportion of false positives among discoveries, allowing us to find more true associations while still controlling error.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Apply Benjamini-Hochberg FDR control</span>
-<span class="c1"># Steps:</span>
-<span class="c1"># 1. Sort p-values</span>
-<span class="c1"># 2. Find largest i where p(i) &lt;= (i/M) * alpha</span>
-<span class="c1"># 3. Reject all hypotheses up to index i</span>
-
-<span class="c1"># Sort p-values and get indices</span>
-<span class="n">sorted_indices</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">order</span><span class="p">(</span><span class="n">results</span><span class="o">$</span><span class="n">P_value</span><span class="p">)</span>
-<span class="n">sorted_pvals</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">results</span><span class="o">$</span><span class="n">P_value</span><span class="p">[</span><span class="n">sorted_indices</span><span class="p">]</span>
-
-<span class="c1"># Find the largest i where p(i) &lt;= (i/M) * alpha_FDR</span>
-<span class="n">alpha_fdr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.05</span>
-<span class="n">thresholds</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n_snps</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">n_snps</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">alpha_fdr</span>
-<span class="n">cutoff_idx</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="nf">which</span><span class="p">(</span><span class="n">sorted_pvals</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">thresholds</span><span class="p">))</span>
-
-<span class="c1"># If no SNP passes, cutoff_idx will be -Inf</span>
-<span class="kr">if</span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">cutoff_idx</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nf">is.infinite</span><span class="p">(</span><span class="n">cutoff_idx</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">cutoff_idx</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span>
-<span class="w">  </span><span class="n">fdr_threshold</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span>
-<span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">fdr_threshold</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sorted_pvals</span><span class="p">[</span><span class="n">cutoff_idx</span><span class="p">]</span>
-<span class="p">}</span>
-
-<span class="c1"># Compute q-values (adjusted p-values for FDR)</span>
-<span class="c1"># q-value for each test = min(p * M / rank, 1)</span>
-<span class="n">q_values</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="n">n_snps</span><span class="p">)</span>
 <span class="kr">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">n_snps</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">rank_i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">which</span><span class="p">(</span><span class="n">sorted_indices</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">i</span><span class="p">)</span>
-<span class="w">  </span><span class="n">q_values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">results</span><span class="o">$</span><span class="n">P_value</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n_snps</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">rank_i</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+<span class="w">  </span><span class="n">fit</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">expression</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">genotypes</span><span class="p">[,</span><span class="w"> </span><span class="n">i</span><span class="p">])</span>
+<span class="w">  </span><span class="n">coef_summary</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">fit</span><span class="p">)</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="p">]</span>
+<span class="w">  </span><span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="m">4</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">coef_summary</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">)]</span>
 <span class="p">}</span>
 
-<span class="n">results</span><span class="o">$</span><span class="n">Q_value</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">q_values</span>
-<span class="n">fdr_sig</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">results</span><span class="o">$</span><span class="n">Q_value</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">alpha_fdr</span>
+<span class="n">results</span><span class="o">$</span><span class="n">Minus_log10_P</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="o">-</span><span class="nf">log10</span><span class="p">(</span><span class="n">results</span><span class="o">$</span><span class="n">P_value</span><span class="p">)</span>
 
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Benjamini-Hochberg FDR Control (alpha = 0.05)\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;=========================================\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;FDR threshold:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">fdr_threshold</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Number of significant SNPs:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">fdr_sig</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\nSignificant SNPs under FDR:\n&quot;</span><span class="p">)</span>
-<span class="kr">if</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="n">fdr_sig</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">results</span><span class="p">[</span><span class="n">fdr_sig</span><span class="p">,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;SNP&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Effect&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;P_value&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Q_value&quot;</span><span class="p">)]</span>
-<span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nf">cat</span><span class="p">(</span><span class="s">&quot;(None)\n&quot;</span><span class="p">)</span>
-<span class="p">}</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\nNominal significance (p &lt; 0.05):&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">results</span><span class="o">$</span><span class="n">P_value</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0.05</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;SNPs\n&quot;</span><span class="p">)</span>
+<span class="n">results</span><span class="p">[</span><span class="n">results</span><span class="o">$</span><span class="n">P_value</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0.05</span><span class="p">,</span><span class="w"> </span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Benjamini-Hochberg FDR Control (alpha = 0.05)
-=========================================
-FDR threshold: 1.247657e-09 
-Number of significant SNPs: 2 
-
-Significant SNPs under FDR:
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nominal significance (p &lt; 0.05): 4 SNPs
 </pre></div>
 </div>
 <div class="output text_html"><table class="dataframe">
-<caption>A data.frame: 2 × 4</caption>
+<caption>A data.frame: 4 × 5</caption>
+<thead>
+	<tr><th></th><th scope=col>SNP</th><th scope=col>Effect</th><th scope=col>T_stat</th><th scope=col>P_value</th><th scope=col>Minus_log10_P</th></tr>
+	<tr><th></th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>1</th><td>SNP_1</td><td>2.0407899</td><td>10.137539</td><td>1.015866e-19</td><td>18.993164</td></tr>
+	<tr><th scope=row>2</th><td>SNP_2</td><td>2.2685514</td><td>11.383006</td><td>2.021029e-23</td><td>22.694427</td></tr>
+	<tr><th scope=row>3</th><td>SNP_3</td><td>1.5096572</td><td> 6.622406</td><td>3.252300e-10</td><td> 9.487809</td></tr>
+	<tr><th scope=row>4</th><td>SNP_4</td><td>0.6000125</td><td> 2.333112</td><td>2.064614e-02</td><td> 1.685161</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="multiple-testing-correction">
+<h2>Multiple Testing Correction<a class="headerlink" href="#multiple-testing-correction" title="Link to this heading">#</a></h2>
+<section id="bonferroni-correction">
+<h3>Bonferroni Correction<a class="headerlink" href="#bonferroni-correction" title="Link to this heading">#</a></h3>
+<p>Apply Bonferroni correction: threshold = <span class="math notranslate nohighlight">\(\frac{\alpha}{M} = \frac{0.05}{25}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">alpha</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.05</span>
+<span class="n">bonf_thresh</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">n_snps</span>
+
+<span class="n">results</span><span class="o">$</span><span class="n">Bonf_sig</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">results</span><span class="o">$</span><span class="n">P_value</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">bonf_thresh</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Bonferroni threshold:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">bonf_thresh</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Significant SNPs:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">results</span><span class="o">$</span><span class="n">Bonf_sig</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n\n&quot;</span><span class="p">)</span>
+<span class="n">results</span><span class="p">[</span><span class="n">results</span><span class="o">$</span><span class="n">Bonf_sig</span><span class="p">,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;SNP&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Effect&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;P_value&quot;</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bonferroni threshold: 0.002 
+Significant SNPs: 3 
+</pre></div>
+</div>
+<div class="output text_html"><table class="dataframe">
+<caption>A data.frame: 3 × 3</caption>
+<thead>
+	<tr><th></th><th scope=col>SNP</th><th scope=col>Effect</th><th scope=col>P_value</th></tr>
+	<tr><th></th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>1</th><td>SNP_1</td><td>2.040790</td><td>1.015866e-19</td></tr>
+	<tr><th scope=row>2</th><td>SNP_2</td><td>2.268551</td><td>2.021029e-23</td></tr>
+	<tr><th scope=row>3</th><td>SNP_3</td><td>1.509657</td><td>3.252300e-10</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>Bonferroni correction reduces the number of significant variants.</p>
+</section>
+<section id="benjamini-hochberg-fdr-control">
+<h3>Benjamini-Hochberg FDR Control<a class="headerlink" href="#benjamini-hochberg-fdr-control" title="Link to this heading">#</a></h3>
+<p>FDR controls the expected proportion of false positives among discoveries, providing more power than Bonferroni.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">sorted_idx</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">order</span><span class="p">(</span><span class="n">results</span><span class="o">$</span><span class="n">P_value</span><span class="p">)</span>
+<span class="n">sorted_p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">results</span><span class="o">$</span><span class="n">P_value</span><span class="p">[</span><span class="n">sorted_idx</span><span class="p">]</span>
+<span class="n">bh_thresh</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n_snps</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">n_snps</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">alpha</span>
+
+<span class="n">cutoff</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="nf">which</span><span class="p">(</span><span class="n">sorted_p</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">bh_thresh</span><span class="p">)))</span>
+<span class="n">fdr_thresh</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="n">cutoff</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sorted_p</span><span class="p">[</span><span class="n">cutoff</span><span class="p">],</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
+
+<span class="n">results</span><span class="o">$</span><span class="n">Q_value</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">p.adjust</span><span class="p">(</span><span class="n">results</span><span class="o">$</span><span class="n">P_value</span><span class="p">,</span><span class="w"> </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;BH&quot;</span><span class="p">)</span>
+<span class="n">results</span><span class="o">$</span><span class="n">FDR_sig</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">results</span><span class="o">$</span><span class="n">Q_value</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">alpha</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;FDR threshold (largest p-value):&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">fdr_thresh</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Significant SNPs:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">results</span><span class="o">$</span><span class="n">FDR_sig</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n\n&quot;</span><span class="p">)</span>
+<span class="n">results</span><span class="p">[</span><span class="n">results</span><span class="o">$</span><span class="n">FDR_sig</span><span class="p">,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;SNP&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Effect&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;P_value&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Q_value&quot;</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FDR threshold (largest p-value): 3.2523e-10 
+Significant SNPs: 3 
+</pre></div>
+</div>
+<div class="output text_html"><table class="dataframe">
+<caption>A data.frame: 3 × 4</caption>
 <thead>
 	<tr><th></th><th scope=col>SNP</th><th scope=col>Effect</th><th scope=col>P_value</th><th scope=col>Q_value</th></tr>
 	<tr><th></th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
 </thead>
 <tbody>
-	<tr><th scope=row>1</th><td>SNP_1</td><td>1.934491</td><td>8.827948e-13</td><td>2.206987e-11</td></tr>
-	<tr><th scope=row>2</th><td>SNP_2</td><td>1.367932</td><td>1.247657e-09</td><td>1.559572e-08</td></tr>
+	<tr><th scope=row>1</th><td>SNP_1</td><td>2.040790</td><td>1.015866e-19</td><td>1.269832e-18</td></tr>
+	<tr><th scope=row>2</th><td>SNP_2</td><td>2.268551</td><td>2.021029e-23</td><td>5.052573e-22</td></tr>
+	<tr><th scope=row>3</th><td>SNP_3</td><td>1.509657</td><td>3.252300e-10</td><td>2.710250e-09</td></tr>
 </tbody>
 </table>
 </div></div>
 </div>
+</section>
+</section>
 <section id="permutation-testing-for-egene-discovery">
 <h2>Permutation Testing for eGene Discovery<a class="headerlink" href="#permutation-testing-for-egene-discovery" title="Link to this heading">#</a></h2>
-<p>Now we demonstrate permutation testing to control FDR for eGene (expression quantitative trait locus) discovery. The key idea: for each gene, we find the minimum p-value across all SNPs. We then shuffle sample labels to generate a null distribution, and compute empirical p-values.</p>
+<p>Permutation testing generates empirical p-values by shuffling sample labels to create a null distribution of the minimum p-value across all SNPs.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Observed test statistic: minimum p-value across all SNPs</span>
-<span class="c1"># This is what we would report as the eGene p-value</span>
-<span class="n">min_pval_observed</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">p_values</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">min_pval_observed</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">results</span><span class="o">$</span><span class="n">P_value</span><span class="p">)</span>
 
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Observed minimum p-value (across all SNPs):&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">min_pval_observed</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;This represents the &#39;eGene signal&#39; for this gene.\n\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Observed minimum p-value:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">min_pval_observed</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\n\n&quot;</span><span class="p">)</span>
 
-<span class="c1"># Now perform permutations to get null distribution</span>
-<span class="n">n_perms</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1000</span><span class="w">  </span><span class="c1"># Number of permutations (use more for real studies, e.g., 10,000)</span>
-
-<span class="c1"># Store minimum p-values from each permutation</span>
+<span class="n">n_perms</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">100</span>
 <span class="n">min_pvals_permuted</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="n">n_perms</span><span class="p">)</span>
 
-<span class="nf">set.seed</span><span class="p">(</span><span class="m">27</span><span class="p">)</span><span class="w">  </span><span class="c1"># For reproducibility</span>
+<span class="nf">set.seed</span><span class="p">(</span><span class="m">72</span><span class="p">)</span>
 
 <span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Running&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n_perms</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;permutations...\n&quot;</span><span class="p">)</span>
 
 <span class="kr">for</span><span class="p">(</span><span class="n">perm</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">n_perms</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="c1"># Shuffle the expression labels (break association with genotypes)</span>
-<span class="w">  </span><span class="c1"># This shuffles the sample order of expression, so each SNP is tested</span>
-<span class="w">  </span><span class="c1"># against a random expression ordering</span>
 <span class="w">  </span><span class="n">expression_shuffled</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">expression</span><span class="p">[</span><span class="nf">sample</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)]</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1"># Test each SNP against shuffled expression</span>
+
 <span class="w">  </span><span class="n">pvals_perm</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="n">n_snps</span><span class="p">)</span>
 <span class="w">  </span><span class="kr">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">n_snps</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">expression_shuffled</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">genotypes</span><span class="p">[,</span><span class="w"> </span><span class="n">i</span><span class="p">])</span>
-<span class="w">    </span><span class="n">summary_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
-<span class="w">    </span><span class="n">pvals_perm</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">summary_model</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">]</span>
+<span class="w">    </span><span class="n">pvals_perm</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">]</span>
 <span class="w">  </span><span class="p">}</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1"># Store minimum p-value from this permutation</span>
+
 <span class="w">  </span><span class="n">min_pvals_permuted</span><span class="p">[</span><span class="n">perm</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">pvals_perm</span><span class="p">)</span>
 <span class="p">}</span>
 
@@ -1141,28 +1002,21 @@ Significant SNPs under FDR:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observed minimum p-value (across all SNPs): 8.827948e-13 
-This represents the &#39;eGene signal&#39; for this gene.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observed minimum p-value: 2.021029e-23 
 
-Running 1000 permutations...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Permutation test completed.
+Running 100 permutations...
+Permutation test completed.
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate empirical p-value</span>
-<span class="c1"># p-value = (1 + # permutations with test stat &gt;= observed) / (n_perms + 1)</span>
-<span class="n">empirical_pval</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">min_pvals_permuted</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">min_pval_observed</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">n_perms</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">empirical_pval</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">min_pvals_permuted</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">min_pval_observed</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">n_perms</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
 
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Empirical p-value from permutations:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">empirical_pval</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Interpretation: probability of seeing a minimum p-value this small by chance\n\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Empirical p-value:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">empirical_pval</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\n\n&quot;</span><span class="p">)</span>
 
-<span class="c1"># Visualize the null distribution</span>
-<span class="nf">hist</span><span class="p">(</span><span class="n">min_pvals_permuted</span><span class="p">,</span><span class="w"> </span>
+<span class="nf">hist</span><span class="p">(</span><span class="n">min_pvals_permuted</span><span class="p">,</span>
 <span class="w">     </span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">30</span><span class="p">,</span>
 <span class="w">     </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;Null Distribution of Minimum p-value\n(from &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n_perms</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; permutations)&quot;</span><span class="p">),</span>
 <span class="w">     </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Minimum p-value across SNPs&quot;</span><span class="p">,</span>
@@ -1170,157 +1024,138 @@ Running 1000 permutations...
 <span class="w">     </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;lightblue&quot;</span><span class="p">,</span>
 <span class="w">     </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;white&quot;</span><span class="p">)</span>
 
-<span class="c1"># Add line for observed minimum p-value</span>
 <span class="nf">abline</span><span class="p">(</span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">min_pval_observed</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
-<span class="nf">legend</span><span class="p">(</span><span class="s">&quot;topright&quot;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">       </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Observed min p-value =&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">min_pval_observed</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">)),</span>
+<span class="nf">legend</span><span class="p">(</span><span class="s">&quot;topright&quot;</span><span class="p">,</span>
+<span class="w">       </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Observed =&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">format</span><span class="p">(</span><span class="n">min_pval_observed</span><span class="p">,</span><span class="w"> </span><span class="n">scientific</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">digits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)),</span>
 <span class="w">       </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Empirical p-value from permutations: 0.000999001 
-Interpretation: probability of seeing a minimum p-value this small by chance
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Empirical p-value: 0.00990099 
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/87597217d332d129b09d4d97072d42222f1e999c776ffc31461ee30c89599ab6.png"><img alt="_images/87597217d332d129b09d4d97072d42222f1e999c776ffc31461ee30c89599ab6.png" src="_images/87597217d332d129b09d4d97072d42222f1e999c776ffc31461ee30c89599ab6.png" style="width: 420px; height: 420px;" />
+<a class="reference internal image-reference" href="_images/7e4803c3308dc2d5758741e61dd625f3d74c10363b7b41508239ef239e72015b.png"><img alt="_images/7e4803c3308dc2d5758741e61dd625f3d74c10363b7b41508239ef239e72015b.png" src="_images/7e4803c3308dc2d5758741e61dd625f3d74c10363b7b41508239ef239e72015b.png" style="width: 420px; height: 420px;" />
 </a>
 </div>
 </div>
 </section>
-<section id="extending-to-genome-wide-study-multiple-genes-and-fdr-control">
-<h2>Extending to Genome-Wide Study: Multiple Genes and FDR Control<a class="headerlink" href="#extending-to-genome-wide-study-multiple-genes-and-fdr-control" title="Link to this heading">#</a></h2>
-<p><strong>Summary of what we just did for ONE gene:</strong></p>
+<section id="genome-wide-egene-discovery-fdr-control-across-multiple-genes">
+<h2>Genome-Wide eGene Discovery: FDR Control Across Multiple Genes<a class="headerlink" href="#genome-wide-egene-discovery-fdr-control-across-multiple-genes" title="Link to this heading">#</a></h2>
+<p><strong>What we did for ONE gene above:</strong></p>
 <ul class="simple">
 <li><p>Tested 25 SNPs for association with expression</p></li>
-<li><p>Used minimum p-value (min p = 8.8e-13) as the test statistic for this gene</p></li>
-<li><p>Ran 1,000 permutations to generate null distribution</p></li>
-<li><p>Computed empirical p-value showing this gene is a significant <strong>eGene</strong></p></li>
+<li><p>Used minimum $p-value across all SNPs as the gene-level test statistic</p></li>
+<li><p>Permuted expression labels to generate null distribution</p></li>
+<li><p>Computed empirical <span class="math notranslate nohighlight">\(p\)</span>-value for the gene</p></li>
 </ul>
-<p><strong>In a real genome-wide study</strong>, we would repeat this permutation test for many genes (e.g., 100, 1000, or 10,000 genes), getting one empirical p-value per gene. Then we need to control for the multiple testing problem across genes using FDR.</p>
-<p>Let’s simulate what happens in a multi-gene study:</p>
+<p><strong>The genome-wide scenario:</strong></p>
+<p>In a real eQTL study, we test thousands of genes. For each gene:</p>
+<ol class="arabic simple">
+<li><p>Test all nearby SNPs for association</p></li>
+<li><p>Use permutation to get an empirical $p-value (accounting for LD between SNPs)</p></li>
+<li><p>This gives us one $p-value per gene</p></li>
+</ol>
+<p><strong>The multiple testing problem:</strong> Testing many genes means we need FDR control at the gene level to determine which genes are true eGenes (genes with at least one eQTL).</p>
+<p>Below, we simulate this scenario: our analyzed gene plus 99 other genes, then apply FDR.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simulate a genome-wide eQTL study with 100 genes</span>
-<span class="c1"># In reality, each gene would have its own permutation test done separately</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">n_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">100</span>
 
-<span class="n">n_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">100</span><span class="w">  </span><span class="c1"># Number of genes tested genome-wide</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Simulating genome-wide eQTL study:\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;===================================\n\n&quot;</span><span class="p">)</span>
 
-<span class="c1"># Our analyzed gene has this empirical p-value from permutations:</span>
-<span class="n">our_gene_pval</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">empirical_pval</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Gene_1 (our analyzed gene):\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;  Empirical p-value:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">format</span><span class="p">(</span><span class="n">empirical_pval</span><span class="p">,</span><span class="w"> </span><span class="n">scientific</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n\n&quot;</span><span class="p">)</span>
 
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Genome-wide FDR control for eGene discovery:\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;=========================================\n\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Our gene (Gene_1) empirical p-value:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">format</span><span class="p">(</span><span class="n">our_gene_pval</span><span class="p">,</span><span class="w"> </span><span class="n">scientific</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n\n&quot;</span><span class="p">)</span>
-
-<span class="c1"># Simulate empirical p-values for 99 other genes</span>
-<span class="c1"># In reality, each would have its own permutation test</span>
-<span class="c1"># Most genes have no eQTL signal (p-values close to 0.5)</span>
-<span class="c1"># A few have real signals (p-values close to 0)</span>
 <span class="nf">set.seed</span><span class="p">(</span><span class="m">72</span><span class="p">)</span>
 <span class="n">other_genes_pval</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rbeta</span><span class="p">(</span><span class="n">n_genes</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">shape1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">shape2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">)</span>
 
-<span class="c1"># Combine: our gene + other genes</span>
-<span class="n">all_genes_pval</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">our_gene_pval</span><span class="p">,</span><span class="w"> </span><span class="n">other_genes_pval</span><span class="p">)</span>
+<span class="n">all_genes_pval</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">empirical_pval</span><span class="p">,</span><span class="w"> </span><span class="n">other_genes_pval</span><span class="p">)</span>
 <span class="n">gene_names</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;Gene_&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">n_genes</span><span class="p">)</span>
 
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Summary of empirical p-values across&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n_genes</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;genes:\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;- Smallest p-value:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">format</span><span class="p">(</span><span class="nf">min</span><span class="p">(</span><span class="n">all_genes_pval</span><span class="p">),</span><span class="w"> </span><span class="n">scientific</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;- Median p-value:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="nf">median</span><span class="p">(</span><span class="n">all_genes_pval</span><span class="p">),</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;- Largest p-value:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="nf">max</span><span class="p">(</span><span class="n">all_genes_pval</span><span class="p">),</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Simulated empirical p-values for&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n_genes</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;other genes\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;(most genes have no eQTL, so p-values are uniformly distributed)\n\n&quot;</span><span class="p">)</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Distribution of empirical p-values across all&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n_genes</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;genes:\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;  Smallest:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">format</span><span class="p">(</span><span class="nf">min</span><span class="p">(</span><span class="n">all_genes_pval</span><span class="p">),</span><span class="w"> </span><span class="n">scientific</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;  Median:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="nf">median</span><span class="p">(</span><span class="n">all_genes_pval</span><span class="p">),</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;  Largest:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="nf">max</span><span class="p">(</span><span class="n">all_genes_pval</span><span class="p">),</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n\n&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Genome-wide FDR control for eGene discovery:
-=========================================
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Simulating genome-wide eQTL study:
+===================================
 
-Our gene (Gene_1) empirical p-value: 9.99001e-04 
+Gene_1 (our analyzed gene):
+  Empirical p-value: 9.90099e-03 
 
-Summary of empirical p-values across 100 genes:
-- Smallest p-value: 4.125328e-04 
-- Median p-value: 0.1206 
-- Largest p-value: 0.5724 
+Simulated empirical p-values for 99 other genes
+(most genes have no eQTL, so p-values are uniformly distributed)
+
+Distribution of empirical p-values across all 100 genes:
+  Smallest: 4.125328e-04 
+  Median: 0.121 
+  Largest: 0.572 
 </pre></div>
 </div>
 </div>
 </div>
-<p>Now let’s apply FDR control on the gene level.</p>
+<p>Apply Benjamini-Hochberg FDR control to identify significant eGenes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Apply FDR control (Benjamini-Hochberg) to empirical p-values</span>
-<span class="c1"># This controls the expected proportion of false positive eGenes</span>
-<span class="n">sorted_idx</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">order</span><span class="p">(</span><span class="n">all_genes_pval</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">sorted_idx</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">order</span><span class="p">(</span><span class="n">all_genes_pval</span><span class="p">)</span>
 <span class="n">sorted_pval</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">all_genes_pval</span><span class="p">[</span><span class="n">sorted_idx</span><span class="p">]</span>
-<span class="n">sorted_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gene_names</span><span class="p">[</span><span class="n">sorted_idx</span><span class="p">]</span>
 
-<span class="c1"># Find largest i where p(i) &lt;= (i/M) * alpha</span>
-<span class="n">alpha_fdr_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.05</span>
-<span class="n">thresholds_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n_genes</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">n_genes</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">alpha_fdr_genes</span>
+<span class="n">alpha_fdr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.05</span>
+<span class="n">bh_thresh</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n_genes</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">n_genes</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">alpha_fdr</span>
 
-<span class="c1"># Find which genes pass the threshold</span>
-<span class="n">sig_idx</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">which</span><span class="p">(</span><span class="n">sorted_pval</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">thresholds_genes</span><span class="p">)</span>
+<span class="n">sig_idx</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">which</span><span class="p">(</span><span class="n">sorted_pval</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">bh_thresh</span><span class="p">)</span>
+<span class="n">n_sig</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">sig_idx</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">sig_idx</span><span class="p">),</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
 
-<span class="kr">if</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">sig_idx</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">n_sig_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">sig_idx</span><span class="p">)</span>
-<span class="w">  </span><span class="n">fdr_cutoff_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sorted_pval</span><span class="p">[</span><span class="n">n_sig_genes</span><span class="p">]</span>
-<span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">n_sig_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span>
-<span class="w">  </span><span class="n">fdr_cutoff_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span>
-<span class="p">}</span>
+<span class="n">q_values</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">p.adjust</span><span class="p">(</span><span class="n">all_genes_pval</span><span class="p">,</span><span class="w"> </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;BH&quot;</span><span class="p">)</span>
 
-<span class="c1"># Compute q-values for all genes (FDR-adjusted p-values)</span>
-<span class="c1"># q-value: the smallest FDR threshold at which this gene is called significant</span>
-<span class="n">q_values_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="n">n_genes</span><span class="p">)</span>
-<span class="kr">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">n_genes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">rank_i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">which</span><span class="p">(</span><span class="n">sorted_idx</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">i</span><span class="p">)</span>
-<span class="w">  </span><span class="n">q_values_genes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">all_genes_pval</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n_genes</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">rank_i</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="c1"># Create results table</span>
-<span class="n">genome_results</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span>
+<span class="n">results</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span>
 <span class="w">  </span><span class="n">Gene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gene_names</span><span class="p">,</span>
-<span class="w">  </span><span class="n">Empirical_Pvalue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">all_genes_pval</span><span class="p">,</span>
-<span class="w">  </span><span class="n">Q_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q_values_genes</span><span class="p">,</span>
-<span class="w">  </span><span class="n">Is_eGene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q_values_genes</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">alpha_fdr_genes</span>
+<span class="w">  </span><span class="n">Empirical_P</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">all_genes_pval</span><span class="p">,</span>
+<span class="w">  </span><span class="n">Q_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q_values</span><span class="p">,</span>
+<span class="w">  </span><span class="n">Significant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q_values</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">alpha_fdr</span>
 <span class="p">)</span>
 
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Results: Significant eGenes (q-value &lt; 0.05):\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;=========================================\n&quot;</span><span class="p">)</span>
-<span class="n">egenes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">genome_results</span><span class="p">[</span><span class="n">genome_results</span><span class="o">$</span><span class="n">Is_eGene</span><span class="p">,</span><span class="w"> </span><span class="p">]</span>
-<span class="kr">if</span><span class="p">(</span><span class="nf">nrow</span><span class="p">(</span><span class="n">egenes</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="n">egenes</span><span class="p">)</span>
-<span class="w">  </span><span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\nTotal significant eGenes:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">nrow</span><span class="p">(</span><span class="n">egenes</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;FDR control results (q-value &lt; 0.05):\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;======================================\n\n&quot;</span><span class="p">)</span>
+
+<span class="n">sig_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">results</span><span class="p">[</span><span class="n">results</span><span class="o">$</span><span class="n">Significant</span><span class="p">,</span><span class="w"> </span><span class="p">]</span>
+<span class="kr">if</span><span class="p">(</span><span class="nf">nrow</span><span class="p">(</span><span class="n">sig_genes</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="n">sig_genes</span><span class="p">[</span><span class="nf">order</span><span class="p">(</span><span class="n">sig_genes</span><span class="o">$</span><span class="n">Q_value</span><span class="p">),</span><span class="w"> </span><span class="p">])</span>
+<span class="w">  </span><span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\nSignificant eGenes:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">nrow</span><span class="p">(</span><span class="n">sig_genes</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Expected false positives: ~&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="nf">nrow</span><span class="p">(</span><span class="n">sig_genes</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.05</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n\n&quot;</span><span class="p">)</span>
 <span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nf">cat</span><span class="p">(</span><span class="s">&quot;(None found)\n&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">cat</span><span class="p">(</span><span class="s">&quot;No significant eGenes found at FDR 0.05\n\n&quot;</span><span class="p">)</span>
 <span class="p">}</span>
 
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\nInterpretation:\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;- Among&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n_genes</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;genes tested, we found&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">nrow</span><span class="p">(</span><span class="n">egenes</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;significant eGenes\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;- At FDR 0.05, we expect ~5% of these&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">nrow</span><span class="p">(</span><span class="n">egenes</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;discoveries to be false positives\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;- Our analyzed gene (Gene_1) is&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="nf">any</span><span class="p">(</span><span class="n">egenes</span><span class="o">$</span><span class="n">Gene</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;Gene_1&quot;</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;significant&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NOT significant&quot;</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Gene_1 (our analyzed gene):&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="nf">ifelse</span><span class="p">(</span><span class="s">&quot;Gene_1&quot;</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">sig_genes</span><span class="o">$</span><span class="n">Gene</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;SIGNIFICANT&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;not significant&quot;</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Results: Significant eGenes (q-value &lt; 0.05):
-=========================================
-      Gene Empirical_Pvalue    Q_value Is_eGene
-1   Gene_1     0.0009990010 0.04995005     TRUE
-34 Gene_34     0.0004125328 0.04125328     TRUE
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FDR control results (q-value &lt; 0.05):
+======================================
 
-Total significant eGenes: 2 
+      Gene  Empirical_P    Q_value Significant
+34 Gene_34 0.0004125328 0.04125328        TRUE
+
+Significant eGenes: 1 
+Expected false positives: ~ 0 
+
+Gene_1 (our analyzed gene): not significant 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Interpretation:
-- Among 100 genes tested, we found 2 significant eGenes
-- At FDR 0.05, we expect ~5% of these 2 discoveries to be false positives
-- Our analyzed gene (Gene_1) is significant 
-</pre></div>
 </div>
 </div>
-</div>
-<p>Note that the results of gene 2-100 are artifact in this case, only to present the complete process of performing permutation test for eGene discovery.</p>
+<p><strong>Note:</strong> Genes 2-100 are simulated to illustrate the workflow. In a real study, each gene would have its own permutation test performed independently.</p>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="supplementary">
@@ -1366,13 +1201,19 @@ Total significant eGenes: 2
 <span class="w">  </span><span class="p">)</span>
 
 <span class="nf">print</span><span class="p">(</span><span class="n">p_value_plot</span><span class="p">)</span>
-<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;./cartoons/p_value.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_value_plot</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span>
+<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;./figures/p_value.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_value_plot</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span>
 <span class="w">       </span><span class="n">units</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;in&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/d6674e431cf9d5ed505f139747b2bf4b52499f15510c4a24a39c56a85c0e83be.png" src="_images/d6674e431cf9d5ed505f139747b2bf4b52499f15510c4a24a39c56a85c0e83be.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message:
+“The `size` argument of `element_line()` is deprecated as of ggplot2 3.4.0.
+<span class=" -Color -Color-Cyan">ℹ</span> Please use the `linewidth` argument instead.”
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/d6674e431cf9d5ed505f139747b2bf4b52499f15510c4a24a39c56a85c0e83be.png"><img alt="_images/d6674e431cf9d5ed505f139747b2bf4b52499f15510c4a24a39c56a85c0e83be.png" src="_images/d6674e431cf9d5ed505f139747b2bf4b52499f15510c4a24a39c56a85c0e83be.png" style="width: 420px; height: 420px;" />
+</a>
 </div>
 </div>
 </section>
@@ -1404,7 +1245,7 @@ Total significant eGenes: 2
 
 <span class="c1"># Create the plot</span>
 <span class="n">p_Bayesian_hypothesis_testing</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">bayes_data</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">density</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hypothesis</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">geom_line</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_line</span><span class="p">(</span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
 <span class="w">  </span><span class="nf">geom_vline</span><span class="p">(</span><span class="n">xintercept</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">line_pos</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;grey&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dashed&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
 <span class="w">  </span><span class="nf">labs</span><span class="p">(</span>
 <span class="w">    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Bayesian Hypothesis Testing: Comparing Any Two Hypotheses&quot;</span><span class="p">,</span>
@@ -1426,7 +1267,7 @@ Total significant eGenes: 2
 <span class="w">  </span><span class="p">)</span>
 
 <span class="nf">print</span><span class="p">(</span><span class="n">p_Bayesian_hypothesis_testing</span><span class="p">)</span>
-<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;./cartoons/Bayesian_hypothesis_testing.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_Bayesian_hypothesis_testing</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span>
+<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;./figures/Bayesian_hypothesis_testing.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_Bayesian_hypothesis_testing</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span>
 <span class="w">       </span><span class="n">units</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;in&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1511,7 +1352,7 @@ Total significant eGenes: 2
 <span class="n">grid_plot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">grid.arrange</span><span class="p">(</span><span class="n">grobs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plot_list</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">)</span>
 
 <span class="c1"># Save</span>
-<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;./cartoons/multiple_testing.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grid_plot</span><span class="p">,</span><span class="w"> </span>
+<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;./figures/multiple_testing.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grid_plot</span><span class="p">,</span><span class="w"> </span>
 <span class="w">       </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">units</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;in&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1596,25 +1437,28 @@ Total significant eGenes: 2
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">p-value and Bayesian Hypothesis Testing</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><span class="math notranslate nohighlight">\(p\)</span>-value and Bayesian Hypothesis Testing</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-summary">Graphical Summary</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formulas">Key Formulas</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#p-value"><span class="math notranslate nohighlight">\(p\)</span>-value</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#property">Property</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitation-of-p-value">Limitation of <span class="math notranslate nohighlight">\(p\)</span>-value</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-testing">Multiple Testing</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#permutation-test">Permutation test</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-testing">Multiple Testing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#permutation-test">Permutation Test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#p-value"><span class="math notranslate nohighlight">\(p\)</span>-value</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-hypothesis-testing">Bayesian Hypothesis Testing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequentist-vs-bayesian-paradigms">Frequentist vs. Bayesian Paradigms</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#association-testing">Association Testing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-testing-correction">Multiple Testing Correction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bonferroni-correction">Bonferroni Correction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#benjamini-hochberg-fdr-control">Benjamini-Hochberg FDR Control</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#permutation-testing-for-egene-discovery">Permutation Testing for eGene Discovery</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extending-to-genome-wide-study-multiple-genes-and-fdr-control">Extending to Genome-Wide Study: Multiple Genes and FDR Control</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#genome-wide-egene-discovery-fdr-control-across-multiple-genes">Genome-Wide eGene Discovery: FDR Control Across Multiple Genes</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#supplementary">Supplementary</a><ul class="visible nav section-nav flex-column">

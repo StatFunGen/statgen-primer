@@ -63,7 +63,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Bayesian Multivariate Normal Mean Model" href="Bayesian_multivariate_normal_mean_model.html" />
-    <link rel="prev" title="p-value and Bayesian Hypothesis Testing" href="p_value_and_Bayesian_hypothesis_testing.html" />
+    <link rel="prev" title="\(p\)-value and Bayesian Hypothesis Testing" href="p_value_and_Bayesian_hypothesis_testing.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -330,7 +330,6 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="likelihood_ratio.html">Likelihood Ratio</a></li>
 
 
@@ -355,14 +354,13 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="Bayes_factor.html">Bayes Factor</a></li>
 
 
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="p_value_and_Bayesian_hypothesis_testing.html">p-value and Bayesian Hypothesis Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p_value_and_Bayesian_hypothesis_testing.html"><span class="math notranslate nohighlight">\(p\)</span>-value and Bayesian Hypothesis Testing</a></li>
 
 
 
@@ -379,9 +377,7 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="Bayesian_multivariate_normal_mean_model.html">Bayesian Multivariate Normal Mean Model</a></li>
-
 
 
 
@@ -391,7 +387,6 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Multiple Bayesian Models</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Bayesian_model_comparison.html">Bayesian Model Comparison</a></li>
-
 
 
 
@@ -580,29 +575,23 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-summary">Graphical Summary</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bayesian-perspective-uncertainty-as-random-variables">The Bayesian Perspective: Uncertainty as Random Variables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-assumptions">Model Assumptions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prior-distribution-quantifying-our-uncertainty">Prior Distribution: Quantifying Our Uncertainty</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#likelihood-what-we-can-condition-on">Likelihood: What We Can Condition On</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-distribution-conditioning-on-everything-available">Posterior Distribution: Conditioning on Everything Available</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-as-weighted-average">Interpretation as Weighted Average</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bayesian-perspective">The Bayesian Perspective</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-setup">Model Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prior-distribution">Prior Distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#likelihood">Likelihood</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-distribution">Posterior Distribution</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-as-weighted-average">Posterior as Weighted Average</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-makes-sense">Why This Makes Sense</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-simulated-data">Generate Simulated Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-normal-mean-model-setup">Bayesian Normal Mean Model Setup</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-both-variances-from-data">Estimating Both Variances from Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-the-posterior">Computing the Posterior</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#supplementary">Supplementary</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Graphical Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Prior Distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-variances">Estimating the Variances</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Posterior Distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-bayesian-update">Visualizing the Bayesian Update</a></li>
 </ul>
 </li>
 </ul>
@@ -632,111 +621,90 @@ document.write(`
 \[
 \mathbf{Y} = \mathbf{X} \beta + \boldsymbol{\varepsilon}, \quad \boldsymbol{\varepsilon} \sim \mathcal{N}(0, \sigma^2 \mathbf{I})
 \]</div>
-<p>where we place a <strong>prior distribution</strong> on the regression coefficient: <span class="math notranslate nohighlight">\(\beta \sim \mathcal{N}(\beta_0, \sigma_0^2)\)</span>.</p>
+<p>with a <strong>prior distribution</strong> on the regression coefficient: <span class="math notranslate nohighlight">\(\beta \sim \mathcal{N}(\beta_0, \sigma_0^2)\)</span>.</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\( \mathbf{Y} \in \mathbb{R}^{N \times 1} \)</span>: phenotype vector</p></li>
-<li><p><span class="math notranslate nohighlight">\( \mathbf{X} \in \mathbb{R}^{N \times 1} \)</span>: genotype vector (e.g., 0, 1, 2 for additive coding)</p></li>
-<li><p><span class="math notranslate nohighlight">\( \beta \in \mathbb{R} \)</span>: a scalar, genetic effect size (regression coefficient)</p></li>
-<li><p><span class="math notranslate nohighlight">\( \boldsymbol{\varepsilon} \in \mathbb{R}^{N \times 1} \)</span>: residual error, assumed i.i.d. Gaussian</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{Y} \in \mathbb{R}^{N}\)</span>: phenotype vector of <span class="math notranslate nohighlight">\(N\)</span> samples</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{X} \in \mathbb{R}^{N}\)</span>: genotype vector of <span class="math notranslate nohighlight">\(N\)</span> samples (<span class="math notranslate nohighlight">\(\mathbf{X}_i \in \{0, 1, 2\}\)</span> for additive coding)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta \in \mathbb{R}\)</span>: genetic effect size</p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{\varepsilon} \in \mathbb{R}^{N}\)</span>: residual error (i.i.d. Gaussian)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma^2\)</span>: residual variance</p></li>
 </ul>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="technical-details">
 <h1>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading">#</a></h1>
-<section id="the-bayesian-perspective-uncertainty-as-random-variables">
-<h2>The Bayesian Perspective: Uncertainty as Random Variables<a class="headerlink" href="#the-bayesian-perspective-uncertainty-as-random-variables" title="Link to this heading">#</a></h2>
-<p>In Bayesian statistics, parameters are not fixed unknown constants but <strong>random variables representing our uncertainty</strong>. This fundamental shift occurs because we recognize that we can never condition on everything that might influence a parameter’s true value.</p>
-<p><strong>Key insight</strong>: When we cannot condition on something (because it’s unobserved or unknown), we treat it as a random variable with a probability distribution that quantifies our uncertainty.</p>
+<section id="the-bayesian-perspective">
+<h2>The Bayesian Perspective<a class="headerlink" href="#the-bayesian-perspective" title="Link to this heading">#</a></h2>
+<p>In Bayesian statistics, parameters are <strong>random variables representing our uncertainty</strong>, not fixed unknown constants.</p>
+<p><strong>Key insight</strong>: When we cannot observe something, we treat it as a random variable with a probability distribution quantifying our uncertainty.</p>
 </section>
-<section id="model-assumptions">
-<h2>Model Assumptions<a class="headerlink" href="#model-assumptions" title="Link to this heading">#</a></h2>
-<p>In the Bayesian normal mean model, we treat uncertainty systematically by making everything we cannot fully condition on into a random variable:</p>
+<section id="model-setup">
+<h2>Model Setup<a class="headerlink" href="#model-setup" title="Link to this heading">#</a></h2>
 <div class="math notranslate nohighlight">
 \[
 Y_i \sim \mathcal{N}(X_i\beta, \sigma^2) \quad \text{for } i = 1, 2, \ldots, N
 \]</div>
-<p>where:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\beta\)</span> is <strong>not</strong> a fixed unknown constant, but a <strong>random variable</strong> representing our uncertainty about the genetic effect</p></li>
-<li><p><span class="math notranslate nohighlight">\(\sigma^2\)</span> is the known variance (we condition on this)</p></li>
-<li><p><span class="math notranslate nohighlight">\(X_i\)</span> is the genotype value (fixed and observed - we condition on this)</p></li>
-</ul>
-<p>The key insight: <strong>Since we cannot condition on the true value of <span class="math notranslate nohighlight">\(\beta\)</span> (we don’t know it), we treat it as random.</strong></p>
+<p>where <span class="math notranslate nohighlight">\(\beta\)</span> is a <strong>random variable</strong> (we cannot observe the true genetic effect, so we quantify our uncertainty about it).</p>
 </section>
-<section id="prior-distribution-quantifying-our-uncertainty">
-<h2>Prior Distribution: Quantifying Our Uncertainty<a class="headerlink" href="#prior-distribution-quantifying-our-uncertainty" title="Link to this heading">#</a></h2>
-<p>Since we cannot condition on the true value of <span class="math notranslate nohighlight">\(\beta\)</span>, we express our uncertainty through a probability distribution:</p>
+<section id="prior-distribution">
+<h2>Prior Distribution<a class="headerlink" href="#prior-distribution" title="Link to this heading">#</a></h2>
 <div class="math notranslate nohighlight">
 \[
 \beta \sim \mathcal{N}(\beta_0, \sigma_0^2)
 \]</div>
-<p>This prior distribution represents:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\beta_0\)</span>: Our best guess about the effect (what we’d expect if we had no data)</p></li>
-<li><p><span class="math notranslate nohighlight">\(\sigma_0^2\)</span>: How uncertain we are about this guess (larger variance = more uncertainty)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_0\)</span>: Best guess before seeing data</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma_0^2\)</span>: How uncertain we are (larger = more uncertain)</p></li>
 </ul>
-<p><strong>Key insight</strong>: This isn’t saying <span class="math notranslate nohighlight">\(\beta\)</span> “is random” in nature - it’s saying <strong>our knowledge about <span class="math notranslate nohighlight">\(\beta\)</span> is uncertain</strong> because we cannot condition on everything that determines the true effect.</p>
 <p>The probability density function reflects this uncertainty:</p>
 <div class="math notranslate nohighlight">
 \[
 p(\beta) \propto \exp\left(-\frac{(\beta - \beta_0)^2}{2\sigma_0^2}\right)
 \]</div>
 </section>
-<section id="likelihood-what-we-can-condition-on">
-<h2>Likelihood: What We Can Condition On<a class="headerlink" href="#likelihood-what-we-can-condition-on" title="Link to this heading">#</a></h2>
+<section id="likelihood">
+<h2>Likelihood<a class="headerlink" href="#likelihood" title="Link to this heading">#</a></h2>
 <p>The likelihood represents what we <strong>can</strong> condition on - the observed data given our uncertain parameter:</p>
 <div class="math notranslate nohighlight">
 \[
 Y_i\mid\beta, \sigma^2 \sim \mathcal{N}(X_i\beta, \sigma^2) \quad \text{for } i = 1, 2, \ldots, N
 \]</div>
-<p>For all observations, the likelihood is:</p>
 <div class="math notranslate nohighlight">
 \[
 p(\mathbf{Y}\mid\beta) \propto \exp\left(-\frac{1}{2\sigma^2} \sum_{i=1}^N (Y_i - X_i\beta)^2\right)
 \]</div>
-<p>This says: “If we knew <span class="math notranslate nohighlight">\(\beta\)</span> (could condition on it), this is how likely our data would be.”</p>
 </section>
-<section id="posterior-distribution-conditioning-on-everything-available">
-<h2>Posterior Distribution: Conditioning on Everything Available<a class="headerlink" href="#posterior-distribution-conditioning-on-everything-available" title="Link to this heading">#</a></h2>
-<p>Using Bayes’ theorem, we condition on all available information (the observed data) to update our uncertainty:</p>
+<section id="posterior-distribution">
+<h2>Posterior Distribution<a class="headerlink" href="#posterior-distribution" title="Link to this heading">#</a></h2>
+<p>Using Bayes’ theorem, we update our uncertainty given the observed data:</p>
 <div class="math notranslate nohighlight">
 \[
-p(\beta|\mathbf{Y}) \propto p(\mathbf{Y}|\beta) p(\beta)
+p(\beta|\mathbf{Y}) \propto p(\mathbf{Y}|\beta) \cdot p(\beta)
 \]</div>
-<p><strong>This is the essence of Bayesian thinking</strong>: Start with our uncertainty (prior), observe data, then update our uncertainty by conditioning on what we’ve learned.</p>
-<p>The posterior distribution follows a normal distribution:</p>
+<p>The posterior is:</p>
 <div class="math notranslate nohighlight">
 \[
 \beta \mid \mathbf{Y} \sim \mathcal{N}\left( \beta_1, \sigma_1^2 \right)
 \]</div>
-<p>where the parameters are:</p>
+<p>where:</p>
 <div class="math notranslate nohighlight">
 \[
 \beta_1 = \frac{\frac{1}{\sigma^2} \sum_{i=1}^N X_i Y_i + \frac{1}{\sigma_0^2} \beta_0}{\frac{1}{\sigma^2} \sum_{i=1}^N X_i^2 + \frac{1}{\sigma_0^2}}, \quad \sigma_1^2 = \frac{1}{\frac{1}{\sigma^2} \sum_{i=1}^N X_i^2 + \frac{1}{\sigma_0^2}}
 \]</div>
-<p>Notice: <span class="math notranslate nohighlight">\(\sigma_1^2 &lt; \sigma_0^2\)</span> always - <strong>conditioning on data reduces our uncertainty</strong>.</p>
-<section id="interpretation-as-weighted-average">
-<h3>Interpretation as Weighted Average<a class="headerlink" href="#interpretation-as-weighted-average" title="Link to this heading">#</a></h3>
-<p>The posterior mean can be rewritten as a <strong>weighted average</strong> of what we knew before (prior) and what we learned from data:</p>
+<p>Note: <span class="math notranslate nohighlight">\(\sigma_1^2 &lt; \sigma_0^2\)</span> always - <strong>observing data reduces uncertainty</strong>.</p>
+<section id="posterior-as-weighted-average">
+<h3>Posterior as Weighted Average<a class="headerlink" href="#posterior-as-weighted-average" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[
-\beta_1 = w \cdot \frac{T_2}{T_1} + (1-w) \cdot \beta_0
+\beta_1 = w \cdot \hat{\beta}_{\text{data}} + (1-w) \cdot \beta_0
 \]</div>
-<p>where: <span class="math notranslate nohighlight">\(w = \frac{\frac{T_1}{\sigma^2}}{\frac{T_1}{\sigma^2} + \frac{1}{\sigma_0^2}}\)</span></p>
-<p>This shows how conditioning works in practice:</p>
+<p>where <span class="math notranslate nohighlight">\(w = \frac{T_1/\sigma^2}{T_1/\sigma^2 + 1/\sigma_0^2}\)</span>, <span class="math notranslate nohighlight">\(\hat{\beta}_{\text{data}} = T_2/T_1\)</span>, and <span class="math notranslate nohighlight">\(T_1 = \sum_{i=1}^N X_i^2\)</span>, <span class="math notranslate nohighlight">\(T_2 = \sum_{i=1}^N X_i Y_i\)</span>.</p>
+<p><strong>Interpretation</strong>:</p>
 <ul class="simple">
-<li><p><strong>More data</strong> or <strong>lower measurement error</strong> (small <span class="math notranslate nohighlight">\(\sigma^2\)</span> or large <span class="math notranslate nohighlight">\(T_1\)</span>): <span class="math notranslate nohighlight">\(w \approx 1\)</span>, we trust the data more</p></li>
-<li><p><strong>More prior uncertainty</strong> (large <span class="math notranslate nohighlight">\(\sigma_0^2\)</span>): <span class="math notranslate nohighlight">\(w \approx 1\)</span>, we let data dominate since our prior was vague</p></li>
-<li><p><strong>Less prior uncertainty</strong> (small <span class="math notranslate nohighlight">\(\sigma_0^2\)</span>): <span class="math notranslate nohighlight">\(w \approx 0\)</span>, we stick closer to our prior beliefs</p></li>
-<li><p><strong>Equal information</strong> (<span class="math notranslate nohighlight">\(\frac{T_1}{\sigma^2} = \frac{1}{\sigma_0^2}\)</span>): <span class="math notranslate nohighlight">\(w = 0.5\)</span>, equal weighting</p></li>
+<li><p>More data or lower noise → <span class="math notranslate nohighlight">\(w \approx 1\)</span> (trust data)</p></li>
+<li><p>Vague prior (large <span class="math notranslate nohighlight">\(\sigma_0^2\)</span>) → <span class="math notranslate nohighlight">\(w \approx 1\)</span> (data dominates)</p></li>
+<li><p>Strong prior (small <span class="math notranslate nohighlight">\(\sigma_0^2\)</span>) → <span class="math notranslate nohighlight">\(w \approx 0\)</span> (prior dominates)</p></li>
 </ul>
-<p>where <span class="math notranslate nohighlight">\(T_1 = \sum_{i=1}^N X_i^2\)</span> and <span class="math notranslate nohighlight">\(T_2 = \sum_{i=1}^N X_i Y_i\)</span> are the sufficient statistics.</p>
 </section>
-</section>
-<section id="why-this-makes-sense">
-<h2>Why This Makes Sense<a class="headerlink" href="#why-this-makes-sense" title="Link to this heading">#</a></h2>
-<p><strong>Traditional thinking</strong>: “What’s the true value of this parameter?”<br />
-<strong>Bayesian thinking</strong>: “What’s our uncertainty about this parameter (because we can never condition on everything that determines it), and how does new information update that uncertainty?”</p>
-<p>This framework naturally handles situations where multiple sources of uncertainty exist, and where we want to systematically combine prior knowledge with observed data. The mathematical machinery ensures that conditioning on observed information always reduces uncertainty in a coherent way.</p>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="related-topics">
@@ -750,34 +718,36 @@ p(\beta|\mathbf{Y}) \propto p(\mathbf{Y}|\beta) p(\beta)
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="example">
 <h1>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
-<p>Imagine you’re studying genetic effects across many variants. You don’t know the true effect size for any particular variant, but you have some intuition: <strong>most genetic effects are probably small, some are moderate, and very few are large</strong>.</p>
-<p>This is fundamentally different from asking “Is the effect exactly 0, 0.5, or 1.0?” (which assumes a fixed effect) Instead, we’re saying: <strong>“The true effect itself is uncertain - it’s a random quantity drawn from some distribution.”</strong></p>
-<p>This leads us naturally to a <strong>hierarchical model</strong>:</p>
+<p>When studying genetic effects across many variants, we typically believe <strong>most effects are small, some are moderate, and few are large</strong>. Rather than assuming each effect is a fixed unknown constant, we model it as a <strong>random variable drawn from a distribution</strong>.</p>
+<p>This leads to a <strong>hierarchical structure</strong>:</p>
 <ol class="arabic simple">
-<li><p><strong>Level 1 (Data)</strong>: Each person’s phenotype depends on their genotype and the true effect</p></li>
-<li><p><strong>Level 2 (Effect)</strong>: The true effect is itself random, drawn from a distribution</p></li>
-<li><p><strong>Level 3 (Hyperparameters)</strong>: The parameters of that distribution are learned from data</p></li>
+<li><p><strong>Data level</strong>: Phenotype depends on genotype and effect</p></li>
+<li><p><strong>Effect level</strong>: Effect <span class="math notranslate nohighlight">\(\beta\)</span> is random, drawn from a distribution</p></li>
+<li><p><strong>Hyperparameter level</strong>: Distribution parameters estimated from data</p></li>
 </ol>
-<p>This example shows how to implement a <strong>Bayesian normal mean model</strong>, where we treat <span class="math notranslate nohighlight">\(\beta\)</span> as a continuous parameter with a prior distribution. Instead of probabilities for just three specific values, we get a complete posterior distribution showing how plausible every possible effect size is after combining our prior knowledge with the data.</p>
+<p><strong>Model</strong>:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align}
-Y_i | \beta, \sigma^2 &amp;\sim \mathcal{N}(X_i \beta, \sigma^2) \quad \text{[observed data given effect]} \\
-\beta | \sigma_0^2 &amp;\sim \mathcal{N}(0, \sigma_0^2) \quad \text{[effect is random]} \\
-\sigma_0^2 &amp; \text{ is estimated from data} \quad \text{[uncertainty about uncertainty!]}
+Y_i | \beta, \sigma^2 &amp;\sim \mathcal{N}(X_i \beta, \sigma^2) \quad \text{[likelihood]} \\
+\beta | \sigma_0^2 &amp;\sim \mathcal{N}(0, \sigma_0^2) \quad \text{[prior]} \\
+\sigma_0^2 &amp; \text{ estimated from data} \quad \text{[hyperparameter]}
 \end{align}
 \end{split}\]</div>
-<p>This isn’t just philosophical - it’s practical. In genomics, we study thousands of variants, and treating each effect as random (with shared distributional properties) is much more realistic than assuming each has a fixed, unknown value.</p>
-<section id="generate-simulated-data">
-<h2>Generate Simulated Data<a class="headerlink" href="#generate-simulated-data" title="Link to this heading">#</a></h2>
-<p>First, let’s recreate the exact same genetic data from our previous <a class="reference external" href="https://statfungen.github.io/statgen-primer/likelihood.html">Lecture: likelihood</a> analysis.</p>
+<p>The posterior distribution <span class="math notranslate nohighlight">\(p(\beta | \mathbf{Y})\)</span> shows how plausible each effect size is after combining prior knowledge with observed data.</p>
+<p><strong>Why this matters</strong>: In genomics with thousands of variants, treating effects as random with shared distributional properties is more realistic than treating each as an independent fixed unknown.</p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
+<p>First, let’s recreate the exact same genetic data from our previous <a class="reference external" href="https://statfungen.github.io/statgen-primer/likelihood.html">Lecture: likelihood</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clear the environment</span>
 <span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ls</span><span class="p">())</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">stats</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
 <span class="nf">set.seed</span><span class="p">(</span><span class="m">19</span><span class="p">)</span><span class="w">  </span><span class="c1"># For reproducibility</span>
 
-<span class="c1"># Generate genotype data for 5 individuals at 1 variant</span>
+<span class="c1"># Generate genotype data for 5 individuals at a single variant</span>
 <span class="n">N</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">5</span>
 <span class="n">genotypes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;CC&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CT&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;TT&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CT&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CC&quot;</span><span class="p">)</span><span class="w">  </span><span class="c1"># Individual genotypes</span>
 <span class="nf">names</span><span class="p">(</span><span class="n">genotypes</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Individual&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">)</span>
@@ -803,52 +773,58 @@ Y_i | \beta, \sigma^2 &amp;\sim \mathcal{N}(X_i \beta, \sigma^2) \quad \text{[ob
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set true beta and generate phenotype data</span>
 <span class="n">true_beta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.4</span>
-<span class="n">true_sigma</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1.0</span>
+<span class="n">true_sd</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1.0</span>
 
 <span class="c1"># Generate phenotype with true effect</span>
-<span class="n">Y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">true_beta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">true_sigma</span><span class="p">)</span>
+<span class="n">Y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">true_beta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">rnorm</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">true_sd</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To apply the Bayesian normal mean model, we need to specify the <strong>prior distribution</strong> for <span class="math notranslate nohighlight">\(\beta\)</span> and the <strong>residual variance</strong> <span class="math notranslate nohighlight">\(\sigma^2\)</span>. We assume the prior mean is zero (i.e., we have no reason to believe the effect is positive or negative before seeing data):</p>
+<div class="math notranslate nohighlight">
+\[
+\beta \sim \mathcal{N}(\beta_0, \sigma_0^2) \quad \text{where } \beta_0 = 0
+\]</div>
+<p>The <strong>prior variance</strong> <span class="math notranslate nohighlight">\(\sigma_0^2\)</span> represents how uncertain we are about <span class="math notranslate nohighlight">\(\beta\)</span> before seeing data, and the <strong>residual variance</strong> <span class="math notranslate nohighlight">\(\sigma^2\)</span> represents how noisy our measurements are. We will estimate both variances from the data using maximum likelihood.</p>
+</section>
+<section id="id1">
+<h2>Prior Distribution<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define prior distribution</span>
+<span class="c1"># Prior mean: no prior expectation about direction of effect</span>
+<span class="n">beta_0</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Prior distribution:\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;beta ~ N(beta_0, sigma_0^2) where beta_0 =&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">beta_0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;sigma_0^2 will be estimated from data\n&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prior distribution:
+beta ~ N(beta_0, sigma_0^2) where beta_0 = 0 
+sigma_0^2 will be estimated from data
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="bayesian-normal-mean-model-setup">
-<h2>Bayesian Normal Mean Model Setup<a class="headerlink" href="#bayesian-normal-mean-model-setup" title="Link to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p>Step 1: Data Model (What we observe)
-Each person’s phenotype follows:</p></li>
-</ol>
+<section id="estimating-the-variances">
+<h2>Estimating the Variances<a class="headerlink" href="#estimating-the-variances" title="Link to this heading">#</a></h2>
+<p><strong>Why estimate variances?</strong> We need <span class="math notranslate nohighlight">\(\sigma^2\)</span> and <span class="math notranslate nohighlight">\(\sigma_0^2\)</span> to compute the posterior, but we don’t know their true values. In practice, we estimate them from the data itself.</p>
+<p><strong>How?</strong> We use the <strong>marginal likelihood</strong> - the probability of observing our data, averaging over all possible <span class="math notranslate nohighlight">\(\beta\)</span> values:</p>
 <div class="math notranslate nohighlight">
 \[
-Y_i | \beta, \sigma^2 \sim \text{Normal}(X_i \beta, \sigma^2)
+P(\mathbf{Y} | \sigma^2, \sigma_0^2) = \int P(\mathbf{Y} | \beta, \sigma^2) P(\beta | \sigma_0^2) d\beta
 \]</div>
-<ol class="arabic simple" start="2">
-<li><p>Effect Model (The effect is random)
-Instead of assuming <span class="math notranslate nohighlight">\(\beta\)</span> is fixed, we model it as random:</p></li>
-</ol>
+<p>For our normal-normal model, this has a closed form:</p>
 <div class="math notranslate nohighlight">
 \[
-\beta | \sigma_0^2 \sim \text{Normal}(0, \sigma_0^2)
+\mathbf{Y} \sim \mathcal{N}(0, \sigma^2 \mathbf{I} + \sigma_0^2 \mathbf{X}\mathbf{X}^T)
 \]</div>
-<p>This says: “We expect the effect to center around 0, but with uncertainty <span class="math notranslate nohighlight">\(\sigma_0^2\)</span>”</p>
-<ol class="arabic simple" start="3">
-<li><p>Learning the Uncertainty (Hyperparameter estimation)</p></li>
-</ol>
-<p>We don’t just guess <span class="math notranslate nohighlight">\(\sigma_0^2\)</span> - we estimate it from the data itself!</p>
-<section id="estimating-both-variances-from-data">
-<h3>Estimating Both Variances from Data<a class="headerlink" href="#estimating-both-variances-from-data" title="Link to this heading">#</a></h3>
-<p>We can first estimate <strong>both</strong> <span class="math notranslate nohighlight">\(\sigma^2\)</span> (error variance) and <span class="math notranslate nohighlight">\(\sigma_0^2\)</span> (prior variance) from the data itself.</p>
-<p>The <strong>marginal likelihood</strong> (probability of observing our data, averaging over all possible β values) is:</p>
-<div class="math notranslate nohighlight">
-\[
-P(Y | \sigma^2, \sigma_0^2) = \int P(Y | \beta, \sigma^2) P(\beta | \sigma_0^2) d\beta
-\]</div>
-<p>For our normal-normal model, this integral has a closed form! The marginal distribution of Y is:</p>
-<div class="math notranslate nohighlight">
-\[
-Y \sim \text{Normal}(0, \sigma^2 I + \sigma_0^2 XX^T)
-\]</div>
-<p>We can use this to find the <span class="math notranslate nohighlight">\(\sigma^2\)</span> and <span class="math notranslate nohighlight">\(\sigma_0^2\)</span> that make our observed data most likely.</p>
+<p>We find the <span class="math notranslate nohighlight">\(\sigma^2\)</span> and <span class="math notranslate nohighlight">\(\sigma_0^2\)</span> that maximize this marginal likelihood.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function to compute log marginal likelihood for given parameters</span>
@@ -856,7 +832,6 @@ Y \sim \text{Normal}(0, \sigma^2 I + \sigma_0^2 XX^T)
 <span class="w">  </span><span class="n">sigma_squared</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">params</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
 <span class="w">  </span><span class="n">sigma_0_squared</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">params</span><span class="p">[</span><span class="m">2</span><span class="p">]</span>
 <span class="w">  </span>
-<span class="w">  </span><span class="c1"># Check for valid parameters</span>
 <span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">sigma_squared</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">sigma_0_squared</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="kr">return</span><span class="p">(</span><span class="o">-</span><span class="kc">Inf</span><span class="p">)</span>
 <span class="w">  </span>
 <span class="w">  </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
@@ -875,7 +850,6 @@ Y \sim \text{Normal}(0, \sigma^2 I + \sigma_0^2 XX^T)
 <span class="p">}</span>
 
 <span class="c1"># Find optimal parameters by maximizing marginal likelihood</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">stats</span><span class="p">)</span>
 <span class="n">optimize_result</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">optim</span><span class="p">(</span>
 <span class="w">  </span><span class="n">par</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">),</span><span class="w">  </span><span class="c1"># Initial guesses for $\sigma^2$ and $\sigma_0^2$</span>
 <span class="w">  </span><span class="n">fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">params</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="nf">log_marginal_likelihood</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">X</span><span class="p">),</span><span class="w">  </span><span class="c1"># Minimize negative log-likelihood</span>
@@ -895,84 +869,62 @@ Y \sim \text{Normal}(0, \sigma^2 I + \sigma_0^2 XX^T)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;Estimated sigma^2 (error variance): 0.663&quot;
-[1] &quot;Estimated sigma_0^2 (prior variance): 0.01&quot;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;Estimated sigma^2 (error variance): 0.486&quot;
+[1] &quot;Estimated sigma_0^2 (prior variance): 0.231&quot;
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="computing-the-posterior">
-<h3>Computing the Posterior<a class="headerlink" href="#computing-the-posterior" title="Link to this heading">#</a></h3>
-<p>Now that we’ve estimated our uncertainty about β from the data itself, we can compute the posterior distribution.</p>
-<p><strong>The beauty of conjugacy</strong>: When we combine our normal prior with the normal likelihood, we get a normal posterior with simple formulas:</p>
+<section id="id2">
+<h2>Posterior Distribution<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>With the estimated variances, we can now compute the posterior distribution using the formulas from the Technical Details section above.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate sufficient statistics</span>
 <span class="n">sum_X_squared</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">X</span><span class="o">^</span><span class="m">2</span><span class="p">)</span>
 <span class="n">sum_XY</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">X</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Y</span><span class="p">)</span>
 
-<span class="c1"># Posterior parameters using estimated variances</span>
+<span class="c1"># Posterior parameters using estimated variances and prior mean beta_0</span>
 <span class="n">posterior_variance</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">sum_X_squared</span><span class="o">/</span><span class="n">sigma_squared_mle</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="o">/</span><span class="n">sigma_0_squared_mle</span><span class="p">)</span>
-<span class="n">posterior_mean</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">posterior_variance</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">sum_XY</span><span class="o">/</span><span class="n">sigma_squared_mle</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">0</span><span class="o">/</span><span class="n">sigma_0_squared_mle</span><span class="p">)</span>
+<span class="n">posterior_mean</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">posterior_variance</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">sum_XY</span><span class="o">/</span><span class="n">sigma_squared_mle</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">beta_0</span><span class="o">/</span><span class="n">sigma_0_squared_mle</span><span class="p">)</span>
 <span class="n">posterior_sd</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">posterior_variance</span><span class="p">)</span>
 
 <span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\nPosterior Results:\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;beta | D ~ Normal(&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">posterior_mean</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">posterior_variance</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;)\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Posterior mean:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">posterior_mean</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Posterior SD:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">posterior_sd</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;beta | D ~ Normal(&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">posterior_mean</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">posterior_variance</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;)\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Posterior mean (beta_1):&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">posterior_mean</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Posterior SD:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">posterior_sd</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Posterior Results:
-beta | D ~ Normal( 0.018 ,  0.0094 )
-Posterior mean: 0.018 
-Posterior SD: 0.097 
+beta | D ~ Normal( 0.3889 ,  0.0796 )
+Posterior mean (beta_1): 0.3889 
+Posterior SD: 0.2821 
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="supplementary">
-<h1>Supplementary<a class="headerlink" href="#supplementary" title="Link to this heading">#</a></h1>
-<section id="id1">
-<h2>Graphical Summary<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<section id="visualizing-the-bayesian-update">
+<h2>Visualizing the Bayesian Update<a class="headerlink" href="#visualizing-the-bayesian-update" title="Link to this heading">#</a></h2>
+<p>Let’s visualize how observing data updates our beliefs about <span class="math notranslate nohighlight">\(\beta\)</span>, shifting from the prior to the posterior distribution.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">beta_range</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="m">-1.5</span><span class="p">,</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="n">length.out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1000</span><span class="p">)</span>
 
-<span class="c1"># Set parameters</span>
-<span class="c1"># Prior: N(mu_0, sigma_0^2)</span>
-<span class="n">mu_0</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span><span class="w">      </span><span class="c1"># Prior mean</span>
-<span class="n">sigma_0</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="w">   </span><span class="c1"># Prior standard deviation (smaller = more informative prior)</span>
+<span class="c1"># Prior distribution: N(beta_0, sigma_0^2)</span>
+<span class="n">prior_density</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">dnorm</span><span class="p">(</span><span class="n">beta_range</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">beta_0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sigma_0_mle</span><span class="p">)</span>
 
-<span class="c1"># Data (observed values)</span>
-<span class="n">y_obs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1.2</span><span class="p">,</span><span class="w"> </span><span class="m">2.1</span><span class="p">,</span><span class="w"> </span><span class="m">1.8</span><span class="p">,</span><span class="w"> </span><span class="m">2.3</span><span class="p">,</span><span class="w"> </span><span class="m">1.9</span><span class="p">)</span><span class="w">  </span><span class="c1"># Sample data</span>
-<span class="n">n</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">y_obs</span><span class="p">)</span>
-<span class="n">y_bar</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">y_obs</span><span class="p">)</span><span class="w">  </span><span class="c1"># Sample mean</span>
-<span class="n">sigma</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">4</span><span class="w">  </span><span class="c1"># Known likelihood standard deviation (larger = less informative data)</span>
+<span class="c1"># Likelihood (as a function of beta, treating data as fixed)</span>
+<span class="c1"># This is proportional to exp(-(sum_X_squared * beta^2 - 2*sum_XY*beta) / (2*sigma^2))</span>
+<span class="n">likelihood_unnormalized</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">sum_X_squared</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">beta_range</span><span class="o">^</span><span class="m">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">2</span><span class="o">*</span><span class="n">sum_XY</span><span class="o">*</span><span class="n">beta_range</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="m">2</span><span class="o">*</span><span class="n">sigma_squared_mle</span><span class="p">))</span>
+<span class="c1"># Normalize to make it a proper density</span>
+<span class="n">likelihood_density</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">likelihood_unnormalized</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="n">likelihood_unnormalized</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">beta_range</span><span class="p">[</span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">beta_range</span><span class="p">[</span><span class="m">1</span><span class="p">]))</span>
 
-<span class="c1"># Calculate posterior parameters (conjugate normal-normal case)</span>
-<span class="c1"># Posterior precision = prior precision + likelihood precision</span>
-<span class="n">tau_0</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">sigma_0</span><span class="o">^</span><span class="m">2</span><span class="w">    </span><span class="c1"># Prior precision</span>
-<span class="n">tau_likelihood</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">sigma</span><span class="o">^</span><span class="m">2</span><span class="w">  </span><span class="c1"># Likelihood precision</span>
-<span class="n">tau_1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tau_0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tau_likelihood</span><span class="w">  </span><span class="c1"># Posterior precision</span>
-
-<span class="c1"># Posterior parameters</span>
-<span class="n">sigma_1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">tau_1</span><span class="p">)</span><span class="w">  </span><span class="c1"># Posterior standard deviation</span>
-<span class="n">mu_1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="n">tau_0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">mu_0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tau_likelihood</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y_bar</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">tau_1</span><span class="w">  </span><span class="c1"># Posterior mean</span>
-
-<span class="c1"># Create data for plotting</span>
-<span class="n">beta_range</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="m">-4</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">length.out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1000</span><span class="p">)</span>
-
-<span class="c1"># Calculate densities</span>
-<span class="n">prior_density</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">dnorm</span><span class="p">(</span><span class="n">beta_range</span><span class="p">,</span><span class="w"> </span><span class="n">mu_0</span><span class="p">,</span><span class="w"> </span><span class="n">sigma_0</span><span class="p">)</span>
-<span class="n">likelihood_density</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">dnorm</span><span class="p">(</span><span class="n">beta_range</span><span class="p">,</span><span class="w"> </span><span class="n">y_bar</span><span class="p">,</span><span class="w"> </span><span class="n">sigma</span><span class="o">/</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">))</span><span class="w">  </span><span class="c1"># Likelihood as function of beta</span>
-<span class="n">posterior_density</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">dnorm</span><span class="p">(</span><span class="n">beta_range</span><span class="p">,</span><span class="w"> </span><span class="n">mu_1</span><span class="p">,</span><span class="w"> </span><span class="n">sigma_1</span><span class="p">)</span>
+<span class="c1"># Posterior distribution: N(posterior_mean, posterior_variance)</span>
+<span class="n">posterior_density</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">dnorm</span><span class="p">(</span><span class="n">beta_range</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">posterior_mean</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">posterior_sd</span><span class="p">)</span>
 
 <span class="c1"># Combine into data frame</span>
 <span class="n">plot_data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span>
@@ -984,11 +936,11 @@ Posterior SD: 0.097
 <span class="c1"># Create the plot</span>
 <span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">plot_data</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">beta</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">density</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">distribution</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">distribution</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
 <span class="w">  </span><span class="nf">geom_line</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">scale_color_manual</span><span class="p">(</span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Prior&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;tomato&quot;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">                               </span><span class="s">&quot;Likelihood&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;#000080&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">scale_color_manual</span><span class="p">(</span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Prior&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;tomato&quot;</span><span class="p">,</span>
+<span class="w">                               </span><span class="s">&quot;Likelihood&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;#000080&quot;</span><span class="p">,</span>
 <span class="w">                               </span><span class="s">&quot;Posterior&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;darkgreen&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">scale_linetype_manual</span><span class="p">(</span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Prior&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dashed&quot;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">                                  </span><span class="s">&quot;Likelihood&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dotted&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">scale_linetype_manual</span><span class="p">(</span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Prior&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dashed&quot;</span><span class="p">,</span>
+<span class="w">                                  </span><span class="s">&quot;Likelihood&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dotted&quot;</span><span class="p">,</span>
 <span class="w">                                  </span><span class="s">&quot;Posterior&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;solid&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
 <span class="w">  </span><span class="nf">labs</span><span class="p">(</span>
 <span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Density&quot;</span><span class="p">,</span>
@@ -1005,30 +957,37 @@ Posterior SD: 0.097
 <span class="w">    </span><span class="n">axis.text.y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">),</span>
 <span class="w">    </span><span class="n">legend.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">(),</span>
 <span class="w">    </span><span class="n">legend.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">),</span>
-<span class="w">    </span><span class="n">legend.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bottom&quot;</span>
+<span class="w">    </span><span class="n">legend.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bottom&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">panel.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">),</span>
+<span class="w">    </span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span>
 <span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
 <span class="w">  </span><span class="nf">guides</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">guide_legend</span><span class="p">(</span><span class="n">override.aes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.5</span><span class="p">)))</span>
 
-<span class="c1"># Add vertical lines for means</span>
-<span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
-<span class="w">  </span><span class="nf">geom_vline</span><span class="p">(</span><span class="n">xintercept</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mu_0</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;tomato&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dashed&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.7</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">geom_vline</span><span class="p">(</span><span class="n">xintercept</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y_bar</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;skyblue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dotted&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.7</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">geom_vline</span><span class="p">(</span><span class="n">xintercept</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mu_1</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;darkgreen&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;solid&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.7</span><span class="p">)</span>
+<span class="c1"># Add vertical lines for means and annotations</span>
+<span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_vline</span><span class="p">(</span><span class="n">xintercept</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">beta_0</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;tomato&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dashed&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.7</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_vline</span><span class="p">(</span><span class="n">xintercept</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">posterior_mean</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;darkgreen&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;solid&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.7</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">annotate</span><span class="p">(</span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">beta_0</span><span class="m">-0.5</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">plot_data</span><span class="o">$</span><span class="n">density</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.6</span><span class="p">,</span><span class="w"> </span>
+<span class="w">           </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;beta[0]==&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">beta_0</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;tomato&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">fontface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hjust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">-0.3</span><span class="p">,</span><span class="w"> </span><span class="n">parse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">annotate</span><span class="p">(</span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">posterior_mean</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">plot_data</span><span class="o">$</span><span class="n">density</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.95</span><span class="p">,</span><span class="w"> </span>
+<span class="w">           </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;beta[1]==&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">posterior_mean</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">)),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;darkgreen&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">fontface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hjust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">-0.3</span><span class="p">,</span><span class="w"> </span><span class="n">parse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
 
 <span class="c1"># Display plot</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-
-<span class="c1"># Save plot to file</span>
-<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;./cartoons/Bayesian_normal_mean_model.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">,</span>
-<span class="w">       </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span>
-<span class="w">       </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">,</span>
-<span class="w">       </span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/37191fec1664c3ca77432a35913e5a7a455677f1505774a5a3bde54f300417d8.png"><img alt="_images/37191fec1664c3ca77432a35913e5a7a455677f1505774a5a3bde54f300417d8.png" src="_images/37191fec1664c3ca77432a35913e5a7a455677f1505774a5a3bde54f300417d8.png" style="width: 420px; height: 420px;" />
+<a class="reference internal image-reference" href="_images/b608188f29cd46ae4bedbf82cbea98bcbd1b73e8831252ecf0bb3cde52899dba.png"><img alt="_images/b608188f29cd46ae4bedbf82cbea98bcbd1b73e8831252ecf0bb3cde52899dba.png" src="_images/b608188f29cd46ae4bedbf82cbea98bcbd1b73e8831252ecf0bb3cde52899dba.png" style="width: 420px; height: 420px;" />
 </a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;./figures/Bayesian_normal_mean_model.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">,</span>
+<span class="w">      </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 </div>
 </section>
@@ -1070,7 +1029,7 @@ Posterior SD: 0.097
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">p-value and Bayesian Hypothesis Testing</p>
+        <p class="prev-next-title"><span class="math notranslate nohighlight">\(p\)</span>-value and Bayesian Hypothesis Testing</p>
       </div>
     </a>
     <a class="right-next"
@@ -1102,29 +1061,23 @@ Posterior SD: 0.097
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-summary">Graphical Summary</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-formula">Key Formula</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical Details</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bayesian-perspective-uncertainty-as-random-variables">The Bayesian Perspective: Uncertainty as Random Variables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-assumptions">Model Assumptions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prior-distribution-quantifying-our-uncertainty">Prior Distribution: Quantifying Our Uncertainty</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#likelihood-what-we-can-condition-on">Likelihood: What We Can Condition On</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-distribution-conditioning-on-everything-available">Posterior Distribution: Conditioning on Everything Available</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-as-weighted-average">Interpretation as Weighted Average</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bayesian-perspective">The Bayesian Perspective</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-setup">Model Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prior-distribution">Prior Distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#likelihood">Likelihood</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-distribution">Posterior Distribution</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-as-weighted-average">Posterior as Weighted Average</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-makes-sense">Why This Makes Sense</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-simulated-data">Generate Simulated Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-normal-mean-model-setup">Bayesian Normal Mean Model Setup</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-both-variances-from-data">Estimating Both Variances from Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-the-posterior">Computing the Posterior</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#supplementary">Supplementary</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Graphical Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Prior Distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-variances">Estimating the Variances</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Posterior Distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-bayesian-update">Visualizing the Bayesian Update</a></li>
 </ul>
 </li>
 </ul>

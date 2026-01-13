@@ -330,7 +330,6 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="likelihood_ratio.html">Likelihood Ratio</a></li>
 
 
@@ -355,14 +354,13 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="Bayes_factor.html">Bayes Factor</a></li>
 
 
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="p_value_and_Bayesian_hypothesis_testing.html">p-value and Bayesian Hypothesis Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p_value_and_Bayesian_hypothesis_testing.html"><span class="math notranslate nohighlight">\(p\)</span>-value and Bayesian Hypothesis Testing</a></li>
 
 
 
@@ -379,9 +377,7 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="Bayesian_multivariate_normal_mean_model.html">Bayesian Multivariate Normal Mean Model</a></li>
-
 
 
 
@@ -391,7 +387,6 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Multiple Bayesian Models</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Bayesian_model_comparison.html">Bayesian Model Comparison</a></li>
-
 
 
 
@@ -589,13 +584,12 @@ document.write(`
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detect-multiple-ancestral-populations-via-pca">Detect Multiple Ancestral Populations via PCA</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-data">Generate Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-pca-on-the-genotype-matrix">Perform PCA on the Genotype Matrix</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proportion-of-variance-explained-by-the-top-pcs">Proportion of Variance Explained by the top PCs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pca">PCA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pve-by-the-top-pcs">PVE by the top PCs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pc1-vs-pc2-colored-by-population">PC1 vs PC2 Colored by Population</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-mixture-to-admixture">From mixture to admixture</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-loadings-for-the-top-pc">Interpretation of Loadings for the top PC</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-mixture-to-admixture">From Mixture to Admixture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-loadings-for-pc1">Interpretation of Loadings for PC1</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#supplementary">Supplementary</a><ul class="visible nav section-nav flex-column">
@@ -665,7 +659,7 @@ document.write(`
 </section>
 <section id="pca-and-regression">
 <h2>PCA and Regression<a class="headerlink" href="#pca-and-regression" title="Link to this heading">#</a></h2>
-<p>Factor analysis in general is similar to the concept of regression, which we introduce <a class="reference external" href="https://statfungen.github.io/statgen-primer/ordinary_least_squares.html">Lecture: here</a>. The fundamental difference is that in regression <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{Y}\)</span> is fixed and the goal is to estimate <span class="math notranslate nohighlight">\(\beta\)</span>, but in factor analysis, only <span class="math notranslate nohighlight">\(\mathbf{Y}\)</span> is fixed and both <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{F}\)</span> is to be estimated to reach the best performance.</p>
+<p>Factor analysis in general is similar to the concept of regression, which we introduce in <a class="reference external" href="https://statfungen.github.io/statgen-primer/ordinary_least_squares.html">Lecture: ordinary least squares</a>. The fundamental difference is that in regression <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{Y}\)</span> is fixed and the goal is to estimate <span class="math notranslate nohighlight">\(\beta\)</span>, but in factor analysis, only <span class="math notranslate nohighlight">\(\mathbf{Y}\)</span> is fixed and both <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{F}\)</span> is to be estimated to reach the best performance.</p>
 <p>Specifically, PCA starts to solve for the first column of <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> and row of <span class="math notranslate nohighlight">\(\mathbf{F}\)</span> that minimize the squared error in predicting <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>; the second principal component then fits the “residual” error that is left behind after removing the first principal component: i.e., it minimizes the squared error in <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>; so on, for subsequent PCs. Please refer to <a class="reference external" href="https://web.stanford.edu/group/pritchardlab/HGbook/ReleaseV1.1/HGBook-V1.1-ch3.1.pdf">HGBook</a> (box on page 191) for more details.</p>
 </section>
 <section id="scaling">
@@ -674,23 +668,21 @@ document.write(`
 </section>
 <section id="eigen-decomposition-and-variance-explained">
 <h2>Eigen Decomposition and Variance Explained<a class="headerlink" href="#eigen-decomposition-and-variance-explained" title="Link to this heading">#</a></h2>
-<p>When <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is scaled (columns have zero mean and unit variance), <span class="math notranslate nohighlight">\(\mathbf{X}^T\mathbf{X}/(N-1)\)</span> is the sample covariance matrix <span class="math notranslate nohighlight">\(\text{Cov}(\mathbf{X})\)</span>. Thus, PCA via eigendecomposition is often described as finding the eigenvectors of the covariance matrix. The eigenvectors <span class="math notranslate nohighlight">\(\mathbf{W}\)</span> are the principal directions, and the eigenvalues represent the variance explained along each direction:</p>
+<p>When <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is scaled (zero mean, unit variance), <span class="math notranslate nohighlight">\(\mathbf{X}^T\mathbf{X}/(N-1)\)</span> equals the sample covariance matrix. PCA via eigendecomposition finds the eigenvectors of this covariance matrix:</p>
 <div class="math notranslate nohighlight">
 \[
 \mathbf{X}^T\mathbf{X} = (\mathbf{W}\mathbf{\Sigma}\mathbf{U}^T)(\mathbf{U}\mathbf{\Sigma}\mathbf{W}^T) = \mathbf{W}\mathbf{\Sigma}^T\mathbf{\Sigma}\mathbf{W}^T = \mathbf{W}\mathbf{\Lambda}\mathbf{W}^T
 \]</div>
-<p>(here we denote <span class="math notranslate nohighlight">\(\mathbf{\Lambda} = \mathbf{\Sigma}^T\mathbf{\Sigma}\)</span>).</p>
-<p>This is the eigendecomposition of matrix <span class="math notranslate nohighlight">\(\mathbf{X}^T\mathbf{X}\)</span>. <span class="math notranslate nohighlight">\(\mathbf{\Lambda}\)</span> is a <span class="math notranslate nohighlight">\(p\times p\)</span> diagonal matrix of eigenvalues <span class="math notranslate nohighlight">\(\lambda_k\)</span> of <span class="math notranslate nohighlight">\(\mathbf{X}^T\mathbf{X}\)</span>. <span class="math notranslate nohighlight">\(\lambda_k\)</span> is equal to the sum of the squares over the dataset associated with each component <span class="math notranslate nohighlight">\(k\)</span>.</p>
-<p>The eigenvalues <span class="math notranslate nohighlight">\(\lambda_k\)</span> relate to the singular values by <span class="math notranslate nohighlight">\(\lambda_k = \sigma_k^2\)</span>, where <span class="math notranslate nohighlight">\(\sigma_k\)</span> are the diagonal elements of <span class="math notranslate nohighlight">\(\mathbf{\Sigma}\)</span>, i.e., the singular value of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>. The scale of <span class="math notranslate nohighlight">\(\lambda_k\)</span> describes the variance explained by the PCs, e.g., the variance explained by the first <span class="math notranslate nohighlight">\(k\)</span> PCs is:</p>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{\Lambda} = \mathbf{\Sigma}^T\mathbf{\Sigma}\)</span> is a <span class="math notranslate nohighlight">\(p\times p\)</span> diagonal matrix of eigenvalues. The eigenvalues relate to singular values by <span class="math notranslate nohighlight">\(\lambda_k = \sigma_k^2\)</span> and represent variance explained along each principal direction. The proportion of variance explained by the first <span class="math notranslate nohighlight">\(k\)</span> PCs is:</p>
 <div class="math notranslate nohighlight">
 \[
-\text{PVE}=\frac{\sum_{j=1}^k \lambda_j}{\sum_{j=1}^p \lambda_k} = \frac{\sum_{j=1}^k \sigma_j^2}{\sum_{j=1}^p \sigma_j^2}
+\text{PVE}=\frac{\sum_{j=1}^k \lambda_j}{\sum_{j=1}^p \lambda_j} = \frac{\sum_{j=1}^k \sigma_j^2}{\sum_{j=1}^p \sigma_j^2}
 \]</div>
-<p>In practice the SVD of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is preferred for numerical stability (especially when <span class="math notranslate nohighlight">\(p\)</span> is large or when <span class="math notranslate nohighlight">\(\mathbf{X}^T\mathbf{X}\)</span> is nearly singular), but the eigendecomposition of <span class="math notranslate nohighlight">\(\mathbf{X}^T\mathbf{X}\)</span> is the traditional textbook approach which provides a perspective from the variance matrix.</p>
+<p>In practice, SVD of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is preferred for numerical stability, but eigendecomposition of <span class="math notranslate nohighlight">\(\mathbf{X}^T\mathbf{X}\)</span> provides useful perspective on the variance structure.</p>
 </section>
 <section id="terminology">
 <h2>Terminology<a class="headerlink" href="#terminology" title="Link to this heading">#</a></h2>
-<p>In PCA we generally care more about the top <span class="math notranslate nohighlight">\(k\)</span> PC loadings (sometimes called PC scores) of each individual, i.e., <span class="math notranslate nohighlight">\(\mathbf{U}_k\mathbf{\Sigma_k}\)</span>, which are often called <span class="math notranslate nohighlight">\(\text{PC}_1, \text{PC}_2, ..., \text{PC}_k\)</span>. A common visualization is to plot each individual’s <span class="math notranslate nohighlight">\(\text{PC}_1\)</span> on the <span class="math notranslate nohighlight">\(x\)</span>-axis and <span class="math notranslate nohighlight">\(\text{PC}_2\)</span> on the <span class="math notranslate nohighlight">\(y\)</span>-axis to detect outliers or clusters (population stratification). In this way the dimension is reduced from <span class="math notranslate nohighlight">\(p\)</span> to <span class="math notranslate nohighlight">\(k\)</span>, with the property that <span class="math notranslate nohighlight">\(\text{PC}_1, \text{PC}_2, ..., \text{PC}_k\)</span> are orthogonal to each other and information is retained to the maximum extent possible.</p>
+<p>In PCA, we focus on the top <span class="math notranslate nohighlight">\(k\)</span> PC loadings <span class="math notranslate nohighlight">\(\mathbf{U}_k\mathbf{\Sigma_k}\)</span> for each individual, denoted <span class="math notranslate nohighlight">\(\text{PC}_1, \text{PC}_2, ..., \text{PC}_k\)</span>. These are commonly visualized by plotting <span class="math notranslate nohighlight">\(\text{PC}_1\)</span> vs <span class="math notranslate nohighlight">\(\text{PC}_2\)</span> to detect outliers or population stratification. This reduces dimensionality from <span class="math notranslate nohighlight">\(p\)</span> to <span class="math notranslate nohighlight">\(k\)</span> while maximizing retained information through orthogonal components.</p>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="related-topics">
@@ -705,15 +697,11 @@ document.write(`
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="example">
 <h1>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
-<section id="detect-multiple-ancestral-populations-via-pca">
-<h2>Detect Multiple Ancestral Populations via PCA<a class="headerlink" href="#detect-multiple-ancestral-populations-via-pca" title="Link to this heading">#</a></h2>
-<p>You are given a sample of genotyped individuals and want to know: <strong>Are all individuals in this sample from the same genetic ancestry, or do they come from different populations?</strong> This is a fundamental question in population genetics and forensics, as population structure can be a major confounder in association studies.</p>
-<p>In this example, we’ll demonstrate how PCA can automatically reveal population structure without any prior knowledge of population labels.</p>
-<p>This is the <strong>mixture problem</strong>: we have a mixture of individuals from distinct populations, and PCA reveals their structure through the principal components. Here we use the same setting as in the topic of <a class="reference external" href="https://statfungen.github.io/statgen-prerequisites/factor_analysis.html">Factor Analysis</a>, and we will see the PCA will detect the four groups of individuals easily.</p>
-</section>
-<section id="generate-data">
-<h2>Generate Data<a class="headerlink" href="#generate-data" title="Link to this heading">#</a></h2>
-<p>This is the same generation as we did in the <a class="reference external" href="https://statfungen.github.io/statgen-prerequisites/factor_analysis.html">Factor Analysis</a>.</p>
+<p>You have genotyped individuals and want to determine: <strong>Do they share the same genetic ancestry, or do they come from different populations?</strong> Population structure is a major confounder in association studies, making this a fundamental question in population genetics and forensics.</p>
+<p>PCA can reveal population structure without prior knowledge of population labels. Using the same setting as <a class="reference external" href="https://statfungen.github.io/statgen-prerequisites/factor_analysis.html">Lecture: factor analysis</a>, we’ll show how PCA easily detects four distinct groups of individuals through their principal components.</p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
+<p>This is the same generation as we did in the Example 1 in <a class="reference external" href="https://statfungen.github.io/statgen-prerequisites/factor_analysis.html">Lecture: factor analysis</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="o">=</span><span class="nf">ls</span><span class="p">())</span>
@@ -786,8 +774,8 @@ document.write(`
 </div>
 </div>
 </section>
-<section id="perform-pca-on-the-genotype-matrix">
-<h2>Perform PCA on the Genotype Matrix<a class="headerlink" href="#perform-pca-on-the-genotype-matrix" title="Link to this heading">#</a></h2>
+<section id="pca">
+<h2>PCA<a class="headerlink" href="#pca" title="Link to this heading">#</a></h2>
 <p>Now we apply PCA to the genotype matrix <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> to discover the population structure.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -797,8 +785,8 @@ document.write(`
 </div>
 </div>
 </section>
-<section id="proportion-of-variance-explained-by-the-top-pcs">
-<h2>Proportion of Variance Explained by the top PCs<a class="headerlink" href="#proportion-of-variance-explained-by-the-top-pcs" title="Link to this heading">#</a></h2>
+<section id="pve-by-the-top-pcs">
+<h2>PVE by the top PCs<a class="headerlink" href="#pve-by-the-top-pcs" title="Link to this heading">#</a></h2>
 <p>The scree plot shows that the first principal component captures the majority of variance, indicating strong population differentiation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -904,26 +892,20 @@ PC5: 1.99%
 </div>
 </section>
 <section id="from-mixture-to-admixture">
-<h2>From mixture to admixture<a class="headerlink" href="#from-mixture-to-admixture" title="Link to this heading">#</a></h2>
-<p>Note that here PCA actually captures four clusters of individuals, treating them as separate groups in the PC plot.</p>
-<p>But our data generation is actually an <strong>admixture problem</strong>, i.e., the individuals actually comes from only two ancestries, with mixed between the ancestries. Since PCA is actually a specific type of factor analysis, we can also infer the proportion of ancestries in each individuals from the PCA results.</p>
-<p>Now we can attempt to infer the genetic ancestry using the PCA results. It’s a heuristic that works well when:</p>
-<ul class="simple">
-<li><p>Population structure is the dominant source of variation (PC1 explains most variance)</p></li>
-<li><p>Populations are reasonably well-separated</p></li>
-</ul>
-<p>The <span class="math notranslate nohighlight">\(k\)</span>-th PC score for the <span class="math notranslate nohighlight">\(i\)</span>-th individual can actually also be considered as a mapping from the original <span class="math notranslate nohighlight">\(\mathbf{X}_{i,}\)</span> through the coeffecients <span class="math notranslate nohighlight">\(\mathbf{W}_k\)</span>:</p>
+<h2>From Mixture to Admixture<a class="headerlink" href="#from-mixture-to-admixture" title="Link to this heading">#</a></h2>
+<p>PCA captures four clusters here, but the data represents an <strong>admixture problem</strong> — individuals have varying proportions of two ancestries. As a factor analysis method, PCA can infer ancestry proportions from PC scores when population structure dominates variation (PC1 explains most variance) and populations are well-separated.</p>
+<p>The <span class="math notranslate nohighlight">\(k\)</span>-th PC score for individual <span class="math notranslate nohighlight">\(i\)</span> is a linear combination of genotypes weighted by <span class="math notranslate nohighlight">\(\mathbf{W}_k\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
 \text{PC score}_{i,k} = \sum_{j=1}^p \mathbf{X}_{i,j} \cdot \mathbf{W}_{j,k}
 \]</div>
-<p>To illustrate this as the proportion of ancestry, the PC scores will be scaled to [0,1].</p>
-<p>Both algorithms essentially aim to estimate the allele frequencies in an individual as a linear combination of <span class="math notranslate nohighlight">\(K\)</span> factors that reflect <em>individual ancestry <span class="math notranslate nohighlight">\(\times\)</span> population allele frequencies</em>.</p>
+<p>These scores can be scaled to [0,1] to represent ancestry proportions.</p>
+<p>Both ADMIXTURE and PCA model allele frequencies as linear combinations of <span class="math notranslate nohighlight">\(k\)</span> factors:</p>
 <ul class="simple">
-<li><p>In Admixture (and Structure method), for each individual at a specific SNP, a “personal” expected allele frequency actually is reflected by their ancestry vector and the population allele frequencies</p></li>
-<li><p>In PCA, it lacks an interpretation of what the linear combination of <span class="math notranslate nohighlight">\(p\)</span> variants represent, but it is similar to have an imaginary “ancestry” represented by the <span class="math notranslate nohighlight">\(w_k\)</span></p></li>
+<li><p><strong>ADMIXTURE</strong>: Expected allele frequency = ancestry proportions <span class="math notranslate nohighlight">\(\times\)</span> population allele frequencies</p></li>
+<li><p><strong>PCA</strong>: Weighted combination of <span class="math notranslate nohighlight">\(p\)</span> variants implicitly represents ancestry through <span class="math notranslate nohighlight">\(\mathbf{W}_k\)</span></p></li>
 </ul>
-<p>For a detailed relationship between between PCA and Structure, please refer to Jonathan Prichard’s <a class="reference external" href="https://web.stanford.edu/group/pritchardlab/HGbook/ReleaseV1.1/HGBook-V1.1-ch3.1.pdf">HGBook</a> (box on page 190-192). Structure and Admixture are two methods but from different perspective (Bayesian versus frequentist, which we will discuss later <a class="reference external" href="https://statfungen.github.io/statgen-prerequisites/Bayesian_frequentist.html">here</a>).</p>
+<p>For detailed PCA-STRUCTURE relationships, see Pritchard’s <a class="reference external" href="https://web.stanford.edu/group/pritchardlab/HGbook/ReleaseV1.1/HGBook-V1.1-ch3.1.pdf">HGBook</a> (pages 190-192). STRUCTURE and ADMIXTURE differ in statistical frameworks (discussed in <a class="reference external" href="https://statfungen.github.io/statgen-prerequisites/Bayesian_frequentist.html">Lecture: Bayesian versus Frequentist</a>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find the range of PC1 scores</span>
@@ -948,7 +930,6 @@ PC5: 1.99%
 <span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Correlation between true and PCA-inferred ancestry proportions:\n&quot;</span><span class="p">)</span>
 <span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;Population 1: %.4f\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cor_pop1</span><span class="p">))</span>
 <span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;Population 2: %.4f\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cor_pop2</span><span class="p">))</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -999,11 +980,11 @@ Population 2: -0.9976
 <p>While PCA can visualize population structure, <strong>for admixture analysis it is better to use the ADMIXTURE model</strong> introduced in <a class="reference external" href="https://statfungen.github.io/statgen-prerequisites/factor_analysis.html">Factor Analysis</a>. Here’s why:</p>
 <ul class="simple">
 <li><p><strong>PCA is a descriptive method</strong>: PCA finds the directions of maximum variance in the data but does not provide a statistical model of how the data was generated</p></li>
-<li><p><strong>ADMIXTURE is a generative model</strong>: ADMIXTURE explicitly models the genetic mixture as a weighted combination of ancestry components: <span class="math notranslate nohighlight">\(\mathbf{X} = \mathbf{L^T\mathbf{F}} + \mathbf{E}\)</span> (check <a class="reference external" href="https://statfungen.github.io/statgen-prerequisites/factor_analysis.html">Factor Analysis</a> for more details)</p></li>
+<li><p><strong>ADMIXTURE is a generative model</strong>: ADMIXTURE explicitly models the genetic mixture as a weighted combination of ancestry components: <span class="math notranslate nohighlight">\(\mathbf{X} = \mathbf{L}^T\mathbf{F} + \mathbf{E}\)</span> (check <a class="reference external" href="https://statfungen.github.io/statgen-prerequisites/factor_analysis.html">Factor Analysis</a> for more details)</p></li>
 </ul>
 </section>
-<section id="interpretation-of-loadings-for-the-top-pc">
-<h2>Interpretation of Loadings for the top PC<a class="headerlink" href="#interpretation-of-loadings-for-the-top-pc" title="Link to this heading">#</a></h2>
+<section id="interpretation-of-loadings-for-pc1">
+<h2>Interpretation of Loadings for PC1<a class="headerlink" href="#interpretation-of-loadings-for-pc1" title="Link to this heading">#</a></h2>
 <p>Here we show that actually the loading for PC1 actually captures the difference of the allele frequencies between the two ancestries:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1023,7 +1004,6 @@ Population 2: -0.9976
 
 <span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\n=== PC Loadings and Allele Frequency Differences in the Raw Data ===\n&quot;</span><span class="p">)</span>
 <span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;Correlation between PC1 loadings and freq differences (raw data): %.4f\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cor_pc1_freqdiff</span><span class="p">))</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1032,12 +1012,9 @@ Population 2: -0.9976
 Correlation between PC1 loadings and freq differences (raw data): 0.9975
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
 </div>
 </div>
-</div>
-<p>And this correlation persists before and after the scale of input data:</p>
+<p>And this correlation persists after the scaling of input data as well:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate allele frequency for each population at each SNP</span>
@@ -1151,7 +1128,7 @@ Correlation between PC1 loadings and freq differences (scaled data): 0.9985
 <span class="w">  </span><span class="nf">coord_fixed</span><span class="p">(</span><span class="n">ratio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
 <span class="w">  </span>
 <span class="c1"># Save with transparent background</span>
-<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;./cartoons/PCA.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_PCA</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="p">,</span><span class="w"> </span>
+<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;./figures/PCA.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_PCA</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="p">,</span><span class="w"> </span>
 <span class="w">       </span><span class="n">units</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;in&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transparent&quot;</span><span class="p">)</span>
 
 <span class="nf">print</span><span class="p">(</span><span class="n">p_PCA</span><span class="p">)</span>
@@ -1252,13 +1229,12 @@ Correlation between PC1 loadings and freq differences (scaled data): 0.9985
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#related-topics">Related Topics</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detect-multiple-ancestral-populations-via-pca">Detect Multiple Ancestral Populations via PCA</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-data">Generate Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-pca-on-the-genotype-matrix">Perform PCA on the Genotype Matrix</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proportion-of-variance-explained-by-the-top-pcs">Proportion of Variance Explained by the top PCs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pca">PCA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pve-by-the-top-pcs">PVE by the top PCs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pc1-vs-pc2-colored-by-population">PC1 vs PC2 Colored by Population</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-mixture-to-admixture">From mixture to admixture</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-loadings-for-the-top-pc">Interpretation of Loadings for the top PC</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-mixture-to-admixture">From Mixture to Admixture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-loadings-for-pc1">Interpretation of Loadings for PC1</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#supplementary">Supplementary</a><ul class="visible nav section-nav flex-column">

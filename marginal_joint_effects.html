@@ -330,7 +330,6 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="likelihood_ratio.html">Likelihood Ratio</a></li>
 
 
@@ -355,14 +354,13 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="Bayes_factor.html">Bayes Factor</a></li>
 
 
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="p_value_and_Bayesian_hypothesis_testing.html">p-value and Bayesian Hypothesis Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p_value_and_Bayesian_hypothesis_testing.html"><span class="math notranslate nohighlight">\(p\)</span>-value and Bayesian Hypothesis Testing</a></li>
 
 
 
@@ -379,9 +377,7 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="Bayesian_multivariate_normal_mean_model.html">Bayesian Multivariate Normal Mean Model</a></li>
-
 
 
 
@@ -391,7 +387,6 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Multiple Bayesian Models</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Bayesian_model_comparison.html">Bayesian Model Comparison</a></li>
-
 
 
 
@@ -590,16 +585,12 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-causal-variant-identification-with-ld">Example 1 – Causal Variant Identification with LD</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#marginal-effects">Marginal Effects</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#joint-effects">Joint Effects</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-analysis">Conditional Analysis</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-start-with-the-most-significant-variant">Step 1: Start with the most significant variant</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-conditional-analysis-for-remaining-variants">Step 2: Conditional analysis for remaining variants</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-analysis">Conditional Analysis</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-simpson-s-paradox">Example 2 – Simpson’s Paradox</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#marginal-effect-of-variant">Marginal Effect of Variant</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#effect-of-the-variant-in-the-population">Effect of the Variant in the Population</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#effects-in-each-group">Effects in Each Group</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#effects-in-population">Effects in Population</a></li>
 </ul>
 </li>
 </ul>
@@ -833,15 +824,12 @@ document.write(`
 </table>
 </div></div>
 </div>
-<p>Now consider a more realistic scenario: if there are millions of variants (<span class="math notranslate nohighlight">\(M&gt;&gt;N\)</span>) or the LD between variants are very strong, then we might not be able to fit the model <span class="math notranslate nohighlight">\(\mathbf{Y} = \mathbf{X} \boldsymbol{\beta} + \boldsymbol{\epsilon}\)</span> or the joint model might give unstable results.</p>
-<p>Typically in practice we can start with the strongest signal from marginal analysis, and then test remaining variants conditioning on the lead SNP, and iteratively identify additional independent signals until no variants exceed the significance threshold.</p>
 </section>
 <section id="conditional-analysis">
 <h3>Conditional Analysis<a class="headerlink" href="#conditional-analysis" title="Link to this heading">#</a></h3>
-<p>Let’s now perform a <strong>conditional analysis</strong> on our toy data to identify which variant(s) truly drive the association. We’ll use the forward selection procedure:</p>
-<section id="step-1-start-with-the-most-significant-variant">
-<h4>Step 1: Start with the most significant variant<a class="headerlink" href="#step-1-start-with-the-most-significant-variant" title="Link to this heading">#</a></h4>
-<p>Based on the marginal analysis, Variant 1 had the smallest p-value. We select it as our lead variant:</p>
+<p>Now consider a more realistic scenario: if there are millions of variants (<span class="math notranslate nohighlight">\(M&gt;&gt;N\)</span>) or the LD between variants are very strong, then we might not be able to fit the model <span class="math notranslate nohighlight">\(\mathbf{Y} = \mathbf{X} \boldsymbol{\beta} + \boldsymbol{\epsilon}\)</span> or the joint model might give unstable results.</p>
+<p>Typically in practice we can start with the strongest signal from marginal analysis, and then test remaining variants conditioning on the lead SNP, and iteratively identify additional independent signals until no variants exceed the significance threshold.</p>
+<p>First, we start with the most significant variant. Based on the marginal analysis, Variant 1 had the smallest <span class="math notranslate nohighlight">\(p\)</span>-value which was then selected as our lead variant:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Identify the lead variant (most significant from marginal analysis)</span>
@@ -849,7 +837,7 @@ document.write(`
 <span class="n">lead_variant_name</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">X</span><span class="p">)[</span><span class="n">lead_variant_idx</span><span class="p">]</span>
 <span class="n">lead_p_value</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">p_values</span><span class="p">[</span><span class="n">lead_variant_idx</span><span class="p">]</span>
 
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;=== STEP 1: Lead Variant Selection ===\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;=== Lead Variant Selection ===\n&quot;</span><span class="p">)</span>
 <span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Selected:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lead_variant_name</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
 <span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Marginal p-value:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">format</span><span class="p">(</span><span class="n">lead_p_value</span><span class="p">,</span><span class="w"> </span><span class="n">scientific</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
 <span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Marginal effect size:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">betas</span><span class="p">[</span><span class="n">lead_variant_idx</span><span class="p">],</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n\n&quot;</span><span class="p">)</span>
@@ -857,23 +845,18 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== STEP 1: Lead Variant Selection ===
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Lead Variant Selection ===
 Selected: Variant 1 
 Marginal p-value: 6.077549e-10 
+Marginal effect size: 0.9416 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Marginal effect size: 0.9416 
-</pre></div>
 </div>
 </div>
-</div>
-</section>
-<section id="step-2-conditional-analysis-for-remaining-variants">
-<h4>Step 2: Conditional analysis for remaining variants<a class="headerlink" href="#step-2-conditional-analysis-for-remaining-variants" title="Link to this heading">#</a></h4>
-<p>Now we test each remaining variant <strong>while holding the lead variant constant</strong>. This shows us which additional variants have independent effects:</p>
+<p>Now we test each remaining variant <strong>while holding the lead variant constant</strong> (i.e., conditional on the lead variant). This shows us which additional variants have independent effects:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">cat</span><span class="p">(</span><span class="s">&quot;=== STEP 2: Conditional Analysis ===\n&quot;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">cat</span><span class="p">(</span><span class="s">&quot;=== Conditional Analysis ===\n&quot;</span><span class="p">)</span>
 <span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Testing remaining variants conditional on&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lead_variant_name</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\n\n&quot;</span><span class="p">)</span>
 
 <span class="c1"># Test each remaining variant conditioned on the lead variant</span>
@@ -914,7 +897,7 @@ Marginal p-value: 6.077549e-10
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== STEP 2: Conditional Analysis ===
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Conditional Analysis ===
 Testing remaining variants conditional on Variant 1 
 </pre></div>
 </div>
@@ -933,7 +916,6 @@ Testing remaining variants conditional on Variant 1
 </div>
 <p>Neither variant 2 or variant 3 are significant anymore (<span class="math notranslate nohighlight">\(p&gt;0.05\)</span>)! Variants 2 and 3 were only associated with the trait because they are correlated with the true causal variant (Variant 1). Once we condition on Variant 1, they provide no additional explanatory power.</p>
 <p>This demonstrates the power of conditional analysis in <strong>causal variant identification</strong>: it helps distinguish between true causal effects and spurious associations due to linkage disequilibrium (LD).</p>
-</section>
 </section>
 </section>
 <section id="example-2-simpson-s-paradox">
@@ -1007,8 +989,8 @@ Population B disease rate: 0.28
 </div>
 </div>
 </div>
-<section id="marginal-effect-of-variant">
-<h3>Marginal Effect of Variant<a class="headerlink" href="#marginal-effect-of-variant" title="Link to this heading">#</a></h3>
+<section id="effects-in-each-group">
+<h3>Effects in Each Group<a class="headerlink" href="#effects-in-each-group" title="Link to this heading">#</a></h3>
 <p>First, let’s see what happens when we analyze each population separately:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1044,8 +1026,8 @@ Population B: OR = 5.014
 </div>
 <p>In both population the variant appears to increase the risk of disease.</p>
 </section>
-<section id="effect-of-the-variant-in-the-population">
-<h3>Effect of the Variant in the Population<a class="headerlink" href="#effect-of-the-variant-in-the-population" title="Link to this heading">#</a></h3>
+<section id="effects-in-population">
+<h3>Effects in Population<a class="headerlink" href="#effects-in-population" title="Link to this heading">#</a></h3>
 <p>Then we analyze the data with two ancestries combined:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1160,7 +1142,20 @@ Interpretation: Protective
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>`geom_smooth()` using formula = &#39;y ~ x&#39;
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attaching package: ‘dplyr’
+
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+
+`geom_smooth()` using formula = &#39;y ~ x&#39;
 `geom_smooth()` using formula = &#39;y ~ x&#39;
 </pre></div>
 </div>
@@ -1249,16 +1244,12 @@ Interpretation: Protective
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-causal-variant-identification-with-ld">Example 1 – Causal Variant Identification with LD</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#marginal-effects">Marginal Effects</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#joint-effects">Joint Effects</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-analysis">Conditional Analysis</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-start-with-the-most-significant-variant">Step 1: Start with the most significant variant</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-conditional-analysis-for-remaining-variants">Step 2: Conditional analysis for remaining variants</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-analysis">Conditional Analysis</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-simpson-s-paradox">Example 2 – Simpson’s Paradox</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#marginal-effect-of-variant">Marginal Effect of Variant</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#effect-of-the-variant-in-the-population">Effect of the Variant in the Population</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#effects-in-each-group">Effects in Each Group</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#effects-in-population">Effects in Population</a></li>
 </ul>
 </li>
 </ul>

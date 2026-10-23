@@ -181,7 +181,6 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="minor_allele_frequency.html">Minor Allele Frequency</a></li>
 
 
@@ -711,11 +710,11 @@ w_k = \frac{1}{\text{SE}_k^2}
 <span class="n">lm_pop2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">y_pop2</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">variant_pop2</span><span class="p">)</span>
 
 <span class="c1"># Extract summary statistics</span>
-<span class="n">beta_pop1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">coef</span><span class="p">(</span><span class="n">lm_pop1</span><span class="p">)[</span><span class="s">&quot;variant_pop1&quot;</span><span class="p">]</span>
-<span class="n">se_pop1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">lm_pop1</span><span class="p">)</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="s">&quot;variant_pop1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Std. Error&quot;</span><span class="p">]</span>
+<span class="n">beta_pop1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">coef</span><span class="p">(</span><span class="n">lm_pop1</span><span class="p">)[</span><span class="s">"variant_pop1"</span><span class="p">]</span>
+<span class="n">se_pop1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">lm_pop1</span><span class="p">)</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="s">"variant_pop1"</span><span class="p">,</span><span class="w"> </span><span class="s">"Std. Error"</span><span class="p">]</span>
 
-<span class="n">beta_pop2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">coef</span><span class="p">(</span><span class="n">lm_pop2</span><span class="p">)[</span><span class="s">&quot;variant_pop2&quot;</span><span class="p">]</span>
-<span class="n">se_pop2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">lm_pop2</span><span class="p">)</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="s">&quot;variant_pop2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Std. Error&quot;</span><span class="p">]</span>
+<span class="n">beta_pop2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">coef</span><span class="p">(</span><span class="n">lm_pop2</span><span class="p">)[</span><span class="s">"variant_pop2"</span><span class="p">]</span>
+<span class="n">se_pop2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">lm_pop2</span><span class="p">)</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="s">"variant_pop2"</span><span class="p">,</span><span class="w"> </span><span class="s">"Std. Error"</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -767,8 +766,8 @@ w_k = \frac{1}{\text{SE}_k^2}
 <span class="n">y_all</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">y_pop1</span><span class="p">,</span><span class="w"> </span><span class="n">y_pop2</span><span class="p">)</span>
 
 <span class="n">lm_all</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">y_all</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">variant_all</span><span class="p">)</span>
-<span class="n">beta_all</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">coef</span><span class="p">(</span><span class="n">lm_all</span><span class="p">)[</span><span class="s">&quot;variant_all&quot;</span><span class="p">]</span>
-<span class="n">se_all</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">lm_all</span><span class="p">)</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="s">&quot;variant_all&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Std. Error&quot;</span><span class="p">]</span>
+<span class="n">beta_all</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">coef</span><span class="p">(</span><span class="n">lm_all</span><span class="p">)[</span><span class="s">"variant_all"</span><span class="p">]</span>
+<span class="n">se_all</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">lm_all</span><span class="p">)</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="s">"variant_all"</span><span class="p">,</span><span class="w"> </span><span class="s">"Std. Error"</span><span class="p">]</span>
 <span class="n">z_all</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">beta_all</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">se_all</span>
 <span class="n">p_all</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">pnorm</span><span class="p">(</span><span class="o">-</span><span class="nf">abs</span><span class="p">(</span><span class="n">z_all</span><span class="p">))</span>
 </pre></div>

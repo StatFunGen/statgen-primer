@@ -181,7 +181,6 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="minor_allele_frequency.html">Minor Allele Frequency</a></li>
 
 
@@ -750,13 +749,13 @@ X \rightarrow W \leftarrow Y
 <span class="n">sex_scaled</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">scale</span><span class="p">(</span><span class="n">sex</span><span class="p">)[,</span><span class="m">1</span><span class="p">]</span>
 <span class="n">height_scaled</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">scale</span><span class="p">(</span><span class="n">height_cm</span><span class="p">)[,</span><span class="m">1</span><span class="p">]</span>
 
-<span class="c1"># Analysis 1: CORRECT - Don&#39;t adjust for height</span>
+<span class="c1"># Analysis 1: CORRECT - Don't adjust for height</span>
 <span class="c1"># Model: sex ~ SNP</span>
 <span class="n">correct_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">sex_scaled</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">snp_scaled</span><span class="p">)</span>
 <span class="n">correct_summary</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">correct_model</span><span class="p">)</span>
 
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Analysis 1 (CORRECT - no height adjustment):\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;  beta = %.4f, p = %.4f → No association between SNP and sex\n\n&quot;</span><span class="p">,</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">"Analysis 1 (CORRECT - no height adjustment):\n"</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">"  beta = %.4f, p = %.4f → No association between SNP and sex\n\n"</span><span class="p">,</span>
 <span class="w">            </span><span class="n">correct_summary</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">],</span>
 <span class="w">            </span><span class="n">correct_summary</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">]))</span>
 </pre></div>
@@ -779,8 +778,8 @@ X \rightarrow W \leftarrow Y
 <span class="c1"># Model: sex ~ SNP + height</span>
 <span class="n">biased_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">sex_scaled</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">snp_scaled</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">height_scaled</span><span class="p">)</span>
 <span class="n">biased_summary</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">biased_model</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Analysis 2 (WRONG - adjusted for height):\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;  beta = %.4f, p = %.4f → Association between SNP and sex\n\n&quot;</span><span class="p">,</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">"Analysis 2 (WRONG - adjusted for height):\n"</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">"  beta = %.4f, p = %.4f → Association between SNP and sex\n\n"</span><span class="p">,</span>
 <span class="w">            </span><span class="n">biased_summary</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">],</span>
 <span class="w">            </span><span class="n">biased_summary</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">]))</span>
 </pre></div>
@@ -804,33 +803,33 @@ X \rightarrow W \leftarrow Y
 <span class="n">short_threshold</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">quantile</span><span class="p">(</span><span class="n">height_cm</span><span class="p">,</span><span class="w"> </span><span class="m">0.25</span><span class="p">)</span><span class="w">   </span><span class="c1"># Bottom 25%</span>
 
 <span class="c1"># Analysis 3a: Only tall people</span>
-<span class="nf">print</span><span class="p">(</span><span class="s">&quot;============================ Tall group analysis ============================&quot;</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">"============================ Tall group analysis ============================"</span><span class="p">)</span>
 <span class="n">tall_subset</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">height_cm</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">tall_threshold</span>
 <span class="n">tall_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">sex_scaled</span><span class="p">[</span><span class="n">tall_subset</span><span class="p">]</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">snp_scaled</span><span class="p">[</span><span class="n">tall_subset</span><span class="p">])</span>
 <span class="n">tall_summary</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">tall_model</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Analysis 3a (WRONG - limited to only tall individuals):\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;  beta = %.4f, p = %.4f → Association between SNP and sex\n\n&quot;</span><span class="p">,</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">"Analysis 3a (WRONG - limited to only tall individuals):\n"</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">"  beta = %.4f, p = %.4f → Association between SNP and sex\n\n"</span><span class="p">,</span>
 <span class="w">            </span><span class="n">tall_summary</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">],</span>
 <span class="w">            </span><span class="n">tall_summary</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">]))</span>
 
 <span class="c1"># Analysis 3b: Only short people</span>
-<span class="nf">print</span><span class="p">(</span><span class="s">&quot;============================ Short group analysis ============================&quot;</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">"============================ Short group analysis ============================"</span><span class="p">)</span>
 <span class="n">short_subset</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">height_cm</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">short_threshold</span>
 <span class="n">short_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">sex_scaled</span><span class="p">[</span><span class="n">short_subset</span><span class="p">]</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">snp_scaled</span><span class="p">[</span><span class="n">short_subset</span><span class="p">])</span>
 <span class="n">short_summary</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">short_model</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Analysis 3b (WRONG - limited to only short individuals):\n&quot;</span><span class="p">)</span>
-<span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;  beta = %.4f, p = %.4f → Association between SNP and sex\n\n&quot;</span><span class="p">,</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">"Analysis 3b (WRONG - limited to only short individuals):\n"</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">"  beta = %.4f, p = %.4f → Association between SNP and sex\n\n"</span><span class="p">,</span>
 <span class="w">            </span><span class="n">short_summary</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">],</span>
 <span class="w">            </span><span class="n">short_summary</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;============================ Tall group analysis ============================&quot;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] "============================ Tall group analysis ============================"
 Analysis 3a (WRONG - limited to only tall individuals):
   beta = -0.0198, p = 0.0115 → Association between SNP and sex
 
-[1] &quot;============================ Short group analysis ============================&quot;
+[1] "============================ Short group analysis ============================"
 Analysis 3b (WRONG - limited to only short individuals):
   beta = -0.0237, p = 0.0003 → Association between SNP and sex
 </pre></div>
@@ -845,10 +844,10 @@ Analysis 3b (WRONG - limited to only short individuals):
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extract results</span>
 <span class="n">results</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span>
 <span class="w">  </span><span class="n">Analysis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span>
-<span class="w">    </span><span class="s">&quot;Correct (no height adjustment)&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s">&quot;BIASED (adjusted for height)&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s">&quot;BIASED (only tall people)&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s">&quot;BIASED (only short people)&quot;</span>
+<span class="w">    </span><span class="s">"Correct (no height adjustment)"</span><span class="p">,</span>
+<span class="w">    </span><span class="s">"BIASED (adjusted for height)"</span><span class="p">,</span>
+<span class="w">    </span><span class="s">"BIASED (only tall people)"</span><span class="p">,</span>
+<span class="w">    </span><span class="s">"BIASED (only short people)"</span>
 <span class="w">  </span><span class="p">),</span>
 <span class="w">  </span><span class="n">Beta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span>
 <span class="w">    </span><span class="nf">round</span><span class="p">(</span><span class="n">correct_summary</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="m">4</span><span class="p">),</span>
@@ -869,10 +868,10 @@ Analysis 3b (WRONG - limited to only short individuals):
 <span class="w">    </span><span class="nf">round</span><span class="p">(</span><span class="n">short_summary</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">],</span><span class="w"> </span><span class="m">4</span><span class="p">)</span>
 <span class="w">  </span><span class="p">),</span>
 <span class="w">  </span><span class="n">Interpretation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span>
-<span class="w">    </span><span class="s">&quot;No association (correct!)&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s">&quot;Strong spurious association&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s">&quot;Spurious association (tall subset)&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s">&quot;Spurious association (short subset)&quot;</span>
+<span class="w">    </span><span class="s">"No association (correct!)"</span><span class="p">,</span>
+<span class="w">    </span><span class="s">"Strong spurious association"</span><span class="p">,</span>
+<span class="w">    </span><span class="s">"Spurious association (tall subset)"</span><span class="p">,</span>
+<span class="w">    </span><span class="s">"Spurious association (short subset)"</span>
 <span class="w">  </span><span class="p">)</span>
 <span class="p">)</span>
 
